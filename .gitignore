@@ -1,0 +1,93 @@
+# ============================================================
+# Segredos e configuração local — NUNCA versionar
+# ============================================================
+.env
+.env.*
+!.env.example
+*.env
+secrets/
+credenciais/
+
+# chaves, certificados e tokens
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+*.ppk
+.npmrc
+.pypirc
+gh-token*
+*token*.txt
+
+# ============================================================
+# Dados da operação — contêm dado pessoal (LGPD)
+# ============================================================
+backups/
+*.dump
+*.sql.gz
+uploads/
+dados_reais/
+*.csv
+!exemplos/*.csv
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ============================================================
+# Node
+# ============================================================
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.npm/
+
+# ============================================================
+# Docker e infraestrutura
+# ============================================================
+certs/
+pgdata/
+redisdata/
+docker-compose.override.yml
+
+# ============================================================
+# Editores e sistema
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# Saídas geradas
+# ============================================================
+*.log
+tmp/
+temp/
+saida/
+*.pdf
+!docs/*.pdf

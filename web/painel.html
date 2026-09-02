@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrimeCorp · Console</title>
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PrimeCorp Console — tokens
+   Marca: carmim #D93438 · grafite #393536 · branco
+   Direção: o documento registral. Pauta, carimbo, inscrição.
+   ============================================================ */
+:root{
+  --carmim:#D93438;
+  --carmim-fundo:#FDEEEF;
+  --grafite:#393536;
+  --tinta:#1C1A1B;
+  --papel:#F1EFEC;
+  --folha:#FFFFFF;
+  --pauta:#DDD8D3;
+  --pauta-forte:#C4BDB7;
+  --apagado:#78716C;
+  --selo:#0F5C4A;
+  --selo-fundo:#E8F2EE;
+  --ambar:#8A5A08;
+  --ambar-fundo:#FBF1DE;
+
+  --display:"Zilla Slab",Georgia,serif;
+  --corpo:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --dado:"IBM Plex Mono",ui-monospace,monospace;
+
+  --u:4px;
+  --raio:3px;
+  --sombra:0 1px 2px rgba(28,26,27,.06),0 8px 24px rgba(28,26,27,.05);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--papel);color:var(--tinta);
+  font-family:var(--corpo);font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--carmim);outline-offset:2px;border-radius:2px}
+[hidden]{display:none !important}
+
+/* ---------- barra superior ---------- */
+.chrome{
+  background:var(--grafite);color:#fff;
+  display:flex;align-items:center;gap:16px;
+  padding:0 20px;min-height:60px;
+  position:sticky;top:0;z-index:40;
+}
+.marca{display:flex;align-items:center;gap:10px}
+.marca img{width:auto;height:34px;display:block}
+.marca-sub{font-family:var(--dado);font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#B9B2B0;padding-left:11px;margin-left:2px;border-left:1px solid #56504F}
+.marca-txt{display:flex;flex-direction:column;line-height:1}
+.marca-txt b{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:16px;letter-spacing:.01em}
+.marca-txt i{font-style:normal;font-family:var(--dado);font-size:8.5px;font-weight:500;letter-spacing:.3em;color:#B9B2B0;margin-top:3px;text-transform:uppercase}
+
+
+.chrome .direita{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:13px;min-width:0}
+.quem{display:flex;flex-direction:column;line-height:1.25;text-align:right;min-width:0}
+.quem b,.quem span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quem b{font-weight:600}
+.quem span{font-family:var(--dado);font-size:11px;color:#B9B2B0}
+.sair{background:none;border:1px solid #56504F;color:#D8D3D1;padding:6px 12px;border-radius:var(--raio);cursor:pointer}
+.sair:hover{border-color:#847C7A;color:#fff}
+
+/* ---------- ASSINATURA: faixa de habilitação ----------
+   Espelha a linha de validade da carteira profissional.
+   É o único elemento que nunca sai da tela: é o que pode
+   parar a operação. ------------------------------------- */
+.habilitacao{
+  background:var(--folha);
+  border-bottom:1px solid var(--pauta);
+  padding:10px 20px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  position:sticky;top:56px;z-index:35;
+}
+.hab-rotulo{
+  font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--apagado);white-space:nowrap;
+}
+.hab-item{display:flex;align-items:center;gap:9px}
+.hab-num{font-family:var(--dado);font-size:12.5px;font-weight:500}
+.hab-barra{width:86px;height:5px;background:var(--pauta);border-radius:99px;overflow:hidden;flex-shrink:0}
+.hab-barra i{display:block;height:100%;background:var(--ambar);border-radius:99px}
+.hab-dias{font-family:var(--dado);font-size:12.5px;font-weight:600;color:var(--ambar);white-space:nowrap}
+.hab-sep{width:1px;height:20px;background:var(--pauta)}
+.hab-pj{
+  margin-left:auto;display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--apagado);
+}
+
+/* ---------- estrutura ---------- */
+.corpo{display:grid;grid-template-columns:196px 1fr;min-height:calc(100vh - 105px)}
+nav.lateral{
+  border-right:1px solid var(--pauta);background:var(--folha);
+  padding:20px 0;
+}
+.nav-grupo{
+  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--apagado);padding:0 20px;margin:20px 0 7px;
+}
+.nav-grupo:first-child{margin-top:0}
+.aba{
+  display:flex;align-items:center;gap:10px;width:100%;
+  background:none;border:0;border-left:3px solid transparent;
+  padding:9px 20px;text-align:left;cursor:pointer;color:var(--tinta);
+  font-size:13.5px;
+}
+.aba:hover{background:var(--papel)}
+.aba[aria-current="page"]{border-left-color:var(--carmim);font-weight:600;background:var(--papel)}
+.aba .conta{
+  margin-left:auto;font-family:var(--dado);font-size:11px;
+  color:var(--apagado);
+}
+.aba .conta.alerta{color:var(--carmim);font-weight:600}
+
+main{padding:26px 28px 60px;min-width:0}
+.cabeca{margin-bottom:22px}
+.cabeca h1{
+  font-family:var(--display);font-weight:600;font-size:27px;
+  letter-spacing:-.015em;margin:0 0 4px;
+}
+.cabeca p{margin:0;color:var(--apagado);max-width:62ch}
+
+/* ---------- painéis ---------- */
+.linha{display:grid;gap:14px;margin-bottom:22px}
+.linha.d2{grid-template-columns:1fr 1fr}
+.linha.d3{grid-template-columns:repeat(3,1fr)}
+.painel{
+  background:var(--folha);border:1px solid var(--pauta);
+  border-radius:var(--raio);padding:18px;
+}
+.painel h2{
+  font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--apagado);margin:0 0 12px;
+}
+.cifra{
+  font-family:var(--dado);font-size:30px;font-weight:500;
+  letter-spacing:-.02em;line-height:1.1;
+}
+.cifra small{font-size:15px;color:var(--apagado);font-weight:400}
+.sob{font-size:12.5px;color:var(--apagado);margin-top:6px}
+.sob b{color:var(--tinta);font-weight:600;font-family:var(--dado)}
+
+/* ---------- ASSINATURA: ficha de captação ----------
+   Cada mandato é renderizado como o documento que ele é.
+   Cabeçalho pautado, inscrição no canto (art. 4º), e a
+   validade que escurece conforme se aproxima do fim. ----- */
+.fichas{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.ficha{
+  background:var(--folha);border:1px solid var(--pauta);
+  border-radius:var(--raio);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .15s,box-shadow .15s;
+}
+.ficha:hover{border-color:var(--pauta-forte);box-shadow:var(--sombra)}
+.ficha-topo{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  padding:11px 15px;border-bottom:1px solid var(--pauta);
+  background:linear-gradient(var(--folha),var(--folha)) padding-box;
+}
+.ficha-cod{font-family:var(--dado);font-size:11.5px;color:var(--apagado);letter-spacing:.02em}
+.ficha-corpo{padding:15px;display:flex;flex-direction:column;gap:11px;flex:1}
+.ficha h3{
+  font-family:var(--display);font-weight:600;font-size:18px;
+  margin:0;line-height:1.25;letter-spacing:-.01em;
+}
+.ficha-local{font-size:12.5px;color:var(--apagado)}
+.ficha-linhas{
+  display:grid;gap:0;border-top:1px solid var(--pauta);
+}
+.ficha-linhas div{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:7px 0;border-bottom:1px solid var(--pauta);
+  font-size:12.5px;
+}
+.ficha-linhas dt{color:var(--apagado);margin:0}
+.ficha-linhas dd{margin:0;font-family:var(--dado);font-weight:500}
+.ficha-pe{
+  padding:10px 15px;border-top:1px solid var(--pauta);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:#FBFAF9;
+}
+.inscricao{
+  font-family:var(--dado);font-size:10.5px;color:var(--apagado);
+  letter-spacing:.04em;
+}
+.inscricao b{color:var(--tinta);font-weight:600}
+
+/* carimbo */
+.carimbo{
+  font-family:var(--dado);font-size:9.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1.5px solid var(--selo);color:var(--selo);
+  padding:3px 7px;border-radius:2px;transform:rotate(-2.5deg);
+  white-space:nowrap;
+}
+.carimbo.pendente{border-color:var(--ambar);color:var(--ambar)}
+
+/* ---------- etiquetas ---------- */
+.etiq{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;
+}
+.etiq.ok{background:var(--selo-fundo);color:var(--selo)}
+.etiq.aviso{background:var(--ambar-fundo);color:var(--ambar)}
+.etiq.risco{background:var(--carmim-fundo);color:var(--carmim)}
+.etiq.neutra{background:var(--papel);color:var(--apagado)}
+.ponto{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* ---------- tabela ---------- */
+.quadro{background:var(--folha);border:1px solid var(--pauta);border-radius:var(--raio);overflow:hidden}
+.quadro-topo{
+  padding:12px 15px;border-bottom:1px solid var(--pauta);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.busca{
+  flex:1;min-width:180px;border:1px solid var(--pauta);border-radius:var(--raio);
+  padding:7px 11px;background:var(--papel);
+}
+.busca:focus{outline:none;border-color:var(--carmim);background:var(--folha)}
+.rolagem{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:660px}
+th{
+  text-align:left;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--apagado);padding:9px 15px;border-bottom:1px solid var(--pauta-forte);
+  white-space:nowrap;background:#FBFAF9;
+}
+td{padding:11px 15px;border-bottom:1px solid var(--pauta);font-size:13px;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FBFAF9}
+.num{font-family:var(--dado);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+th.num{text-align:right}
+.principal{font-weight:600}
+.secundario{font-size:11.5px;color:var(--apagado);margin-top:1px}
+
+/* barra de progresso do score */
+.medida{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.medida i{display:block;width:44px;height:4px;background:var(--pauta);border-radius:99px;overflow:hidden;flex-shrink:0}
+.medida i b{display:block;height:100%;background:var(--grafite)}
+
+/* ---------- formulários operacionais ---------- */
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.campos .larga{grid-column:1/-1}
+.campo-rot{display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--apagado);margin-bottom:5px}
+.campo-in{width:100%;border:1px solid var(--pauta);border-radius:var(--raio);padding:9px 11px;background:var(--papel);color:var(--tinta);font-size:13.5px}
+.campo-in:focus{outline:none;border-color:var(--carmim);background:var(--folha)}
+textarea.campo-in{resize:vertical;font-family:var(--dado);font-size:12px;line-height:1.55;min-height:130px;white-space:pre}
+.acoes-linha{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+
+/* resultado da avaliação */
+.laudo{border:1px solid var(--pauta);border-radius:var(--raio);background:var(--folha);margin-top:16px;overflow:hidden}
+.laudo-faixa{display:grid;grid-template-columns:1fr 1.3fr 1fr;border-bottom:1px solid var(--pauta)}
+.laudo-faixa div{padding:16px;text-align:center;border-right:1px solid var(--pauta)}
+.laudo-faixa div:last-child{border-right:0}
+.laudo-faixa div.centro{background:#FBFAF9}
+.laudo-faixa span{display:block;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--apagado);margin-bottom:5px}
+.laudo-faixa b{font-family:var(--dado);font-size:15px;font-weight:500}
+.laudo-faixa .centro b{font-size:24px;color:var(--carmim)}
+.laudo-corpo{padding:16px;display:grid;gap:9px}
+.laudo-linha{display:flex;justify-content:space-between;gap:14px;font-size:12.5px;padding-bottom:8px;border-bottom:1px solid var(--pauta)}
+.laudo-linha:last-child{border-bottom:0;padding-bottom:0}
+.laudo-linha dt{color:var(--apagado);margin:0}
+.laudo-linha dd{margin:0;font-family:var(--dado);font-weight:500;text-align:right}
+.parecer{font-family:var(--dado);font-size:11.5px;line-height:1.65;white-space:pre-wrap;background:#FBFAF9;border:1px solid var(--pauta);border-radius:var(--raio);padding:16px;max-height:340px;overflow:auto;margin-top:14px}
+
+/* medidor de componente */
+.barras{display:grid;gap:7px;margin-top:4px}
+.barra{display:grid;grid-template-columns:104px 1fr 42px;gap:10px;align-items:center;font-size:12px}
+.barra i{display:block;height:5px;background:var(--pauta);border-radius:99px;overflow:hidden}
+.barra i b{display:block;height:100%;background:var(--grafite);border-radius:99px}
+.barra u{text-decoration:none;font-family:var(--dado);font-size:11.5px;text-align:right;color:var(--apagado)}
+
+/* ---------- avisos ---------- */
+.aviso{
+  display:flex;gap:11px;align-items:flex-start;
+  padding:13px 15px;border-radius:var(--raio);margin-bottom:18px;
+  border:1px solid;font-size:13px;
+}
+.aviso.risco{background:var(--carmim-fundo);border-color:#F4C9CB;color:#7A1418}
+.aviso.info{background:var(--ambar-fundo);border-color:#EBD9B4;color:#6B4606}
+.aviso b{display:block;margin-bottom:2px}
+.aviso .marcador{
+  font-family:var(--dado);font-size:10px;font-weight:600;letter-spacing:.1em;
+  border:1px solid currentColor;padding:2px 5px;border-radius:2px;flex-shrink:0;
+  margin-top:1px;
+}
+
+/* ---------- botões ---------- */
+.btn{
+  border:1px solid var(--pauta-forte);background:var(--folha);
+  padding:7px 14px;border-radius:var(--raio);cursor:pointer;
+  font-size:13px;font-weight:500;
+}
+.btn:hover{background:var(--papel)}
+.btn.principal{background:var(--carmim);border-color:var(--carmim);color:#fff;font-weight:600}
+.btn.principal:hover{background:#A82429}
+.btn.principal:disabled{background:var(--pauta);border-color:var(--pauta);color:var(--apagado);cursor:not-allowed}
+.btn.miudo{padding:4px 10px;font-size:12px}
+
+/* ---------- login ---------- */
+.entrada{
+  min-height:100vh;display:grid;place-items:center;padding:24px;
+  background:var(--grafite);
+}
+.entrada-caixa{
+  width:min(400px,100%);background:var(--folha);
+  border-radius:var(--raio);padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.3);
+}
+.entrada-caixa .marca{margin-bottom:6px}
+.entrada-caixa .marca-sub{color:var(--apagado);border-left-color:var(--pauta)}
+.entrada-caixa > p{color:var(--apagado);font-size:13px;margin:0 0 24px}
+.campo{margin-bottom:14px}
+.campo label{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--apagado);margin-bottom:5px}
+.campo input{
+  width:100%;border:1px solid var(--pauta);border-radius:var(--raio);
+  padding:10px 12px;background:var(--papel);
+}
+.campo input:focus{outline:none;border-color:var(--carmim);background:var(--folha)}
+.campo input.mono{font-family:var(--dado);letter-spacing:.28em;text-align:center;font-size:17px}
+.campo .dica{font-size:11.5px;color:var(--apagado);margin-top:5px}
+.entrada-caixa .btn.principal{width:100%;padding:11px;margin-top:6px}
+.rodape-entrada{
+  margin-top:22px;padding-top:16px;border-top:1px solid var(--pauta);
+  font-size:11px;color:var(--apagado);line-height:1.6;
+}
+.rodape-entrada code{font-family:var(--dado);font-size:10.5px}
+
+.vazio{padding:44px 20px;text-align:center;color:var(--apagado)}
+.vazio p{margin:0 0 14px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+
+@media(max-width:900px){
+  .corpo{grid-template-columns:1fr}
+  nav.lateral{
+    border-right:0;border-bottom:1px solid var(--pauta);
+    display:flex;overflow-x:auto;padding:0;
+  }
+  .nav-grupo{display:none}
+  .aba{
+    border-left:0;border-bottom:3px solid transparent;
+    white-space:nowrap;width:auto;padding:12px 15px;
+  }
+  .aba[aria-current="page"]{border-bottom-color:var(--carmim)}
+  .aba .conta{margin-left:6px}
+  .linha.d2,.linha.d3{grid-template-columns:1fr}
+  main{padding:20px 16px 50px}
+  .habilitacao{top:56px;gap:12px;padding:9px 16px}
+  .hab-pj{margin-left:0;width:100%}
+  .chrome{padding:0 14px;gap:10px}
+  .marca img{height:28px}
+  .marca-sub{display:none}
+  .quem{max-width:38vw}
+  .quem span{display:none}
+  .quem b{font-size:12.5px}
+  .sair{padding:5px 10px;font-size:12px}
+  .habilitacao{top:60px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ ENTRADA ============================ -->
+<div class="entrada" id="tela-entrada">
+  <div class="entrada-caixa">
+    <div class="marca"><img src="assets/marca-horizontal-600.png" alt="PrimeCorp" class="marca-neg"><span class="marca-sub">Console</span></div>
+    <p>Acesso restrito à equipe habilitada.</p>
+
+    <div id="passo-senha">
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" value="joselia@primecorpimoveis.com.br" autocomplete="username">
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" value="demonstracao" autocomplete="current-password">
+      </div>
+      <button class="btn principal" onclick="pedirCodigo()">Continuar</button>
+    </div>
+
+    <div id="passo-mfa" hidden>
+      <div class="campo">
+        <label for="codigo">Código do aplicativo autenticador</label>
+        <input id="codigo" class="mono" maxlength="6" inputmode="numeric" placeholder="000000" autocomplete="one-time-code">
+        <div class="dica">Seis dígitos, renovados a cada 30 segundos.</div>
+      </div>
+      <button class="btn principal" onclick="entrar()">Entrar</button>
+      <button class="btn" style="width:100%;margin-top:8px" onclick="voltarSenha()">Voltar</button>
+    </div>
+
+    <div class="rodape-entrada">
+      O segundo fator é obrigatório para os papéis <code>admin</code>, <code>corretor</code> e <code>juridico</code>.
+      Cinco tentativas erradas bloqueiam a conta temporariamente.
+    </div>
+  </div>
+</div>
+
+<!-- ============================ CONSOLE ============================ -->
+<div id="tela-console" hidden>
+
+  <header class="chrome">
+    <div class="marca"><img src="assets/marca-horizontal-negativa-600.png" alt="PrimeCorp" class="marca-neg"><span class="marca-sub">Console</span></div>
+    <div class="direita">
+      <div class="quem">
+        <b>Joselia Junqueira Viana</b>
+        <span>CRECISP 300760 · responsável técnica</span>
+      </div>
+      <button class="sair" onclick="sair()">Sair</button>
+    </div>
+  </header>
+
+  <!-- SIGNATURE: faixa de habilitação -->
+  <div class="habilitacao">
+    <span class="hab-rotulo">Habilitação</span>
+
+    <div class="hab-item">
+      <span class="hab-num">CRECISP 300760</span>
+      <span class="hab-barra"><i style="width:26%"></i></span>
+      <span class="hab-dias">31 dias</span>
+    </div>
+    <div class="hab-sep"></div>
+    <div class="hab-item">
+      <span class="hab-num">CRECISP 297692</span>
+      <span class="hab-barra"><i style="width:26%"></i></span>
+      <span class="hab-dias">31 dias</span>
+    </div>
+
+    <div class="hab-pj">
+      <span class="etiq aviso"><span class="ponto"></span>CRECI-J em concessão</span>
+      <span>anúncios saem sob o CRECI do responsável pelo mandato</span>
+    </div>
+  </div>
+
+  <div class="corpo">
+    <nav class="lateral">
+      <div class="nav-grupo">Operação</div>
+      <button class="aba" aria-current="page" onclick="ir('hoje',this)">Hoje</button>
+      <button class="aba" onclick="ir('captacoes',this)">Captações <span class="conta">5</span></button>
+      <button class="aba" onclick="ir('ativos',this)">Ativos <span class="conta">37</span></button>
+      <button class="aba" onclick="ir('leads',this)">Leads <span class="conta alerta">4</span></button>
+
+      <div class="nav-grupo">Inteligência</div>
+      <button class="aba" onclick="ir('radar',this)">Radar</button>
+      <button class="aba" onclick="ir('anuncios',this)">Anúncios</button>
+      <button class="aba" onclick="ir('avaliacao',this)">Avaliação</button>
+      <button class="aba" onclick="ir('oportunidades',this)">Oportunidades</button>
+
+      <div class="nav-grupo">Controle</div>
+      <button class="aba" onclick="ir('conformidade',this)">Conformidade <span class="conta alerta">2</span></button>
+    </nav>
+
+    <main>
+
+      <!-- ---------------- HOJE ---------------- -->
+      <section id="v-hoje">
+        <div class="cabeca">
+          <h1>Hoje</h1>
+          <p>Quarta-feira, 20 de agosto de 2026.</p>
+        </div>
+
+        <div class="aviso risco">
+          <span class="marcador">PRAZO</span>
+          <div>
+            <b>Autorização do galpão de Jundiaí vence em 16 dias</b>
+            Sem renovação assinada até 05/09, o anúncio sai do ar automaticamente e a
+            comissão de R$ 445.000 deixa o pipeline.
+          </div>
+        </div>
+
+        <div class="linha d3">
+          <div class="painel">
+            <h2>Comissão contratada</h2>
+            <div class="cifra">R$ 1.443.000</div>
+            <div class="sob">4 negócios em andamento · ticket médio <b>R$ 360.750</b></div>
+          </div>
+          <div class="painel">
+            <h2>Ponderada por estágio</h2>
+            <div class="cifra">R$ 512.020</div>
+            <div class="sob">conversão implícita <b>35,5%</b> — calibrar com histórico real</div>
+          </div>
+          <div class="painel">
+            <h2>Inventário autorizado</h2>
+            <div class="cifra">R$ 27,45<small> mi</small></div>
+            <div class="sob">4 mandatos vigentes · <b>3</b> em exclusividade</div>
+          </div>
+        </div>
+
+        <div class="linha d2">
+          <div class="painel">
+            <h2>Pipeline por negócio</h2>
+            <div class="rolagem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ativo</th><th>Estágio</th>
+                    <th class="num">Referência</th><th class="num">Comissão</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="principal">Área industrial</div><div class="secundario">Campinas · 18.400 m²</div></td>
+                    <td><span class="etiq neutra">Contraproposta</span></td>
+                    <td class="num">11.800.000</td>
+                    <td class="num principal">590.000</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Casa alto padrão</div><div class="secundario">Valinhos · 620 m²</div></td>
+                    <td><span class="etiq ok"><span class="ponto"></span>Contrato</span></td>
+                    <td class="num">4.150.000</td>
+                    <td class="num principal">249.000</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Galpão logístico</div><div class="secundario">Jundiaí · 6.200 m²</div></td>
+                    <td><span class="etiq neutra">Proposta</span></td>
+                    <td class="num">8.900.000</td>
+                    <td class="num principal">445.000</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Terreno urbano</div><div class="secundario">Indaiatuba · 3.400 m²</div></td>
+                    <td><span class="etiq neutra">Sem proposta</span></td>
+                    <td class="num">2.650.000</td>
+                    <td class="num principal">159.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="painel">
+            <h2>Próximas ações</h2>
+            <div class="rolagem">
+              <table>
+                <thead><tr><th>Quando</th><th>O quê</th><th>Quem</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td class="num">hoje 14h</td>
+                    <td><div class="principal">Visita — área industrial Campinas</div><div class="secundario">comprador confirmou</div></td>
+                    <td>Rodrigo</td>
+                  </tr>
+                  <tr>
+                    <td class="num">hoje 17h</td>
+                    <td><div class="principal">Renovar autorização — Jundiaí</div><div class="secundario">proprietário aguarda minuta</div></td>
+                    <td>Joselia</td>
+                  </tr>
+                  <tr>
+                    <td class="num">21/08</td>
+                    <td><div class="principal">Assinatura — Hortolândia</div><div class="secundario">libera publicação do anúncio</div></td>
+                    <td>Joselia</td>
+                  </tr>
+                  <tr>
+                    <td class="num">24/08</td>
+                    <td><div class="principal">Matrícula — Valinhos</div><div class="secundario">conferir ônus antes da escritura</div></td>
+                    <td>Rodrigo</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------- CAPTAÇÕES ---------------- -->
+      <section id="v-captacoes" hidden>
+        <div class="cabeca">
+          <h1>Captações</h1>
+          <p>Cada ficha é a autorização escrita que sustenta o anúncio. Sem ela assinada e vigente, o imóvel não vai ao ar.</p>
+        </div>
+
+        <div class="fichas">
+
+          <article class="ficha">
+            <div class="ficha-topo">
+              <span class="ficha-cod">PRC-SP-00000141</span>
+              <span class="carimbo">Autorizada</span>
+            </div>
+            <div class="ficha-corpo">
+              <h3>Área industrial estratégica</h3>
+              <div class="ficha-local">Campinas/SP · Distrito Industrial · 18.400 m²</div>
+              <dl class="ficha-linhas">
+                <div><dt>Modalidade</dt><dd>Exclusiva</dd></div>
+                <div><dt>Preço pedido</dt><dd>R$ 12.500.000</dd></div>
+                <div><dt>Comissão</dt><dd>5,0% · R$ 625.000</dd></div>
+                <div><dt>Vigência</dt><dd>até 10/02/2027</dd></div>
+              </dl>
+            </div>
+            <div class="ficha-pe">
+              <span class="inscricao">Anúncio sob <b>CRECISP 300760</b></span>
+              <span class="etiq ok"><span class="ponto"></span>No ar</span>
+            </div>
+          </article>
+
+          <article class="ficha">
+            <div class="ficha-topo">
+              <span class="ficha-cod">PRC-SP-00000138</span>
+              <span class="carimbo">Autorizada</span>
+            </div>
+            <div class="ficha-corpo">
+              <h3>Galpão logístico</h3>
+              <div class="ficha-local">Jundiaí/SP · Rod. Anhanguera km 58 · 6.200 m²</div>
+              <dl class="ficha-linhas">
+                <div><dt>Modalidade</dt><dd>Exclusiva</dd></div>
+                <div><dt>Preço pedido</dt><dd>R$ 8.900.000</dd></div>
+                <div><dt>Comissão</dt><dd>5,0% · R$ 445.000</dd></div>
+                <div><dt>Vigência</dt><dd>até 05/09/2026</dd></div>
+              </dl>
+            </div>
+            <div class="ficha-pe">
+              <span class="inscricao">Anúncio sob <b>CRECISP 297692</b></span>
+              <span class="etiq risco"><span class="ponto"></span>Vence em 16 dias</span>
+            </div>
+          </article>
+
+          <article class="ficha">
+            <div class="ficha-topo">
+              <span class="ficha-cod">PRC-SP-00000149</span>
+              <span class="carimbo">Autorizada</span>
+            </div>
+            <div class="ficha-corpo">
+              <h3>Casa alto padrão</h3>
+              <div class="ficha-local">Valinhos/SP · Condomínio fechado · 620 m²</div>
+              <dl class="ficha-linhas">
+                <div><dt>Modalidade</dt><dd>Exclusiva</dd></div>
+                <div><dt>Preço pedido</dt><dd>R$ 4.300.000</dd></div>
+                <div><dt>Comissão</dt><dd>6,0% · R$ 258.000</dd></div>
+                <div><dt>Vigência</dt><dd>até 30/09/2026</dd></div>
+              </dl>
+            </div>
+            <div class="ficha-pe">
+              <span class="inscricao">Anúncio sob <b>CRECISP 300760</b></span>
+              <span class="etiq aviso"><span class="ponto"></span>Vence em 41 dias</span>
+            </div>
+          </article>
+
+          <article class="ficha">
+            <div class="ficha-topo">
+              <span class="ficha-cod">PRC-SP-00000155</span>
+              <span class="carimbo">Autorizada</span>
+            </div>
+            <div class="ficha-corpo">
+              <h3>Terreno urbano</h3>
+              <div class="ficha-local">Indaiatuba/SP · Centro expandido · 3.400 m²</div>
+              <dl class="ficha-linhas">
+                <div><dt>Modalidade</dt><dd>Simples</dd></div>
+                <div><dt>Preço pedido</dt><dd>R$ 2.650.000</dd></div>
+                <div><dt>Comissão</dt><dd>6,0% · R$ 159.000</dd></div>
+                <div><dt>Vigência</dt><dd>até 22/11/2026</dd></div>
+              </dl>
+            </div>
+            <div class="ficha-pe">
+              <span class="inscricao">Anúncio sob <b>CRECISP 297692</b></span>
+              <span class="etiq ok"><span class="ponto"></span>No ar</span>
+            </div>
+          </article>
+
+          <article class="ficha" data-mandato="PRC-SP-00000160">
+            <div class="ficha-topo">
+              <span class="ficha-cod">PRC-SP-00000160</span>
+              <span class="carimbo pendente">Sem assinatura</span>
+            </div>
+            <div class="ficha-corpo">
+              <h3>Área comercial</h3>
+              <div class="ficha-local">Hortolândia/SP · Av. Principal · 1.850 m²</div>
+              <dl class="ficha-linhas">
+                <div><dt>Modalidade</dt><dd>Simples</dd></div>
+                <div><dt>Preço pedido</dt><dd>R$ 3.200.000</dd></div>
+                <div><dt>Comissão</dt><dd>6,0% · R$ 192.000</dd></div>
+                <div><dt>Vigência</dt><dd>a definir</dd></div>
+              </dl>
+            </div>
+            <div class="ficha-pe">
+              <span class="inscricao">Publicação bloqueada</span>
+              <button class="btn miudo" onclick="anexarAutorizacao('PRC-SP-00000160')">Anexar autorização</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ---------------- ATIVOS ---------------- -->
+      <section id="v-ativos" hidden>
+        <div class="cabeca">
+          <h1>Ativos</h1>
+          <p>Imóveis mapeados, com ou sem mandato. A ordem reflete a prioridade de captação.</p>
+        </div>
+
+        <div class="quadro">
+          <div class="quadro-topo">
+            <input class="busca" type="search" placeholder="Buscar por cidade, tipo ou código" oninput="filtrar(this.value)">
+            <button class="btn">Exportar CSV</button>
+          </div>
+          <div class="rolagem">
+            <table id="tabela-ativos">
+              <thead>
+                <tr>
+                  <th>Código</th><th>Ativo</th><th>Situação</th>
+                  <th class="num">Área</th><th class="num">Pedido</th><th class="num">Prioridade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num">PRC-SP-00000141</td>
+                  <td><div class="principal">Área industrial</div><div class="secundario">Campinas · Distrito Industrial</div></td>
+                  <td><span class="etiq ok"><span class="ponto"></span>Em divulgação</span></td>
+                  <td class="num">18.400 m²</td><td class="num">12.500.000</td>
+                  <td><div class="medida"><i><b style="width:94%"></b></i><span class="num">94</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000138</td>
+                  <td><div class="principal">Galpão logístico</div><div class="secundario">Jundiaí · Anhanguera km 58</div></td>
+                  <td><span class="etiq ok"><span class="ponto"></span>Em divulgação</span></td>
+                  <td class="num">6.200 m²</td><td class="num">8.900.000</td>
+                  <td><div class="medida"><i><b style="width:88%"></b></i><span class="num">88</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000162</td>
+                  <td><div class="principal">Área industrial</div><div class="secundario">Sumaré · próximo à Rod. Bandeirantes</div></td>
+                  <td><span class="etiq aviso"><span class="ponto"></span>Proprietário localizado</span></td>
+                  <td class="num">24.100 m²</td><td class="num">—</td>
+                  <td><div class="medida"><i><b style="width:81%"></b></i><span class="num">81</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000149</td>
+                  <td><div class="principal">Casa alto padrão</div><div class="secundario">Valinhos · condomínio fechado</div></td>
+                  <td><span class="etiq ok"><span class="ponto"></span>Em divulgação</span></td>
+                  <td class="num">620 m²</td><td class="num">4.300.000</td>
+                  <td><div class="medida"><i><b style="width:72%"></b></i><span class="num">72</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000158</td>
+                  <td><div class="principal">Terreno urbano</div><div class="secundario">Paulínia · zona de expansão</div></td>
+                  <td><span class="etiq neutra">Qualificado</span></td>
+                  <td class="num">9.800 m²</td><td class="num">5.100.000</td>
+                  <td><div class="medida"><i><b style="width:66%"></b></i><span class="num">66</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000155</td>
+                  <td><div class="principal">Terreno urbano</div><div class="secundario">Indaiatuba · centro expandido</div></td>
+                  <td><span class="etiq ok"><span class="ponto"></span>Em divulgação</span></td>
+                  <td class="num">3.400 m²</td><td class="num">2.650.000</td>
+                  <td><div class="medida"><i><b style="width:59%"></b></i><span class="num">59</span></div></td>
+                </tr>
+                <tr>
+                  <td class="num">PRC-SP-00000167</td>
+                  <td><div class="principal">Chácara</div><div class="secundario">Itatiba · estrada municipal</div></td>
+                  <td><span class="etiq neutra">Triagem</span></td>
+                  <td class="num">12.000 m²</td><td class="num">1.980.000</td>
+                  <td><div class="medida"><i><b style="width:41%"></b></i><span class="num">41</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="vazio" id="sem-resultado" hidden>
+          <p>Nenhum ativo corresponde à busca.</p>
+          <button class="btn" onclick="limparBusca()">Limpar busca</button>
+        </div>
+      </section>
+
+      <!-- ---------------- LEADS ---------------- -->
+      <section id="v-leads" hidden>
+        <div class="cabeca">
+          <h1>Leads</h1>
+          <p>Contatos vindos do site. Quatro aguardam primeira resposta.</p>
+        </div>
+
+        <div class="quadro">
+          <div class="quadro-topo">
+            <input class="busca" type="search" placeholder="Buscar por nome ou cidade">
+            <button class="btn">Exportar CSV</button>
+          </div>
+          <div class="rolagem">
+            <table>
+              <thead>
+                <tr><th>Recebido</th><th>Pessoa</th><th>Interesse</th><th>Estágio</th><th>Responsável</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num">hoje 09:12</td>
+                  <td><div class="principal">Marcelo A.</div><div class="secundario">Campinas · WhatsApp</div></td>
+                  <td>Comprador — área industrial</td>
+                  <td><span class="etiq risco"><span class="ponto"></span>Novo</span></td>
+                  <td class="secundario">—</td>
+                </tr>
+                <tr>
+                  <td class="num">hoje 08:40</td>
+                  <td><div class="principal">Construtora Vertentes</div><div class="secundario">Jundiaí · formulário</div></td>
+                  <td>Investidor — galpões</td>
+                  <td><span class="etiq risco"><span class="ponto"></span>Novo</span></td>
+                  <td class="secundario">—</td>
+                </tr>
+                <tr>
+                  <td class="num">ontem 18:22</td>
+                  <td><div class="principal">Rita P.</div><div class="secundario">Valinhos · formulário</div></td>
+                  <td>Vendedor — casa</td>
+                  <td><span class="etiq risco"><span class="ponto"></span>Novo</span></td>
+                  <td class="secundario">—</td>
+                </tr>
+                <tr>
+                  <td class="num">ontem 15:05</td>
+                  <td><div class="principal">Eduardo M.</div><div class="secundario">Sumaré · indicação</div></td>
+                  <td>Vendedor — área industrial</td>
+                  <td><span class="etiq risco"><span class="ponto"></span>Novo</span></td>
+                  <td class="secundario">—</td>
+                </tr>
+                <tr>
+                  <td class="num">18/08</td>
+                  <td><div class="principal">Grupo Sanmar</div><div class="secundario">Campinas · formulário</div></td>
+                  <td>Comprador — área industrial</td>
+                  <td><span class="etiq aviso"><span class="ponto"></span>Em contato</span></td>
+                  <td>Rodrigo</td>
+                </tr>
+                <tr>
+                  <td class="num">14/08</td>
+                  <td><div class="principal">Helena T.</div><div class="secundario">Indaiatuba · WhatsApp</div></td>
+                  <td>Comprador — terreno</td>
+                  <td><span class="etiq ok"><span class="ponto"></span>Visita agendada</span></td>
+                  <td>Joselia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- ---------------- RADAR ---------------- -->
+      <section id="v-radar" hidden>
+        <div class="cabeca">
+          <h1>Radar</h1>
+          <p>Agrupa o mesmo imóvel anunciado por corretores diferentes, reconstrói o endereço por concordância e mede o quanto o proprietário está mal servido. Uso interno.</p>
+        </div>
+
+        <div class="aviso info">
+          <span class="marcador">COMO LÊ</span>
+          <div>
+            <b>A área identifica o imóvel; preço e endereço são o que erram</b>
+            Por isso o agrupamento usa a metragem como chave. Quando três corretores
+            anunciam o mesmo bem por preços e ruas diferentes, o proprietário está
+            desassistido — e é essa a lista de quem aceita conversar.
+          </div>
+        </div>
+
+        <div class="painel">
+          <h2>Filtros da varredura</h2>
+          <div class="campos">
+            <div>
+              <label class="campo-rot" for="rd-tipos">Tipologias</label>
+              <select id="rd-tipos" class="campo-in">
+                <option value="">Todas</option>
+                <option>Área industrial</option><option>Galpão</option>
+                <option>Terreno urbano</option><option>Área comercial</option>
+                <option>Gleba rural</option>
+              </select>
+            </div>
+            <div>
+              <label class="campo-rot" for="rd-cidade">Município</label>
+              <input id="rd-cidade" class="campo-in" placeholder="Todos">
+            </div>
+            <div>
+              <label class="campo-rot" for="rd-amin">Área mínima m²</label>
+              <input id="rd-amin" class="campo-in" type="number" value="1000">
+            </div>
+            <div>
+              <label class="campo-rot" for="rd-desas">Desassistência mínima</label>
+              <input id="rd-desas" class="campo-in" type="number" value="30" min="0" max="100">
+            </div>
+          </div>
+
+          <label class="campo-rot" for="rd-csv">Anúncios pesquisados — CSV</label>
+          <textarea id="rd-csv" class="campo-in" spellcheck="false"></textarea>
+          <div class="acoes-linha" style="margin-top:12px">
+            <button class="btn principal" onclick="rodarRadar()">Rodar varredura</button>
+            <button class="btn" onclick="exemploRadar()">Carregar exemplo</button>
+            <span class="secundario">Só venda. Locação é descartada automaticamente.</span>
+          </div>
+        </div>
+
+        <div id="rd-saida" style="margin-top:18px"></div>
+      </section>
+
+      <!-- ---------------- ANÚNCIOS ---------------- -->
+      <section id="v-anuncios" hidden>
+        <div class="cabeca">
+          <h1>Anúncios</h1>
+          <p>Cole a planilha de anúncios pesquisados. O sistema remove repetidos pela impressão do anúncio e cruza com os ativos já mapeados.</p>
+        </div>
+
+        <div class="painel">
+          <h2>Entrada</h2>
+          <label class="campo-rot" for="an-csv">Colar CSV — aceita vírgula ou ponto e vírgula</label>
+          <textarea id="an-csv" class="campo-in" spellcheck="false"></textarea>
+          <div class="acoes-linha" style="margin-top:12px">
+            <button class="btn principal" onclick="processarAnuncios()">Cruzar informações</button>
+            <button class="btn" onclick="exemploAnuncios()">Carregar exemplo</button>
+            <span class="secundario">Colunas: portal, id_externo, url, titulo, endereco, cidade, area, preco</span>
+          </div>
+        </div>
+
+        <div id="an-saida" style="margin-top:18px"></div>
+      </section>
+
+      <!-- ---------------- AVALIAÇÃO ---------------- -->
+      <section id="v-avaliacao" hidden>
+        <div class="cabeca">
+          <h1>Avaliação</h1>
+          <p>Método comparativo com mediana e desvio absoluto mediano, homogeneização por área e saída em faixa. É o insumo do parecer técnico.</p>
+        </div>
+
+        <div class="painel">
+          <h2>Imóvel avaliando</h2>
+          <div class="campos">
+            <div>
+              <label class="campo-rot" for="av-tipo">Tipologia</label>
+              <select id="av-tipo" class="campo-in">
+                <option>Área industrial</option><option>Galpão</option>
+                <option>Centro de distribuição</option><option>Terreno urbano</option>
+                <option>Área comercial</option><option>Gleba rural</option>
+                <option>Fazenda</option><option>Chácara</option>
+                <option>Casa</option><option>Apartamento</option>
+                <option>Sala comercial</option><option>Loja</option>
+              </select>
+            </div>
+            <div>
+              <label class="campo-rot" for="av-cidade">Município</label>
+              <input id="av-cidade" class="campo-in" value="Campinas">
+            </div>
+            <div>
+              <label class="campo-rot" for="av-area">Área em m²</label>
+              <input id="av-area" class="campo-in" type="number" value="18400">
+            </div>
+            <div>
+              <label class="campo-rot" for="av-pedido">Pretensão do proprietário</label>
+              <input id="av-pedido" class="campo-in" type="number" value="12500000">
+            </div>
+          </div>
+
+          <label class="campo-rot" for="av-comps">Elementos de mercado pesquisados — CSV com cidade, tipo, area, preco</label>
+          <textarea id="av-comps" class="campo-in" spellcheck="false"></textarea>
+
+          <div class="acoes-linha" style="margin-top:12px">
+            <button class="btn principal" onclick="rodarAvaliacao()">Avaliar</button>
+            <button class="btn" onclick="exemploComparaveis()">Carregar exemplo</button>
+            <button class="btn" id="av-btn-ptam" onclick="emitirParecer()" disabled>Emitir parecer</button>
+          </div>
+        </div>
+
+        <div id="av-saida"></div>
+      </section>
+
+      <!-- ---------------- OPORTUNIDADES ---------------- -->
+      <section id="v-oportunidades" hidden>
+        <div class="cabeca">
+          <h1>Oportunidades</h1>
+          <p>Fila de captação ordenada por valor esperado de comissão, não por preço do imóvel. Imóvel acima do mercado desce na fila.</p>
+        </div>
+
+        <div class="aviso info">
+          <span class="marcador">CRITÉRIO</span>
+          <div>
+            <b>O maior imóvel não é a melhor captação</b>
+            Mandato acima do mercado ocupa inventário, não vende e vence sem resultado.
+            A aderência de preço pesa 30% e penaliza sobrepreço.
+          </div>
+        </div>
+
+        <div class="quadro">
+          <div class="quadro-topo">
+            <span class="secundario">Recalculado a partir da avaliação de cada ativo</span>
+            <button class="btn miudo" style="margin-left:auto" onclick="rodarOportunidades()">Recalcular</button>
+          </div>
+          <div class="rolagem"><table id="op-tabela"><tbody></tbody></table></div>
+        </div>
+        <div id="op-detalhe" style="margin-top:18px"></div>
+      </section>
+
+      <!-- ---------------- CONFORMIDADE ---------------- -->
+      <section id="v-conformidade" hidden>
+        <div class="cabeca">
+          <h1>Conformidade</h1>
+          <p>Habilitação profissional e tratamento de dados pessoais. Duas pendências.</p>
+        </div>
+
+        <div class="aviso info">
+          <span class="marcador">CRECI</span>
+          <div>
+            <b>Inscrições vencem em 31 dias — renovação protocolada</b>
+            A partir de 20/09 o sistema deixa de ativar novos mandatos até o deferimento.
+            Mandatos já vigentes seguem válidos.
+          </div>
+        </div>
+
+        <div class="linha d2">
+          <div class="painel">
+            <h2>Habilitação</h2>
+            <div class="rolagem">
+              <table>
+                <thead><tr><th>Titular</th><th>Inscrição</th><th>Situação</th><th class="num">Validade</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><div class="principal">Joselia Junqueira Viana</div><div class="secundario">responsável técnica</div></td>
+                    <td class="num">CRECISP 300760</td>
+                    <td><span class="etiq aviso"><span class="ponto"></span>Renovação protocolada</span></td>
+                    <td class="num">20/09/2026</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Rodrigo Franca Viana</div><div class="secundario">corretor</div></td>
+                    <td class="num">CRECISP 297692</td>
+                    <td><span class="etiq aviso"><span class="ponto"></span>Renovação protocolada</span></td>
+                    <td class="num">20/09/2026</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">PrimeCorp Imóveis</div><div class="secundario">pessoa jurídica</div></td>
+                    <td class="num">—</td>
+                    <td><span class="etiq neutra">Em concessão</span></td>
+                    <td class="num">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="painel">
+            <h2>Dados pessoais</h2>
+            <div class="rolagem">
+              <table>
+                <thead><tr><th>Item</th><th>Situação</th><th class="num">Prazo</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><div class="principal">Contatos sem trilha de origem</div><div class="secundario">bloqueados para abordagem</div></td>
+                    <td><span class="etiq risco"><span class="ponto"></span>3 registros</span></td>
+                    <td class="num">—</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Expurgo por retenção vencida</div><div class="secundario">rotina automática</div></td>
+                    <td><span class="etiq ok"><span class="ponto"></span>Em dia</span></td>
+                    <td class="num">01/09</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">Pedidos de titular</div><div class="secundario">acesso, correção, oposição</div></td>
+                    <td><span class="etiq ok"><span class="ponto"></span>Nenhum aberto</span></td>
+                    <td class="num">—</td>
+                  </tr>
+                  <tr>
+                    <td><div class="principal">LIA vigente</div><div class="secundario">legítimo interesse</div></td>
+                    <td><span class="etiq neutra">LIA-2026-01</span></td>
+                    <td class="num">revisar 01/2027</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/motor.js"></script>
+<script>
+const TELAS = ['hoje','captacoes','ativos','leads','radar','anuncios','avaliacao','oportunidades','conformidade'];
+
+function pedirCodigo(){
+  document.getElementById('passo-senha').hidden = true;
+  document.getElementById('passo-mfa').hidden = false;
+  document.getElementById('codigo').focus();
+}
+function voltarSenha(){
+  document.getElementById('passo-mfa').hidden = true;
+  document.getElementById('passo-senha').hidden = false;
+}
+function entrar(){
+  document.getElementById('tela-entrada').hidden = true;
+  document.getElementById('tela-console').hidden = false;
+  window.scrollTo(0,0);
+}
+function sair(){
+  document.getElementById('tela-console').hidden = true;
+  document.getElementById('tela-entrada').hidden = false;
+  voltarSenha();
+  document.getElementById('codigo').value = '';
+}
+function ir(destino, botao){
+  TELAS.forEach(t => document.getElementById('v'+'-'+t).hidden = (t !== destino));
+  document.querySelectorAll('.aba').forEach(a => a.removeAttribute('aria-current'));
+  botao.setAttribute('aria-current','page');
+  window.scrollTo(0,0);
+}
+function filtrar(termo){
+  const t = termo.trim().toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-ativos tbody tr');
+  let visiveis = 0;
+  linhas.forEach(l => {
+    const bate = l.textContent.toLowerCase().includes(t);
+    l.hidden = !bate;
+    if (bate) visiveis++;
+  });
+  document.getElementById('sem-resultado').hidden = visiveis > 0;
+  document.querySelector('#v-ativos .quadro').hidden = visiveis === 0;
+}
+function limparBusca(){
+  const campo = document.querySelector('#v-ativos .busca');
+  campo.value = '';
+  filtrar('');
+  campo.focus();
+}
+
+/* ============================================================
+   Módulos operacionais.
+   Usam window.Motor (assets/motor.js), porte fiel de
+   app/comparaveis.py e app/captacao.py. Quando a API subir,
+   troque as chamadas por fetch — entrada e saída são as mesmas.
+   ============================================================ */
+
+const el = id => document.getElementById(id);
+const reais = v => "R$ " + Math.round(v).toLocaleString("pt-BR");
+const pct = v => v.toFixed(1).replace(".", ",") + "%";
+
+const CRECI_RESPONSAVEL = "CRECISP 300760";
+const EMISSOR = { nome: "Joselia Junqueira Viana", creci: "CRECISP 300760", validade: "20/09/2026" };
+
+
+/* ---------------- RADAR ---------------- */
+
+function exemploRadar() {
+  el("rd-csv").value =
+`portal;id_externo;url;titulo;endereco;cidade;tipo;area;preco;fotos;descricao;publicado_em;finalidade
+PortalX;A-1001;https://px.com/1001;Área industrial 18.400m²;Rua Projetada, Distrito Industrial;Campinas;Área industrial;18400;12500000;9;Área industrial plana com frente para via coletora, pronta para implantação, documentação em ordem e acesso facilitado a rodovia.;2026-06-01;venda
+PortalY;B-7742;https://py.com/7742;Terreno industrial Campinas;Av. das Indústrias, Jd. Bandeirantes;Campinas;Área industrial;18400;14900000;2;Ótima área;2025-04-10;venda
+PortalZ;C-3390;https://pz.com/3390;18.400 m2 industrial;Distrito Industrial, s/n;Campinas;Área industrial;18400;;0;;2025-01-15;venda
+PortalW;D-0455;https://pw.com/455;Galpão 6.200m² Anhanguera;Rod. Anhanguera km 58, Distrito Industrial;Jundiaí;Galpão;6200;8900000;14;Galpão logístico com pé-direito de 11 metros, docas niveladas, pátio de manobra e escritório administrativo em dois pavimentos.;2026-07-20;venda
+PortalX;A-2210;https://px.com/2210;Galpão Anhanguera 6.200;Rodovia Anhanguera, Jundiaí;Jundiaí;Galpão;6200;9600000;1;Galpão bom;2025-02-08;venda
+PortalY;B-8890;https://py.com/8890;Área Sumaré 24.100m²;Bandeirantes;Sumaré;Área industrial;24100;;0;;2024-11-03;venda
+PortalZ;C-1120;https://pz.com/1120;Terreno 24.100 Sumaré;Rod. dos Bandeirantes, Sumaré;Sumaré;Área industrial;24100;9800000;3;Terreno industrial;2025-03-22;venda
+PortalW;D-7788;https://pw.com/7788;24.100m2 industrial;Jardim Bandeirantes, km 110;Sumaré;Área industrial;24100;11200000;2;Area para industria;2024-12-14;venda
+PortalX;A-3301;https://px.com/3301;Galpão para locação;Rua A, Centro;Campinas;Galpão;3000;42000;5;Locação;2026-08-01;locacao
+PortalY;B-4400;https://py.com/4400;Área comercial Hortolândia;Av. Principal, 1200;Hortolândia;Área comercial;1850;3200000;11;Área comercial em avenida de grande fluxo, com testada ampla e projeto aprovado para uso misto.;2026-08-05;venda`;
+}
+
+function rodarRadar() {
+  const saida = el("rd-saida");
+  const { registros } = Motor.lerCSV(el("rd-csv").value.trim());
+  if (!registros.length) {
+    saida.innerHTML = `<div class="aviso info"><span class="marcador">VAZIO</span><div>
+      <b>Nada para varrer</b>Cole a planilha ou carregue o exemplo.</div></div>`;
+    return;
+  }
+
+  const anuncios = registros.map(r => ({
+    portal: r.portal || "", idExterno: r.id_externo || "", url: r.url || "",
+    titulo: r.titulo || "", endereco: r.endereco || "", cidade: r.cidade || "",
+    tipo: r.tipo || "", area: Motor.numero(r.area) || 0, preco: Motor.numero(r.preco) || 0,
+    fotos: Motor.numero(r.fotos) || 0, descricao: r.descricao || "",
+    publicadoEm: r.publicado_em || null, finalidade: r.finalidade || "venda"
+  }));
+
+  const tipo = el("rd-tipos").value;
+  const cidade = el("rd-cidade").value.trim();
+  const r = Motor.radar(anuncios, {
+    apenasVenda: true,
+    tipos: tipo ? [tipo] : null,
+    cidades: cidade ? [cidade] : null,
+    areaMin: Number(el("rd-amin").value) || 0
+  });
+
+  const piso = Number(el("rd-desas").value) || 0;
+  const lista = r.achados.filter(a => a.desassistencia >= piso);
+
+  const cor = n => n >= 55 ? "risco" : n >= 30 ? "aviso" : "ok";
+  const rotuloEndereco = { convergente: "ok", parcial: "aviso", divergente: "risco", anunciante_unico: "neutra" };
+  const nomeEndereco = { convergente: "Convergente", parcial: "Parcial", divergente: "Divergente", anunciante_unico: "Anunciante único" };
+
+  saida.innerHTML = `
+    <div class="linha d3">
+      <div class="painel"><h2>Anúncios varridos</h2><div class="cifra">${r.lidos}</div>
+        <div class="sob"><b>${r.descartados.locacao}</b> de locação fora · <b>${r.duplicados}</b> repetido(s)</div></div>
+      <div class="painel"><h2>Imóveis distintos</h2><div class="cifra">${r.imoveis}</div>
+        <div class="sob">agrupados pela metragem, não pelo endereço</div></div>
+      <div class="painel"><h2>Alvos de captação</h2><div class="cifra">${lista.length}</div>
+        <div class="sob">desassistência a partir de <b>${piso}</b></div></div>
+    </div>
+
+    ${lista.length ? lista.map(a => `
+      <div class="painel" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap">
+          <div>
+            <h2 style="margin-bottom:4px">${a.tipo} · ${a.cidade}</h2>
+            <div class="principal" style="font-family:var(--dado);font-size:15px">
+              ${a.area ? a.area.toLocaleString("pt-BR") + " m²" : "área não informada"}
+              ${a.precoMin ? " · " + reais(a.precoMin) + (a.precoMax !== a.precoMin ? " a " + reais(a.precoMax) : "") : " · preço não anunciado"}
+            </div>
+          </div>
+          <span class="etiq ${cor(a.desassistencia)}"><span class="ponto"></span>Desassistência ${a.desassistencia}</span>
+        </div>
+
+        <div class="laudo-corpo" style="padding:14px 0 0">
+          <dl class="laudo-linha"><dt>Anunciantes</dt><dd>${a.nAnunciantes} · ${a.anunciantes.join(", ")}</dd></dl>
+          <dl class="laudo-linha"><dt>Endereço</dt>
+            <dd><span class="etiq ${rotuloEndereco[a.endereco.situacao]}">${nomeEndereco[a.endereco.situacao]}</span>
+                ${a.endereco.concordancia}% de concordância</dd></dl>
+          <dl class="laudo-linha"><dt>Reconstruído</dt>
+            <dd>${a.endereco.enderecoProvavel || "sem base para reconstruir"}</dd></dl>
+          ${a.diasNoMercado !== null ? `<dl class="laudo-linha"><dt>No mercado</dt>
+            <dd>${a.diasNoMercado} dias</dd></dl>` : ""}
+        </div>
+
+        <div class="aviso ${a.desassistencia >= 55 ? "risco" : "info"}" style="margin:14px 0 0">
+          <span class="marcador">LEITURA</span>
+          <div><b>${a.endereco.recado}</b>${a.motivos.join(" · ") || "Anúncio bem cuidado — captação difícil."}</div>
+        </div>
+
+        <details style="margin-top:12px">
+          <summary style="cursor:pointer;font-size:12.5px;color:var(--apagado)">Ver os ${a.anuncios.length} anúncio(s) agrupados</summary>
+          <div class="rolagem" style="margin-top:10px"><table>
+            <thead><tr><th>Portal</th><th>Endereço informado</th><th class="num">Preço</th><th class="num">Fotos</th></tr></thead>
+            <tbody>${a.anuncios.map(x => `<tr>
+              <td>${x.portal}</td>
+              <td class="secundario">${x.endereco || "—"}</td>
+              <td class="num">${x.preco ? reais(x.preco) : "—"}</td>
+              <td class="num">${x.fotos || 0}</td></tr>`).join("")}</tbody>
+          </table></div>
+        </details>
+      </div>`).join("") : `
+      <div class="vazio"><p>Nenhum imóvel atingiu o piso de desassistência ${piso}.</p>
+      <button class="btn" onclick="el('rd-desas').value=0;rodarRadar()">Mostrar todos</button></div>`}`;
+}
+
+/* ---------------- ANÚNCIOS ---------------- */
+
+const ATIVOS_BASE = [
+  { id: "PRC-SP-00000141", titulo: "Área industrial", cidade: "Campinas", bairro: "Distrito Industrial", area: 18400, preco: 12500000 },
+  { id: "PRC-SP-00000138", titulo: "Galpão logístico", cidade: "Jundiaí", bairro: "Anhanguera", area: 6200, preco: 8900000 },
+  { id: "PRC-SP-00000155", titulo: "Terreno urbano", cidade: "Indaiatuba", bairro: "Centro", area: 3400, preco: 2650000 },
+  { id: "PRC-SP-00000162", titulo: "Área industrial", cidade: "Sumaré", bairro: "Bandeirantes", area: 24100, preco: null }
+];
+
+function exemploAnuncios() {
+  el("an-csv").value =
+`portal;id_externo;url;titulo;endereco;cidade;area;preco
+PortalX;A-1001;https://portalx.com.br/i/1001;Área industrial 18.400 m²;Rua Projetada, Distrito Industrial;Campinas;18400;12500000
+PortalY;B-7742;https://portaly.com.br/ad/7742;Terreno industrial Campinas;Distrito Industrial, s/n;Campinas;18400;12500000
+PortalX;A-1001;https://portalx.com.br/i/1001?utm_source=news;Área industrial 18.400 m²;Rua Projetada, Distrito Industrial;Campinas;18400;12500000
+PortalZ;C-3390;https://portalz.com.br/imovel/3390;Galpão 6.200 m² Anhanguera;Rod. Anhanguera km 58;Jundiaí;6200;8900000
+PortalX;A-2210;https://portalx.com.br/i/2210;Área industrial Sumaré;Bandeirantes;Sumaré;24100;9800000
+PortalY;B-9911;https://portaly.com.br/ad/9911;Terreno 3.400 m² centro;Centro expandido;Indaiatuba;3400;2650000
+PortalW;D-0455;https://portalw.com.br/x/455;Área rural;Estrada municipal;Itatiba;12000;1980000`;
+}
+
+function processarAnuncios() {
+  const bruto = el("an-csv").value.trim();
+  const saida = el("an-saida");
+  if (!bruto) {
+    saida.innerHTML = `<div class="aviso info"><span class="marcador">VAZIO</span><div>
+      <b>Nenhum anúncio para cruzar</b>Cole a planilha ou carregue o exemplo.</div></div>`;
+    return;
+  }
+
+  const { registros } = Motor.lerCSV(bruto);
+  const anuncios = registros.map(r => ({
+    portal: r.portal || "", idExterno: r.id_externo || "", url: r.url || "",
+    titulo: r.titulo || "", endereco: r.endereco || "", cidade: r.cidade || "",
+    area: Motor.numero(r.area) || 0, preco: Motor.numero(r.preco) || 0
+  })).filter(a => a.cidade || a.titulo);
+
+  if (!anuncios.length) {
+    saida.innerHTML = `<div class="aviso risco"><span class="marcador">FORMATO</span><div>
+      <b>Não reconheci as colunas</b>Esperado: portal, id_externo, url, titulo, endereco, cidade, area, preco.</div></div>`;
+    return;
+  }
+
+  const r = Motor.cruzarAnuncios(anuncios, ATIVOS_BASE);
+
+  const linhas = r.novos.map(n => {
+    const a = n.anuncio;
+    const vinc = n.ativo
+      ? `<span class="etiq ok"><span class="ponto"></span>${n.ativo.id}</span>`
+      : `<span class="etiq aviso"><span class="ponto"></span>Ativo novo</span>`;
+    return `<tr>
+      <td><div class="principal">${a.titulo || "—"}</div><div class="secundario">${a.portal} · ${a.cidade}</div></td>
+      <td class="num">${a.area ? a.area.toLocaleString("pt-BR") + " m²" : "—"}</td>
+      <td class="num">${a.preco ? reais(a.preco) : "—"}</td>
+      <td>${vinc}</td>
+      <td class="num">${n.confianca}</td>
+      <td class="num secundario">${n.impressao}</td>
+    </tr>`;
+  }).join("");
+
+  const repetidos = r.repetidos.map(d => `<tr>
+      <td><div class="principal">${d.anuncio.titulo || "—"}</div><div class="secundario">${d.anuncio.portal}</div></td>
+      <td colspan="5" class="secundario">Mesma impressão de "${d.igualA.titulo}" (${d.igualA.portal})</td>
+    </tr>`).join("");
+
+  saida.innerHTML = `
+    <div class="linha d3">
+      <div class="painel"><h2>Anúncios lidos</h2><div class="cifra">${anuncios.length}</div>
+        <div class="sob">− <b>${r.repetidos.length}</b> repetido(s) = <b>${r.novos.length}</b> anúncio(s) único(s)</div></div>
+      <div class="painel"><h2>Vinculados a ativo</h2><div class="cifra">${r.vinculados}</div>
+        <div class="sob">exigem cidade, área e preço concordando</div></div>
+      <div class="painel"><h2>Ativos novos</h2><div class="cifra">${r.semVinculo}</div>
+        <div class="sob">entram na fila de qualificação</div></div>
+    </div>
+
+    <div class="quadro">
+      <div class="quadro-topo"><span class="secundario">Resultado do cruzamento</span></div>
+      <div class="rolagem"><table>
+        <thead><tr><th>Anúncio</th><th class="num">Área</th><th class="num">Preço</th>
+          <th>Vínculo</th><th class="num">Confiança</th><th class="num">Impressão</th></tr></thead>
+        <tbody>${linhas}</tbody>
+      </table></div>
+    </div>
+
+    ${r.repetidos.length ? `<div class="quadro" style="margin-top:16px">
+      <div class="quadro-topo"><span class="secundario">Descartados por duplicidade</span></div>
+      <div class="rolagem"><table><tbody>${repetidos}</tbody></table></div>
+    </div>` : ""}`;
+}
+
+/* ---------------- AVALIAÇÃO ---------------- */
+
+let ultimaAvaliacao = null;
+
+function exemploComparaveis() {
+  const linhas = ["cidade;tipo;area;preco"];
+  let semente = 7;
+  const rnd = () => { semente = (semente * 1103515245 + 12345) % 2147483648; return semente / 2147483648; };
+  for (let i = 0; i < 26; i++) {
+    const area = Math.round(11000 + rnd() * 13000);
+    const z = Math.sqrt(-2 * Math.log(Math.max(rnd(), 1e-9))) * Math.cos(2 * Math.PI * rnd());
+    const unit = 820 * Math.pow(area / 15000, -0.22) * Math.exp(z * 0.12);
+    linhas.push(`Campinas;Área industrial;${area};${Math.round(unit * area)}`);
+  }
+  linhas.push("Campinas;Área industrial;16000;44000000");
+  linhas.push("Campinas;Área industrial;13500;38000000");
+  el("av-comps").value = linhas.join("\n");
+}
+
+function rodarAvaliacao() {
+  const saida = el("av-saida");
+  const tipo = el("av-tipo").value;
+  const cidade = el("av-cidade").value.trim();
+  const area = Number(el("av-area").value);
+  const { registros } = Motor.lerCSV(el("av-comps").value.trim());
+
+  const comps = registros.map(r => ({
+    cidade: r.cidade || "", tipo: r.tipo || "",
+    area: Motor.numero(r.area) || 0, preco: Motor.numero(r.preco) || 0,
+    observadoEm: r.observado_em || null
+  })).filter(c => c.area && c.preco);
+
+  const r = Motor.avaliar(comps, { tipo, cidade, area });
+  el("av-btn-ptam").disabled = true;
+  ultimaAvaliacao = null;
+
+  if (r.erro) {
+    saida.innerHTML = `<div class="aviso risco" style="margin-top:16px">
+      <span class="marcador">SEM BASE</span>
+      <div><b>Não é possível emitir parecer</b>${r.erro}</div></div>`;
+    return;
+  }
+
+  ultimaAvaliacao = { r, tipo, cidade, area };
+  el("av-btn-ptam").disabled = false;
+
+  const pedido = Number(el("av-pedido").value) || 0;
+  const desvio = pedido ? (pedido / r.p50 - 1) * 100 : null;
+
+  saida.innerHTML = `
+    <div class="laudo">
+      <div class="laudo-faixa">
+        <div><span>Limite inferior · P10</span><b>${reais(r.p10)}</b></div>
+        <div class="centro"><span>Valor de mercado · P50</span><b>${reais(r.p50)}</b></div>
+        <div><span>Limite superior · P90</span><b>${reais(r.p90)}</b></div>
+      </div>
+      <div class="laudo-corpo">
+        <dl class="laudo-linha"><dt>Valor unitário</dt><dd>${reais(r.valorM2)}/m²</dd></dl>
+        <dl class="laudo-linha"><dt>Elementos utilizados</dt><dd>${r.comparaveis} · ${r.descartados} descartados por 3·MAD</dd></dl>
+        <dl class="laudo-linha"><dt>Elasticidade de área</dt><dd>${r.elasticidade.toFixed(3)} ${r.elasticidadeEstimada ? "(estimada da amostra)" : "(referência da tipologia)"}</dd></dl>
+        <dl class="laudo-linha"><dt>Dispersão da amostra</dt><dd>${pct(r.dispersao * 100)}</dd></dl>
+        <dl class="laudo-linha"><dt>Confiança</dt><dd>${r.confianca}/100${r.confianca < 60 ? " — abaixo do piso" : ""}</dd></dl>
+        ${desvio !== null ? `<dl class="laudo-linha"><dt>Pretensão do proprietário</dt>
+          <dd>${reais(pedido)} · ${desvio >= 0 ? "+" : ""}${pct(desvio)} vs mercado</dd></dl>` : ""}
+      </div>
+    </div>
+
+    ${desvio !== null && desvio > 10 ? `<div class="aviso info" style="margin-top:16px">
+      <span class="marcador">PREÇO</span><div>
+      <b>Pretensão ${pct(desvio)} acima do mercado</b>
+      Captar sem alinhar o preço gera mandato que vence sem venda. Leve o parecer à conversa.</div></div>` : ""}`;
+}
+
+function emitirParecer() {
+  if (!ultimaAvaliacao) return;
+  const { r, tipo, cidade, area } = ultimaAvaliacao;
+  const hoje = new Date().toLocaleDateString("pt-BR");
+
+  const texto =
+`PARECER TÉCNICO DE AVALIAÇÃO MERCADOLÓGICA
+
+Parecer nº PTAM-${new Date().getFullYear()}-0001
+Emitido em ${hoje}
+Finalidade: definição de preço de oferta
+
+1. DO EMISSOR E DA COMPETÊNCIA
+${EMISSOR.nome}, Corretor(a) de Imóveis inscrito(a) sob o nº ${EMISSOR.creci},
+com inscrição regular até ${EMISSOR.validade}.
+A competência decorre do art. 3º da Lei nº 6.530/1978, e a forma de elaboração
+observa a Resolução COFECI nº 1.066/2007.
+
+2. DO IMÓVEL AVALIANDO
+Tipologia .......... ${tipo}
+Município .......... ${cidade}
+Área do terreno .... ${area.toLocaleString("pt-BR")} m²
+
+3. DA METODOLOGIA
+Método comparativo direto de dados de mercado. Foram pesquisados
+${r.comparaveis + r.descartados} elementos do mesmo tipo e município, com área entre
+65% e 135% da área do imóvel avaliando. ${r.descartados} elemento(s) foram descartados
+por afastamento superior a 3 desvios absolutos medianos. Os ${r.comparaveis} elementos
+remanescentes tiveram o valor unitário homogeneizado para a escala do imóvel
+avaliando por fator de área com elasticidade de ${r.elasticidade.toFixed(3)},
+${r.elasticidadeEstimada ? "estimada por regressão log-log sobre a própria amostra" : "adotada como referência para a tipologia"}.
+Adotou-se mediana e desvio absoluto mediano em lugar de média e desvio-padrão,
+em razão da assimetria característica de preços de oferta.
+
+4. DO RESULTADO
+Limite inferior (P10) ...... ${reais(r.p10)}   (${reais(r.p10 / area)}/m²)
+VALOR DE MERCADO (P50) ..... ${reais(r.p50)}   (${reais(r.valorM2)}/m²)
+Limite superior (P90) ...... ${reais(r.p90)}   (${reais(r.p90 / area)}/m²)
+
+Índice de confiança da amostra: ${r.confianca}/100
+Dispersão amostral: ${pct(r.dispersao * 100)}
+
+5. DAS RESSALVAS
+${r.confianca < 70 ? "0. ATENÇÃO: confiança da amostra abaixo de 70. Recomenda-se ampliar a pesquisa\n   antes de usar este parecer como base única de decisão.\n" : ""}1. Reflete valor de mercado para negociação de compra e venda, nos termos da
+   Resolução COFECI nº 1.066/2007.
+2. Não substitui laudo conforme ABNT NBR 14.653, exigido para fins judiciais,
+   garantia bancária, fiscais ou de desapropriação.
+3. A pesquisa baseia-se em preços de oferta, que divergem sistematicamente de
+   preços de transação. A faixa apresentada já incorpora essa dispersão.
+4. Não foi realizada vistoria pericial nem verificação registral, salvo se
+   expressamente consignado.
+5. A área considerada é a informada. Recomenda-se confrontá-la com a área da
+   matrícula antes da oferta.
+
+_______________________________________
+${EMISSOR.nome}
+${EMISSOR.creci}
+${hoje}`;
+
+  const anterior = el("av-parecer");
+  if (anterior) anterior.parentElement.removeChild(anterior);
+
+  el("av-saida").insertAdjacentHTML("beforeend",
+    `<div class="parecer" id="av-parecer"></div>
+     <div class="acoes-linha" style="margin-top:10px">
+       <button class="btn" onclick="copiarParecer()">Copiar parecer</button>
+       <span class="secundario" id="av-copia"></span>
+     </div>`);
+  el("av-parecer").textContent = texto;
+}
+
+function copiarParecer() {
+  const alvo = el("av-parecer");
+  if (!alvo) return;
+  const aviso = m => { const c = el("av-copia"); if (c) { c.textContent = m; setTimeout(() => c.textContent = "", 2600); } };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(alvo.textContent).then(() => aviso("Copiado."), () => aviso("Selecione o texto para copiar."));
+  } else {
+    aviso("Selecione o texto acima para copiar.");
+  }
+}
+
+/* ---------------- OPORTUNIDADES ---------------- */
+
+const CANDIDATOS = [
+  { id: "PRC-SP-00000162", titulo: "Área industrial", cidade: "Sumaré", area: 24100,
+    pretendido: 9800000, p50: 11900000, confianca: 84, comissao: 5, modalidade: "exclusiva",
+    dias: 132, absorvidos: 9, localizado: true, matricula: true, estagio: "sem proposta" },
+  { id: "PRC-SP-00000158", titulo: "Terreno urbano", cidade: "Paulínia", area: 9800,
+    pretendido: 5100000, p50: 5350000, confianca: 78, comissao: 6, modalidade: "simples",
+    dias: 168, absorvidos: 6, localizado: true, matricula: null, estagio: "sem proposta" },
+  { id: "PRC-SP-00000171", titulo: "Galpão", cidade: "Vinhedo", area: 4100,
+    pretendido: 9900000, p50: 7100000, confianca: 81, comissao: 5, modalidade: "exclusiva",
+    dias: 210, absorvidos: 4, localizado: true, matricula: true, estagio: "sem proposta" },
+  { id: "PRC-SP-00000167", titulo: "Chácara", cidade: "Itatiba", area: 12000,
+    pretendido: 1980000, p50: 2050000, confianca: 52, comissao: 6, modalidade: "simples",
+    dias: 240, absorvidos: 3, localizado: false, matricula: null, estagio: "sem proposta" },
+  { id: "PRC-SP-00000174", titulo: "Área comercial", cidade: "Hortolândia", area: 1850,
+    pretendido: 3050000, p50: 3200000, confianca: 88, comissao: 6, modalidade: "exclusiva",
+    dias: 96, absorvidos: 14, localizado: true, matricula: true, estagio: "sem proposta" }
+];
+
+function pontuar(c) {
+  return Motor.pontuarCaptacao({
+    precoPretendido: c.pretendido, p50Mercado: c.p50, confiancaAvaliacao: c.confianca,
+    diasNoMercado: c.dias, absorvidos12m: c.absorvidos, comissaoPct: c.comissao,
+    modalidade: c.modalidade, proprietarioLocalizado: c.localizado,
+    matriculaLimpa: c.matricula, estagio: c.estagio
+  });
+}
+
+function rodarOportunidades() {
+  const avaliados = CANDIDATOS.map(c => ({ c, r: pontuar(c) }))
+    .sort((a, b) => b.r.veComissao - a.r.veComissao);
+
+  const etiqueta = d => d === "Captação" ? "ok" : d === "Fila de pesquisa" ? "neutra" : "aviso";
+
+  el("op-tabela").innerHTML = `
+    <thead><tr><th>Ativo</th><th class="num">Pretensão</th><th class="num">Mercado</th>
+      <th class="num">Desvio</th><th class="num">Comissão</th><th class="num">VE</th>
+      <th class="num">Score</th><th>Destino</th></tr></thead>
+    <tbody>${avaliados.map(({ c, r }) => `
+      <tr onclick="detalharOportunidade('${c.id}')" style="cursor:pointer">
+        <td><div class="principal">${c.titulo}</div><div class="secundario">${c.cidade} · ${c.area.toLocaleString("pt-BR")} m²</div></td>
+        <td class="num">${reais(c.pretendido)}</td>
+        <td class="num secundario">${reais(c.p50)}</td>
+        <td class="num" style="${r.desvioPct > 10 ? "color:var(--carmim);font-weight:600" : ""}">${r.desvioPct >= 0 ? "+" : ""}${pct(r.desvioPct)}</td>
+        <td class="num">${reais(r.comissaoBruta)}</td>
+        <td class="num principal">${reais(r.veComissao)}</td>
+        <td class="num">${r.score}</td>
+        <td><span class="etiq ${etiqueta(r.destino)}"><span class="ponto"></span>${r.destino}</span></td>
+      </tr>`).join("")}</tbody>`;
+
+  const topo = avaliados[0];
+  const maiorComissao = [...avaliados].sort((a, b) => b.r.comissaoBruta - a.r.comissaoBruta)[0];
+
+  el("op-detalhe").innerHTML = `<div class="aviso info">
+    <span class="marcador">LEITURA</span><div>
+    <b>A fila não segue o tamanho da comissão</b>
+    ${maiorComissao.c.id !== topo.c.id
+      ? `${maiorComissao.c.titulo} de ${maiorComissao.c.cidade} tem a maior comissão bruta da lista
+         (${reais(maiorComissao.r.comissaoBruta)}, contra ${reais(topo.r.comissaoBruta)} do primeiro colocado)
+         e mesmo assim não lidera: a pretensão está ${pct(maiorComissao.r.desvioPct)} acima do mercado.`
+      : `Clique em uma linha para ver a decomposição do score.`}</div></div>`;
+}
+
+function detalharOportunidade(id) {
+  const c = CANDIDATOS.find(x => x.id === id);
+  if (!c) return;
+  const r = pontuar(c);
+  const nomes = { aderencia: "Aderência de preço", liquidez: "Liquidez da região",
+                  valor: "Valor da comissão", exclusividade: "Exclusividade", tratabilidade: "Tratabilidade" };
+
+  el("op-detalhe").innerHTML = `
+    <div class="painel">
+      <h2>${c.titulo} · ${c.cidade}</h2>
+      <div class="barras">
+        ${Object.keys(Motor.PESOS).map(k => `
+          <div class="barra">
+            <span>${nomes[k]}</span>
+            <i><b style="width:${(r.componentes[k] * 100).toFixed(0)}%"></b></i>
+            <u>${r.componentes[k].toFixed(2)} · ${(Motor.PESOS[k] * 100).toFixed(0)}%</u>
+          </div>`).join("")}
+      </div>
+      <div class="sob" style="margin-top:14px">
+        Score <b>${r.score}</b> · comissão bruta <b>${reais(r.comissaoBruta)}</b> ·
+        valor esperado <b>${reais(r.veComissao)}</b>
+      </div>
+      <div class="aviso ${r.destino === "Captação" ? "info" : "risco"}" style="margin:14px 0 0">
+        <span class="marcador">${r.destino.toUpperCase()}</span><div>${r.motivo}</div>
+      </div>
+    </div>`;
+}
+
+/* ---------------- ATIVAÇÃO DE MANDATO ---------------- */
+
+const MANDATOS = {
+  "PRC-SP-00000160": { assinado: false, creciValido: true, titulo: "Área comercial · Hortolândia" }
+};
+
+/* Mesmas travas do banco: art. 6º §1º da Lei 6.530/78 (responsável com CRECI
+   válido) e art. 5º do Decreto 81.871/78 (autorização escrita vigente). */
+function ativarMandato(id) {
+  const m = MANDATOS[id];
+  if (!m) return false;
+  if (!m.creciValido) {
+    alert("Não é possível ativar: o responsável não possui CRECI válido (Lei 6.530/1978, art. 6º, §1º).");
+    return false;
+  }
+  if (!m.assinado) {
+    alert("Não é possível ativar: falta anexar a autorização escrita assinada (Decreto 81.871/1978, art. 5º).");
+    return false;
+  }
+  const ficha = document.querySelector(`[data-mandato="${id}"]`);
+  if (ficha) {
+    const carimbo = ficha.querySelector(".carimbo");
+    carimbo.textContent = "Autorizada";
+    carimbo.classList.remove("pendente");
+    ficha.querySelector(".ficha-pe").innerHTML =
+      `<span class="inscricao">Anúncio sob <b>${CRECI_RESPONSAVEL}</b></span>
+       <span class="etiq ok"><span class="ponto"></span>No ar</span>`;
+  }
+  m.ativo = true;
+  return true;
+}
+
+function anexarAutorizacao(id) {
+  const m = MANDATOS[id];
+  if (!m) return false;
+  m.assinado = true;
+  const ficha = document.querySelector(`[data-mandato="${id}"]`);
+  if (ficha) {
+    ficha.querySelector(".ficha-pe").innerHTML =
+      `<span class="inscricao">Autorização anexada</span>
+       <button class="btn miudo principal" onclick="ativarMandato('${id}')">Ativar mandato</button>`;
+  }
+  return true;
+}
+
+exemploAnuncios();
+exemploRadar();
+exemploComparaveis();
+rodarOportunidades();
+
+document.getElementById('codigo').addEventListener('keydown', e => {
+  if (e.key === 'Enter') entrar();
+});
+document.getElementById('senha').addEventListener('keydown', e => {
+  if (e.key === 'Enter') pedirCodigo();
+});
+</script>
+</body>
+</html>
