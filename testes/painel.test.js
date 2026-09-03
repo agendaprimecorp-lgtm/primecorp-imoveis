@@ -2,7 +2,7 @@
    Roda: node testes/painel.test.js  */
 const fs = require("fs");
 const path = require("path");
-const { JSDOM } = require("/tmp/node_modules/jsdom");
+const { JSDOM } = require("jsdom");
 
 const html = fs.readFileSync(path.join(__dirname, "..", "web", "painel.html"), "utf8");
 

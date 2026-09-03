@@ -3,7 +3,7 @@
    Roda: node testes/motor.test.js */
 const fs = require("fs");
 const path = require("path");
-const { JSDOM } = require("/tmp/node_modules/jsdom");
+const { JSDOM } = require("jsdom");
 
 const dom = new JSDOM("<!doctype html><html><body></body></html>", { runScripts: "outside-only" });
 const window = dom.window;

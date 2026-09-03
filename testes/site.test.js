@@ -2,7 +2,7 @@
    Roda: node testes/site.test.js  */
 const fs = require("fs");
 const path = require("path");
-const { JSDOM } = require("/tmp/node_modules/jsdom");
+const { JSDOM } = require("jsdom");
 
 const BASE = path.join(__dirname, "..", "web");
 let html = fs.readFileSync(path.join(BASE, "index.html"), "utf8");

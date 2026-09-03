@@ -1,0 +1,13 @@
+{
+  "name": "primecorp-imoveis",
+  "version": "0.0.0",
+  "description": "Testes de DOM headless do site e do painel PrimeCorp",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "node testes/motor.test.js && node testes/site.test.js && node testes/painel.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}
