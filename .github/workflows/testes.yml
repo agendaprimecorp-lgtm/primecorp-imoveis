@@ -16,17 +16,17 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
-          # sem cache: o package-lock.json e ignorado neste repo (.gitignore:62)
+          cache: npm
 
       # weasyprint precisa de pango/harfbuzz do sistema, senao o import
       # de app.ptam quebra antes de qualquer teste rodar.
@@ -39,10 +39,10 @@ jobs:
       - name: Dependencias Python
         run: pip install -r requirements.txt
 
-      # npm install, nao npm ci: o package-lock.json e ignorado neste
-      # repositorio (.gitignore:62), e npm ci exige o lock.
+      # npm ci: instala exatamente o que esta no package-lock.json,
+      # sem resolver versoes de novo. Instalacao reproduzivel.
       - name: Dependencias Node
-        run: npm install --no-audit --no-fund
+        run: npm ci
 
       - name: Backend (pytest)
         run: python -m pytest tests/ -q
