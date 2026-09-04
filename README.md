@@ -51,6 +51,19 @@ pipeline de build para manter. Trocar por React ou Vue é opção, não necessid
 
 ---
 
+## Produção — Propto (Capture Worker)
+
+O **Propto** é o serviço de captura de áudio de imóveis com extração de dados via IA.
+Para deploy em produção, veja [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+
+**Quick start:**
+```bash
+cp .env.example .env && nano .env  # preencher credenciais Supabase
+docker-compose up -d
+```
+
+---
+
 ## Instalação
 
 Requisitos: Docker e Docker Compose. Para rodar os testes, Python 3.12 e Node 18+.
