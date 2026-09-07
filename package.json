@@ -5,8 +5,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "test": "node testes/motor.test.js && node testes/site.test.js && node testes/painel.test.js",
-    "migrate": "NODE_ENV=production tsx scripts/setup-db.ts"
+    "test": "node testes/motor.test.js && node testes/site.test.js && node testes/painel.test.js"
   },
   "devDependencies": {
     "jsdom": "^26.0.0"
