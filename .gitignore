@@ -90,3 +90,8 @@ temp/
 saida/
 *.pdf
 !docs/*.pdf
+
+# ============================================================
+# Workspace de execução do superpowers (scratch, não versionar)
+# ============================================================
+.superpowers/
