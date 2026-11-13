@@ -1,7 +1,13 @@
 # PrimeCorp Imóveis — Plataforma de Intermediação
 
-Plataforma de intermediação imobiliária (corretagem) para o Estado de São Paulo, com foco
-em áreas industriais, galpões, terrenos e imóveis de alto padrão. **Somente venda.**
+Plataforma de intermediação imobiliária (corretagem) com atuação nacional, com foco
+em áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão. **Somente venda.**
+
+Inscrição principal no CRECI-SP e operação direta na região metropolitana de Campinas.
+Negócio fora da jurisdição do CRECI-SP observa o art. 5º da Resolução COFECI nº 327/1992:
+requerimento prévio ao CRECI da região para atuação eventual, inscrição secundária acima de
+120 dias. Atenção ao art. 6º, parágrafo único: **pessoa jurídica não pode ter inscrição
+secundária** — atuação continuada em outro estado exigiria filial.
 
 O sistema tem três peças que rodam juntas:
 

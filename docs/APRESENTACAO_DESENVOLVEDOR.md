@@ -7,7 +7,7 @@ Versão do pacote: V4 · Data: 20/08/2026
 
 ## 1. O que é o produto
 
-Plataforma de intermediação imobiliária (corretagem) para o Estado de São Paulo, com foco
+Plataforma de intermediação imobiliária (corretagem) com atuação nacional, com foco
 em áreas industriais, galpões, terrenos e imóveis de alto padrão. **Somente venda.**
 
 Três peças que andam juntas:
@@ -89,9 +89,9 @@ O dev deve preservar esse padrão.
 **20 rotas.** Autenticação, MFA, mandatos, pipeline, importação CSV, avaliação, PTAM,
 captação, LGPD, conformidade.
 
-### 3.3 Front — `web/` (2.425 linhas + 645 no motor)
+### 3.3 Front — `web/`
 
-**Site (`index.html`).** 16 tipologias × 645 municípios de SP (base IBGE, com código
+**Site (`index.html`).** 17 tipologias × 5.570 municípios do Brasil (base IBGE, com código
 municipal). Seletor de município próprio — o `<datalist>` do HTML não funciona no Safari do
 iOS e o campo ficava mudo no iPhone. Vitrine com CRECI por imóvel. Formulário com validação
 e consentimento LGPD. Rodapé legal. Schema.org `RealEstateAgent`.

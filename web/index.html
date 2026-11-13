@@ -3,404 +3,750 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PrimeCorp Imóveis · Áreas industriais, galpões e terrenos no Estado de São Paulo</title>
-<meta name="description" content="Intermediação imobiliária no Estado de São Paulo. Parecer técnico de avaliação antes de definir o preço de oferta. CRECISP 300760 e 297692.">
-<meta name="theme-color" content="#393536">
+<title>PrimeCorp Imóveis — Intermediação de compra e venda em todo o Brasil</title>
+<meta name="description" content="Intermediação de compra e venda de áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão. Corretores inscritos no CRECI-SP, negociando em todo o Brasil.">
+<meta name="theme-color" content="#14171a">
 <link rel="canonical" href="https://www.primecorpimoveis.com.br/">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
-<link rel="icon" href="assets/favicon.png" sizes="200x200">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.primecorpimoveis.com.br/">
-<meta property="og:title" content="PrimeCorp Imóveis — antes de anunciar, saiba por quanto vende">
-<meta property="og:description" content="Parecer técnico de avaliação sobre dados reais da sua micro-região, antes de definir o preço de oferta.">
+<meta property="og:title" content="PrimeCorp Imóveis — intermediação de compra e venda">
+<meta property="og:description" content="Quem compra encontra o ativo certo. Quem vende descobre o preço real antes de anunciar.">
 <meta property="og:image" content="https://www.primecorpimoveis.com.br/assets/marca-empilhada-1200.png">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"RealEstateAgent",
-  "name":"PrimeCorp Imóveis",
-  "url":"https://www.primecorpimoveis.com.br/",
-  "areaServed":{"@type":"State","name":"São Paulo"},
-  "address":{"@type":"PostalAddress","addressRegion":"SP","addressCountry":"BR"},
-  "employee":[
-    {"@type":"Person","name":"Joselia Junqueira Viana","identifier":"CRECISP 300760","jobTitle":"Corretora de Imóveis"},
-    {"@type":"Person","name":"Rodrigo Franca Viana","identifier":"CRECISP 297692","jobTitle":"Corretor de Imóveis"}
-  ]
-}
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"PrimeCorp Imóveis",
+"url":"https://www.primecorpimoveis.com.br/","areaServed":{"@type":"Country","name":"Brasil"},
+"telephone":"+55-19-99919-4447","email":"contato@primecorpconsultoria.com.br",
+"address":{"@type":"PostalAddress","addressRegion":"SP","addressCountry":"BR"},
+"employee":[{"@type":"Person","name":"Joselia Junqueira Viana","identifier":"CRECISP 300760","jobTitle":"Corretora de Imóveis"},
+{"@type":"Person","name":"Rodrigo França Viana","identifier":"CRECISP 297692","jobTitle":"Corretor de Imóveis"}]}
 </script>
 
 <style>
+/* ============================================================
+   Sistema de design PrimeCorp — tokens lidos do CSS computado de
+   primecorpconsultoria.com.br. Mesma casa, mesma cara.
+   ============================================================ */
 :root{
-  --carmim:#D93438; --carmim-esc:#A82429; --carmim-fundo:#FDEEEF;
-  --grafite:#393536; --tinta:#231F20; --papel:#F1EFEC; --folha:#fff;
-  --pauta:#DDD8D3; --pauta-forte:#C4BDB7; --apagado:#78716C; --selo:#0F5C4A;
-  --display:"Zilla Slab",Georgia,serif;
-  --corpo:"IBM Plex Sans",system-ui,sans-serif;
-  --dado:"IBM Plex Mono",ui-monospace,monospace;
-  --raio:3px;
+  --carvao:#14171a; --grafite:#22272b; --tinta:#191c1f; --tinta2:#4f575c; --tinta3:#6a7277;
+  --papel:#eef1f2; --claro:#f6f7f8; --branco:#fff; --linha:#d5dbde; --linha2:#e4e8ea;
+  --vermelho:#d5383a; --vermelho-e:#a8282a;
+  --areia:#c2ae74; --areia-c:#f1ebda;
+  --verde:#1c7a4a; --verde-c:#e2f1e8;
+  --f-disp:"Bricolage Grotesque",Geist,system-ui,sans-serif;
+  --f-corpo:Geist,Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:12px; --max:1880px; --hdr:76px;
+  --sombra:0 1px 2px rgba(20,23,26,.05),0 10px 28px rgba(20,23,26,.07);
+  --gutter:clamp(16px,3.5vw,72px);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:var(--corpo);color:var(--tinta);background:var(--folha);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--f-corpo);font-size:16px;line-height:1.6;color:var(--tinta);background:var(--branco);-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
 a{color:inherit}
 button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--carmim);outline-offset:3px}
-.faixa{width:min(1140px,calc(100% - 40px));margin-inline:auto}
-h1,h2,h3{font-family:var(--display);letter-spacing:-.015em;line-height:1.15;margin:0}
-.olho{font-family:var(--dado);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--carmim)}
+:focus-visible{outline:2px solid var(--vermelho);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-disp);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:0}
+.faixa{width:min(var(--max),calc(100% - var(--gutter)*2));margin-inline:auto}
 .pular{position:absolute;left:-9999px}
-.pular:focus{left:12px;top:12px;background:var(--folha);padding:10px 16px;z-index:100;border:2px solid var(--carmim);border-radius:var(--raio)}
+.pular:focus{left:12px;top:12px;background:var(--branco);padding:10px 16px;z-index:200;border:2px solid var(--vermelho);border-radius:var(--r)}
+/* alvo de âncora sem ocupar espaço: #comprar e #vender precisam existir
+   no documento para o link funcionar mesmo sem JavaScript */
+.ancora{display:block;height:0;width:0;overflow:hidden}
 
-/* ---------- marca ---------- */
+.olho{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--areia);display:flex;align-items:center;gap:10px}
+.olho::before{content:"";width:22px;height:1.5px;background:currentColor;flex-shrink:0}
+
+/* ---------- cabeçalho ---------- */
+.topo{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--linha2)}
+.topo .faixa{display:flex;align-items:center;gap:28px;min-height:var(--hdr)}
 .marca{display:inline-flex;align-items:center;text-decoration:none;flex-shrink:0}
-.marca img{width:auto;height:44px}
-.marca-rodape{margin-bottom:18px}
-.marca-rodape img{width:auto;height:52px}
+.marca img{height:38px;width:auto}
+.menu{display:flex;gap:26px;margin-left:auto;font-size:14.5px;font-weight:500}
+.menu a{text-decoration:none;color:var(--tinta2);padding:6px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.menu a:hover{color:var(--tinta);border-bottom-color:var(--vermelho)}
 
-/* ---------- topo ---------- */
-.topo{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--pauta)}
-.topo .faixa{display:flex;align-items:center;gap:26px;min-height:82px}
-.menu{display:flex;gap:24px;margin-left:auto;font-size:14.5px;font-weight:500}
-.menu a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
-.menu a:hover{border-bottom-color:var(--carmim)}
-.botao{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--pauta-forte);background:var(--folha);padding:11px 20px;border-radius:var(--raio);font-weight:500;cursor:pointer;text-decoration:none;font-size:15px}
-.botao:hover{background:var(--papel)}
-.botao.forte{background:var(--carmim);border-color:var(--carmim);color:#fff;font-weight:600}
-.botao.forte:hover{background:var(--carmim-esc)}
-.botao.clara{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
-.botao.clara:hover{background:rgba(255,255,255,.1)}
+/* hambúrguer — só existe abaixo de 1080px */
+.hamburguer{display:none;margin-left:auto;background:none;border:1px solid var(--linha);border-radius:9px;width:44px;height:44px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0}
+.hamburguer span{display:block;width:18px;height:1.8px;background:var(--tinta);position:relative;transition:background .15s}
+.hamburguer span::before,.hamburguer span::after{content:"";position:absolute;left:0;width:18px;height:1.8px;background:var(--tinta);transition:transform .2s,top .2s}
+.hamburguer span::before{top:-6px}
+.hamburguer span::after{top:6px}
+.hamburguer[aria-expanded="true"] span{background:transparent}
+.hamburguer[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+.hamburguer[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+.veu{display:none;position:fixed;inset:var(--hdr) 0 0;background:rgba(20,23,26,.45);z-index:90}
+.veu.aberto{display:block}
 
-/* ---------- capa ---------- */
-.capa{background:var(--grafite);color:#fff;padding:74px 0 82px;position:relative;overflow:hidden}
-.capa::before{
-  content:"";position:absolute;inset:0;opacity:.1;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px);background-size:100% 34px;
-}
-.capa::after{
-  content:"";position:absolute;right:-150px;top:-80px;width:560px;height:560px;opacity:.055;pointer-events:none;
-  background:url("assets/marca-simbolo-512.png") center/contain no-repeat;
-}
-.capa .faixa{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.capa h1{font-size:clamp(34px,4.5vw,54px);font-weight:600;margin:14px 0 20px}
-.capa h1 b{color:#FF6B71;font-weight:600}
-.capa p{font-size:18px;color:#CFC9C7;max-width:52ch;margin:0}
-.acoes{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.selo-creci{margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);font-family:var(--dado);font-size:12px;color:#A39C9A;line-height:1.85}
-.selo-creci b{color:#fff;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;background:var(--vermelho);color:#fff;font-weight:600;font-size:15px;padding:13px 20px;border-radius:9px;cursor:pointer;text-decoration:none;transition:background .15s,transform .1s}
+.btn:hover{background:var(--vermelho-e)}
+.btn:active{transform:translateY(1px)}
+.btn.sec{background:var(--branco);color:var(--tinta);border-color:var(--linha)}
+.btn.sec:hover{background:var(--claro)}
+.btn.clara{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)}
+.btn.clara:hover{background:rgba(255,255,255,.16)}
+.btn.mini{padding:8px 13px;font-size:13.5px;border-radius:8px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
 
-/* ---------- consultor ---------- */
-/* color explícito: sem isso o cartão herda o branco da capa e o texto do
-   select/input fica branco sobre campo claro — some da tela no celular */
-.medidor{background:var(--folha);color:var(--tinta);border-radius:var(--raio);padding:26px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
-.medidor h2{color:var(--tinta)}
-.medidor .entrada,.medidor select.entrada{color:var(--tinta);-webkit-text-fill-color:var(--tinta)}
-.medidor label{color:var(--apagado)}
-.medidor h2{font-size:21px;margin-bottom:5px}
-.medidor > p{font-size:14px;color:var(--apagado);margin:0 0 18px}
-.grade{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px}
-.grade .larga{grid-column:1/-1}
-label{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--apagado);margin-bottom:5px}
-.entrada{width:100%;border:1px solid var(--pauta);border-radius:var(--raio);padding:10px 12px;background:var(--papel);color:var(--tinta);-webkit-text-fill-color:var(--tinta);-webkit-appearance:none;appearance:none}
-select.entrada{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%2378716C' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:11px;padding-right:34px}
-.entrada:focus{outline:none;border-color:var(--carmim);background:var(--folha)}
-.medidor .botao.forte{width:100%}
-.saida{margin-top:18px;padding-top:18px;border-top:1px solid var(--pauta)}
-.tres{display:flex;align-items:flex-end;gap:12px;margin-bottom:9px}
-.tres div{text-align:center;flex:1}
-.tres span{display:block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--apagado);margin-bottom:3px}
-.tres b{font-family:var(--dado);font-size:14px;font-weight:500}
-.tres .centro b{font-size:21px;color:var(--carmim)}
-.regua{height:6px;background:linear-gradient(90deg,var(--pauta),var(--carmim) 50%,var(--pauta));border-radius:99px;margin-bottom:12px}
-.nota{font-size:12.5px;color:var(--apagado);line-height:1.55;margin:0}
-.nota code{font-family:var(--dado);font-size:11.5px}
-.convite{background:var(--carmim-fundo);border:1px solid #F4C9CB;border-radius:var(--raio);padding:15px}
-.convite b{display:block;font-family:var(--display);font-size:16px;margin-bottom:5px;color:var(--carmim-esc)}
-.convite p{margin:0 0 12px;font-size:13.5px;color:#7A1418;line-height:1.5}
-.convite .botao{width:100%;font-size:14px}
+/* ============================================================
+   CAPA — o roteador
+   Sem inventário e sem calibração, uma calculadora no hero é uma
+   promessa vazia. A capa pergunta o que a pessoa quer fazer e
+   abre o caminho dela ali mesmo. Funciona com zero imóvel.
+   ============================================================ */
+.capa{background:var(--carvao);color:#fff;position:relative;overflow:hidden;padding:clamp(44px,5.5vw,76px) 0 clamp(40px,4.5vw,60px)}
+.capa::before{content:"";position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background:url("assets/marca-simbolo-512.png") right -160px bottom -140px/560px no-repeat}
+.capa::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background:radial-gradient(1100px 520px at 12% -10%,rgba(213,56,58,.18),transparent 60%)}
+.capa .faixa{position:relative;z-index:1}
+.capa-grade{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(36px,4.5vw,80px);align-items:center}
+.capa h1{font-size:clamp(36px,4.5vw,62px);margin:18px 0 20px;color:#fff;letter-spacing:-.035em;max-width:15ch}
+.capa h1 em{font-style:normal;color:#ff6b6d}
+.capa .lead{font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;color:#aeb6bb;max-width:52ch;margin:0}
 
+/* portas */
+.portas{display:grid;gap:14px}
+.porta{position:relative;text-align:left;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:clamp(20px,2vw,26px);cursor:pointer;color:#fff;transition:background .18s,border-color .18s,transform .18s;display:flex;flex-direction:column;gap:9px}
+.porta:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);transform:translateY(-2px)}
+.porta[aria-selected="true"]{background:var(--branco);border-color:var(--branco);color:var(--tinta)}
+.porta[aria-selected="true"] .p-sub{color:var(--tinta2)}
+.porta[aria-selected="true"] .p-num{color:var(--vermelho)}
+.p-num{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--areia)}
+.porta h2{font-family:var(--f-disp);font-size:clamp(20px,1.9vw,25px);letter-spacing:-.025em}
+.p-sub{font-size:14px;line-height:1.5;color:#aeb6bb;margin:0}
+.p-seta{margin-top:3px;font-family:var(--f-mono);font-size:12.5px;font-weight:600;color:var(--vermelho);display:flex;align-items:center;gap:7px}
+.porta[aria-selected="false"] .p-seta{color:#ff6b6d}
 
-/* ---------- seletor de município ----------
-   Substitui <datalist>, que o Safari no iOS não implementa: o campo
-   simplesmente não abria sugestão nenhuma no iPhone. */
-.combo{position:relative}
-.combo-lista{
-  position:absolute;z-index:60;left:0;right:0;top:calc(100% + 4px);
-  margin:0;padding:4px;list-style:none;max-height:252px;overflow-y:auto;
-  background:var(--folha);border:1px solid var(--pauta-forte);border-radius:var(--raio);
-  box-shadow:0 14px 34px rgba(35,31,32,.16);-webkit-overflow-scrolling:touch;
-}
-.combo-lista li{
-  padding:11px 12px;border-radius:2px;cursor:pointer;font-size:15px;line-height:1.3;
-}
-.combo-lista li[aria-selected="true"],.combo-lista li:hover{background:var(--papel)}
-.combo-lista li mark{background:transparent;color:var(--carmim);font-weight:600}
-.combo-lista li.vazio{color:var(--apagado);cursor:default;font-size:13.5px}
-.combo-lista li.vazio:hover{background:transparent}
+/* painel que abre sob as portas */
+.painel-porta{background:var(--branco);color:var(--tinta);border-radius:var(--r);margin-top:clamp(22px,2.6vw,34px);padding:clamp(22px,2.6vw,32px);box-shadow:0 24px 60px rgba(0,0,0,.34)}
+.painel-porta[hidden]{display:none}
+.pp-cab{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.pp-cab h3{font-size:clamp(19px,2vw,23px)}
+.pp-cab p{margin:7px 0 0;color:var(--tinta2);font-size:14.5px;line-height:1.55;max-width:62ch}
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px}
+.campos .larga{grid-column:1/-1}
+label{display:block;font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta3);margin-bottom:6px}
+.ent{width:100%;border:1px solid var(--linha);border-radius:9px;padding:11px 13px;background:var(--claro);color:var(--tinta);font-size:14.5px;-webkit-appearance:none;appearance:none}
+.ent:focus{outline:none;border-color:var(--vermelho);background:var(--branco);box-shadow:0 0 0 3px rgba(213,56,58,.1)}
+select.ent{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%236a7277' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:11px;padding-right:36px}
+textarea.ent{resize:vertical;min-height:84px;line-height:1.55}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--tinta2);line-height:1.55;text-transform:none;letter-spacing:0;font-weight:400;font-family:var(--f-corpo);margin-top:4px}
+.consent input{margin-top:3px;accent-color:var(--vermelho);flex-shrink:0;width:16px;height:16px}
+.acoes-pp{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--linha2)}
+.acoes-pp .btn{flex:0 0 auto}
+.dica{font-size:13px;color:var(--tinta3);margin:0}
+.erro{color:var(--vermelho-e);font-size:13px;margin:10px 0 0;display:none}
+.erro.ok{display:block}
+.recibo{display:none;padding:22px;background:var(--verde-c);border:1px solid #b9d8cd;border-radius:9px;color:var(--verde);font-size:14.5px}
+.recibo.ok{display:block}
+.recibo b{display:block;font-family:var(--f-disp);font-size:18px;margin-bottom:5px}
+
+/* credenciais da capa */
+.credenciais{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:clamp(34px,4vw,48px);padding-top:26px;border-top:1px solid rgba(255,255,255,.13)}
+.credenciais b{display:block;font-family:var(--f-disp);font-size:19px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.credenciais span{display:block;font-size:12.5px;color:#8d969b;line-height:1.45;margin-top:5px}
 
 /* ---------- seções ---------- */
-section{padding:74px 0}
-section.suave{background:var(--papel)}
-.cabeca-secao{max-width:60ch;margin-bottom:34px}
-.cabeca-secao h2{font-size:clamp(26px,3.2vw,35px);font-weight:600;margin:10px 0 12px}
-.cabeca-secao p{color:var(--apagado);margin:0;font-size:17px}
+section{padding:clamp(44px,4.6vw,76px) 0}
+section.claro{background:var(--claro)}
+section.papel{background:var(--papel)}
 
-.etapas{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--pauta)}
-.etapa{padding:24px 22px 24px 0;border-right:1px solid var(--pauta)}
+/* O cabeçalho é fixo: sem esta folga a âncora entrega o título
+   debaixo dele. Medido: 77px de barra, zero de margem. */
+.capa,section,[id]{scroll-margin-top:calc(var(--hdr) + 16px)}
+
+.cab{max-width:62ch;margin-bottom:clamp(24px,2.4vw,34px)}
+.cab h2{font-size:clamp(26px,3vw,36px);margin:11px 0 11px}
+.cab p{color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.6}
+
+/* o que negociamos */
+.segmentos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--linha)}
+.seg{padding:26px 24px 26px 0;border-right:1px solid var(--linha)}
+.seg:last-child{border-right:0;padding-right:0}
+.seg-ico{width:34px;height:34px;margin-bottom:14px}
+.seg h3{font-size:17px;margin-bottom:9px}
+.seg p{font-size:14.5px;color:var(--tinta2);margin:0 0 12px;line-height:1.6}
+.seg ul{list-style:none;padding:0;margin:0;display:grid;gap:5px}
+.seg li{font-family:var(--f-mono);font-size:11.5px;color:var(--tinta3);letter-spacing:.02em}
+
+/* etapas */
+.etapas{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--linha)}
+.etapa{padding:24px 24px 24px 0;border-right:1px solid var(--linha)}
 .etapa:last-child{border-right:0;padding-right:0}
-.etapa .n{font-family:var(--dado);font-size:12px;font-weight:600;color:var(--carmim);letter-spacing:.1em}
-.etapa h3{font-size:18px;font-weight:600;margin:9px 0 7px}
-.etapa p{font-size:14.5px;color:var(--apagado);margin:0}
+.etapa .n{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--vermelho);letter-spacing:.12em}
+.etapa h3{font-size:17.5px;margin:10px 0 8px}
+.etapa p{font-size:14.5px;color:var(--tinta2);margin:0;line-height:1.6}
 
-.vitrine{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.imovel{border:1px solid var(--pauta);border-radius:var(--raio);overflow:hidden;background:var(--folha);display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
-.imovel:hover{border-color:var(--pauta-forte);box-shadow:0 8px 26px rgba(35,31,32,.08)}
-.imovel-capa{aspect-ratio:16/10;background:var(--grafite);position:relative}
-.imovel-tipo{position:absolute;top:11px;left:11px;background:var(--folha);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px}
-.imovel-corpo{padding:18px;display:flex;flex-direction:column;gap:9px;flex:1}
-.imovel h3{font-size:19px;font-weight:600}
-.onde{font-size:13.5px;color:var(--apagado)}
-.imovel dl{margin:4px 0 0;border-top:1px solid var(--pauta)}
-.imovel dl div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--pauta);font-size:13px}
-.imovel dt{color:var(--apagado);margin:0}
-.imovel dd{margin:0;font-family:var(--dado);font-weight:500}
-.imovel-pe{padding:12px 18px;border-top:1px solid var(--pauta);background:#FBFAF9;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.preco{font-family:var(--dado);font-size:17px;font-weight:600}
-.registro{font-family:var(--dado);font-size:10px;color:var(--apagado);letter-spacing:.03em}
+/* alcance nacional */
+.alcance{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,4vw,58px);align-items:center}
+.mapa-br{width:100%;max-width:min(380px,46vh);margin-inline:auto}
+.alcance>div:last-child{display:flex;flex-direction:column;align-items:center}
+.mapa-br .uf{fill:#dfe4e7;stroke:#fff;stroke-width:1.1;transition:fill .2s}
+.mapa-br .uf.base{fill:var(--vermelho)}
+.mapa-br .uf.ativa{fill:#f0a9aa}
+.legenda{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:16px;font-size:13px;color:var(--tinta2)}
+.legenda i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px}
 
-.contato{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:start}
-.formulario{background:var(--folha);border:1px solid var(--pauta);border-radius:var(--raio);padding:28px}
-.consentimento{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--apagado);line-height:1.5;margin-top:4px;text-transform:none;letter-spacing:0;font-weight:400}
-.consentimento input{margin-top:3px;accent-color:var(--carmim);flex-shrink:0}
-.recibo{display:none;padding:20px;background:#E8F2EE;border:1px solid #B9D8CD;border-radius:var(--raio);color:var(--selo);font-size:14.5px}
-.recibo.visivel{display:block}
-.recibo b{display:block;margin-bottom:4px;font-family:var(--display);font-size:17px}
-.erro{color:var(--carmim-esc);font-size:12.5px;margin-top:5px;display:none}
-.erro.visivel{display:block}
-.lista{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:14px}
-.lista li{display:flex;gap:12px;font-size:15px;align-items:flex-start}
-.lista .pt{width:5px;height:5px;border-radius:50%;background:var(--carmim);margin-top:9px;flex-shrink:0}
+/* ---------- filtros e vitrine ---------- */
+.barra-filtros{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r);padding:16px;box-shadow:var(--sombra);margin-bottom:20px}
+.linha-f{display:grid;grid-template-columns:1.3fr 1.3fr 1fr 1fr auto;gap:11px;align-items:end}
+.extras{display:none;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-top:14px;padding-top:16px;border-top:1px solid var(--linha2)}
+.extras.aberto{display:grid}
+.rodape-f{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--linha2)}
+.conta{font-family:var(--f-mono);font-size:12.5px;color:var(--tinta3)}
+.conta b{color:var(--tinta);font-weight:600}
+.link-f{background:none;border:0;padding:0;font-size:13.5px;font-weight:500;color:var(--vermelho);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
-footer{background:var(--grafite);color:#B9B2B0;padding:54px 0 26px;font-size:14px}
-footer .faixa:first-child{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:44px}
-footer h3{font-family:var(--corpo);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0 0 12px}
-footer a{text-decoration:none}
+.vitrine{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.imovel{border:1px solid var(--linha);border-radius:var(--r);overflow:hidden;background:var(--branco);display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s,transform .15s}
+.imovel:hover{border-color:var(--tinta3);box-shadow:var(--sombra);transform:translateY(-2px)}
+.im-capa{aspect-ratio:16/10;background:var(--grafite);position:relative}
+.im-capa svg{width:100%;height:100%}
+.im-tag{position:absolute;top:12px;left:12px;background:var(--branco);font-family:var(--f-mono);font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.im-corpo{padding:18px;display:flex;flex-direction:column;gap:9px;flex:1}
+.imovel h3{font-size:18px;line-height:1.3}
+.onde{font-size:13.5px;color:var(--tinta3)}
+.imovel dl{margin:6px 0 0;border-top:1px solid var(--linha2)}
+.imovel dl div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--linha2);font-size:13px}
+.imovel dt{color:var(--tinta3);margin:0}
+.imovel dd{margin:0;font-family:var(--f-mono);font-weight:500}
+.im-pe{padding:13px 18px;border-top:1px solid var(--linha2);background:var(--claro);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.preco{font-family:var(--f-mono);font-size:17px;font-weight:600;letter-spacing:-.02em}
+.registro{font-family:var(--f-mono);font-size:10px;color:var(--tinta3);letter-spacing:.03em}
+.imovel{cursor:pointer}
+.imovel .im-corpo h3{transition:color .15s}
+.imovel:hover h3{color:var(--vermelho)}
+.ver-mais{font-family:var(--f-mono);font-size:11.5px;font-weight:600;color:var(--vermelho);margin-top:auto;padding-top:10px}
+
+/* ---------- ficha do imóvel ---------- */
+.ficha-veu{position:fixed;inset:0;z-index:150;background:rgba(20,23,26,.6);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:clamp(12px,3vw,48px)}
+.ficha-veu.aberta{display:flex}
+.ficha{background:var(--branco);border-radius:var(--r);width:min(960px,100%);box-shadow:0 30px 80px rgba(0,0,0,.42);overflow:hidden;margin:auto}
+.ficha-capa{position:relative;aspect-ratio:2/1;background:var(--grafite)}
+.ficha-capa svg{width:100%;height:100%}
+.ficha-fechar{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--tinta);font-size:21px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ficha-fechar:hover{background:#fff}
+.ficha-corpo{padding:clamp(20px,3vw,34px)}
+.ficha-corpo h2{font-size:clamp(22px,2.6vw,30px);margin:10px 0 8px}
+.ficha-onde{font-size:15px;color:var(--tinta3);margin:0 0 20px}
+.ficha-preco{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:16px 0;border-top:1px solid var(--linha2);border-bottom:1px solid var(--linha2);margin-bottom:20px}
+.ficha-preco b{font-family:var(--f-mono);font-size:clamp(22px,2.6vw,29px);font-weight:600;letter-spacing:-.02em}
+.ficha-preco span{font-family:var(--f-mono);font-size:12.5px;color:var(--tinta3)}
+.ficha-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--linha2);border:1px solid var(--linha2);border-radius:9px;overflow:hidden;margin-bottom:20px}
+.ficha-grade div{background:var(--branco);padding:13px 15px}
+.ficha-grade dt{font-family:var(--f-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta3);margin:0 0 5px}
+.ficha-grade dd{margin:0;font-size:15.5px;font-weight:500}
+.ficha p.desc{font-size:15.5px;line-height:1.7;color:var(--tinta2);margin:0 0 20px;max-width:70ch}
+.ficha-acoes{display:flex;gap:11px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid var(--linha2)}
+.ficha-legal{font-family:var(--f-mono);font-size:11px;color:var(--tinta3);line-height:1.7;margin:16px 0 0}
+
+.vazio{grid-column:1/-1;padding:clamp(36px,5vw,60px) 24px;text-align:center;background:var(--branco);border:1px dashed var(--linha);border-radius:var(--r)}
+.vazio h3{font-size:21px;margin-bottom:10px}
+.vazio p{margin:0 auto 20px;color:var(--tinta2);max-width:52ch;line-height:1.6}
+
+/* ---------- confiança ---------- */
+.blocos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--linha)}
+.bloco{padding:26px 24px 26px 0;border-right:1px solid var(--linha)}
+.bloco:last-child{border-right:0;padding-right:0}
+.bloco h3{font-size:16.5px;margin-bottom:9px}
+.bloco p{font-size:14.5px;color:var(--tinta2);margin:0;line-height:1.6}
+
+/* ---------- consulta de faixa (secundária) ---------- */
+.faixa-wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,4vw,56px);align-items:start}
+.consultor{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r);padding:26px;box-shadow:var(--sombra)}
+.consultor h3{font-size:19px;margin-bottom:6px}
+.consultor>p{font-size:13.5px;color:var(--tinta3);margin:0 0 20px;line-height:1.55}
+.consultor .btn{width:100%;margin-top:16px}
+.saida{margin-top:20px;padding-top:20px;border-top:1px solid var(--linha2)}
+.tres{display:flex;gap:10px;margin-bottom:10px}
+.tres div{flex:1;text-align:center;padding:10px 6px;background:var(--claro);border-radius:9px}
+.tres div.meio{background:var(--areia-c)}
+.tres span{display:block;font-family:var(--f-mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta3);margin-bottom:4px}
+.tres b{font-family:var(--f-mono);font-size:14px;font-weight:600}
+.tres .meio b{font-size:20px;color:var(--vermelho);letter-spacing:-.02em}
+.nota{font-size:12.5px;color:var(--tinta3);line-height:1.55;margin:0}
+.nota code{font-family:var(--f-mono);font-size:11.5px;color:var(--tinta)}
+.convite{background:var(--areia-c);border:1px solid #e4d8b4;border-radius:9px;padding:16px}
+.convite b{display:block;font-family:var(--f-disp);font-size:16px;margin-bottom:6px;color:#6b5a21}
+.convite p{margin:0 0 14px;font-size:13px;color:#7a6a32;line-height:1.55}
+.convite .btn{width:100%;margin:0}
+
+.lista{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.lista li{display:flex;gap:12px;font-size:15.5px;align-items:flex-start;line-height:1.5}
+.lista .pt{width:6px;height:6px;border-radius:50%;background:var(--vermelho);margin-top:8px;flex-shrink:0}
+
+/* ---------- banda ---------- */
+.banda{background:var(--carvao);color:#fff;border-radius:var(--r);padding:clamp(30px,4vw,52px);display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;position:relative;overflow:hidden}
+.banda::before{content:"";position:absolute;right:-80px;bottom:-110px;width:340px;height:340px;opacity:.06;pointer-events:none;background:url("assets/marca-simbolo-512.png") center/contain no-repeat}
+.banda h2{font-size:clamp(24px,2.8vw,33px);color:#fff;margin:12px 0 12px;position:relative}
+.banda p{color:#aeb6bb;margin:0;font-size:16px;line-height:1.6;position:relative;max-width:46ch}
+.banda-acoes{display:flex;flex-direction:column;gap:10px;position:relative}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--carvao);color:#8d969b;padding:56px 0 26px;font-size:14.5px}
+footer .faixa:first-child{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px}
+footer h4{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#fff;margin:0 0 14px}
+footer a{text-decoration:none;transition:color .15s}
 footer a:hover{color:#fff}
-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-footer .marca-texto b{color:#fff}
-footer .marca-texto span{color:#8E8583}
-.legal{margin-top:40px;padding-top:20px;border-top:1px solid #4E4847;font-family:var(--dado);font-size:11.5px;color:#8E8583;line-height:1.95}
-.legal b{color:#D6D0CE;font-weight:500}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.marca-pe img{height:46px;width:auto;margin-bottom:16px}
+.legal{margin-top:44px;padding-top:22px;border-top:1px solid #2b3135;font-family:var(--f-mono);font-size:11.5px;color:#6a7277;line-height:2}
+.legal b{color:#aeb6bb;font-weight:500}
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-@media(max-width:940px){
-  .capa .faixa,.contato{grid-template-columns:1fr;gap:36px}
-  .vitrine{grid-template-columns:1fr 1fr}
-  .etapas{grid-template-columns:1fr 1fr}
-  .etapa{border-right:0;border-bottom:1px solid var(--pauta);padding-right:0}
-  footer .faixa:first-child{grid-template-columns:1fr 1fr}
-  .menu{display:none}
+/* ---------- combo ---------- */
+/* ---------- WhatsApp flutuante ---------- */
+.zap{position:fixed;right:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);z-index:120;
+     display:flex;align-items:center;gap:10px;background:#25d366;color:#0b3d22;
+     border:0;border-radius:999px;padding:13px 19px 13px 15px;cursor:pointer;
+     font-family:var(--f-corpo);font-size:15px;font-weight:600;text-decoration:none;
+     box-shadow:0 8px 26px rgba(14,70,40,.3);transition:transform .15s,box-shadow .15s}
+.zap:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(14,70,40,.38)}
+.zap svg{width:23px;height:23px;flex-shrink:0}
+@media(max-width:560px){ .zap{padding:14px;border-radius:50%} .zap span{display:none} }
+@media print{ .zap,.topo,.hamburguer{display:none} }
+
+.combo{position:relative}
+.combo-lista{position:absolute;z-index:60;left:0;right:0;top:calc(100% + 5px);margin:0;padding:5px;list-style:none;max-height:256px;overflow-y:auto;background:var(--branco);border:1px solid var(--linha);border-radius:9px;box-shadow:0 14px 34px rgba(20,23,26,.18);-webkit-overflow-scrolling:touch}
+.combo-lista li{padding:11px 12px;border-radius:6px;cursor:pointer;font-size:15px;line-height:1.3;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.combo-lista li[aria-selected="true"],.combo-lista li:hover{background:var(--claro)}
+.combo-lista li mark{background:transparent;color:var(--vermelho);font-weight:600}
+.combo-lista .uf{font-family:var(--f-mono);font-size:11px;color:var(--tinta3);flex-shrink:0}
+.combo-lista li.vazio{color:var(--tinta3);cursor:default;font-size:13.5px;padding:16px 12px;display:block}
+.combo-lista li.vazio:hover{background:transparent}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---- até 1080px: tablet e notebook estreito ---- */
+@media(max-width:1080px){
+  .capa-grade{grid-template-columns:1fr;gap:clamp(26px,4vw,36px)}
+  .capa h1{max-width:19ch}
+  .capa .lead{max-width:62ch}
+  .portas{grid-template-columns:1fr 1fr}
+  .alcance,.faixa-wrap{grid-template-columns:1fr}
+  .mapa-br{margin-inline:auto}
+  .segmentos,.etapas,.blocos,.credenciais{grid-template-columns:1fr 1fr}
+  .seg,.etapa,.bloco{border-right:0;border-bottom:1px solid var(--linha);padding-right:0}
+  .seg:nth-child(odd),.etapa:nth-child(odd),.bloco:nth-child(odd){padding-right:24px;border-right:1px solid var(--linha)}
+  .seg:nth-last-child(-n+2),.etapa:nth-last-child(-n+2),.bloco:nth-last-child(-n+2){border-bottom:0}
+  .linha-f{grid-template-columns:1fr 1fr}
+  .linha-f>:last-child{grid-column:1/-1}
+  .banda{grid-template-columns:1fr}
+  footer .faixa:first-child{grid-template-columns:1fr 1fr;gap:32px}
+
+  /* navegação passa para o hambúrguer */
+  .hamburguer{display:flex}
+  .menu{position:fixed;top:var(--hdr);left:0;right:0;z-index:95;display:block;margin:0;
+        background:var(--branco);border-bottom:1px solid var(--linha);
+        padding:8px var(--gutter) 18px;transform:translateY(-130%);transition:transform .22s ease;
+        box-shadow:0 18px 40px rgba(20,23,26,.12)}
+  .menu.aberto{transform:translateY(0)}
+  .menu a{display:block;padding:14px 0;font-size:17px;color:var(--tinta);border-bottom:1px solid var(--linha2)}
+  .menu a:last-child{border-bottom:0}
+  .topo .btn{order:3}
 }
-@media(max-width:620px){
-  .marca img{height:36px}
-  .marca-rodape img{height:44px}
-  .vitrine,.grade,.etapas{grid-template-columns:1fr}
-  section{padding:50px 0}
-  .capa{padding:50px 0 58px}
+
+/* ---- até 680px: celular ---- */
+@media(max-width:680px){
+  .portas{grid-template-columns:1fr;gap:11px}
+  .segmentos,.etapas,.blocos,.linha-f,.credenciais{grid-template-columns:1fr}
+  .seg,.etapa,.bloco{padding-right:0!important;border-right:0!important;border-bottom:1px solid var(--linha)}
+  .seg:last-child,.etapa:last-child,.bloco:last-child{border-bottom:0}
+  .vitrine{grid-template-columns:1fr}
   footer .faixa:first-child{grid-template-columns:1fr}
-  .capa::after{display:none}
+  .capa::before{display:none}
+  .marca img{height:32px}
+  .tres{flex-direction:column}
+  .topo .faixa{gap:10px}
+  .topo .btn{padding:11px 14px;font-size:14px;white-space:nowrap}
+  .topo .btn .longo{display:none}
+  .ficha-capa{aspect-ratio:16/10}
+  .ficha-acoes .btn{width:100%}
+
+  /* A capa precisa caber na dobra. Medido em 390×844: sem estes
+     cortes as portas terminam em 874px — a decisão nasce invisível. */
+  .capa{padding:30px 0 34px}
+  .capa h1{font-size:clamp(31px,8.4vw,36px);margin:14px 0 14px}
+  .capa .lead{font-size:15.5px;line-height:1.55}
+  .credenciais{grid-template-columns:1fr 1fr;gap:13px 18px;margin-top:20px;padding-top:17px}
+  .credenciais b{font-size:15.5px}
+  .credenciais span{font-size:11.5px;margin-top:3px;line-height:1.35}
+  .nota{font-size:13.5px}
+}
+
+/* ---- até 560px: o subtítulo das portas sai do caminho.
+   A explicação não se perde: ela reaparece dentro do painel. ---- */
+@media(max-width:560px){
+  .porta{padding:16px 18px;gap:7px}
+  .p-sub{display:none}
+  .porta h2{font-size:22px}
+  .capa .lead{font-size:15px}
 }
 </style>
 </head>
 <body>
 <a href="#conteudo" class="pular">Ir para o conteúdo</a>
 
+<div class="veu" id="veu-menu" hidden></div>
 <header class="topo">
   <div class="faixa">
-    <a href="./" class="marca">
-      <img src="assets/marca-horizontal-600.png" alt="PrimeCorp Imóveis" width="300" height="83">
-    </a>
-    <nav class="menu" aria-label="Principal">
-      <a href="#avaliar">Avaliar meu imóvel</a>
-      <a href="#vitrine">Imóveis</a>
-      <a href="#como">Como trabalhamos</a>
-      <a href="#contato">Contato</a>
+    <a href="./" class="marca"><img src="assets/marca-horizontal-600.png" alt="PrimeCorp Imóveis" width="600" height="118"></a>
+    <button class="hamburguer" id="abrir-menu" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu de navegação"><span></span></button>
+    <nav class="menu" id="menu-principal" aria-label="Principal">
+      <a href="#comprar">Quero comprar</a>
+      <a href="#vender">Quero vender</a>
+      <a href="#carteira">Carteira</a>
+      <a href="#atuacao">Onde atuamos</a>
+      <a href="#faixa">Consulta de faixa</a>
     </nav>
-    <a href="#contato" class="botao forte">Quero avaliar</a>
+    <a href="#vender" class="btn"><span>Avaliar<span class="longo"> meu imóvel</span></span></a>
   </div>
 </header>
 
 <main id="conteudo">
 
-<!-- ============ CAPA ============ -->
-<div class="capa" id="avaliar">
+<!-- ================= CAPA / ROTEADOR ================= -->
+<div class="capa" id="inicio">
   <div class="faixa">
-    <div>
-      <span class="olho">Industrial · Galpões · Terrenos · Rural · Residencial</span>
-      <h1>Antes de anunciar, saiba <b>por quanto vende</b>.</h1>
-      <p>
-        Preço errado é o que faz um imóvel encalhar. Emitimos parecer técnico de
-        avaliação sobre dados reais da sua micro-região — e só então definimos o
-        valor de oferta. Em todo o Estado de São Paulo.
-      </p>
-      <div class="acoes">
-        <a href="#contato" class="botao forte">Solicitar parecer</a>
-        <a href="#vitrine" class="botao clara">Ver imóveis</a>
+    <div class="capa-grade">
+      <div class="capa-topo">
+        <div class="olho">Intermediação de compra e venda · Brasil</div>
+        <h1>Imóvel certo, <em>preço certo,</em> negócio fechado.</h1>
+        <p class="lead">
+          Somos corretores e trabalhamos os dois lados da mesa: encontramos o ativo
+          para quem compra e definimos o preço real para quem vende. Áreas industriais,
+          galpões, terrenos, fazendas e alto padrão — em todo o Brasil.
+        </p>
       </div>
-      <div class="selo-creci">
-        Joselia Junqueira Viana · <b>CRECISP 300760</b><br>
-        Rodrigo Franca Viana · <b>CRECISP 297692</b>
+
+      <div class="portas" id="portas" role="tablist" aria-label="O que você quer fazer">
+        <span id="comprar" class="ancora" aria-hidden="true"></span>
+        <span id="vender" class="ancora" aria-hidden="true"></span>
+        <button class="porta" id="porta-comprar" role="tab" aria-selected="false" aria-controls="pp-comprar">
+          <span class="p-num">01 · Comprador ou investidor</span>
+          <h2>Quero comprar</h2>
+          <p class="p-sub">Diga o que procura. Buscamos no mercado aberto, em carteiras de parceiros e em proprietários que ainda não anunciaram.</p>
+          <span class="p-seta">Abrir mandato de busca →</span>
+        </button>
+
+        <button class="porta" id="porta-vender" role="tab" aria-selected="false" aria-controls="pp-vender">
+          <span class="p-num">02 · Proprietário</span>
+          <h2>Quero vender</h2>
+          <p class="p-sub">Avaliação técnica antes do anúncio. Preço errado é o que faz um imóvel encalhar meses e vender abaixo do que valia.</p>
+          <span class="p-seta">Pedir avaliação →</span>
+        </button>
       </div>
     </div>
 
-    <div class="medidor">
-      <h2>Consulta rápida de faixa</h2>
-      <p>Estimativa preliminar por tipologia, município e metragem. O parecer técnico vem depois, com pesquisa dedicada.</p>
-
-      <div class="grade">
-        <div class="larga">
-          <label for="m-tipo">Tipo de imóvel</label>
-          <select id="m-tipo" class="entrada"></select>
+    <!-- painel: comprar -->
+    <div class="painel-porta" id="pp-comprar" role="tabpanel" aria-labelledby="porta-comprar" hidden>
+      <div class="pp-cab">
+        <div>
+          <h3>Mandato de busca</h3>
+          <p>Não listamos o que não temos. Recebemos seu perfil de busca e vamos atrás —
+             inclusive de proprietário que ainda não colocou o imóvel no mercado.</p>
         </div>
-        <div class="larga">
-          <label for="m-cidade">Município</label>
-          <div class="combo">
-            <input id="m-cidade" class="entrada" type="text" placeholder="Digite o município"
-                   role="combobox" aria-expanded="false" aria-controls="m-cidade-lista"
-                   aria-autocomplete="list" autocomplete="off" autocapitalize="words"
-                   spellcheck="false" enterkeyhint="search">
-            <ul id="m-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios de São Paulo" hidden></ul>
-          </div>
-        </div>
-        <div class="larga">
-          <label for="m-area">Área em m²</label>
-          <input id="m-area" class="entrada" type="number" min="20" step="10" placeholder="ex.: 18400" inputmode="numeric">
-        </div>
+        <button class="btn sec mini" data-fechar>Fechar</button>
       </div>
 
-      <button class="botao forte" id="m-botao">Ver faixa estimada</button>
-      <div class="saida" id="m-saida" hidden></div>
+      <div id="c-campos">
+        <div class="campos">
+          <div><label for="c-tipo">Tipo de imóvel</label><select id="c-tipo" class="ent"></select></div>
+          <div><label for="c-cidade">Cidade de interesse</label>
+            <div class="combo">
+              <input id="c-cidade" class="ent" type="text" placeholder="Qualquer cidade do Brasil" role="combobox"
+                     aria-expanded="false" aria-controls="c-cidade-lista" aria-autocomplete="list"
+                     autocomplete="off" autocapitalize="words" spellcheck="false">
+              <ul id="c-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+            </div></div>
+          <div><label for="c-area">Área a partir de (m²)</label><input id="c-area" class="ent" type="number" min="0" step="100" placeholder="ex.: 5000" inputmode="numeric"></div>
+          <div><label for="c-orcamento">Orçamento até</label>
+            <select id="c-orcamento" class="ent">
+              <option value="">A definir</option>
+              <option>Até R$ 1 milhão</option><option>R$ 1 a 3 milhões</option>
+              <option>R$ 3 a 10 milhões</option><option>R$ 10 a 30 milhões</option>
+              <option>Acima de R$ 30 milhões</option>
+            </select></div>
+          <div><label for="c-nome">Seu nome</label><input id="c-nome" class="ent" autocomplete="name"></div>
+          <div><label for="c-tel">WhatsApp</label><input id="c-tel" class="ent" type="tel" autocomplete="tel" placeholder="(19) 90000-0000"></div>
+          <div class="larga"><label for="c-msg">O que o imóvel precisa ter</label>
+            <textarea id="c-msg" class="ent" placeholder="Pé-direito, docas, energia, acesso rodoviário, prazo, finalidade do investimento."></textarea></div>
+          <label class="consent larga" for="c-ok"><input type="checkbox" id="c-ok">
+            <span>Autorizo o contato da PrimeCorp sobre esta busca. Posso pedir a exclusão dos meus dados a qualquer momento.</span></label>
+        </div>
+        <div class="acoes-pp">
+          <button class="btn" id="c-enviar">Enviar meu perfil de busca</button>
+          <p class="dica">Retorno em até um dia útil. Sem custo para o comprador.</p>
+        </div>
+        <p class="erro" id="c-erro"></p>
+      </div>
+      <div class="recibo" id="c-recibo"><b>Mandato recebido.</b>Vamos ao mercado com o seu perfil e retornamos com o que encontrarmos.</div>
+    </div>
+
+    <!-- painel: vender -->
+    <div class="painel-porta" id="pp-vender" role="tabpanel" aria-labelledby="porta-vender" hidden>
+      <div class="pp-cab">
+        <div>
+          <h3>Avaliação do seu imóvel</h3>
+          <p>Visita, levantamento e pesquisa de mercado. O parecer sai por escrito, com a metodologia,
+             nos termos da Resolução COFECI nº 1.066/2007. Sem custo na etapa inicial.</p>
+        </div>
+        <button class="btn sec mini" data-fechar>Fechar</button>
+      </div>
+
+      <div id="v-campos">
+        <div class="campos">
+          <div><label for="v-tipo">Tipo de imóvel</label><select id="v-tipo" class="ent"></select></div>
+          <div><label for="v-cidade">Onde fica</label>
+            <div class="combo">
+              <input id="v-cidade" class="ent" type="text" placeholder="Cidade do imóvel" role="combobox"
+                     aria-expanded="false" aria-controls="v-cidade-lista" aria-autocomplete="list"
+                     autocomplete="off" autocapitalize="words" spellcheck="false">
+              <ul id="v-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+            </div></div>
+          <div><label for="v-area">Área total (m²)</label><input id="v-area" class="ent" type="number" min="0" step="10" placeholder="ex.: 18400" inputmode="numeric"></div>
+          <div><label for="v-prazo">Prazo para vender</label>
+            <select id="v-prazo" class="ent">
+              <option value="">Sem pressa</option><option>Até 3 meses</option>
+              <option>3 a 6 meses</option><option>6 a 12 meses</option>
+            </select></div>
+          <div><label for="v-nome">Seu nome</label><input id="v-nome" class="ent" autocomplete="name"></div>
+          <div><label for="v-tel">WhatsApp</label><input id="v-tel" class="ent" type="tel" autocomplete="tel" placeholder="(19) 90000-0000"></div>
+          <div class="larga"><label for="v-msg">Sobre o imóvel</label>
+            <textarea id="v-msg" class="ent" placeholder="Benfeitorias, matrícula, se já esteve anunciado antes e por quanto."></textarea></div>
+          <label class="consent larga" for="v-ok"><input type="checkbox" id="v-ok">
+            <span>Autorizo o contato da PrimeCorp sobre esta avaliação. Posso pedir a exclusão dos meus dados a qualquer momento.</span></label>
+        </div>
+        <div class="acoes-pp">
+          <button class="btn" id="v-enviar">Pedir avaliação</button>
+          <p class="dica">Já tem ideia do valor? <a href="#faixa" style="color:var(--vermelho)">Consulte a faixa estimada</a> antes.</p>
+        </div>
+        <p class="erro" id="v-erro"></p>
+      </div>
+      <div class="recibo" id="v-recibo"><b>Pedido recebido.</b>Entramos em contato para agendar a visita e o levantamento.</div>
+    </div>
+
+    <div class="credenciais">
+      <div><b>CRECISP 300760</b><span>Joselia Junqueira Viana · responsável técnica</span></div>
+      <div><b>CRECISP 297692</b><span>Rodrigo França Viana · corretor</span></div>
+      <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
+      <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
     </div>
   </div>
 </div>
 
-<!-- ============ COMO ============ -->
+<!-- ================= O QUE NEGOCIAMOS ================= -->
+<section id="segmentos">
+  <div class="faixa">
+    <div class="cab">
+      <div class="olho">O que negociamos</div>
+      <h2>Ativos que exigem leitura técnica, não só anúncio</h2>
+      <p>Imóvel de ticket alto não vende por foto bonita. Vende quando o comprador entende a operação que cabe ali e o vendedor sabe onde está o preço.</p>
+    </div>
+    <div class="segmentos">
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 27h26M5 27V14l7-4v17M14 27V8l12-5v24"/><path d="M18 12h4M18 17h4M18 22h4M8 18h2"/></svg>
+        <h3>Industrial e logístico</h3>
+        <p>Galpões, centros de distribuição e áreas com vocação industrial.</p>
+        <ul><li>Pé-direito e docas</li><li>Energia e efluente</li><li>Acesso rodoviário</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 26h26M6 26V9l10-5 10 5v17"/><path d="M13 26v-7h6v7"/><circle cx="16" cy="12" r="1.6"/></svg>
+        <h3>Terrenos e glebas</h3>
+        <p>Lotes urbanos, glebas de expansão e áreas para incorporação.</p>
+        <ul><li>Zoneamento e uso</li><li>Frente e topografia</li><li>Viabilidade e REURB</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 24c4-6 8-6 12 0s8 6 14 0"/><path d="M3 29h26M9 17V7M9 7l8 3-8 3"/></svg>
+        <h3>Rural</h3>
+        <p>Fazendas, sítios e chácaras com e sem exploração ativa.</p>
+        <ul><li>Georreferenciamento</li><li>CAR e recurso hídrico</li><li>Benfeitorias</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 28h26M7 28V6h12v22M19 14h7v14"/><path d="M11 11h4M11 16h4M11 21h4M22 19h2M22 24h2"/></svg>
+        <h3>Comercial e alto padrão</h3>
+        <p>Prédios, lojas, pontos consolidados e residencial de alto padrão.</p>
+        <ul><li>Rentabilidade e cap rate</li><li>Ponto e fluxo</li><li>Padrão construtivo</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ONDE ATUAMOS ================= -->
+<section class="claro" id="atuacao">
+  <div class="faixa alcance">
+    <div>
+      <div class="olho">Onde atuamos</div>
+      <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Base em Campinas,<br>negociação em todo o Brasil</h2>
+      <p style="color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.65;max-width:62ch">
+        A inscrição principal é no CRECI-SP e a operação do dia a dia fica na região metropolitana de Campinas.
+        Para negócio em outro estado, atuamos na forma do art. 5º da Resolução COFECI nº 327/1992 —
+        requerimento prévio ao CRECI da região, ou inscrição secundária quando a atuação deixa de ser eventual.
+      </p>
+      <ul class="lista">
+        <li><span class="pt"></span><span><b>Núcleo operacional:</b> Campinas, Jundiaí, Sumaré, Indaiatuba, Hortolândia, Paulínia, Valinhos e Vinhedo.</span></li>
+        <li><span class="pt"></span><span><b>Interior e litoral de SP:</b> atendimento direto, com visita.</span></li>
+        <li><span class="pt"></span><span><b>Demais estados:</b> negociamos com corretor local credenciado, sempre com a habilitação da região em ordem.</span></li>
+      </ul>
+    </div>
+    <div>
+      <svg class="mapa-br" viewBox="28 18 500 716" role="img" aria-label="Mapa esquemático do Brasil com destaque para São Paulo">
+        <g class="ufs"></g>
+      </svg>
+      <div class="legenda">
+        <span><i style="background:#d5383a"></i>Base e operação direta</span>
+        <span><i style="background:#f0a9aa"></i>Negócios em andamento</span>
+        <span><i style="background:#dfe4e7"></i>Atendimento sob demanda</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMO ================= -->
 <section id="como">
   <div class="faixa">
-    <div class="cabeca-secao">
-      <span class="olho">Como trabalhamos</span>
+    <div class="cab">
+      <div class="olho">Como trabalhamos</div>
       <h2>O parecer vem antes do anúncio</h2>
       <p>A ordem importa. Definir preço por comparação com o vizinho é o que faz um imóvel ficar meses parado e depois vender abaixo do que valia.</p>
     </div>
     <div class="etapas">
-      <div class="etapa">
-        <div class="n">01</div><h3>Visita e levantamento</h3>
-        <p>Metragem, acessos, benfeitorias e situação registral. Conferimos a área da matrícula contra a área informada.</p>
-      </div>
-      <div class="etapa">
-        <div class="n">02</div><h3>Pesquisa de mercado</h3>
-        <p>Elementos do mesmo tipo e município, com metragem comparável, observados nos últimos 18 meses.</p>
-      </div>
-      <div class="etapa">
-        <div class="n">03</div><h3>Parecer técnico</h3>
-        <p>Valor de mercado com faixa de negociação e a metodologia por escrito, nos termos da Resolução COFECI 1.066/2007.</p>
-      </div>
-      <div class="etapa">
-        <div class="n">04</div><h3>Autorização e divulgação</h3>
-        <p>Com o preço definido, formalizamos a autorização escrita e o imóvel vai ao mercado.</p>
-      </div>
+      <div class="etapa"><div class="n">ETAPA 01</div><h3>Visita e levantamento</h3>
+        <p>Metragem, acessos, benfeitorias e situação registral. Conferimos a área da matrícula contra a área informada.</p></div>
+      <div class="etapa"><div class="n">ETAPA 02</div><h3>Pesquisa de mercado</h3>
+        <p>Elementos do mesmo tipo e município, com metragem comparável, observados nos últimos 18 meses.</p></div>
+      <div class="etapa"><div class="n">ETAPA 03</div><h3>Parecer técnico</h3>
+        <p>Valor de mercado com faixa de negociação e a metodologia por escrito, nos termos da Resolução COFECI 1.066/2007.</p></div>
+      <div class="etapa"><div class="n">ETAPA 04</div><h3>Autorização e divulgação</h3>
+        <p>Com o preço definido, formalizamos a autorização escrita e o imóvel vai ao mercado.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ VITRINE ============ -->
-<section class="suave" id="vitrine">
+<!-- ================= CARTEIRA ================= -->
+<section class="claro" id="carteira">
   <div class="faixa">
-    <div class="cabeca-secao">
-      <span class="olho">Disponíveis</span>
+    <div class="cab">
+      <div class="olho">Carteira</div>
       <h2>Imóveis com autorização vigente</h2>
-      <p>Todo imóvel aqui tem autorização escrita do proprietário. Se não tem, não anunciamos.</p>
+      <p>Só entra aqui o que tem autorização escrita do proprietário. O que não está na lista, buscamos sob demanda.</p>
     </div>
+
+    <div class="barra-filtros">
+      <div class="linha-f">
+        <div><label for="fl-tipo">Tipo</label><select id="fl-tipo" class="ent"></select></div>
+        <div><label for="fl-cidade">Cidade</label>
+          <div class="combo">
+            <input id="fl-cidade" class="ent" type="text" placeholder="Todas" role="combobox"
+                   aria-expanded="false" aria-controls="fl-cidade-lista" aria-autocomplete="list"
+                   autocomplete="off" autocapitalize="words" spellcheck="false">
+            <ul id="fl-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios" hidden></ul>
+          </div></div>
+        <div><label for="fl-preco-max">Preço até</label>
+          <select id="fl-preco-max" class="ent">
+            <option value="">Sem limite</option><option value="1000000">R$ 1 mi</option>
+            <option value="3000000">R$ 3 mi</option><option value="5000000">R$ 5 mi</option>
+            <option value="10000000">R$ 10 mi</option><option value="20000000">R$ 20 mi</option>
+          </select></div>
+        <div><label for="fl-area-min">Área mínima</label>
+          <select id="fl-area-min" class="ent">
+            <option value="">Qualquer</option><option value="500">500 m²</option>
+            <option value="1000">1.000 m²</option><option value="3000">3.000 m²</option>
+            <option value="10000">10.000 m²</option><option value="20000">20.000 m²</option>
+          </select></div>
+        <button class="btn sec" id="fl-mais" aria-expanded="false" aria-controls="fl-extras">Mais filtros</button>
+      </div>
+      <div class="extras" id="fl-extras"></div>
+      <div class="rodape-f">
+        <span class="conta" id="fl-conta">—</span>
+        <button class="link-f" id="fl-limpar" hidden>Limpar filtros</button>
+      </div>
+    </div>
+
     <div class="vitrine" id="vitrine-lista"></div>
   </div>
 </section>
 
-<!-- ============ CONTATO ============ -->
-<section id="contato">
-  <div class="faixa contato">
+<!-- ================= CONSULTA DE FAIXA (secundária) ================= -->
+<section id="faixa">
+  <div class="faixa faixa-wrap">
     <div>
-      <span class="olho">Fale com a gente</span>
-      <h2 style="font-size:32px;font-weight:600;margin:10px 0 12px">Peça o parecer do seu imóvel</h2>
-      <p style="color:var(--apagado);margin:0">Respondemos em até um dia útil. A visita e o levantamento inicial não têm custo.</p>
+      <div class="olho">Ferramenta · proprietário</div>
+      <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Uma ideia do valor, antes da conversa</h2>
+      <p style="color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.65;max-width:62ch">
+        Estimativa preliminar por tipologia, cidade e metragem. Serve para calibrar expectativa —
+        não substitui o parecer técnico, que é feito com visita e pesquisa dedicada.
+      </p>
       <ul class="lista">
-        <li><span class="pt"></span><span>Atendemos todo o Estado de São Paulo, com base na região metropolitana de Campinas.</span></li>
-        <li><span class="pt"></span><span>Área industrial, galpão, terreno, rural, comercial e residencial de alto padrão.</span></li>
-        <li><span class="pt"></span><span>Seus dados são usados só para responder este contato. Você pode pedir a exclusão quando quiser.</span></li>
+        <li><span class="pt"></span><span>Onde ainda não temos base comparável publicada, o resultado diz isso em vez de inventar um número.</span></li>
+        <li><span class="pt"></span><span>O parecer técnico costuma estreitar bastante a faixa.</span></li>
       </ul>
     </div>
 
-    <div class="formulario">
-      <div class="grade" id="form-campos">
-        <div>
-          <label for="f-nome">Nome</label>
-          <input id="f-nome" class="entrada" autocomplete="name" required>
-        </div>
-        <div>
-          <label for="f-tel">Telefone ou WhatsApp</label>
-          <input id="f-tel" class="entrada" type="tel" autocomplete="tel" placeholder="(19) 90000-0000">
-        </div>
-        <div>
-          <label for="f-email">E-mail</label>
-          <input id="f-email" class="entrada" type="email" autocomplete="email">
-        </div>
-        <div>
-          <label for="f-interesse">Quero</label>
-          <select id="f-interesse" class="entrada">
-            <option>Avaliar meu imóvel</option>
-            <option>Vender meu imóvel</option>
-            <option>Comprar um imóvel</option>
-            <option>Locação</option>
-            <option>Outro assunto</option>
-          </select>
-        </div>
-        <div>
-          <label for="f-tipo">Tipo do imóvel</label>
-          <select id="f-tipo" class="entrada"></select>
-        </div>
-        <div>
-          <label for="f-cidade">Município</label>
+    <div class="consultor">
+      <h3>Consulta rápida de faixa</h3>
+      <p>Preencha os três campos. Leva dez segundos.</p>
+      <div class="campos">
+        <div class="larga"><label for="m-tipo">Tipo de imóvel</label><select id="m-tipo" class="ent"></select></div>
+        <div class="larga"><label for="m-cidade">Cidade</label>
           <div class="combo">
-            <input id="f-cidade" class="entrada" type="text" placeholder="Digite o município"
-                   role="combobox" aria-expanded="false" aria-controls="f-cidade-lista"
-                   aria-autocomplete="list" autocomplete="off" autocapitalize="words"
-                   spellcheck="false">
-            <ul id="f-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios de São Paulo" hidden></ul>
-          </div>
-        </div>
-        <div class="larga">
-          <label for="f-msg">Sobre o imóvel</label>
-          <textarea id="f-msg" class="entrada" rows="3" placeholder="Metragem aproximada, bairro e o que mais achar relevante."></textarea>
-        </div>
-        <label class="consentimento larga" for="f-ok">
-          <input type="checkbox" id="f-ok">
-          <span>Autorizo o contato da PrimeCorp sobre este assunto. Posso pedir a exclusão dos meus dados a qualquer momento.</span>
-        </label>
-        <div class="larga">
-          <button class="botao forte" style="width:100%" id="f-enviar">Enviar</button>
-          <p class="erro" id="f-erro"></p>
-        </div>
+            <input id="m-cidade" class="ent" type="text" placeholder="Digite a cidade" role="combobox"
+                   aria-expanded="false" aria-controls="m-cidade-lista" aria-autocomplete="list"
+                   autocomplete="off" autocapitalize="words" spellcheck="false">
+            <ul id="m-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+          </div></div>
+        <div class="larga"><label for="m-area">Área em m²</label>
+          <input id="m-area" class="ent" type="number" min="20" step="10" placeholder="ex.: 18400" inputmode="numeric"></div>
       </div>
-      <div class="recibo" id="f-recibo">
-        <b>Recebido.</b>
-        Retornamos em até um dia útil pelo contato informado.
+      <button class="btn" id="m-botao">Ver faixa estimada</button>
+      <div class="saida" id="m-saida" hidden></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONFIANÇA ================= -->
+<section class="claro">
+  <div class="faixa">
+    <div class="cab">
+      <div class="olho">O que sustenta o trabalho</div>
+      <h2>Intermediação com base documental</h2>
+      <p>A corretagem exige inscrição ativa e autorização escrita. Tratamos as duas como condição, não como formalidade.</p>
+    </div>
+    <div class="blocos">
+      <div class="bloco"><h3>Inscrição em toda peça</h3>
+        <p>O número do CRECI consta de cada anúncio, como determina o art. 4º do Decreto 81.871/1978.</p></div>
+      <div class="bloco"><h3>Autorização escrita</h3>
+        <p>Só anunciamos com contrato de mediação assinado. O art. 5º do mesmo decreto não admite outra via.</p></div>
+      <div class="bloco"><h3>Área conferida na matrícula</h3>
+        <p>Metragem de anúncio e metragem registrada divergem com frequência. Confrontamos antes de precificar.</p></div>
+      <div class="bloco"><h3>Dados pessoais com trilha</h3>
+        <p>Todo contato tem origem registrada e base legal declarada, com exclusão a pedido do titular.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANDA ================= -->
+<section class="papel">
+  <div class="faixa">
+    <div class="banda">
+      <div>
+        <div class="olho" style="color:#d9c892">Proprietário</div>
+        <h2>Seu imóvel está há meses no mercado?</h2>
+        <p>Na maioria das vezes o problema não é o imóvel — é o preço de oferta. O parecer técnico mostra onde ele está em relação à sua micro-região.</p>
+      </div>
+      <div class="banda-acoes">
+        <a href="#vender" class="btn" onclick="abrirPorta('vender')">Pedir avaliação gratuita</a>
+        <a href="#faixa" class="btn clara">Consultar faixa estimada</a>
       </div>
     </div>
   </div>
@@ -408,36 +754,47 @@ footer .marca-texto span{color:#8E8583}
 
 </main>
 
+<a class="zap" id="zap" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.8-1.3-1.3-2.8-1.3-4.4 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.6 8.3-8 8.3z"/></svg>
+  <span>Falar no WhatsApp</span>
+</a>
+
+<!-- ficha do imóvel: mesma página, endereço próprio (#imovel/ref) para compartilhar -->
+<div class="ficha-veu" id="ficha-veu" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo">
+  <article class="ficha" id="ficha"></article>
+</div>
+
 <footer>
   <div class="faixa">
     <div>
-      <div class="marca-rodape">
-        <img src="assets/marca-horizontal-negativa-600.png" alt="PrimeCorp Imóveis" width="600" height="118">
-      </div>
-      <p style="margin:0;max-width:40ch">Intermediação de áreas industriais, galpões, terrenos e imóveis de alto padrão no Estado de São Paulo.</p>
+      <div class="marca-pe"><img src="assets/marca-horizontal-negativa-600.png" alt="PrimeCorp Imóveis" width="600" height="118"></div>
+      <p style="margin:0;max-width:40ch;line-height:1.7">Intermediação de compra e venda de áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão.</p>
     </div>
-    <div>
-      <h3>Navegação</h3>
-      <ul>
-        <li><a href="#avaliar">Avaliar meu imóvel</a></li>
-        <li><a href="#vitrine">Imóveis disponíveis</a></li>
-        <li><a href="#como">Como trabalhamos</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>Dados pessoais</h3>
-      <ul>
-        <li><a href="#contato">Pedir acesso aos meus dados</a></li>
-        <li><a href="#contato">Pedir exclusão</a></li>
-        <li><a href="#contato">Não quero mais contato</a></li>
-      </ul>
-    </div>
+    <div><h4>Começar</h4><ul>
+      <li><a href="#comprar" onclick="abrirPorta('comprar')">Quero comprar</a></li>
+      <li><a href="#vender" onclick="abrirPorta('vender')">Quero vender</a></li>
+      <li><a href="#faixa">Consulta de faixa</a></li>
+      <li><a href="#carteira">Ver a carteira</a></li></ul></div>
+    <div><h4>Atuação</h4><ul>
+      <li><a href="#segmentos">Industrial e logístico</a></li>
+      <li><a href="#segmentos">Terrenos e glebas</a></li>
+      <li><a href="#segmentos">Rural</a></li>
+      <li><a href="#atuacao">Onde atuamos</a></li></ul></div>
+    <div><h4>Falar com a gente</h4><ul>
+      <li><a id="pe-zap" href="#" target="_blank" rel="noopener">WhatsApp <span id="pe-tel">(19) 99919-4447</span></a></li>
+      <li><a href="tel:+5519999194447">Ligar: (19) 99919-4447</a></li>
+      <li><a href="mailto:contato@primecorpconsultoria.com.br">contato@primecorpconsultoria.com.br</a></li>
+      <li><a href="mailto:comercial@primecorpconsultoria.com.br">comercial@primecorpconsultoria.com.br</a></li>
+      <li style="margin-top:4px;color:#6a7277">Seg a sex, 9h às 18h</li></ul></div>
   </div>
   <div class="faixa">
     <div class="legal">
-      Corretores responsáveis: Joselia Junqueira Viana — <b>CRECISP 300760</b> · Rodrigo Franca Viana — <b>CRECISP 297692</b><br>
+      Para exercer seus direitos de titular de dados (acesso, correção ou exclusão), escreva para
+      <a href="mailto:contato@primecorpconsultoria.com.br" style="color:#aeb6bb;text-decoration:underline">contato@primecorpconsultoria.com.br</a>
+      — respondemos em até 15 dias, nos termos do art. 19 da Lei nº 13.709/2018 (LGPD).<br>
+      Corretores responsáveis: Joselia Junqueira Viana — <b>CRECISP 300760</b> · Rodrigo França Viana — <b>CRECISP 297692</b><br>
       Inscrição da pessoa jurídica no CRECI-SP em processo de concessão. Enquanto isso, a intermediação é exercida pelos corretores pessoa física acima identificados.<br>
+      Atuação fora da jurisdição do CRECI-SP observa o art. 5º da Resolução COFECI nº 327/1992.<br>
       Todo imóvel divulgado possui autorização escrita do proprietário, nos termos do art. 5º do Decreto nº 81.871/1978.<br>
       A consulta de faixa desta página é estimativa preliminar e não constitui parecer técnico de avaliação mercadológica.<br>
       © 2026 PrimeCorp Imóveis · Campinas/SP
@@ -445,267 +802,401 @@ footer .marca-texto span{color:#8E8583}
   </div>
 </footer>
 
-<script src="assets/municipios-sp.js"></script>
+<script src="assets/municipios-br.js"></script>
+<script src="assets/contato.js"></script>
+<script src="assets/carteira.js"></script>
 <script src="assets/calibracao.js"></script>
 <script>
 "use strict";
 
-/* ---------- tipologias ---------- */
-const TIPOS = [
-  ["area-industrial",    "Área industrial"],
-  ["galpao",             "Galpão / barracão"],
-  ["centro-distribuicao","Centro de distribuição"],
-  ["terreno-urbano",     "Terreno urbano"],
-  ["area-comercial",     "Área comercial"],
-  ["gleba-rural",        "Gleba / área rural"],
-  ["fazenda",            "Fazenda"],
-  ["chacara-sitio",      "Chácara / sítio"],
-  ["casa",               "Casa"],
-  ["casa-condominio",    "Casa em condomínio"],
-  ["apartamento",        "Apartamento"],
-  ["sala-comercial",     "Sala / conjunto comercial"],
-  ["loja-ponto",         "Loja / ponto comercial"],
-  ["predio-comercial",   "Prédio comercial"],
-  ["hotel-pousada",      "Hotel / pousada"],
-  ["posto-combustivel",  "Posto de combustível"]
-];
-
-const IMOVEIS = [
-  {tipo:"Área industrial", titulo:"Área industrial com frente para via coletora",
-   onde:"Campinas/SP · Distrito Industrial", preco:12500000, creci:"CRECISP 300760", arte:"industrial",
-   dados:[["Terreno","18.400 m²"],["Zoneamento","Industrial"],["Valor por m²","R$ 679"]]},
-  {tipo:"Galpão", titulo:"Galpão logístico próximo à Anhanguera",
-   onde:"Jundiaí/SP · km 58", preco:8900000, creci:"CRECISP 297692", arte:"galpao",
-   dados:[["Terreno","6.200 m²"],["Construído","3.850 m²"],["Pé-direito","11 m"]]},
-  {tipo:"Terreno", titulo:"Terreno urbano no centro expandido",
-   onde:"Indaiatuba/SP · Centro expandido", preco:2650000, creci:"CRECISP 297692", arte:"terreno",
-   dados:[["Terreno","3.400 m²"],["Zoneamento","Misto"],["Valor por m²","R$ 779"]]}
-];
+/* Dados vêm de assets/carteira.js — é lá que se cadastra imóvel. */
+const TIPOS = window.TIPOS || [];
+const CAMPOS = window.CAMPOS || {};
+const IMOVEIS = window.IMOVEIS || [];
+const NUMERICOS = window.CAMPOS_NUMERICOS || [];
 
 const ARTES = {
-  industrial:`<rect width="320" height="200" fill="#393536"/><path d="M0 150h320v50H0z" fill="#2E2A2B"/><path d="M40 150V95h70v55zM120 150V80h90v70zM220 150v-40h60v40z" fill="#4A4546"/><path d="M40 95l35-22 35 22M120 80l45-26 45 26" fill="none" stroke="#D93438" stroke-width="2.5"/><g fill="#78716C"><rect x="52" y="112" width="14" height="16"/><rect x="84" y="112" width="14" height="16"/><rect x="140" y="100" width="16" height="18"/><rect x="176" y="100" width="16" height="18"/></g>`,
-  galpao:`<rect width="320" height="200" fill="#393536"/><path d="M0 155h320v45H0z" fill="#2E2A2B"/><path d="M35 155V85h250v70z" fill="#4A4546"/><path d="M35 85l125-32 125 32" fill="none" stroke="#D93438" stroke-width="2.5"/><g fill="#5C5657"><rect x="60" y="112" width="42" height="43"/><rect x="122" y="112" width="42" height="43"/><rect x="184" y="112" width="42" height="43"/></g><path d="M0 176h320" stroke="#5C5657" stroke-width="1" stroke-dasharray="8 8"/>`,
-  terreno:`<rect width="320" height="200" fill="#393536"/><path d="M0 130h320v70H0z" fill="#2E2A2B"/><path d="M55 130l35-40h140l35 40z" fill="#4A4546"/><path d="M55 130l35-40h140l35 40" fill="none" stroke="#D93438" stroke-width="2.5"/><g stroke="#5C5657" stroke-width="1"><path d="M92 130V92M160 130V90M228 130V92"/></g><circle cx="55" cy="130" r="4" fill="#D93438"/><circle cx="265" cy="130" r="4" fill="#D93438"/><path d="M0 165h320" stroke="#5C5657" stroke-width="1" stroke-dasharray="4 10"/>`
+  industrial:`<rect width="320" height="200" fill="#22272b"/><path d="M0 150h320v50H0z" fill="#191c1f"/><path d="M40 150V95h70v55zM120 150V80h90v70zM220 150v-40h60v40z" fill="#343b40"/><path d="M40 95l35-22 35 22M120 80l45-26 45 26" fill="none" stroke="#d5383a" stroke-width="2.5"/><g fill="#6a7277"><rect x="52" y="112" width="14" height="16"/><rect x="84" y="112" width="14" height="16"/><rect x="140" y="100" width="16" height="18"/><rect x="176" y="100" width="16" height="18"/></g>`,
+  galpao:`<rect width="320" height="200" fill="#22272b"/><path d="M0 155h320v45H0z" fill="#191c1f"/><path d="M35 155V85h250v70z" fill="#343b40"/><path d="M35 85l125-32 125 32" fill="none" stroke="#d5383a" stroke-width="2.5"/><g fill="#4f575c"><rect x="60" y="112" width="42" height="43"/><rect x="122" y="112" width="42" height="43"/><rect x="184" y="112" width="42" height="43"/></g><path d="M0 176h320" stroke="#4f575c" stroke-width="1" stroke-dasharray="8 8"/>`,
+  terreno:`<rect width="320" height="200" fill="#22272b"/><path d="M0 130h320v70H0z" fill="#191c1f"/><path d="M55 130l35-40h140l35 40z" fill="#343b40"/><path d="M55 130l35-40h140l35 40" fill="none" stroke="#d5383a" stroke-width="2.5"/><g stroke="#4f575c" stroke-width="1"><path d="M92 130V92M160 130V90M228 130V92"/></g><circle cx="55" cy="130" r="4" fill="#d5383a"/><circle cx="265" cy="130" r="4" fill="#d5383a"/><path d="M0 165h320" stroke="#4f575c" stroke-width="1" stroke-dasharray="4 10"/>`,
+  rural:`<rect width="320" height="200" fill="#22272b"/><path d="M0 128c40-10 70 6 105 2s60-16 100-10 75 14 115 6v74H0z" fill="#191c1f"/><path d="M0 128c40-10 70 6 105 2s60-16 100-10 75 14 115 6" fill="none" stroke="#d5383a" stroke-width="2.5"/><path d="M58 128V96m0 0l16 7-16 7M58 103l-15 7 15 6" stroke="#4f575c" stroke-width="1.6" fill="none"/><path d="M196 128v-24h34v24z" fill="#343b40"/><path d="M196 104l17-11 17 11" fill="none" stroke="#6a7277" stroke-width="1.6"/><path d="M0 162h320" stroke="#4f575c" stroke-width="1" stroke-dasharray="5 11"/>`,
+  predio:`<rect width="320" height="200" fill="#22272b"/><path d="M0 172h320v28H0z" fill="#191c1f"/><path d="M78 172V38h96v134z" fill="#343b40"/><path d="M174 172V88h62v84z" fill="#2b3135"/><path d="M78 38h96" fill="none" stroke="#d5383a" stroke-width="2.5"/><g fill="#6a7277"><rect x="92" y="54" width="17" height="13"/><rect x="118" y="54" width="17" height="13"/><rect x="144" y="54" width="17" height="13"/><rect x="92" y="78" width="17" height="13"/><rect x="118" y="78" width="17" height="13"/><rect x="144" y="78" width="17" height="13"/><rect x="92" y="102" width="17" height="13"/><rect x="118" y="102" width="17" height="13"/><rect x="144" y="102" width="17" height="13"/></g><g fill="#4f575c"><rect x="186" y="104" width="15" height="12"/><rect x="211" y="104" width="15" height="12"/><rect x="186" y="128" width="15" height="12"/><rect x="211" y="128" width="15" height="12"/></g><rect x="116" y="146" width="22" height="26" fill="#191c1f"/>`,
+  residencial:`<rect width="320" height="200" fill="#22272b"/><path d="M0 168h320v32H0z" fill="#191c1f"/><path d="M62 168v-62h126v62z" fill="#343b40"/><path d="M48 106l77-40 77 40" fill="none" stroke="#d5383a" stroke-width="2.5"/><path d="M188 168v-40h66v40z" fill="#2b3135"/><path d="M188 128l33-18 33 18" fill="none" stroke="#6a7277" stroke-width="1.6"/><g fill="#6a7277"><rect x="80" y="122" width="22" height="18"/><rect x="146" y="122" width="22" height="18"/></g><rect x="112" y="138" width="26" height="30" fill="#191c1f"/><path d="M204 140h34v12h-34z" fill="#4f575c"/>`
 };
 
+const CONTATO = window.CONTATO;
+
+const d = document, w = window;
 const reais = v => "R$ " + Math.round(v).toLocaleString("pt-BR");
-const el = id => document.getElementById(id);
+const el = id => d.getElementById(id);
+const tipoPor = slug => TIPOS.find(t => t.slug === slug);
+const semAcento = t => (t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().trim();
 
-/* ---------- montagem ---------- */
+/* ---------- seletores de tipo ---------- */
+function opcoesAgrupadas(vazio){
+  const g = {};
+  TIPOS.forEach(t => (g[t.grupo] = g[t.grupo] || []).push(t));
+  return (vazio ? `<option value="">${vazio}</option>` : "") +
+    Object.entries(g).map(([nome, ts]) =>
+      `<optgroup label="${nome}">` + ts.map(t => `<option value="${t.slug}">${t.nome}</option>`).join("") + `</optgroup>`).join("");
+}
 function montarTipos(){
-  const opcoes = TIPOS.map(([s,n]) => `<option value="${s}">${n}</option>`).join("");
-  el("m-tipo").innerHTML = opcoes;
-  el("f-tipo").innerHTML = `<option value="">Selecione</option>` + opcoes;
+  el("m-tipo").innerHTML = opcoesAgrupadas(null);
+  el("c-tipo").innerHTML = opcoesAgrupadas("Qualquer tipo");
+  el("v-tipo").innerHTML = opcoesAgrupadas("Selecione");
+  el("fl-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
 }
 
-/* ---------- seletor de município ----------
-   Componente próprio. <datalist> não funciona no Safari do iOS — o campo
-   ficava em branco no iPhone, sem abrir sugestão. Este funciona em toque,
-   teclado e leitor de tela. */
-function semAcento(t){
-  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-}
-
+/* ---------- combo de cidade (base nacional) ----------
+   Componente próprio: <datalist> não funciona no Safari do iOS.
+   Mostra a UF porque 232 nomes se repetem entre estados. */
 function montarCombo(idCampo, aoEscolher){
-  const campo = el(idCampo);
-  const lista = el(idCampo + "-lista");
+  const campo = el(idCampo), lista = el(idCampo + "-lista");
   if (!campo || !lista) return;
+  const base = window.MUNICIPIOS_BR || [];
+  let ativo = -1, visiveis = [];
 
-  const municipios = window.MUNICIPIOS_SP || [];
-  let ativo = -1;
-  let visiveis = [];
-
-  function fechar(){
-    lista.hidden = true;
-    lista.innerHTML = "";
-    campo.setAttribute("aria-expanded", "false");
-    ativo = -1;
-    visiveis = [];
-  }
+  const fechar = () => { lista.hidden = true; lista.innerHTML = ""; campo.setAttribute("aria-expanded","false"); ativo = -1; visiveis = []; };
 
   function escolher(i){
     if (!visiveis[i]) return;
-    campo.value = visiveis[i][0];
-    campo.dataset.slug = visiveis[i][1];
+    const [nome, uf, slug] = visiveis[i];
+    campo.value = nome + "/" + uf;
+    campo.dataset.slug = slug; campo.dataset.cidade = nome; campo.dataset.uf = uf;
     fechar();
     if (aoEscolher) aoEscolher(visiveis[i]);
   }
 
   function marcar(nome, termo){
-    const alvo = semAcento(nome);
-    const pos = alvo.indexOf(termo);
+    const pos = semAcento(nome).indexOf(termo);
     if (pos < 0 || !termo) return nome;
-    return nome.slice(0, pos) + "<mark>" + nome.slice(pos, pos + termo.length) + "</mark>" + nome.slice(pos + termo.length);
+    return nome.slice(0,pos) + "<mark>" + nome.slice(pos,pos+termo.length) + "</mark>" + nome.slice(pos+termo.length);
   }
 
   function abrir(){
-    const termo = semAcento(campo.value);
+    const bruto = campo.value.split("/")[0];
+    const termo = semAcento(bruto);
     campo.dataset.slug = "";
-
-    if (!termo){ fechar(); return; }
+    if (termo.length < 2){ fechar(); if (aoEscolher) aoEscolher(null); return; }
 
     const comeca = [], contem = [];
-    for (const m of municipios){
+    for (const m of base){
       const alvo = semAcento(m[0]);
       if (alvo.startsWith(termo)) comeca.push(m);
       else if (alvo.includes(termo)) contem.push(m);
+      if (comeca.length > 60) break;
     }
-    /* Nome mais curto primeiro. Sem isso, "campin" traz Campina do Monte
-       Alegre antes de Campinas — alfabético põe o município pequeno na
-       frente do que a pessoa quase sempre quer. */
-    const porTamanho = (a, b) => a[0].length - b[0].length || a[0].localeCompare(b[0], "pt-BR");
-    comeca.sort(porTamanho);
-    contem.sort(porTamanho);
-    visiveis = comeca.concat(contem).slice(0, 10);
+    /* capital primeiro, depois nome curto: sem isso "sao pau" traz
+       São Paulo das Missões/RS antes de São Paulo/SP. */
+    const ordem = (a,b) => (b[3]-a[3]) || (a[0].length-b[0].length) || a[0].localeCompare(b[0],"pt-BR");
+    comeca.sort(ordem); contem.sort(ordem);
+    visiveis = comeca.concat(contem).slice(0,10);
 
     if (!visiveis.length){
-      lista.innerHTML = `<li class="vazio" role="presentation">Nenhum município de São Paulo com esse nome.</li>`;
-      lista.hidden = false;
-      campo.setAttribute("aria-expanded", "true");
-      return;
+      lista.innerHTML = `<li class="vazio" role="presentation">Nenhum município com esse nome.</li>`;
+      lista.hidden = false; campo.setAttribute("aria-expanded","true"); return;
     }
-
-    lista.innerHTML = visiveis.map((m, i) =>
-      `<li role="option" id="${idCampo}-op-${i}" aria-selected="false" data-i="${i}">${marcar(m[0], termo)}</li>`
-    ).join("");
-    lista.hidden = false;
-    campo.setAttribute("aria-expanded", "true");
-    ativo = -1;
+    lista.innerHTML = visiveis.map((m,i) =>
+      `<li role="option" id="${idCampo}-op-${i}" aria-selected="false" data-i="${i}">
+         <span>${marcar(m[0],termo)}</span><span class="uf">${m[1]}</span></li>`).join("");
+    lista.hidden = false; campo.setAttribute("aria-expanded","true"); ativo = -1;
   }
 
   function destacar(novo){
     const itens = lista.querySelectorAll("li[data-i]");
     if (!itens.length) return;
-    if (ativo >= 0 && itens[ativo]) itens[ativo].setAttribute("aria-selected", "false");
+    if (ativo >= 0 && itens[ativo]) itens[ativo].setAttribute("aria-selected","false");
     ativo = (novo + itens.length) % itens.length;
-    itens[ativo].setAttribute("aria-selected", "true");
+    itens[ativo].setAttribute("aria-selected","true");
     campo.setAttribute("aria-activedescendant", itens[ativo].id);
-    /* protegido: uma exceção aqui derruba o keydown inteiro e a navegação
-       por teclado para de funcionar sem nenhum sinal na tela */
-    try { itens[ativo].scrollIntoView({ block: "nearest" }); } catch (_) {}
+    /* protegido: exceção aqui derruba o keydown e mata a navegação por teclado */
+    try { itens[ativo].scrollIntoView({block:"nearest"}); } catch(_){}
   }
 
   campo.addEventListener("input", abrir);
   campo.addEventListener("focus", () => { if (campo.value) abrir(); });
-
   campo.addEventListener("keydown", e => {
     if (lista.hidden && e.key === "ArrowDown"){ abrir(); return; }
     if (lista.hidden) return;
-    if (e.key === "ArrowDown"){ e.preventDefault(); destacar(ativo + 1); }
-    else if (e.key === "ArrowUp"){ e.preventDefault(); destacar(ativo - 1); }
+    if (e.key === "ArrowDown"){ e.preventDefault(); destacar(ativo+1); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); destacar(ativo-1); }
     else if (e.key === "Enter"){
       if (ativo >= 0){ e.preventDefault(); escolher(ativo); }
       else if (visiveis.length === 1){ e.preventDefault(); escolher(0); }
-    }
-    else if (e.key === "Escape"){ fechar(); }
+    } else if (e.key === "Escape") fechar();
   });
-
   /* pointerdown vem antes do blur — sem isso o toque no iOS fecha a lista
      antes de registrar a escolha */
   lista.addEventListener("pointerdown", e => {
     const item = e.target.closest("li[data-i]");
-    if (!item) return;
-    e.preventDefault();
-    escolher(Number(item.dataset.i));
+    if (item){ e.preventDefault(); escolher(Number(item.dataset.i)); }
   });
-
-  /* reserva para navegador sem PointerEvent, onde pointerdown nunca dispara */
   lista.addEventListener("click", e => {
     const item = e.target.closest("li[data-i]");
     if (item) escolher(Number(item.dataset.i));
   });
-
   campo.addEventListener("blur", () => setTimeout(fechar, 150));
-  document.addEventListener("pointerdown", e => {
-    if (!campo.parentElement.contains(e.target)) fechar();
+  document.addEventListener("pointerdown", e => { if (!campo.parentElement.contains(e.target)) fechar(); });
+}
+
+/* ---------- portas da capa ---------- */
+function abrirPorta(qual){
+  ["comprar","vender"].forEach(p => {
+    const aberta = p === qual;
+    el("porta-" + p).setAttribute("aria-selected", String(aberta));
+    el("pp-" + p).hidden = !aberta;
+  });
+  const alvo = el("pp-" + qual);
+  if (alvo) setTimeout(() => alvo.scrollIntoView({behavior:"smooth", block:"nearest"}), 80);
+}
+function fecharPortas(){
+  ["comprar","vender"].forEach(p => {
+    el("porta-" + p).setAttribute("aria-selected","false");
+    el("pp-" + p).hidden = true;
   });
 }
 
-function montarVitrine(){
-  el("vitrine-lista").innerHTML = IMOVEIS.map(i => `
-    <article class="imovel">
-      <div class="imovel-capa">
-        <span class="imovel-tipo">${i.tipo}</span>
-        <svg viewBox="0 0 320 200" role="img" aria-label="Ilustração de ${i.tipo.toLowerCase()}" style="width:100%;height:100%">${ARTES[i.arte]}</svg>
+/* ---------- filtros adaptativos ---------- */
+function montarExtras(){
+  const t = tipoPor(el("fl-tipo").value);
+  const caixa = el("fl-extras");
+  const campos = t ? t.campos : [];
+  if (!campos.length){
+    caixa.innerHTML = `<p class="nota" style="grid-column:1/-1;margin:0">Escolha um tipo para ver os filtros específicos dele — um galpão filtra por pé-direito e docas, uma gleba por recurso hídrico.</p>`;
+    return;
+  }
+  caixa.innerHTML = campos.map(c => {
+    const d = CAMPOS[c];
+    return `<div><label for="fx-${c}">${d.rotulo}</label>
+      <select id="fx-${c}" class="ent" data-campo="${c}">
+        ${d.opcoes.map(([v,n]) => `<option value="${v}">${n}</option>`).join("")}
+      </select></div>`;
+  }).join("");
+  caixa.querySelectorAll("select").forEach(s => s.addEventListener("change", renderVitrine));
+}
+
+function lerFiltros(){
+  const f = {
+    tipo: el("fl-tipo").value,
+    cidade: semAcento(el("fl-cidade").value.split("/")[0]),
+    precoMax: Number(el("fl-preco-max").value) || Infinity,
+    areaMin: Number(el("fl-area-min").value) || 0,
+    extras: {}
+  };
+  el("fl-extras").querySelectorAll("select").forEach(s => { if (s.value) f.extras[s.dataset.campo] = s.value; });
+  return f;
+}
+
+function passa(im, f){
+  if (f.tipo && im.tipo !== f.tipo) return false;
+  if (f.cidade && !semAcento(im.cidade).includes(f.cidade)) return false;
+  if (im.preco > f.precoMax) return false;
+  if ((im.area || 0) < f.areaMin) return false;
+  for (const [campo, valor] of Object.entries(f.extras)){
+    const v = im[campo];
+    if (v === undefined || v === null) return false;
+    if (NUMERICOS.includes(campo)){ if (Number(v) < Number(valor)) return false; }
+    else if (String(v) !== String(valor)) return false;
+  }
+  return true;
+}
+
+/* Referência estável do imóvel: é o que vai na URL e no pedido de
+   contato. Se a carteira não declarar `ref`, derivamos de tipo+cidade. */
+function refDe(im, i){
+  return im.ref || (im.tipo.slice(0,3) + "-" + semAcento(im.cidade).replace(/\s+/g,"").slice(0,4) + "-" + String(i+1).padStart(3,"0")).toUpperCase();
+}
+
+function cartao(im, i){
+  const t = tipoPor(im.tipo);
+  return `<article class="imovel" tabindex="0" role="button" data-ref="${refDe(im,i)}"
+           aria-label="Ver ficha: ${im.titulo}">
+    <div class="im-capa">
+      <span class="im-tag">${t ? t.nome : im.tipo}</span>
+      <svg viewBox="0 0 320 200" role="img" aria-label="Ilustração de ${(t?t.nome:im.tipo).toLowerCase()}">${ARTES[im.arte] || ARTES.terreno}</svg>
+    </div>
+    <div class="im-corpo">
+      <h3>${im.titulo}</h3>
+      <div class="onde">${im.onde}</div>
+      <dl>${im.dados.map(([k,v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+      <div class="ver-mais">Ver ficha completa →</div>
+    </div>
+    <div class="im-pe"><span class="preco">${reais(im.preco)}</span><span class="registro">${im.creci}</span></div>
+  </article>`;
+}
+
+/* ---------- ficha do imóvel ---------- */
+const ROTULOS = {construida:"Área construída", pedireito:"Pé-direito", docas:"Docas",
+  zoneamento:"Zoneamento", energia:"Energia", frente:"Frente", agua:"Recurso hídrico",
+  benfeitorias:"Benfeitorias", quartos:"Quartos", vagas:"Vagas", elevador:"Elevador"};
+const UNIDADES = {construida:" m²", pedireito:" m", frente:" m"};
+const LEGIVEL = {industrial:"Industrial", comercial:"Comercial", misto:"Misto",
+  media:"Média tensão", alta:"Alta tensão", sim:"Sim"};
+
+let focoAnterior = null;
+
+function abrirFicha(ref){
+  const i = IMOVEIS.findIndex((im, k) => refDe(im, k) === ref);
+  if (i < 0) return;
+  const im = IMOVEIS[i], t = tipoPor(im.tipo);
+
+  const linhas = [["Tipo", t ? t.nome : im.tipo], ["Área total", im.area.toLocaleString("pt-BR") + " m²"]];
+  Object.keys(ROTULOS).forEach(c => {
+    if (im[c] === undefined || im[c] === null) return;
+    const v = LEGIVEL[im[c]] || (typeof im[c] === "number" ? im[c].toLocaleString("pt-BR") + (UNIDADES[c]||"") : im[c]);
+    linhas.push([ROTULOS[c], v]);
+  });
+  linhas.push(["Valor por m²", reais(im.preco / im.area)]);
+
+  el("ficha").innerHTML = `
+    <div class="ficha-capa">
+      <svg viewBox="0 0 320 200" role="img" aria-label="Ilustração de ${(t?t.nome:im.tipo).toLowerCase()}" preserveAspectRatio="xMidYMid slice">${ARTES[im.arte] || ARTES.terreno}</svg>
+      <button class="ficha-fechar" id="ficha-fechar" aria-label="Fechar ficha">×</button>
+    </div>
+    <div class="ficha-corpo">
+      <div class="olho">Ref. ${ref} · à venda</div>
+      <h2 id="ficha-titulo">${im.titulo}</h2>
+      <p class="ficha-onde">${im.onde}</p>
+      <div class="ficha-preco"><b>${reais(im.preco)}</b><span>${reais(im.preco/im.area)} por m² de terreno</span></div>
+      ${im.descricao ? `<p class="desc">${im.descricao}</p>` : ""}
+      <dl class="ficha-grade">${linhas.map(([k,v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+      <div class="ficha-acoes">
+        <a class="btn" id="ficha-zap" target="_blank" rel="noopener"
+           href="${linkZap(`Olá! Vi o imóvel ref. ${ref} no site — ${im.titulo} (${im.onde}), ${reais(im.preco)}. Gostaria de mais informações.`)}">Falar no WhatsApp</a>
+        <button class="btn sec" id="ficha-interesse">Enviar meu perfil de busca</button>
+        <button class="btn sec" id="ficha-copiar">Copiar link</button>
       </div>
-      <div class="imovel-corpo">
-        <h3>${i.titulo}</h3>
-        <div class="onde">${i.onde}</div>
-        <dl>${i.dados.map(([k,v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
-      </div>
-      <div class="imovel-pe">
-        <span class="preco">${reais(i.preco)}</span>
-        <span class="registro">${i.creci}</span>
-      </div>
-    </article>`).join("");
+      <p class="ficha-legal">
+        Anúncio de venda sob responsabilidade de ${im.creci}. Imóvel divulgado com autorização
+        escrita do proprietário, nos termos do art. 5º do Decreto nº 81.871/1978.<br>
+        Medidas informadas pelo proprietário e conferidas em matrícula; confirme na documentação antes de contratar.
+      </p>
+    </div>`;
+
+  focoAnterior = d.activeElement;
+  el("ficha-veu").classList.add("aberta");
+  d.body.style.overflow = "hidden";
+  if (location.hash !== "#imovel/" + ref) history.pushState(null, "", "#imovel/" + ref);
+  el("ficha-fechar").focus();
+
+  el("ficha-fechar").addEventListener("click", fecharFicha);
+  el("ficha-interesse").addEventListener("click", () => {
+    fecharFicha();
+    el("c-tipo").value = im.tipo;
+    el("c-cidade").value = im.cidade + "/" + im.uf;
+    el("c-area").value = im.area;
+    el("c-msg").value = `Tenho interesse no imóvel ref. ${ref} — ${im.titulo} (${im.onde}).`;
+    abrirPorta("comprar");
+  });
+  el("ficha-copiar").addEventListener("click", e => {
+    const url = location.origin + location.pathname + "#imovel/" + ref;
+    const avisar = () => { e.target.textContent = "Link copiado"; setTimeout(() => e.target.textContent = "Copiar link", 2200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(avisar, avisar); else avisar();
+  });
+}
+
+function fecharFicha(){
+  el("ficha-veu").classList.remove("aberta");
+  d.body.style.overflow = "";
+  if (location.hash.startsWith("#imovel/")) history.pushState(null, "", location.pathname);
+  if (focoAnterior) { try { focoAnterior.focus(); } catch(_){} focoAnterior = null; }
+}
+
+function lerHash(){
+  const m = location.hash.match(/^#imovel\/(.+)$/);
+  if (m) abrirFicha(decodeURIComponent(m[1]));
+  else if (el("ficha-veu").classList.contains("aberta")) fecharFicha();
+}
+
+function renderVitrine(){
+  const f = lerFiltros();
+  const achados = IMOVEIS.filter(im => passa(im, f));
+  const alvo = el("vitrine-lista");
+  const ativos = (f.tipo?1:0) + (f.cidade?1:0) + (f.precoMax!==Infinity?1:0) + (f.areaMin?1:0) + Object.keys(f.extras).length;
+
+  el("fl-limpar").hidden = ativos === 0;
+  el("fl-conta").innerHTML = IMOVEIS.length === 0
+    ? `carteira em formação`
+    : achados.length
+      ? `<b>${achados.length}</b> ${achados.length === 1 ? "imóvel" : "imóveis"} com autorização vigente${ativos ? " · filtros aplicados" : ""}`
+      : `<b>0</b> imóveis com os filtros aplicados`;
+
+  if (achados.length){
+    alvo.innerHTML = achados.map(im => cartao(im, IMOVEIS.indexOf(im))).join("");
+    alvo.querySelectorAll(".imovel").forEach(c => {
+      c.addEventListener("click", () => abrirFicha(c.dataset.ref));
+      c.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirFicha(c.dataset.ref); }
+      });
+    });
+    return;
+  }
+
+  /* Vitrine vazia vira captação. O site antigo mostrava "nenhum
+     resultado" e perdia o lead ali. */
+  alvo.innerHTML = `<div class="vazio">
+      <h3>${IMOVEIS.length === 0 ? "Carteira em formação" : "Nada na carteira com esses filtros"}</h3>
+      <p>Boa parte do que negociamos nunca chega a ser anunciado — vem de proprietário direto
+         e de carteira de parceiros. Diga o que procura e vamos atrás.</p>
+      <a href="#comprar" class="btn" id="vazio-cta">Abrir mandato de busca</a>
+    </div>`;
+  const cta = el("vazio-cta");
+  if (cta) cta.addEventListener("click", () => { passarFiltrosParaBusca(); abrirPorta("comprar"); });
+}
+
+function passarFiltrosParaBusca(){
+  const t = el("fl-tipo").value, c = el("fl-cidade");
+  if (t) el("c-tipo").value = t;
+  if (c.value){ el("c-cidade").value = c.value; el("c-cidade").dataset.slug = c.dataset.slug || ""; }
+  if (el("fl-area-min").value) el("c-area").value = el("fl-area-min").value;
+}
+
+function limparFiltros(){
+  el("fl-tipo").value = ""; el("fl-cidade").value = ""; el("fl-cidade").dataset.slug = "";
+  el("fl-preco-max").value = ""; el("fl-area-min").value = "";
+  montarExtras(); renderVitrine();
 }
 
 /* ---------- consulta de faixa ----------
-   Só exibe número onde há calibração própria. Município sem base
-   convida a pedir o parecer — não inventa valor de mercado. */
-function slugDoNome(nome){
-  const campo = el("m-cidade");
-  if (campo && campo.dataset.slug) return campo.dataset.slug;
-  const alvo = semAcento(nome);
-  const achado = (window.MUNICIPIOS_SP || []).find(m => semAcento(m[0]) === alvo);
-  return achado ? achado[1] : null;
-}
-
-function nomeDoTipo(slug){
-  const t = TIPOS.find(t => t[0] === slug);
-  return t ? t[1] : slug;
-}
-
+   Só mostra número onde há calibração própria. Cidade sem base
+   convida ao parecer — não inventa valor de mercado. */
 function convite(texto){
   return `<div class="convite">
     <b>Ainda não publicamos faixa para este caso</b>
     <p>${texto}</p>
-    <a href="#contato" class="botao forte" onclick="levarParaContato()">Pedir o parecer técnico</a>
+    <a href="#vender" class="btn" id="conv-cta">Pedir avaliação técnica</a>
   </div>`;
 }
 
-function levarParaContato(){
-  const cidade = el("m-cidade").value.trim();
-  const area = el("m-area").value;
-  const tipo = el("m-tipo").value;
-  if (cidade){ el("f-cidade").value = cidade; el("f-cidade").dataset.slug = el("m-cidade").dataset.slug || ""; }
-  if (tipo) el("f-tipo").value = tipo;
-  if (area) el("f-msg").value = `Área aproximada de ${Number(area).toLocaleString("pt-BR")} m².`;
+function ligarConvite(){
+  const b = el("conv-cta");
+  if (b) b.addEventListener("click", () => {
+    const c = el("m-cidade");
+    if (c.value){ el("v-cidade").value = c.value; el("v-cidade").dataset.slug = c.dataset.slug || ""; }
+    if (el("m-tipo").value) el("v-tipo").value = el("m-tipo").value;
+    if (el("m-area").value) el("v-area").value = el("m-area").value;
+    abrirPorta("vender");
+  });
 }
 
 function estimar(){
   const C = window.CALIBRACAO || {};
-  const tipo = el("m-tipo").value;
-  const nomeCidade = el("m-cidade").value.trim();
-  const area = Number(el("m-area").value);
+  const tipo = el("m-tipo").value, campo = el("m-cidade"), area = Number(el("m-area").value);
   const saida = el("m-saida");
   saida.hidden = false;
 
-  if (!nomeCidade){
-    saida.innerHTML = convite("Informe o município para consultarmos a base da região.");
-    return;
-  }
-  const slug = slugDoNome(nomeCidade);
-  if (!slug){
-    saida.innerHTML = convite(
-      `Não encontramos <strong>${nomeCidade}</strong> na lista de municípios de São Paulo. ` +
-      `Confira a grafia ou fale com a gente — atendemos todo o estado.`);
-    return;
-  }
-  if (!area || area < 20){
-    saida.innerHTML = convite("Informe a metragem aproximada, a partir de 20 m².");
-    return;
-  }
+  const nome = campo.dataset.cidade || campo.value.split("/")[0].trim();
+  const slug = campo.dataset.slug;
 
-  const dadosCidade = (C.MERCADO || {})[slug];
-  const par = dadosCidade && dadosCidade[tipo];
+  if (!nome) { saida.innerHTML = convite("Informe a cidade para consultarmos a base da região."); return ligarConvite(); }
+  if (!slug) { saida.innerHTML = convite(`Escolha <strong>${nome}</strong> na lista de sugestões para identificarmos o município e a UF.`); return ligarConvite(); }
+  if (!area || area < 20) { saida.innerHTML = convite("Informe a metragem aproximada, a partir de 20 m²."); return ligarConvite(); }
 
+  const par = ((C.MERCADO || {})[slug] || {})[tipo];
+  const t = tipoPor(tipo);
   if (!par){
-    saida.innerHTML = convite(
-      `Ainda não temos base comparável calibrada para <strong>${nomeCidade}</strong> ` +
-      `na tipologia <strong>${nomeDoTipo(tipo).toLowerCase()}</strong>. ` +
-      `Fazemos a pesquisa dedicada e emitimos o parecer técnico — sem custo na etapa inicial.`);
-    return;
+    saida.innerHTML = convite(`Ainda não temos base comparável calibrada para <strong>${nome}</strong> na tipologia <strong>${(t?t.nome:tipo).toLowerCase()}</strong>. Fazemos a pesquisa dedicada e emitimos o parecer técnico — sem custo na etapa inicial.`);
+    return ligarConvite();
   }
 
   const [valorRef, areaRef] = par;
@@ -716,75 +1207,195 @@ function estimar(){
 
   saida.innerHTML = `
     <div class="tres">
-      <div><span>Mínimo</span><b>${reais(total * (1 - amp))}</b></div>
-      <div class="centro"><span>Referência</span><b>${reais(total)}</b></div>
-      <div><span>Máximo</span><b>${reais(total * (1 + amp))}</b></div>
+      <div><span>Mínimo</span><b>${reais(total*(1-amp))}</b></div>
+      <div class="meio"><span>Referência</span><b>${reais(total)}</b></div>
+      <div><span>Máximo</span><b>${reais(total*(1+amp))}</b></div>
     </div>
-    <div class="regua"></div>
-    <p class="nota">
-      Cerca de <code>${reais(unit)}/m²</code> em ${nomeCidade} para esta metragem.
-      Faixa preliminar, sem visita nem pesquisa dedicada — o parecer técnico costuma estreitá-la bastante.
-      <a href="#contato" onclick="levarParaContato()" style="color:var(--carmim)">Peça o seu</a>.
-    </p>`;
+    <p class="nota">Cerca de <code>${reais(unit)}/m²</code> em ${nome} para esta metragem.
+    Faixa preliminar, sem visita nem pesquisa dedicada — o parecer técnico costuma estreitá-la bastante.
+    <a href="#vender" id="conv-cta" style="color:var(--vermelho)">Peça o seu</a>.</p>`;
+  ligarConvite();
 }
 
-/* ---------- formulário ---------- */
-function enviar(){
-  const erro = el("f-erro");
-  const mostrar = (msg, campo) => {
-    erro.textContent = msg; erro.classList.add("visivel");
-    if (campo) el(campo).focus();
-  };
-  erro.classList.remove("visivel");
+/* ---------- formulários ---------- */
+function validarEnviar(pref, montarDados){
+  const erro = el(pref + "-erro");
+  const falha = (msg, campo) => { erro.textContent = msg; erro.classList.add("ok"); if (campo) el(campo).focus(); return false; };
+  erro.classList.remove("ok");
 
-  const nome = el("f-nome").value.trim();
-  const tel = el("f-tel").value.trim();
-  const email = el("f-email").value.trim();
+  const nome = el(pref + "-nome").value.trim(), tel = el(pref + "-tel").value.trim();
+  if (nome.length < 2) return falha("Informe seu nome para que possamos retornar.", pref + "-nome");
+  if (tel.replace(/\D/g,"").length < 10) return falha("Informe um WhatsApp com DDD.", pref + "-tel");
+  if (!el(pref + "-ok").checked) return falha("Marque a autorização de contato para enviar.", pref + "-ok");
 
-  if (nome.length < 2) return mostrar("Informe seu nome para que possamos retornar.", "f-nome");
-  if (!tel && !email) return mostrar("Informe telefone ou e-mail — precisamos de uma forma de retornar.", "f-tel");
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return mostrar("Confira o e-mail informado.", "f-email");
-  if (!el("f-ok").checked) return mostrar("Marque a autorização de contato para enviar.", "f-ok");
+  const dados = montarDados();
+  const concluir = () => { el(pref + "-campos").style.display = "none"; el(pref + "-recibo").classList.add("ok"); };
+  const porWhats = () => w.open(linkZap(textoDoLead(dados)), "_blank", "noopener");
 
-  const dados = {
-    name: nome, phone: tel || null, email: email || null,
-    purpose: el("f-interesse").value,
-    location: el("f-cidade").value.trim() || null,
-    tipo: el("f-tipo").value || null,
-    message: el("f-msg").value.trim() || null,
-    source: "site"
-  };
+  const quer = CONTATO.destino;
+  const temEndpoint = quer !== "whatsapp" && CONTATO.ENDPOINT;
 
-  /* Substituir pelo endpoint real ao publicar — ver DEPLOY.md, passo 6. */
-  const ENDPOINT = "";
-  const concluir = () => {
-    el("form-campos").style.display = "none";
-    el("f-recibo").classList.add("visivel");
-  };
+  if (!temEndpoint){ porWhats(); concluir(); return true; }
 
-  if (!ENDPOINT) { console.info("Lead capturado (sem endpoint configurado):", dados); return concluir(); }
+  el(pref + "-enviar").disabled = true;
+  fetch(CONTATO.ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(dados)})
+    .then(r => { if (!r.ok) throw new Error(r.status); if (quer === "ambos") porWhats(); concluir(); })
+    .catch(() => {
+      /* Backend fora do ar não pode custar o lead: cai no WhatsApp. */
+      porWhats(); concluir();
+    });
+  return true;
+}
 
-  el("f-enviar").disabled = true;
-  fetch(ENDPOINT, {
-    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(dados)
-  }).then(r => {
-    if (!r.ok) throw new Error(r.status);
-    concluir();
-  }).catch(() => {
-    el("f-enviar").disabled = false;
-    mostrar("Não conseguimos enviar agora. Tente novamente ou chame no WhatsApp.");
+/* ---------- WhatsApp ---------- */
+function linkZap(texto){
+  return "https://wa.me/" + CONTATO.whatsapp + "?text=" + encodeURIComponent(texto);
+}
+
+const ROTULO_LEAD = {name:"Nome", phone:"WhatsApp", tipo:"Tipo", location:"Cidade",
+  area:"Área (m²)", orcamento:"Orçamento", prazo:"Prazo", message:"Observações"};
+
+function textoDoLead(dados){
+  const linhas = ["*" + dados.purpose + "* — site PrimeCorp Imóveis", ""];
+  Object.entries(ROTULO_LEAD).forEach(([k, rot]) => {
+    if (dados[k]) linhas.push(rot + ": " + dados[k]);
   });
+  return linhas.join("\n");
+}
+
+/* ---------- mapa do Brasil ----------
+   Grade esquemática: cada UF é um bloco. Não é cartografia — é um
+   diagrama de presença, legível em 440px e sem 2 MB de GeoJSON. */
+const GRADE_UF = [
+  ["RR",2,0],["AP",4,0],
+  ["AM",1,1],["PA",3,1],["MA",4,1],["CE",5,1],["RN",6,1],
+  ["AC",0,2],["RO",1,2],["TO",3,2],["PI",4,2],["PB",6,2],
+  ["MT",2,3],["BA",4,3],["PE",6,3],["AL",6,4],["SE",5,4],
+  ["GO",3,4],["DF",4,4],["MG",4,5],["ES",5,5],
+  ["MS",2,5],["SP",3,6],["RJ",4,6],
+  ["PR",2,7],["SC",2,8],["RS",1,9]
+];
+const UF_BASE = ["SP"];
+const UF_ATIVA = ["MG","PR","GO","MS"];
+
+function montarMapa(){
+  const g = document.querySelector(".mapa-br .ufs");
+  if (!g) return;
+  const L = 62, GAP = 7;
+  g.innerHTML = GRADE_UF.map(([uf,x,y]) => {
+    const cls = UF_BASE.includes(uf) ? "uf base" : UF_ATIVA.includes(uf) ? "uf ativa" : "uf";
+    const px = 40 + x*(L+GAP), py = 30 + y*(L+GAP);
+    const cor = UF_BASE.includes(uf) ? "#fff" : "#4f575c";
+    return `<g><rect class="${cls}" x="${px}" y="${py}" width="${L}" height="${L}" rx="9"/>
+      <text x="${px+L/2}" y="${py+L/2+5}" text-anchor="middle"
+        font-family="Geist Mono,monospace" font-size="15" font-weight="600" fill="${cor}">${uf}</text></g>`;
+  }).join("");
 }
 
 /* ---------- início ---------- */
 montarTipos();
-montarVitrine();
-montarCombo("m-cidade", () => { if (el("m-area").value) estimar(); });
-montarCombo("f-cidade");
+montarMapa();
+["m-cidade","c-cidade","v-cidade"].forEach(id => montarCombo(id));
+montarCombo("fl-cidade", renderVitrine);
+montarExtras();
+renderVitrine();
+
+el("porta-comprar").addEventListener("click", () => abrirPorta("comprar"));
+el("porta-vender").addEventListener("click", () => abrirPorta("vender"));
+document.querySelectorAll("[data-fechar]").forEach(b => b.addEventListener("click", fecharPortas));
+
 el("m-botao").addEventListener("click", estimar);
-el("f-enviar").addEventListener("click", enviar);
-el("m-area").addEventListener("keydown", e => { if (e.key === "Enter") estimar(); });
-el("m-cidade").addEventListener("keydown", e => { if (e.key === "Enter") estimar(); });
+["m-area","m-cidade"].forEach(id => el(id).addEventListener("keydown", e => { if (e.key === "Enter") estimar(); }));
+
+el("c-enviar").addEventListener("click", () => validarEnviar("c", () => ({
+  purpose:"Comprar um imóvel", name:el("c-nome").value.trim(), phone:el("c-tel").value.trim(),
+  tipo:el("c-tipo").value||null, location:el("c-cidade").value.trim()||null,
+  area:el("c-area").value||null, orcamento:el("c-orcamento").value||null,
+  message:el("c-msg").value.trim()||null, source:"site/mandato-busca"
+})));
+
+el("v-enviar").addEventListener("click", () => validarEnviar("v", () => ({
+  purpose:"Avaliar meu imóvel", name:el("v-nome").value.trim(), phone:el("v-tel").value.trim(),
+  tipo:el("v-tipo").value||null, location:el("v-cidade").value.trim()||null,
+  area:el("v-area").value||null, prazo:el("v-prazo").value||null,
+  message:el("v-msg").value.trim()||null, source:"site/avaliacao"
+})));
+
+el("fl-limpar").addEventListener("click", limparFiltros);
+el("fl-tipo").addEventListener("change", () => { montarExtras(); renderVitrine(); });
+["fl-preco-max","fl-area-min"].forEach(id => el(id).addEventListener("change", renderVitrine));
+el("fl-cidade").addEventListener("input", renderVitrine);
+el("fl-mais").addEventListener("click", () => {
+  const aberto = el("fl-extras").classList.toggle("aberto");
+  el("fl-mais").setAttribute("aria-expanded", String(aberto));
+  el("fl-mais").textContent = aberto ? "Menos filtros" : "Mais filtros";
+});
+
+/* âncoras do menu abrem a porta correspondente */
+document.querySelectorAll('a[href="#comprar"],a[href="#vender"]').forEach(a => {
+  a.addEventListener("click", () => abrirPorta(a.getAttribute("href").slice(1)));
+});
+
+/* ---------- menu móvel ---------- */
+const btnMenu = el("abrir-menu"), navMenu = el("menu-principal"), veuMenu = el("veu-menu");
+function menu(aberto){
+  btnMenu.setAttribute("aria-expanded", String(aberto));
+  navMenu.classList.toggle("aberto", aberto);
+  veuMenu.classList.toggle("aberto", aberto);
+  veuMenu.hidden = !aberto;
+  btnMenu.setAttribute("aria-label", aberto ? "Fechar menu de navegação" : "Abrir menu de navegação");
+}
+btnMenu.addEventListener("click", () => menu(btnMenu.getAttribute("aria-expanded") !== "true"));
+veuMenu.addEventListener("click", () => menu(false));
+navMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => menu(false)));
+/* volta à barra normal ao passar do ponto de quebra, para o menu não
+   ficar preso aberto quando o aparelho é girado */
+w.addEventListener("resize", () => { if (w.innerWidth > 1080) menu(false); });
+
+/* ---------- ficha: teclado e histórico ---------- */
+el("ficha-veu").addEventListener("click", e => { if (e.target === el("ficha-veu")) fecharFicha(); });
+d.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (el("ficha-veu").classList.contains("aberta")) fecharFicha();
+  else if (btnMenu.getAttribute("aria-expanded") === "true") menu(false);
+});
+w.addEventListener("popstate", lerHash);
+lerHash();
+
+/* ---------- WhatsApp flutuante, com assunto ----------
+   O botão pergunta sobre o que a pessoa está olhando. Um "olá"
+   genérico obriga o corretor a descobrir o assunto do zero. */
+const ASSUNTOS = [
+  ["faixa",     "Olá! Usei a consulta de faixa no site e queria entender melhor o valor do meu imóvel."],
+  ["carteira",  "Olá! Estou vendo a carteira de imóveis no site e queria mais informações."],
+  ["atuacao",   "Olá! Vi o site da PrimeCorp e queria falar sobre um imóvel fora da região de Campinas."],
+  ["como",      "Olá! Queria entender como funciona a avaliação antes do anúncio."],
+  ["segmentos", "Olá! Vi o site da PrimeCorp Imóveis e queria falar sobre compra e venda."]
+];
+const btnZap = el("zap");
+function assuntoDoZap(){
+  if (el("ficha-veu").classList.contains("aberta")) return null;   // a ficha tem botão próprio
+  const meio = w.innerHeight / 2;
+  for (const [id, texto] of ASSUNTOS){
+    const s = el(id);
+    if (!s) continue;
+    const r = s.getBoundingClientRect();
+    if (r.top <= meio && r.bottom >= meio) return texto;
+  }
+  return "Olá! Vi o site da PrimeCorp Imóveis e queria falar sobre compra e venda de imóveis.";
+}
+function atualizarZap(){
+  const t = assuntoDoZap();
+  if (t) btnZap.href = linkZap(t);
+}
+atualizarZap();
+el("pe-zap").href = linkZap("Olá! Vi o site da PrimeCorp Imóveis e queria falar sobre compra e venda de imóveis.");
+let aguardando = false;
+w.addEventListener("scroll", () => {
+  if (aguardando) return;
+  aguardando = true;
+  requestAnimationFrame(() => { atualizarZap(); aguardando = false; });
+}, {passive:true});
 </script>
 </body>
 </html>

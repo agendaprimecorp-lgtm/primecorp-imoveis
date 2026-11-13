@@ -49,6 +49,7 @@ window.CALIBRACAO = {
     'casa':            -0.12,
     'casa-condominio': -0.12,
     'apartamento':     -0.08,
+    'cobertura':       -0.06,
     'sala-comercial':  -0.10,
     'loja-ponto':      -0.12,
     'predio-comercial':-0.14,

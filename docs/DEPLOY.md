@@ -38,7 +38,9 @@ public_html/
 ├── index.html                  ← página inicial
 ├── painel.html                 ← NÃO subir ainda (ver etapa 4)
 └── assets/
-    ├── municipios-sp.js
+    ├── municipios-br.js
+    ├── carteira.js
+    ├── contato.js
     ├── calibracao.js
     ├── motor.js                        ← motor de avaliação usado pelo painel
     ├── marca-300.png                   ← lockup empilhado (BROKERS · CONSULTORIA)
@@ -284,7 +286,7 @@ Sem consentimento, evite qualquer coisa que use cookie para rastrear.
 |---|---|
 | Site não abre, dá erro de DNS | DNS ainda propagando ou apontado para o lugar errado |
 | Abre sem estilo, tudo desalinhado | pasta `assets/` não subiu ou subiu com outro nome |
-| Consulta de faixa não faz nada | `municipios-sp.js` não carregou — confira o caminho |
+| Consulta de faixa não faz nada | `municipios-br.js` não carregou — confira o caminho |
 | API não sobe, sai `[BOOT ABORTADO]` | segredo faltando ou fraco no `.env` — é proteção, leia a mensagem |
 | Login diz "MFA obrigatório" | cadastre em `POST /api/auth/mfa/setup` no primeiro acesso |
 | Mandato não ativa | responsável sem CRECI válido, ou falta anexar a autorização assinada |
