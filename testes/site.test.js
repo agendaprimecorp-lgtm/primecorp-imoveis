@@ -105,6 +105,16 @@ setTimeout(() => {
   ok("carteira sem texto explicativo", d.querySelector("#carteira .cab p") === null);
   ok("sem atalhos na carteira", d.querySelector("#carteira .atalhos") === null);
 
+  ok("sem parágrafo de autorização na capa", d.querySelector(".capa .lead") === null);
+  ok("eyebrow diz só Compra e venda", d.querySelector(".capa .olho").textContent.trim() === "Compra e venda");
+  ok("'sem locação' fora da capa", !/sem locação/i.test(d.querySelector(".capa").textContent));
+  ok("link de WhatsApp na capa aponta para wa.me", /^https:\/\/wa\.me\//.test(d.getElementById("capa-zap").href), d.getElementById("capa-zap").href);
+  ok("destaques existem na home", d.getElementById("destaques-lista") !== null);
+  ok("destaques mostram até 3 imóveis", d.querySelectorAll("#destaques-lista article.imovel").length === Math.min(3, w.IMOVEIS.length),
+     d.querySelectorAll("#destaques-lista article.imovel").length);
+  ok("destaque abre a ficha", (() => { const c = d.querySelector("#destaques-lista article.imovel"); if (!c) return false; c.dispatchEvent(new w.MouseEvent("click", {bubbles:true})); return d.getElementById("ficha-veu").classList.contains("aberta") || d.getElementById("ficha-veu").hidden === false || d.getElementById("ficha") !== null; })());
+  d.dispatchEvent(new w.KeyboardEvent("keydown", {key:"Escape", bubbles:true}));
+
   console.log("\n=== 6b. segmentos com peso igual ===");
   const cartoesSeg = [...d.querySelectorAll(".seg-card")];
   ok("seis cartões de segmento", cartoesSeg.length === 6, cartoesSeg.length);
