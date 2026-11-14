@@ -70,9 +70,10 @@ setTimeout(() => {
     ok(id + " tem optgroups", n && n.querySelectorAll("optgroup").length >= 4,
        n ? n.querySelectorAll("optgroup").length : "ausente");
   });
-  ok("fl-grupo lista os segmentos",
-     d.getElementById("fl-grupo").options.length === new Set(TIPOS.map(t=>t.grupo)).size + 1,
-     d.getElementById("fl-grupo").options.length);
+  ok("dropdown de tipo lista os grupos",
+     d.querySelectorAll("#fl-tipo-grupos .tg-nome").length === new Set(TIPOS.map(t=>t.grupo)).size,
+     d.querySelectorAll("#fl-tipo-grupos .tg-nome").length);
+  ok("abre com apartamento marcado", JSON.stringify(w.tiposMarcados()) === '["apartamento"]', JSON.stringify(w.tiposMarcados()));
 
   console.log("\n=== 5. portas da capa ===");
   ok("pp-comprar começa fechado", d.getElementById("pp-comprar").hidden);
@@ -134,10 +135,8 @@ setTimeout(() => {
   d.getElementById("bc-area").value = "1000";
   d.getElementById("busca-capa").dispatchEvent(new w.Event("submit", {bubbles:true, cancelable:true}));
 
-  ok("busca leva o tipo para o filtro", d.getElementById("fl-tipo").value === "galpao",
-     d.getElementById("fl-tipo").value);
-  ok("busca deduz o segmento", d.getElementById("fl-grupo").value === "Industrial e logístico",
-     d.getElementById("fl-grupo").value);
+  ok("busca leva o tipo para o filtro", JSON.stringify(w.tiposMarcados()) === '["galpao"]',
+     JSON.stringify(w.tiposMarcados()));
   ok("busca leva a cidade", d.getElementById("fl-cidade").value === "Jundiaí/SP",
      d.getElementById("fl-cidade").value);
   ok("busca leva a área mínima", d.getElementById("fl-area-min").value === "1000");
@@ -147,7 +146,7 @@ setTimeout(() => {
   // atalho por segmento
   d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
   d.querySelector('.atalho[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  ok("atalho aplica o segmento", d.getElementById("fl-grupo").value === "Rural");
+  ok("atalho marca os tipos do segmento", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
   ok("segmento sem imóvel mostra captação",
      d.getElementById("vitrine-lista").querySelector("#vazio-cta") !== null);
   d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
@@ -155,9 +154,14 @@ setTimeout(() => {
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
   const vitrine = d.getElementById("vitrine-lista");
   const conta = () => vitrine.querySelectorAll("article.imovel").length;
-  const limpar = () => d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
+  /* "Limpar" volta ao padrão (apartamento); os testes deste bloco querem a carteira inteira. */
+  const limpar = () => { d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true})); w.marcarTipos([]); w.montarExtras(); w.atualizar(); };
   function por(sets){
     Object.entries(sets).forEach(([id, v]) => {
+      if (id === "fl-tipo" || id === "fl-grupo") {
+        w.marcarTipos(id === "fl-tipo" ? [v] : TIPOS.filter(t => t.grupo === v).map(t => t.slug));
+        w.montarExtras(); w.atualizar(); return;
+      }
       const n = d.getElementById(id);
       n.value = v;
       n.dispatchEvent(new w.Event(n.tagName === "SELECT" ? "change" : "input", {bubbles:true}));
@@ -182,9 +186,9 @@ setTimeout(() => {
 
   // --- segmento filtra o seletor de tipo ---
   por({"fl-grupo":"Industrial e logístico"});
-  const tiposVisiveis = [...d.getElementById("fl-tipo").options].map(o => o.value).filter(Boolean);
-  ok("segmento restringe os tipos",
-     tiposVisiveis.every(sl => (TIPOS.find(t=>t.slug===sl)||{}).grupo === "Industrial e logístico"), tiposVisiveis.join(","));
+  const marcados = w.tiposMarcados();
+  ok("segmento marca só os tipos do segmento",
+     marcados.length > 0 && marcados.every(sl => (TIPOS.find(t=>t.slug===sl)||{}).grupo === "Industrial e logístico"), marcados.join(","));
   ok("segmento industrial devolve 2", conta() === 2, conta());
   limpar();
 
@@ -250,7 +254,7 @@ setTimeout(() => {
   ok("etiqueta mostra o teto de preço", /até R\$/.test(etqs[1].textContent), etqs[1].textContent);
   etqs[1].querySelector("button").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
   ok("remover etiqueta limpa aquele filtro", d.getElementById("fl-preco-max").value === "");
-  ok("o outro filtro permanece", d.getElementById("fl-tipo").value === "galpao");
+  ok("o outro filtro permanece", JSON.stringify(w.tiposMarcados()) === '["galpao"]');
   ok("sobra uma etiqueta", d.getElementById("fl-etiquetas").querySelectorAll(".etiqueta").length === 1);
   limpar();
 
@@ -298,10 +302,11 @@ setTimeout(() => {
   ok("marca horizontal no cabeçalho", /marca-horizontal-600\.png/.test(html));
   ok("marca negativa no rodapé", /marca-horizontal-negativa-600\.png/.test(html));
   ok("vermelho da marca #d5383a", /#d5383a/.test(html) && !/#DB1D25|#db1d25/.test(html));
-  ok("CRECI dos dois corretores no rodapé", /300760/.test(html) && /297692/.test(html));
+  ok("rodapé traz razão social e CNPJ", /PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA/.test(html) && /55\.745\.297\/0001-06/.test(html));
+  ok("nomes e CRECI pessoais fora do site", !/Joselia|Rodrigo França|CRECISP 300760|CRECISP 297692/.test(html));
   ok("cita Decreto 81.871/1978", /81\.871/.test(html));
   ok("cita Resolução 327/1992 para fora de SP", /327\/1992/.test(html));
-  ok("declara PJ em concessão", /concess/i.test(html));
+  ok("sem texto sobre processo de concessão no site", !/concess/i.test(html));
   ok("avaliação declarada como serviço contratado", /mediante contratação/i.test(html));
   ok("site não promete avaliação gratuita", !/avaliação gratuita/i.test(html));
   ok("nenhuma menção a locação como serviço", !/alug|loca(ç|c)ão de im/i.test(html.replace(/não operamos locação/g,"")));

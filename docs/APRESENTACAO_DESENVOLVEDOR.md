@@ -91,7 +91,7 @@ captação, LGPD, conformidade.
 
 ### 3.3 Front — `web/`
 
-**Site (`index.html`).** 17 tipologias × 5.570 municípios do Brasil (base IBGE, com código
+**Site (`index.html`).** 29 tipologias × 5.570 municípios do Brasil (base IBGE, com código
 municipal). Seletor de município próprio — o `<datalist>` do HTML não funciona no Safari do
 iOS e o campo ficava mudo no iPhone. Vitrine com CRECI por imóvel. Formulário com validação
 e consentimento LGPD. Rodapé legal. Schema.org `RealEstateAgent`.

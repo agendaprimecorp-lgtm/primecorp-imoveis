@@ -111,13 +111,19 @@ const site = http.createServer((req, res) => {
   await page.goto(urlSite);
   await page.waitForFunction(() => window.IMOVEIS && window.IMOVEIS.some(i => i.origem === 'propto'),
                              { timeout: 8000 }).catch(() => {});
-  const r1 = await page.evaluate(() => ({
-    total: window.IMOVEIS.length,
-    refs: window.IMOVEIS.map(i => i.ref),
-    origem: window.IMOVEIS[0] && window.IMOVEIS[0].origem,
-    cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length,
-    botao: document.getElementById('fl-buscar').textContent.trim()
-  }));
+  const r1 = await page.evaluate(() => {
+    const padrao = window.tiposMarcados().join();
+    window.marcarTipos([]); window.montarExtras(); window.atualizar();
+    return {
+      padrao,
+      total: window.IMOVEIS.length,
+      refs: window.IMOVEIS.map(i => i.ref),
+      origem: window.IMOVEIS[0] && window.IMOVEIS[0].origem,
+      cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length,
+      botao: document.getElementById('fl-buscar').textContent.trim()
+    };
+  });
+  ok('a barra abre com apartamento marcado', r1.padrao === 'apartamento', r1.padrao);
   ok('carteira veio do Propto', r1.origem === 'propto', r1.origem);
   ok('entraram os 4 publicáveis', r1.total === 4, r1.refs.join(','));
   ok('a vitrine renderizou os 4', r1.cartoes === 4, r1.cartoes);
@@ -152,22 +158,22 @@ const site = http.createServer((req, res) => {
 
   console.log('\n=== 4. filtros funcionam sobre o que veio do Propto ===');
   const r4 = await page.evaluate(() => {
-    const ev = (id, v) => { const n = document.getElementById(id); n.value = v;
+    const ev = (id, v) => { if (id === 'fl-tipo' || id === 'fl-grupo') { window.marcarTipos(id === 'fl-tipo' ? [v] : window.TIPOS.filter(t => t.grupo === v).map(t => t.slug)); window.montarExtras(); window.atualizar(); return; } const n = document.getElementById(id); n.value = v;
       n.dispatchEvent(new Event(n.tagName === 'SELECT' ? 'change' : 'input', { bubbles: true })); };
     ev('fl-grupo', 'Industrial e logístico');
     const indus = document.querySelectorAll('#vitrine-lista article.imovel').length;
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     ev('fl-tipo', 'galpao');
     const fx = document.getElementById('fx-pedireito');
     if (fx) { fx.value = '12'; fx.dispatchEvent(new Event('change', { bubbles: true })); }
     const comPd = document.querySelectorAll('#vitrine-lista article.imovel').length;
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     ev('fl-codigo', 'PC-0022');
     const porCod = document.querySelectorAll('#vitrine-lista article.imovel').length;
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     ev('fl-preco-min', '10000000');
     const caros = document.querySelectorAll('#vitrine-lista article.imovel').length;
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     return { indus, comPd, porCod, caros };
   });
   ok('segmento industrial devolve 2', r4.indus === 2, r4.indus);
@@ -227,16 +233,17 @@ const site = http.createServer((req, res) => {
   const page4 = await b.newPage({ viewport: { width: 1366, height: 900 } });
   await page4.goto(urlSite);
   await page4.waitForTimeout(1500);
-  const r8 = await page4.evaluate(() => ({
-    endpoint: window.PROPTO.ENDPOINT,
-    cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length
-  }));
+  const r8 = await page4.evaluate(() => {
+    window.marcarTipos([]); window.montarExtras(); window.atualizar();
+    return { endpoint: window.PROPTO.ENDPOINT,
+             cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length };
+  });
   ok('endpoint nasce vazio', r8.endpoint === '');
   ok('site funciona igual sem integração', r8.cartoes === 3, r8.cartoes);
 
   console.log('\n=== 9. fotos reais do Propto ===');
   const r9 = await page.evaluate(() => {
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     const cartoes = [...document.querySelectorAll('#vitrine-lista article.imovel')];
     const comFoto = cartoes.find(c => c.querySelector('.im-contagem'));
     const semFoto = cartoes.find(c => c.querySelector('.im-capa svg'));
@@ -284,19 +291,19 @@ const site = http.createServer((req, res) => {
 
   console.log('\n=== 11. filtros residenciais só no residencial ===');
   const r11 = await page.evaluate(() => {
-    const ev = (id, v) => { const n = document.getElementById(id); n.value = v;
+    const ev = (id, v) => { if (id === 'fl-tipo' || id === 'fl-grupo') { window.marcarTipos(id === 'fl-tipo' ? [v] : window.TIPOS.filter(t => t.grupo === v).map(t => t.slug)); window.montarExtras(); window.atualizar(); return; } const n = document.getElementById(id); n.value = v;
       n.dispatchEvent(new Event('change', { bubbles: true })); };
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
 
     ev('fl-tipo', 'apartamento');
-    const apto = [...document.querySelectorAll('#fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
+    const apto = [...document.querySelectorAll('.qb-campo:not([hidden]) [data-campo], #fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
     const blocosApto = [...document.querySelectorAll('#fl-atribs-campos .ex-sub')].map(x => x.textContent);
 
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     ev('fl-tipo', 'galpao');
-    const galpao = [...document.querySelectorAll('#fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
+    const galpao = [...document.querySelectorAll('.qb-campo:not([hidden]) [data-campo], #fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
     const blocosGalpao = [...document.querySelectorAll('#fl-atribs-campos .ex-sub')].map(x => x.textContent);
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     return { apto, blocosApto, galpao, blocosGalpao };
   });
   ok('apartamento tem quartos e suítes',
@@ -312,9 +319,9 @@ const site = http.createServer((req, res) => {
 
   console.log('\n=== 12. caixas de marcar filtram ===');
   const r12 = await page.evaluate(() => {
-    const ev = (id, v) => { const n = document.getElementById(id); n.value = v;
+    const ev = (id, v) => { if (id === 'fl-tipo' || id === 'fl-grupo') { window.marcarTipos(id === 'fl-tipo' ? [v] : window.TIPOS.filter(t => t.grupo === v).map(t => t.slug)); window.montarExtras(); window.atualizar(); return; } const n = document.getElementById(id); n.value = v;
       n.dispatchEvent(new Event('change', { bubbles: true })); };
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     ev('fl-tipo', 'apartamento');
     const antes = document.querySelectorAll('#vitrine-lista article.imovel').length;
     const cx = document.getElementById('fx-piscina');
@@ -324,7 +331,7 @@ const site = http.createServer((req, res) => {
     const academia = document.getElementById('fx-academia');
     academia.checked = true; academia.dispatchEvent(new Event('change', { bubbles: true }));
     const comAcademia = document.querySelectorAll('#vitrine-lista article.imovel').length;
-    document.getElementById('fl-limpar').click();
+    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
     const depoisLimpar = document.getElementById('fx-piscina');
     return { antes, comPiscina, comAcademia, etq,
              limpou: !depoisLimpar || depoisLimpar.checked === false };

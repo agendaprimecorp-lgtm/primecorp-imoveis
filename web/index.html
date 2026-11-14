@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PrimeCorp Imóveis — Intermediação de compra e venda em todo o Brasil</title>
-<meta name="description" content="Intermediação de compra e venda de áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão. Corretores inscritos no CRECI-SP, negociando em todo o Brasil.">
+<meta name="description" content="Compra e venda de casas, terrenos, chácaras, sítios, fazendas, galpões e imóveis comerciais em todo o Brasil. Somente venda, com autorização escrita do proprietário.">
 <meta name="theme-color" content="#14171a">
 <link rel="canonical" href="https://www.primecorpimoveis.com.br/">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
@@ -27,8 +27,7 @@
 "url":"https://www.primecorpimoveis.com.br/","areaServed":{"@type":"Country","name":"Brasil"},
 "telephone":"+55-19-99919-4447","email":"contato@primecorpconsultoria.com.br",
 "address":{"@type":"PostalAddress","addressRegion":"SP","addressCountry":"BR"},
-"employee":[{"@type":"Person","name":"Joselia Junqueira Viana","identifier":"CRECISP 300760","jobTitle":"Corretora de Imóveis"},
-{"@type":"Person","name":"Rodrigo França Viana","identifier":"CRECISP 297692","jobTitle":"Corretor de Imóveis"}]}
+"legalName":"PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA.","taxID":"55.745.297/0001-06"}
 </script>
 
 <style>
@@ -511,6 +510,48 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   .porta h2{font-size:22px}
   .capa .lead{font-size:15px}
 }
+/* ---- refino 3: barra no padrão ZAP, dropdown de tipo, cinco segmentos ---- */
+@media (min-width:1081px){.linha-f{grid-template-columns:minmax(150px,.9fr) minmax(210px,1.3fr) repeat(3,minmax(118px,.8fr)) auto}}
+/* abaixo de 1080: tipo ocupa a linha; contadores e finalidade dividem o resto */
+@media (max-width:1080px){.linha-f{grid-template-columns:1fr 1fr}.qb-tipo{grid-column:1/-1}.linha-f>#fl-mais{grid-column:1/-1}}
+.fin{display:flex;height:44px;border:1px solid var(--linha);border-radius:9px;background:var(--claro);overflow:hidden}
+.fin-on{flex:1;display:flex;align-items:center;justify-content:center;font-size:14.5px;font-weight:600;color:var(--tinta);background:var(--branco);box-shadow:inset 0 -2px 0 var(--vermelho)}
+.drop{position:relative}
+.drop-botao{width:100%;height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 13px;border:1px solid var(--linha);border-radius:9px;background:var(--claro);color:var(--tinta);font:inherit;font-size:14.5px;text-align:left;cursor:pointer;min-width:0}
+.drop-botao span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drop-botao i{width:8px;height:8px;border-right:2px solid var(--tinta2);border-bottom:2px solid var(--tinta2);transform:rotate(45deg);margin-top:-4px;flex-shrink:0}
+.drop-botao[aria-expanded="true"]{border-color:var(--vermelho);background:var(--branco)}
+.drop-botao[aria-expanded="true"] i{transform:rotate(-135deg);margin-top:4px}
+.drop-lista{position:absolute;z-index:70;top:calc(100% + 6px);left:0;width:min(640px,calc(100vw - 32px));max-height:min(460px,70vh);overflow-y:auto;background:var(--branco);border:1px solid var(--linha);border-radius:12px;box-shadow:0 18px 40px rgba(20,23,26,.2);padding:14px 16px 12px}
+.drop-lista[hidden]{display:none}
+.tg{margin-bottom:14px}
+.tg-nome{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px solid var(--linha2)}
+.tg-itens{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px 14px}
+.tg-item{display:flex;align-items:center;gap:9px;padding:6px 2px;font-family:var(--f-corpo);font-size:14.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--tinta2);cursor:pointer}
+.tg-item:hover{color:var(--tinta)}
+.tg-item input{accent-color:var(--vermelho);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.drop-rodape{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--linha2)}
+.drop-rodape .mini{padding:9px 16px}
+@media (max-width:680px){
+  .drop-lista{position:fixed;left:16px;right:16px;top:50%;transform:translateY(-50%);width:auto;max-height:72vh}
+}
+.segmentos{grid-template-columns:repeat(5,1fr)}
+.seg{padding:26px 22px 26px 0}
+.seg:last-child{border-right:0}
+.seg-ico{width:46px;height:46px}
+.seg-ico .base{stroke-width:1.6}
+.seg-ico .marca{stroke-width:2.2}
+.seg-ico .leve{stroke:#b8bfc4;stroke-width:1.3}
+@media (max-width:1180px){
+  .segmentos{grid-template-columns:repeat(2,1fr)}
+  .seg{border-right:0;border-bottom:1px solid var(--linha);padding-right:18px}
+  .seg:nth-child(odd){border-right:1px solid var(--linha)}
+  .seg:last-child{grid-column:1/-1;border-right:0}
+}
+@media (max-width:680px){
+  .segmentos{grid-template-columns:1fr}
+  .seg{border-right:0;padding-right:0}
+}
 </style>
 </head>
 <body>
@@ -539,11 +580,11 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   <div class="faixa">
     <div class="capa-topo">
       <div class="olho">Intermediação de compra e venda · Brasil</div>
-      <h1>Galpões, áreas e terrenos <em>à venda</em> em todo o Brasil.</h1>
+      <h1>Casas, terrenos, chácaras e galpões <em>à venda</em> em todo o Brasil.</h1>
       <p class="lead">
         Somos corretores e negociamos os dois lados: levamos o comprador ao ativo certo
-        e o proprietário ao comprador certo. Industrial, logístico, comercial, rural e
-        alto padrão. <strong>Somente venda.</strong>
+        e o proprietário ao comprador certo. Residencial, industrial, terrenos, rural e
+        comercial. <strong>Somente venda.</strong>
       </p>
     </div>
 
@@ -570,19 +611,19 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       </div>
       <div class="atalhos">
         <b>Atalhos</b>
+        <button type="button" class="atalho" data-grupo="Residencial">Casas e apartamentos</button>
         <button type="button" class="atalho" data-grupo="Industrial e logístico">Galpões e industrial</button>
-        <button type="button" class="atalho" data-grupo="Terrenos e glebas">Terrenos e áreas</button>
-        <button type="button" class="atalho" data-grupo="Rural">Fazendas e rural</button>
+        <button type="button" class="atalho" data-grupo="Terrenos e glebas">Terrenos e glebas</button>
+        <button type="button" class="atalho" data-grupo="Rural">Fazendas e chácaras</button>
         <button type="button" class="atalho" data-grupo="Comercial">Comercial</button>
-        <button type="button" class="atalho" data-grupo="Residencial alto padrão">Alto padrão</button>
         <button type="button" class="atalho" id="atalho-codigo">Buscar por código</button>
       </div>
     </form>
 
     <div class="credenciais">
-      <div><b>CRECISP 300760</b><span>Joselia Junqueira Viana · responsável técnica</span></div>
-      <div><b>CRECISP 297692</b><span>Rodrigo França Viana · corretor</span></div>
       <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
+      <div><b>Autorização escrita</b><span>só entra imóvel com autorização do proprietário</span></div>
+      <div><b>Somente venda</b><span>compra e venda; não operamos locação</span></div>
       <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
     </div>
   </div>
@@ -598,30 +639,45 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     </div>
 
     <div class="barra-filtros">
-      <!-- Barra rápida: o que se usa todo dia. -->
+      <!-- Barra rápida, como no ZAP: finalidade, tipo de imóvel e os contadores. -->
       <div class="linha-f">
-        <div><label for="fl-grupo">Segmento</label><select id="fl-grupo" class="ent"></select></div>
-        <div><label for="fl-tipo">Tipo</label><select id="fl-tipo" class="ent"></select></div>
-        <div><label for="fl-cidade">Cidade</label>
+        <div class="qb-fin"><label>Finalidade</label>
+          <div class="fin" role="group" aria-label="Finalidade"><span class="fin-on" aria-current="true">Comprar</span></div></div>
+        <div class="qb-tipo"><label for="fl-tipo-botao">Tipo de imóvel</label>
+          <div class="drop" id="fl-tipo-caixa">
+            <button type="button" class="drop-botao" id="fl-tipo-botao" aria-expanded="false" aria-controls="fl-tipo-lista" aria-haspopup="true"><span id="fl-tipo-rotulo">Apartamento</span><i aria-hidden="true"></i></button>
+            <div class="drop-lista" id="fl-tipo-lista" hidden>
+              <div id="fl-tipo-grupos"></div>
+              <div class="drop-rodape"><button type="button" class="link-f" id="fl-tipo-todos">Limpar seleção</button><button type="button" class="btn sec mini" id="fl-tipo-fechar">Pronto</button></div>
+            </div>
+          </div></div>
+        <div class="qb-campo" id="qb-quartos"><label for="fx-quartos">Quartos</label><select id="fx-quartos" class="ent" data-campo="quartos"></select></div>
+        <div class="qb-campo" id="qb-banheiros"><label for="fx-banheiros">Banheiros</label><select id="fx-banheiros" class="ent" data-campo="banheiros"></select></div>
+        <div class="qb-campo" id="qb-vagas"><label for="fx-vagas">Vagas</label><select id="fx-vagas" class="ent" data-campo="vagas"></select></div>
+        <button type="button" class="btn sec" id="fl-mais" aria-expanded="false" aria-controls="fl-extras">Filtros</button>
+      </div>
+
+      <!-- Painel completo, como no ZAP: localização, preço, área, características e código. -->
+      <div class="extras" id="fl-extras">
+        <div class="ex-grupo">
+          <span class="ex-rot">Localização</span>
           <div class="combo">
-            <input id="fl-cidade" class="ent" type="text" placeholder="Todas" role="combobox"
+            <input id="fl-cidade" class="ent" type="text" placeholder="Todas as cidades" aria-label="Localização" role="combobox"
                    aria-expanded="false" aria-controls="fl-cidade-lista" aria-autocomplete="list"
                    autocomplete="off" autocapitalize="words" spellcheck="false">
             <ul id="fl-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios" hidden></ul>
-          </div></div>
-        <div><label for="fl-ordem">Ordenar por</label>
-          <select id="fl-ordem" class="ent">
+          </div>
+        </div>
+        <div class="ex-grupo">
+          <span class="ex-rot">Ordenar por</span>
+          <select id="fl-ordem" class="ent" aria-label="Ordenar por">
             <option value="recente">Mais recentes</option>
             <option value="preco-asc">Menor preço</option>
             <option value="preco-desc">Maior preço</option>
             <option value="area-desc">Maior área</option>
             <option value="m2-asc">Menor R$/m²</option>
-          </select></div>
-        <button type="button" class="btn sec" id="fl-mais" aria-expanded="false" aria-controls="fl-extras">Filtros</button>
-      </div>
-
-      <!-- Painel completo: faixas, características da tipologia e código. -->
-      <div class="extras" id="fl-extras">
+          </select>
+        </div>
         <div class="ex-grupo">
           <span class="ex-rot">Preço</span>
           <div class="par">
@@ -631,7 +687,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
           </div>
         </div>
         <div class="ex-grupo">
-          <span class="ex-rot">Área do terreno (m²)</span>
+          <span class="ex-rot">Área (m²)</span>
           <div class="par">
             <input id="fl-area-min" class="ent" type="number" min="0" step="100" placeholder="Mínima" inputmode="numeric" aria-label="Área mínima">
             <span class="ate">até</span>
@@ -793,56 +849,69 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     </div>
     <div class="segmentos">
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M2 34h36"/>
-          <path class="base" d="M5 34V18h30v16"/>
-          <path class="marca" d="M5 18v-5l7.5 5v-5l7.5 5v-5l7.5 5v-5l7.5 5"/>
-          <path class="base" d="M9 34v-7h5v7M19 34v-7h5v7M29 34v-7h4v7"/>
-          <circle class="cheio" cx="11.5" cy="30.5" r="1"/>
-          <circle class="cheio" cx="21.5" cy="30.5" r="1"/>
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M3 44.5h42"/>
+          <path class="base" d="M6 44V16l9 6v-6l9 6v-6l9 6v-6l9 6v22"/>
+          <path class="marca" d="M11 44V32h11v12M26 44V32h11v12"/>
+          <path class="leve" d="M11 35.5h11M11 38.5h11M26 35.5h11M26 38.5h11"/>
         </svg>
         <h3>Industrial e logístico</h3>
         <p>Galpões, centros de distribuição e áreas com vocação industrial.</p>
         <ul><li>Pé-direito e docas</li><li>Energia e efluente</li><li>Acesso rodoviário</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="base" d="M4 26L12 6l24 3.5-5 19.5z"/>
-          <path class="leve" d="M12 6L9 26M21 7.3L17 27.3"/>
-          <circle class="cheio" cx="4" cy="26" r="2.2"/>
-          <circle class="cheio" cx="12" cy="6" r="2.2"/>
-          <circle class="cheio" cx="36" cy="9.5" r="2.2"/>
-          <circle class="cheio" cx="31" cy="29" r="2.2"/>
-          <path class="marca" d="M4 34h27"/>
-          <path class="base" d="M4 31.5v5M31 31.5v5"/>
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="base" d="M8 10L38 6l5 26-38 5z"/>
+          <path class="leve" d="M13 23c6-4 12-4 18 0s8 1 9-1"/>
+          <path class="marca" d="M5 37l38-5"/>
+          <path class="leve" d="M5 43h38M5 41.5v3M43 41.5v3"/>
+          <circle class="cheio" cx="8" cy="10" r="1.9"/>
+          <circle class="cheio" cx="38" cy="6" r="1.9"/>
+          <circle class="cheio" cx="43" cy="32" r="1.9"/>
+          <circle class="cheio" cx="5" cy="37" r="1.9"/>
         </svg>
         <h3>Terrenos e glebas</h3>
         <p>Lotes urbanos, glebas de expansão e áreas para incorporação.</p>
         <ul><li>Zoneamento e uso</li><li>Frente e topografia</li><li>Viabilidade e REURB</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M2 21c5-7 10-7 15 0 5-6 10-6 21 1"/>
-          <path class="base" d="M4 33V21M15 33V19M26 33V20M37 33V22"/>
-          <path class="base" d="M3 24.5c11-1.5 23-1.5 35 .5M3 29c11-1.5 23-1.5 35 .5"/>
-          <path class="marca" d="M2 36.5c5-2.5 10 2.5 15 0s10-2.5 15 0 4.5 1 6 0"/>
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle class="marca" cx="35" cy="13" r="4.5"/>
+          <path class="base" d="M2 35c6-9 13-10 19-5 6-5 13-4 17 0 3 3 6 2 8 1"/>
+          <path class="leve" d="M2 43c8-6 15-6 22-1s14 3 22-1"/>
+          <circle class="base" cx="11" cy="22" r="3.5"/>
+          <path class="base" d="M11 25.5V29"/>
         </svg>
         <h3>Rural</h3>
         <p>Fazendas, sítios e chácaras com e sem exploração ativa.</p>
         <ul><li>Georreferenciamento</li><li>CAR e recurso hídrico</li><li>Benfeitorias</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M2 34h36"/>
-          <path class="base" d="M7 34V5h15v29M22 34V15h11v19"/>
-          <path class="leve" d="M11 10h3.5M17.5 10h1.5M11 15h3.5M17.5 15h1.5M11 20h3.5M17.5 20h1.5M26 20h4M26 25h4"/>
-          <path class="marca" d="M6.5 26h16l-2.5-4h-11z"/>
-          <path class="base" d="M12 34v-6h5v6"/>
-          <circle class="cheio" cx="16" cy="31" r="0.9"/>
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M3 44.5h42"/>
+          <path class="base" d="M8 44V6h19v38"/>
+          <path class="base" d="M27 44V20h13v24"/>
+          <path class="leve" d="M12 11h4M19 11h3M12 17h4M19 17h3M12 23h4M19 23h3"/>
+          <path class="leve" d="M31 26h5M31 32h5M31 38h5"/>
+          <path class="marca" d="M10 33h15l-3-4h-9z"/>
+          <path class="base" d="M14 44v-7h7v7"/>
         </svg>
-        <h3>Comercial e alto padrão</h3>
-        <p>Prédios, lojas, pontos consolidados e residencial de alto padrão.</p>
+        <h3>Comercial</h3>
+        <p>Prédios, lojas, salas e pontos consolidados.</p>
         <ul><li>Rentabilidade e cap rate</li><li>Ponto e fluxo</li><li>Padrão construtivo</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M3 44.5h42"/>
+          <path class="marca" d="M5 22.5L24 6l19 16.5"/>
+          <path class="base" d="M10 20v24h28V20"/>
+          <path class="base" d="M20 44V33h8v11"/>
+          <rect class="base" x="14" y="26" width="4.5" height="4.5" rx=".6"/>
+          <rect class="base" x="29.5" y="26" width="4.5" height="4.5" rx=".6"/>
+        </svg>
+        <h3>Casas e alto padrão</h3>
+        <p>Casas, sobrados e casas em condomínio de alto padrão.</p>
+        <ul><li>Terreno e área útil</li><li>Padrão construtivo</li><li>Condomínio e segurança</li></ul>
       </div>
     </div>
   </div>
@@ -855,9 +924,9 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       <div class="olho">Onde atuamos</div>
       <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Base em Campinas,<br>negociação em todo o Brasil</h2>
       <p style="color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.65;max-width:62ch">
-        A inscrição principal é no CRECI-SP e a operação do dia a dia fica na região metropolitana de Campinas.
+        A operação do dia a dia fica na região metropolitana de Campinas.
         Para negócio em outro estado, atuamos na forma do art. 5º da Resolução COFECI nº 327/1992 —
-        requerimento prévio ao CRECI da região, ou inscrição secundária quando a atuação deixa de ser eventual.
+        com a habilitação da região em ordem antes de qualquer negócio.
       </p>
       <ul class="lista">
         <li><span class="pt"></span><span><b>Núcleo operacional:</b> Campinas, Jundiaí, Sumaré, Indaiatuba, Hortolândia, Paulínia, Valinhos e Vinhedo.</span></li>
@@ -990,8 +1059,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       Para exercer seus direitos de titular de dados (acesso, correção ou exclusão), escreva para
       <a href="mailto:contato@primecorpconsultoria.com.br" style="color:#aeb6bb;text-decoration:underline">contato@primecorpconsultoria.com.br</a>
       — respondemos em até 15 dias, nos termos do art. 19 da Lei nº 13.709/2018 (LGPD).<br>
-      Corretores responsáveis: Joselia Junqueira Viana — <b>CRECISP 300760</b> · Rodrigo França Viana — <b>CRECISP 297692</b><br>
-      Inscrição da pessoa jurídica no CRECI-SP em processo de concessão. Enquanto isso, a intermediação é exercida pelos corretores pessoa física acima identificados.<br>
+      <b>PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA.</b> · CNPJ 55.745.297/0001-06<br>
       Atuação fora da jurisdição do CRECI-SP observa o art. 5º da Resolução COFECI nº 327/1992.<br>
       Todo imóvel divulgado possui autorização escrita do proprietário, nos termos do art. 5º do Decreto nº 81.871/1978.<br>
       Parecer técnico de avaliação mercadológica (Resolução COFECI nº 1.066/2007) é serviço prestado mediante contratação. Este site não emite avaliação de valor.<br>
@@ -1043,7 +1111,6 @@ function montarTipos(){
   el("bc-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
   el("c-tipo").innerHTML = opcoesAgrupadas("Qualquer tipo");
   el("v-tipo").innerHTML = opcoesAgrupadas("Selecione");
-  el("fl-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
 }
 
 /* ---------- combo de cidade (base nacional) ----------
@@ -1160,21 +1227,46 @@ function fecharPortas(){
    taxonomia nossa: as características mudam conforme a tipologia, para
    não oferecer filtro de piscina numa carteira de galpões. */
 
-function montarGrupos(){
-  const grupos = [...new Set(TIPOS.map(t => t.grupo))];
-  el("fl-grupo").innerHTML = '<option value="">Todos</option>' +
-    grupos.map(g => `<option value="${g}">${g}</option>`).join("");
-}
+/* Tipo de imóvel: dropdown com caixas de marcar, como no ZAP.
+   Nada marcado = todos os tipos. Padrão: apartamento. */
+const TIPO_PADRAO = ["apartamento"];
 
-/* O seletor de tipo mostra só os tipos do segmento escolhido. */
-function montarTiposDoGrupo(){
-  const g = el("fl-grupo").value;
-  const lista = g ? TIPOS.filter(t => t.grupo === g) : TIPOS;
-  const atual = el("fl-tipo").value;
-  el("fl-tipo").innerHTML = g
-    ? '<option value="">Todos os tipos</option>' + lista.map(t => `<option value="${t.slug}">${t.nome}</option>`).join("")
-    : opcoesAgrupadas("Todos os tipos");
-  if (lista.some(t => t.slug === atual)) el("fl-tipo").value = atual;
+function tiposMarcados(){
+  return [...d.querySelectorAll("#fl-tipo-grupos input[data-tipo]:checked")].map(x => x.dataset.tipo);
+}
+function atualizarRotuloTipo(){
+  const s = tiposMarcados();
+  el("fl-tipo-rotulo").textContent = !s.length ? "Todos os tipos"
+    : s.length === 1 ? tipoPor(s[0]).nome : `${s.length} tipos`;
+}
+function marcarTipos(lista){
+  d.querySelectorAll("#fl-tipo-grupos input[data-tipo]").forEach(x => { x.checked = lista.includes(x.dataset.tipo); });
+  atualizarRotuloTipo();
+}
+function abrirTipos(abrir){
+  el("fl-tipo-lista").hidden = !abrir;
+  el("fl-tipo-botao").setAttribute("aria-expanded", String(abrir));
+}
+function montarTiposFiltro(){
+  const grupos = {};
+  TIPOS.forEach(t => (grupos[t.grupo] = grupos[t.grupo] || []).push(t));
+  el("fl-tipo-grupos").innerHTML = Object.entries(grupos).map(([g, ts]) =>
+    `<div class="tg"><div class="tg-nome">${g}</div><div class="tg-itens">` +
+    ts.map(t => `<label class="tg-item"><input type="checkbox" data-tipo="${t.slug}"><span>${t.nome}</span></label>`).join("") +
+    `</div></div>`).join("");
+  el("fl-tipo-grupos").querySelectorAll("input[data-tipo]").forEach(x =>
+    x.addEventListener("change", () => { atualizarRotuloTipo(); montarExtras(); atualizar(); }));
+  marcarTipos(TIPO_PADRAO);
+}
+/* Quartos, banheiros e vagas vêm das opções declaradas em CAMPOS. */
+function montarRapidos(){
+  ["quartos","banheiros","vagas"].forEach(c => {
+    el("fx-" + c).innerHTML = CAMPOS[c].opcoes.map(([v,n]) => `<option value="${v}">${n}</option>`).join("");
+  });
+}
+function tiposEmJogo(){
+  const s = tiposMarcados();
+  return s.length ? TIPOS.filter(t => s.includes(t.slug)) : TIPOS;
 }
 
 /* Características do painel.
@@ -1187,16 +1279,19 @@ function montarTiposDoGrupo(){
    não aparecem em apartamento. Foi o filtro residencial numa carteira
    industrial que zerava a vitrine sem explicar por quê. */
 function montarExtras(){
-  const t = tipoPor(el("fl-tipo").value);
-  const g = el("fl-grupo").value;
   const caixa = el("fl-atribs-campos");
   if (!caixa) return;
+  const jogo = tiposEmJogo();
+  const aplicam = new Set(jogo.flatMap(x => x.campos));
 
-  const emJogo = t ? [t] : (g ? TIPOS.filter(x => x.grupo === g) : []);
-  if (!emJogo.length){
-    caixa.innerHTML = `<p>Escolha um segmento ou tipo para ver as características — apartamento filtra por quartos e lazer, galpão por pé-direito e docas, gleba por recurso hídrico.</p>`;
-    return;
-  }
+  /* Quartos, banheiros e vagas ficam na barra: só aparecem se alguma
+     tipologia escolhida os usa. Quando somem, o valor também zera —
+     filtro invisível ativo é o pior dos defeitos. */
+  ["quartos","banheiros","vagas"].forEach(c => {
+    const on = aplicam.has(c);
+    el("qb-" + c).hidden = !on;
+    if (!on) el("fx-" + c).value = "";
+  });
 
   const antes = {};
   caixa.querySelectorAll("[data-campo]").forEach(x => {
@@ -1204,8 +1299,9 @@ function montarExtras(){
     else if (x.value) antes[x.dataset.campo] = x.value;
   });
 
-  const principais = [...new Set(emJogo.flatMap(x => x.campos))].filter(c => CAMPOS[c]);
-  const slugs = emJogo.map(x => x.slug);
+  const barra = ["quartos","banheiros","vagas"];
+  const principais = [...new Set(jogo.flatMap(x => x.campos))].filter(c => CAMPOS[c] && CAMPOS[c].opcoes && !barra.includes(c));
+  const slugs = jogo.map(x => x.slug);
   const extras = {};
   for (const [bloco, permitidos] of Object.entries(EXTRAS)){
     const vale = slugs.some(sl => permitidos.includes(sl));
@@ -1240,8 +1336,7 @@ function montarExtras(){
 
 function lerFiltros(){
   const f = {
-    grupo:    el("fl-grupo").value,
-    tipo:     el("fl-tipo").value,
+    tipos:    tiposMarcados(),
     cidade:   semAcento(el("fl-cidade").value.split("/")[0]),
     codigo:   el("fl-codigo").value.trim().toUpperCase(),
     precoMin: Number(el("fl-preco-min").value) || 0,
@@ -1251,7 +1346,7 @@ function lerFiltros(){
     ordem:    el("fl-ordem").value,
     extras:   {}
   };
-  el("fl-atribs-campos").querySelectorAll("[data-campo]").forEach(x => {
+  d.querySelectorAll(".linha-f [data-campo], #fl-atribs-campos [data-campo]").forEach(x => {
     if (x.type === "checkbox"){ if (x.checked) f.extras[x.dataset.campo] = "sim"; }
     else if (x.value) f.extras[x.dataset.campo] = x.value;
   });
@@ -1260,9 +1355,7 @@ function lerFiltros(){
 
 function passa(im, f, i){
   if (f.codigo && !refDe(im, i).includes(f.codigo)) return false;
-  const t = tipoPor(im.tipo);
-  if (f.grupo && (!t || t.grupo !== f.grupo)) return false;
-  if (f.tipo && im.tipo !== f.tipo) return false;
+  if (f.tipos.length && !f.tipos.includes(im.tipo)) return false;
   if (f.cidade && !semAcento(im.cidade).includes(f.cidade)) return false;
   if (im.preco < f.precoMin || im.preco > f.precoMax) return false;
   const a = im.area || 0;
@@ -1292,8 +1385,7 @@ function achados(){
 
 /* ---------- etiquetas de filtro ativo ---------- */
 const LIMPAR = {
-  grupo:    () => { el("fl-grupo").value = ""; montarTiposDoGrupo(); montarExtras(); },
-  tipo:     () => { el("fl-tipo").value = ""; montarExtras(); },
+  tipos:    () => { marcarTipos([]); montarExtras(); },
   cidade:   () => { el("fl-cidade").value = ""; el("fl-cidade").dataset.slug = ""; },
   codigo:   () => { el("fl-codigo").value = ""; },
   precoMin: () => { el("fl-preco-min").value = ""; },
@@ -1305,8 +1397,7 @@ const LIMPAR = {
 function etiquetas(f){
   const lista = [];
   const add = (chave, texto) => lista.push({chave, texto});
-  if (f.grupo) add("grupo", f.grupo);
-  if (f.tipo){ const t = tipoPor(f.tipo); add("tipo", t ? t.nome : f.tipo); }
+  if (f.tipos.length) add("tipos", f.tipos.length === 1 ? tipoPor(f.tipos[0]).nome : f.tipos.length + " tipos");
   if (el("fl-cidade").value.trim()) add("cidade", el("fl-cidade").value.trim());
   if (f.codigo) add("codigo", "Cód. " + f.codigo);
   if (f.precoMin) add("precoMin", "a partir de " + reais(f.precoMin));
@@ -1579,37 +1670,44 @@ function renderVitrine(lista, f, nAtivos){
   /* Vitrine vazia vira captação. Sem isso o site mostra "nenhum
      resultado" e perde o lead exatamente onde ele estava mais quente. */
   const semCarteira = IMOVEIS.length === 0;
+  const sel = (f && f.tipos) || [];
+  const titulo = semCarteira ? "Carteira em formação"
+    : sel.length ? `Nenhum ${sel.length === 1 ? tipoPor(sel[0]).nome.toLowerCase() : "desses tipos"} na carteira agora`
+    : "Nada na carteira com esses filtros";
   alvo.innerHTML = `<div class="vazio">
-      <h3>${semCarteira ? "Carteira em formação" : "Nada na carteira com esses filtros"}</h3>
+      <h3>${titulo}</h3>
       <p>Boa parte do que negociamos nunca chega a ser anunciado — vem de proprietário direto
          e de carteira de parceiros. Diga o que procura e vamos atrás.</p>
+      ${sel.length ? '<button type="button" class="btn sec" id="vazio-tipos" style="margin:0 0 12px">Ver todos os tipos</button><br>' : ""}
       <a href="#comprar" class="btn" id="vazio-cta">Encomendar minha busca</a>
       ${nAtivos ? '<button type="button" class="link-f" id="vazio-limpar" style="display:block;margin:14px auto 0">Limpar os filtros</button>' : ""}
     </div>`;
   const cta = el("vazio-cta");
   if (cta) cta.addEventListener("click", () => { passarFiltrosParaBusca(); abrirPorta("comprar"); });
+  const vt = el("vazio-tipos");
+  if (vt) vt.addEventListener("click", () => { marcarTipos([]); montarExtras(); atualizar(); });
   const lim = el("vazio-limpar");
   if (lim) lim.addEventListener("click", limparFiltros);
 }
 
 function passarFiltrosParaBusca(){
-  const t = el("fl-tipo").value, c = el("fl-cidade");
-  if (t) el("c-tipo").value = t;
+  const t = tiposMarcados(), c = el("fl-cidade");
+  if (t.length === 1) el("c-tipo").value = t[0];
   if (c.value){ el("c-cidade").value = c.value; el("c-cidade").dataset.slug = c.dataset.slug || ""; }
   if (el("fl-area-min").value) el("c-area").value = el("fl-area-min").value;
 }
 
+/* "Limpar tudo" volta ao ponto de partida da barra: apartamento. */
 function limparFiltros(){
-  ["fl-grupo","fl-tipo","fl-cidade","fl-codigo","fl-preco-min","fl-preco-max","fl-area-min","fl-area-max"]
+  ["fl-cidade","fl-codigo","fl-preco-min","fl-preco-max","fl-area-min","fl-area-max","fx-quartos","fx-banheiros","fx-vagas"]
     .forEach(id => { el(id).value = ""; });
   el("fl-cidade").dataset.slug = "";
   el("fl-ordem").value = "recente";
-  /* As características são remontadas preservando o que estava escolhido;
-     num "limpar tudo" isso deixaria filtro invisível ativo. */
   el("fl-atribs-campos").querySelectorAll("[data-campo]").forEach(x => {
     if (x.type === "checkbox") x.checked = false; else x.value = "";
   });
-  montarTiposDoGrupo(); montarExtras(); atualizar();
+  marcarTipos(TIPO_PADRAO);
+  montarExtras(); atualizar();
 }
 
 function abrirPainelFiltros(abrir){
@@ -1698,8 +1796,8 @@ montarTipos();
 montarMapa();
 ["bc-cidade","c-cidade","v-cidade"].forEach(id => montarCombo(id));
 montarCombo("fl-cidade", atualizar);
-montarGrupos();
-montarTiposDoGrupo();
+montarTiposFiltro();
+montarRapidos();
 montarExtras();
 atualizar();
 
@@ -1735,8 +1833,12 @@ el("v-enviar").addEventListener("click", () => validarEnviar("v", () => ({
 })));
 
 el("fl-limpar").addEventListener("click", limparFiltros);
-el("fl-grupo").addEventListener("change", () => { montarTiposDoGrupo(); montarExtras(); atualizar(); });
-el("fl-tipo").addEventListener("change", () => { montarExtras(); atualizar(); });
+el("fl-tipo-botao").addEventListener("click", () => abrirTipos(el("fl-tipo-lista").hidden));
+el("fl-tipo-fechar").addEventListener("click", () => abrirTipos(false));
+el("fl-tipo-todos").addEventListener("click", () => { marcarTipos([]); montarExtras(); atualizar(); });
+d.addEventListener("pointerdown", e => { if (!el("fl-tipo-caixa").contains(e.target)) abrirTipos(false); });
+d.addEventListener("keydown", e => { if (e.key === "Escape") abrirTipos(false); });
+["fx-quartos","fx-banheiros","fx-vagas"].forEach(id => el(id).addEventListener("change", atualizar));
 el("fl-ordem").addEventListener("change", atualizar);
 /* Os numéricos escutam input e change: só em change a contagem do botão
    esperaria a pessoa sair do campo, e a promessa é ver o número enquanto
@@ -1761,11 +1863,7 @@ function buscarDaCapa(e){
   if (e) e.preventDefault();
   const tipo = el("bc-tipo").value, cid = el("bc-cidade"), area = el("bc-area").value;
   limparFiltros();
-  if (tipo){
-    const t = tipoPor(tipo);
-    if (t){ el("fl-grupo").value = t.grupo; montarTiposDoGrupo(); }
-    el("fl-tipo").value = tipo;
-  }
+  marcarTipos(tipo ? [tipo] : []);
   if (cid.value.trim()){
     el("fl-cidade").value = cid.value;
     el("fl-cidade").dataset.slug = cid.dataset.slug || "";
@@ -1780,8 +1878,8 @@ el("busca-capa").addEventListener("submit", buscarDaCapa);
 d.querySelectorAll(".atalho[data-grupo]").forEach(b => {
   b.addEventListener("click", () => {
     limparFiltros();
-    el("fl-grupo").value = b.dataset.grupo;
-    montarTiposDoGrupo(); montarExtras(); atualizar();
+    marcarTipos(TIPOS.filter(t => t.grupo === b.dataset.grupo).map(t => t.slug));
+    montarExtras(); atualizar();
     rolarAte("carteira");
   });
 });
