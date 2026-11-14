@@ -69,7 +69,8 @@ window.PROPTO = Object.assign({
     operacao:  "não é venda",
     publicado: "não está publicado",
     creci:     "sem CRECI do corretor responsável",
-    essencial: "faltam dados essenciais (tipo, cidade ou preço)"
+    essencial: "faltam dados essenciais (tipo, cidade ou preço)",
+    tipo:      "tipo não reconhecido pela vitrine"
   };
 
   function recusar(o) {
@@ -93,6 +94,10 @@ window.PROPTO = Object.assign({
     /* 4. O mínimo para o anúncio dizer alguma coisa. Ficha vazia no
           ar é pior que vitrine vazia. */
     if (!o.tipo || !o.cidade || !(o.preco > 0)) return MOTIVOS.essencial;
+
+    /* 5. Tipo que a vitrine não conhece não vira "área comercial" por
+          descuido: fica de fora e aparece no log, para ser ajustado. */
+    if (!tipoDe(o)) return MOTIVOS.tipo;
 
     return null;
   }
@@ -147,9 +152,14 @@ window.PROPTO = Object.assign({
     return Number.isFinite(n) && n > 0 ? n : undefined;
   };
 
+  /* Aceita o slug do próprio carteira.js ("casa-condominio") ou o nome
+     em português ("casa em condomínio"). Sem correspondência, devolve
+     null — nunca um tipo chutado. */
   function tipoDe(o) {
     const bruto = semAcento(o.tipo || "");
-    return TIPOS[bruto] || TIPOS[o.tipo] || "area-comercial";
+    const slug = (window.TIPOS || []).find(t => t.slug === bruto || t.slug === o.tipo);
+    if (slug) return slug.slug;
+    return TIPOS[bruto] || TIPOS[o.tipo] || null;
   }
 
   /* As três linhas da fichinha do cartão. Mostramos o que o imóvel
