@@ -65,7 +65,7 @@ setTimeout(() => {
   ok("todo imóvel tem descrição", semDesc === 0, semDesc);
 
   console.log("\n=== 4. seletores preenchidos ===");
-  ["bc-tipo","c-tipo","v-tipo"].forEach(id => {
+  ["c-tipo","v-tipo"].forEach(id => {
     const n = d.getElementById(id);
     ok(id + " tem optgroups", n && n.querySelectorAll("optgroup").length >= 4,
        n ? n.querySelectorAll("optgroup").length : "ausente");
@@ -73,7 +73,7 @@ setTimeout(() => {
   ok("dropdown de tipo lista os grupos",
      d.querySelectorAll("#fl-tipo-grupos .tg-nome").length === new Set(TIPOS.map(t=>t.grupo)).size,
      d.querySelectorAll("#fl-tipo-grupos .tg-nome").length);
-  ok("abre com apartamento marcado", JSON.stringify(w.tiposMarcados()) === '["apartamento"]', JSON.stringify(w.tiposMarcados()));
+  ok("abre sem tipo marcado", JSON.stringify(w.tiposMarcados()) === "[]", JSON.stringify(w.tiposMarcados()));
 
   console.log("\n=== 5. portas da capa ===");
   ok("pp-comprar começa fechado", d.getElementById("pp-comprar").hidden);
@@ -86,67 +86,20 @@ setTimeout(() => {
   d.querySelector("[data-fechar]").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
   ok("botão fechar fecha as duas", d.getElementById("pp-comprar").hidden && d.getElementById("pp-vender").hidden);
 
-  console.log("\n=== 6. combobox de cidade ===");
-  function digitar(id, texto) {
-    const c = d.getElementById(id);
-    c.value = texto;
-    c.dispatchEvent(new w.Event("input", {bubbles:true}));
-    return d.getElementById(id + "-lista");
-  }
-  let lista = digitar("bc-cidade", "campin");
-  const itens = [...lista.querySelectorAll("li[data-i]")].map(li => li.textContent.replace(/\s+/g," ").trim());
-  ok("'campin' sugere algo", itens.length > 0, itens.length);
-  ok("Campinas vem primeiro", /^Campinas/.test(itens[0] || ""), itens[0]);
-  ok("sugestão mostra a UF", /SP/.test(itens[0] || ""), itens[0]);
+  console.log("\n=== 6. capa enxuta ===");
+  ok("busca simples removida da capa", d.getElementById("busca-capa") === null);
+  ok("carteira ao vivo removida", d.querySelector(".capa-painel") === null);
+  ok("sem o texto 'Ver a carteira'", !/Ver a carteira/.test(d.body.textContent));
+  const ctas = [...d.querySelectorAll('a[href="#carteira"]')].map(a => a.textContent.trim());
+  ok("há ao menos dois CTAs 'Buscar imóveis'", ctas.filter(t => t === "Buscar imóveis").length >= 2, ctas.join(" | "));
+  ok("'Quero vender meu imóvel' continua na capa", /Quero vender meu imóvel/.test(d.body.textContent));
 
-  lista = digitar("bc-cidade", "sao paul");
-  const primeiros = [...lista.querySelectorAll("li[data-i]")].map(li => ({
-    nome: li.querySelector("span:first-child").textContent.trim(),
-    uf: li.querySelector(".uf").textContent.trim()
-  }));
-  ok("'sao paul' sem acento acha São Paulo",
-     primeiros.some(x => x.nome === "São Paulo" && x.uf === "SP"), JSON.stringify(primeiros[0]));
-  ok("capital antes de homônimo",
-     primeiros[0] && primeiros[0].nome === "São Paulo" && primeiros[0].uf === "SP", JSON.stringify(primeiros[0]));
-
-  lista = digitar("bc-cidade", "agua boa");
-  const homonimos = [...lista.querySelectorAll("li[data-i]")];
-  ok("homônimo lista mais de uma UF", new Set(homonimos.map(li => li.querySelector(".uf").textContent)).size > 1,
-     homonimos.map(li => li.querySelector(".uf").textContent).join(","));
-
-  lista = digitar("bc-cidade", "zzzqqq");
-  ok("termo sem resultado avisa", lista.querySelector("li.vazio") !== null);
-
-  // escolha por clique registra slug
-  digitar("bc-cidade", "campinas");
-  const alvo = d.getElementById("bc-cidade-lista").querySelector("li[data-i]");
-  alvo.dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  const campoM = d.getElementById("bc-cidade");
-  ok("clique preenche Nome/UF", campoM.value === "Campinas/SP", campoM.value);
-  ok("clique registra slug", campoM.dataset.slug === "campinas-sp", campoM.dataset.slug);
-
-  console.log("\n=== 7. busca da capa ===");
-  ok("formulário de busca existe", d.getElementById("busca-capa") !== null);
-  ok("capa não tem mais consulta de faixa", d.getElementById("m-botao") === null);
-
-  const campoBc = d.getElementById("bc-cidade");
-  d.getElementById("bc-tipo").value = "galpao";
-  campoBc.value = "Jundiaí/SP"; campoBc.dataset.slug = "jundiai-sp"; campoBc.dataset.cidade = "Jundiaí";
-  d.getElementById("bc-area").value = "1000";
-  d.getElementById("busca-capa").dispatchEvent(new w.Event("submit", {bubbles:true, cancelable:true}));
-
-  ok("busca leva o tipo para o filtro", JSON.stringify(w.tiposMarcados()) === '["galpao"]',
-     JSON.stringify(w.tiposMarcados()));
-  ok("busca leva a cidade", d.getElementById("fl-cidade").value === "Jundiaí/SP",
-     d.getElementById("fl-cidade").value);
-  ok("busca leva a área mínima", d.getElementById("fl-area-min").value === "1000");
-  ok("busca encontra o galpão de Jundiaí",
-     d.getElementById("vitrine-lista").querySelectorAll("article.imovel").length === 1);
-
-  // atalho por segmento
-  d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  d.querySelector('.atalho[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  ok("atalho marca os tipos do segmento", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
+  console.log("\n=== 7. segmentos da home ===");
+  ok("home tem 6 caminhos (5 segmentos + código)", d.querySelectorAll("nav.escolhas .escolha").length === 6,
+     d.querySelectorAll("nav.escolhas .escolha").length);
+  ok("atalho 'Tenho o código' existe", d.getElementById("atalho-codigo") !== null);
+  d.querySelector('.escolha[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
+  ok("segmento marca os tipos do segmento", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
   ok("segmento sem imóvel mostra captação",
      d.getElementById("vitrine-lista").querySelector("#vazio-cta") !== null);
   d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
@@ -154,7 +107,7 @@ setTimeout(() => {
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
   const vitrine = d.getElementById("vitrine-lista");
   const conta = () => vitrine.querySelectorAll("article.imovel").length;
-  /* "Limpar" volta ao padrão (apartamento); os testes deste bloco querem a carteira inteira. */
+  /* "Limpar" volta ao ponto de partida: nada escolhido, carteira fechada. */
   const limpar = () => { d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true})); w.marcarTipos([]); w.montarExtras(); w.atualizar(); };
   function por(sets){
     Object.entries(sets).forEach(([id, v]) => {
@@ -170,19 +123,19 @@ setTimeout(() => {
   }
 
   limpar();
-  ok("vitrine abre com todos os imóveis", conta() === IMOVEIS.length, conta());
+  ok("sem escolha, a carteira não aparece", conta() === 0, conta());
 
   // --- contagem ANTES de aplicar: o detalhe que o ZAP acerta ---
   const botao = d.getElementById("fl-buscar");
-  ok("botão conta os imóveis", /Ver 3 imóveis/.test(botao.textContent), botao.textContent);
+  ok("botão começa como Buscar", botao.textContent === "Buscar", botao.textContent);
   por({"fl-tipo":"galpao"});
   ok("botão atualiza a contagem", /Ver 1 imóvel$/.test(botao.textContent), botao.textContent);
   ok("filtro por tipo devolve 1", conta() === 1);
   por({"fl-area-min":"99999"});
-  ok("botão avisa zero antes de clicar", /Nenhum imóvel/.test(botao.textContent), botao.textContent);
-  ok("botão desabilitado em zero", botao.disabled === true);
+  ok("zero resultados mostra Buscar", botao.textContent === "Buscar", botao.textContent);
+  ok("botão continua clicável em zero", botao.disabled === false);
   limpar();
-  ok("limpar reabilita o botão", botao.disabled === false && conta() === IMOVEIS.length);
+  ok("limpar reabilita o botão e fecha a carteira", botao.disabled === false && conta() === 0);
 
   // --- segmento filtra o seletor de tipo ---
   por({"fl-grupo":"Industrial e logístico"});
@@ -213,6 +166,7 @@ setTimeout(() => {
   // --- ordenação ---
   function precos(){ return [...vitrine.querySelectorAll(".preco")].map(e =>
     Number(e.textContent.replace(/\D/g,""))); }
+  por({"fl-grupo":"Industrial e logístico"});
   por({"fl-ordem":"preco-asc"});
   const asc = precos();
   ok("menor preço ordena crescente", asc.every((v,i) => i === 0 || asc[i-1] <= v), asc.join(","));
@@ -298,16 +252,16 @@ setTimeout(() => {
   console.log("\n=== 10. identidade, acessibilidade e conformidade ===");
   const html = fs.readFileSync(path.join(DIR, "index.html"), "utf8");
   ok("não sobrou referência a municipios-sp.js", !/municipios-sp\.js/.test(html));
-  ok("não sobrou 'Estado de São Paulo'", !/Estado de São Paulo/.test(html));
-  ok("marca horizontal no cabeçalho", /marca-horizontal-600\.png/.test(html));
+  ok("não sobrou 'todo o Brasil'", !/todo o Brasil/i.test(html));
+  ok("marca do cabeçalho com símbolo e tipografia", /marca-simbolo-128\.png/.test(html) && /class="marca-txt"/.test(html));
   ok("marca negativa no rodapé", /marca-horizontal-negativa-600\.png/.test(html));
   ok("vermelho da marca #d5383a", /#d5383a/.test(html) && !/#DB1D25|#db1d25/.test(html));
   ok("rodapé traz razão social e CNPJ", /PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA/.test(html) && /55\.745\.297\/0001-06/.test(html));
   ok("nomes e CRECI pessoais fora do site", !/Joselia|Rodrigo França|CRECISP 300760|CRECISP 297692/.test(html));
   ok("cita Decreto 81.871/1978", /81\.871/.test(html));
-  ok("cita Resolução 327/1992 para fora de SP", /327\/1992/.test(html));
+  ok("sem ressalva de jurisdição no rodapé (escopo é SP)", !/327\/1992/.test(html));
   ok("sem texto sobre processo de concessão no site", !/concess/i.test(html));
-  ok("avaliação declarada como serviço contratado", /mediante contratação/i.test(html));
+  ok("sem parecer de avaliação no rodapé", !/mediante contratação/i.test(html));
   ok("site não promete avaliação gratuita", !/avaliação gratuita/i.test(html));
   ok("nenhuma menção a locação como serviço", !/alug|loca(ç|c)ão de im/i.test(html.replace(/não operamos locação/g,"")));
 
@@ -316,8 +270,7 @@ setTimeout(() => {
   const semLabel = [...d.querySelectorAll("input:not([type=checkbox]), select, textarea")]
     .filter(c => c.id && !d.querySelector(`label[for="${c.id}"]`) && !c.getAttribute("aria-label"));
   ok("todo campo tem label", semLabel.length === 0, semLabel.map(c=>c.id).join(","));
-  ok("mapa do Brasil renderizou 27 UFs", d.querySelectorAll(".mapa-br .uf").length === 27,
-     d.querySelectorAll(".mapa-br .uf").length);
+  ok("mapa do Brasil removido (escopo SP)", d.querySelectorAll(".mapa-br").length === 0);
   ok("um único h1", d.querySelectorAll("h1").length === 1, d.querySelectorAll("h1").length);
   ok("link de pular para o conteúdo", d.querySelector(".pular") !== null);
 
@@ -339,6 +292,8 @@ setTimeout(() => {
   ok("Esc fecha o menu", btn.getAttribute("aria-expanded") === "false");
 
   console.log("\n=== 12. ficha do imóvel ===");
+  limpar();
+  por({"fl-grupo":"Industrial e logístico"});
   const cartoes = [...vitrine.querySelectorAll("article.imovel")];
   ok("cartão é acionável", cartoes[0].getAttribute("role") === "button" && cartoes[0].tabIndex === 0);
   ok("cartão carrega a referência", /^[A-Z]{2}-[A-Z]{3}-\d{3}$/.test(cartoes[0].dataset.ref), cartoes[0].dataset.ref);
@@ -433,9 +388,7 @@ setTimeout(() => {
 
   console.log("\n=== 15. LGPD e dados de contato ===");
   const htm = fs.readFileSync(path.join(DIR,"index.html"), "utf8");
-  ok("rodapé informa canal de direitos do titular", /direitos de titular/i.test(htm));
-  ok("cita a Lei 13.709 (LGPD)", /13\.709/.test(htm));
-  ok("cita prazo de resposta", /15 dias/.test(htm));
+  ok("rodapé sem bloco LGPD (pedido do titular)", !/direitos de titular|13\.709|15 dias/i.test(htm));
   ok("telefone no schema.org", /\+55-19-99919-4447/.test(htm));
   ok("sem telefone antigo remanescente", !/99805-1985|98110-5192/.test(htm));
 

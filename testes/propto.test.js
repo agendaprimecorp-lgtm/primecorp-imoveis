@@ -119,15 +119,22 @@ const site = http.createServer((req, res) => {
       total: window.IMOVEIS.length,
       refs: window.IMOVEIS.map(i => i.ref),
       origem: window.IMOVEIS[0] && window.IMOVEIS[0].origem,
-      cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length,
-      botao: document.getElementById('fl-buscar').textContent.trim()
+      fechada: document.querySelectorAll('#vitrine-lista article.imovel').length,
+      botaoFechado: document.getElementById('fl-buscar').textContent.trim()
     };
   });
-  ok('a barra abre com apartamento marcado', r1.padrao === 'apartamento', r1.padrao);
+  ok('a barra abre sem tipo marcado', r1.padrao === '', r1.padrao);
   ok('carteira veio do Propto', r1.origem === 'propto', r1.origem);
   ok('entraram os 4 publicáveis', r1.total === 4, r1.refs.join(','));
-  ok('a vitrine renderizou os 4', r1.cartoes === 4, r1.cartoes);
-  ok('o contador acompanha', /Ver 4 im/.test(r1.botao), r1.botao);
+  ok('a carteira começa fechada', r1.fechada === 0, r1.fechada);
+  ok('o botão começa como Buscar', r1.botaoFechado === 'Buscar', r1.botaoFechado);
+  const r1b = await page.evaluate(() => {
+    window.marcarTipos(window.TIPOS.map(t => t.slug)); window.montarExtras(); window.atualizar();
+    return { cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length,
+             botao: document.getElementById('fl-buscar').textContent.trim() };
+  });
+  ok('escolhidos todos os tipos, a vitrine mostra os 4', r1b.cartoes === 4, r1b.cartoes);
+  ok('o contador acompanha', /Ver 4 im/.test(r1b.botao), r1b.botao);
   ok('os demonstrativos saíram', !r1.refs.some(x => /AI-CPQ|GA-JUN|TU-IND/.test(x)), r1.refs.join(','));
 
   console.log('\n=== 2. as travas ===');
@@ -183,6 +190,10 @@ const site = http.createServer((req, res) => {
 
   console.log('\n=== 5. a ficha abre com dados do Propto ===');
   const r5 = await page.evaluate(async () => {
+    /* a carteira só aparece depois da escolha do cliente: escolhe o segmento industrial */
+    document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar();
+    window.marcarTipos(window.TIPOS.filter(t => t.grupo === 'Industrial e logístico').map(t => t.slug));
+    window.montarExtras(); window.atualizar();
     document.querySelector('#vitrine-lista article.imovel').click();
     await new Promise(r => setTimeout(r, 300));
     const t = document.getElementById('ficha').textContent;
@@ -234,16 +245,16 @@ const site = http.createServer((req, res) => {
   await page4.goto(urlSite);
   await page4.waitForTimeout(1500);
   const r8 = await page4.evaluate(() => {
-    window.marcarTipos([]); window.montarExtras(); window.atualizar();
+    window.marcarTipos(window.TIPOS.map(t => t.slug)); window.montarExtras(); window.atualizar();
     return { endpoint: window.PROPTO.ENDPOINT,
              cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length };
   });
-  ok('endpoint nasce vazio', r8.endpoint === '');
+  ok('endpoint ligado ao Propto', r8.endpoint === 'https://propto.com.br/vitrine/imoveis');
   ok('site funciona igual sem integração', r8.cartoes === 3, r8.cartoes);
 
   console.log('\n=== 9. fotos reais do Propto ===');
   const r9 = await page.evaluate(() => {
-    (() => { document.getElementById('fl-limpar').click(); window.marcarTipos([]); window.montarExtras(); window.atualizar(); })();
+    window.marcarTipos(window.TIPOS.map(t => t.slug)); window.montarExtras(); window.atualizar();
     const cartoes = [...document.querySelectorAll('#vitrine-lista article.imovel')];
     const comFoto = cartoes.find(c => c.querySelector('.im-contagem'));
     const semFoto = cartoes.find(c => c.querySelector('.im-capa svg'));
@@ -265,6 +276,7 @@ const site = http.createServer((req, res) => {
 
   console.log('\n=== 10. galeria da ficha ===');
   const r10 = await page.evaluate(async () => {
+    window.marcarTipos(window.TIPOS.map(t => t.slug)); window.montarExtras(); window.atualizar();
     const alvo = [...document.querySelectorAll('#vitrine-lista article.imovel')]
       .find(c => c.querySelector('.im-contagem'));   // o que tem mais de uma foto
     alvo.click();

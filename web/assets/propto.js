@@ -33,7 +33,7 @@ window.PROPTO = Object.assign({
   /* URL do endpoint público do Propto. Vazio = usa só a lista local.
      Quando o endpoint estiver no ar:
      ENDPOINT: "https://propto.com.br/api/publicos?org=primecorp" */
-  ENDPOINT: "",
+  ENDPOINT: "https://propto.com.br/vitrine/imoveis",
 
   /* Segundos antes de desistir da busca. Acima disso o visitante
      está esperando uma tela em branco, e a lista local é melhor

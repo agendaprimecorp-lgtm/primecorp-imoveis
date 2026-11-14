@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PrimeCorp Imóveis — Intermediação de compra e venda em todo o Brasil</title>
-<meta name="description" content="Compra e venda de casas, terrenos, chácaras, sítios, fazendas, galpões e imóveis comerciais em todo o Brasil. Intermediação de compra e de venda, sem locação. Autorização escrita do proprietário em todo anúncio.">
+<title>PrimeCorp Imóveis — Intermediação de compra e venda no estado de São Paulo</title>
+<meta name="description" content="Compra e venda de casas, terrenos, chácaras, sítios, fazendas, galpões e imóveis comerciais em todas as cidades do estado de São Paulo. Intermediação de compra e de venda, sem locação. Autorização escrita do proprietário em todo anúncio.">
 <meta name="theme-color" content="#14171a">
 <link rel="canonical" href="https://www.primecorpimoveis.com.br/">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
@@ -24,7 +24,7 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RealEstateAgent","name":"PrimeCorp Imóveis",
-"url":"https://www.primecorpimoveis.com.br/","areaServed":{"@type":"Country","name":"Brasil"},
+"url":"https://www.primecorpimoveis.com.br/","areaServed":{"@type":"State","name":"São Paulo","containedInPlace":{"@type":"Country","name":"Brasil"}},
 "telephone":"+55-19-99919-4447","email":"contato@primecorpconsultoria.com.br",
 "address":{"@type":"PostalAddress","addressRegion":"SP","addressCountry":"BR"},
 "legalName":"PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA.","taxID":"55.745.297/0001-06"}
@@ -510,6 +510,13 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   .porta h2{font-size:22px}
   .capa .lead{font-size:15px}
 }
+/* ---- escolhas da capa (busca por tipo, sem a barra simples) ---- */
+.escolhas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0 0;max-width:560px}
+.escolha{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px;color:#f3f4f6;font:inherit;cursor:pointer;transition:border-color .2s,background .2s}
+.escolha:hover,.escolha:focus-visible{border-color:var(--vermelho);background:rgba(255,255,255,.08);outline:none}
+.escolha b{font-size:15px;font-weight:600;color:#fff}
+.escolha span{font-size:13px;line-height:1.45;color:rgba(255,255,255,.66)}
+@media (max-width:560px){.escolhas{grid-template-columns:1fr;margin-top:20px}}
 /* ---- refino 3: barra no padrão ZAP, dropdown de tipo, cinco segmentos ---- */
 @media (min-width:1081px){.linha-f{grid-template-columns:minmax(240px,1.6fr) repeat(3,minmax(118px,.8fr)) auto}}
 /* abaixo de 1080: tipo ocupa a linha; contadores e finalidade dividem o resto */
@@ -552,6 +559,123 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   .segmentos{grid-template-columns:1fr}
   .seg{border-right:0;padding-right:0}
 }
+/* ---- refino 4: ícones em ladrilho ---- */
+.seg-ico{width:56px;height:56px;margin-bottom:16px}
+.seg-ico .tile{fill:#F3F4F6;stroke:none}
+.seg-ico .base{stroke:#2B3136;stroke-width:2}
+.seg-ico .marca{stroke:var(--vermelho);stroke-width:2.2}
+.seg-ico .leve{stroke:#8E969C;stroke-width:1.4}
+.seg-ico .cheio{fill:var(--vermelho);stroke:none}
+.seg:hover .seg-ico .base{stroke:#14171A}
+
+/* ---- refino 5: capa com painel vivo da carteira ---- */
+.capa-grade2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,3.4vw,56px);align-items:center}
+.capa-grade2 h1{font-size:clamp(32px,3.5vw,50px);margin:12px 0 12px}
+.capa-grade2 .lead{font-size:clamp(14.5px,1.1vw,16.5px);line-height:1.5}
+@media (min-width:901px){.capa{padding-top:clamp(22px,2.6vw,36px);padding-bottom:clamp(22px,2.4vw,34px)}}
+@media (max-width:900px){.cp-lista,.cp-sub,.cp-link{display:none}.capa-painel{padding:16px 18px}}
+.capa-painel{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:clamp(18px,2vw,26px)}
+.cp-cab{display:flex;align-items:center;gap:10px;color:#fff;font-size:15px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)}
+.cp-cab > span:last-child{margin-left:auto;color:#aeb6bb;font-family:var(--f-mono,monospace);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.cp-pulso{width:8px;height:8px;border-radius:50%;background:#2ecc71;animation:cp-pulso 2s infinite}
+@keyframes cp-pulso{0%{box-shadow:0 0 0 0 rgba(46,204,113,.6)}70%{box-shadow:0 0 0 9px rgba(46,204,113,0)}100%{box-shadow:0 0 0 0 rgba(46,204,113,0)}}
+.cp-g{display:grid;grid-template-columns:minmax(120px,150px) 1fr 28px;gap:12px;align-items:center;padding:4px 0;font-size:14px;color:#d6dbdf}
+.cp-g i{height:6px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;display:block}
+.cp-g b{display:block;height:100%;background:#ff6b6d;border-radius:4px}
+.cp-g em{font-style:normal;text-align:right;color:#fff;font-variant-numeric:tabular-nums}
+.cp-sub{margin:10px 0 2px;font-family:var(--f-mono,monospace);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6bb}
+.cp-lista{list-style:none;margin:0;padding:0}
+.cp-lista li{border-top:1px solid rgba(255,255,255,.08)}
+.cp-lista a{display:flex;justify-content:space-between;gap:12px;padding:8px 0;color:#fff;text-decoration:none;font-size:14.5px}
+.cp-lista a:hover > span:first-child{text-decoration:underline}
+.cp-lista small{display:block;color:#aeb6bb;font-size:12.5px;margin-top:2px}
+.cp-lista strong{white-space:nowrap;color:#ff9a9b;font-variant-numeric:tabular-nums}
+.cp-link{display:inline-block;margin-top:6px;color:#ff9a9b;font-size:14px;text-decoration:none;font-weight:600}
+@media (max-width:900px){.capa-grade2{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.cp-pulso{animation:none}}
+
+/* ---- refino 6: marca do cabeçalho em tipografia (mesmas cores da paleta) ---- */
+.topo .marca{gap:11px}
+.topo .marca .marca-sim{height:44px;width:auto;display:block}
+.marca-txt{display:flex;flex-direction:column;justify-content:center;line-height:1}
+.marca-txt b{font-family:var(--f-disp);font-weight:800;font-size:25px;letter-spacing:.005em;color:var(--grafite);line-height:1}
+.marca-txt > span{display:flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--f-corpo);font-weight:700;font-size:13px;letter-spacing:.34em;color:var(--vermelho);line-height:1}
+.marca-txt > span::after{content:"";flex:1;min-width:34px;height:2px;background:var(--vermelho);opacity:.9}
+@media (max-width:560px){
+  .marca-txt b{font-size:19px}
+  .marca-txt > span{font-size:11px;letter-spacing:.26em;margin-top:5px;gap:7px}
+  .marca-txt > span::after{min-width:18px}
+  .topo .marca .marca-sim{height:36px}
+  .topo .marca{gap:8px}
+}
+
+.capa-acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.capa-acoes .btn{padding:14px 22px}
+.capa-selos{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:#aeb6bb}
+.capa-selos li{display:flex;align-items:center;gap:8px}
+.capa-selos li::before{content:"";width:6px;height:6px;border-radius:50%;background:#ff6b6d}
+@media (max-width:560px){.capa-acoes .btn{flex:1 1 100%;text-align:center}.capa-selos{font-size:12.5px}}
+
+/* ---- refino 7: primeira tela inteira (texto, busca e credenciais) ---- */
+@media (min-width:901px){
+  .capa{padding-top:clamp(18px,2vw,28px);padding-bottom:clamp(14px,1.6vw,22px)}
+  .capa-grade2{gap:clamp(24px,3vw,48px)}
+  .capa-grade2 h1{font-size:clamp(30px,3.1vw,44px);margin:10px 0 10px}
+  .capa-grade2 .lead{font-size:clamp(14px,1vw,15.5px);line-height:1.5}
+  .capa-acoes{margin-top:16px}
+  .capa-acoes .btn{padding:12px 20px}
+  .capa .busca-capa{margin-top:18px}
+  .credenciais{margin-top:14px;padding-top:14px;gap:16px}
+  .credenciais b{font-size:16px}
+  .credenciais span{font-size:12px;margin-top:2px}
+}
+@media (max-width:900px){
+  .capa{padding:16px 0 14px}
+  .capa-painel{display:none}
+  .capa-grade2 h1{font-size:clamp(26px,7.4vw,34px);margin:8px 0 8px}
+  .capa-grade2 .lead{font-size:14px;line-height:1.45}
+  .capa-acoes{margin-top:12px;gap:8px}
+  .capa-acoes .btn{flex:1 1 0;padding:12px 10px;font-size:14px;text-align:center}
+  .capa .busca-capa{margin-top:12px}
+  .credenciais{margin-top:12px;padding-top:12px;gap:10px 14px;grid-template-columns:1fr 1fr}
+  .credenciais b{font-size:14px}
+  .credenciais span{font-size:11.5px;margin-top:1px;line-height:1.3}
+}
+
+@media (min-width:901px){
+  .cp-g{padding:3px 0}
+  .cp-lista a{padding:6px 0}
+  .capa-painel{padding:16px 22px}
+  .cp-cab{padding-bottom:8px}
+}
+@media (max-width:900px){
+  .capa-grade2 h1{font-size:clamp(24px,6.8vw,30px);margin:6px 0 6px}
+  .capa-grade2 .lead{font-size:13.5px;line-height:1.4}
+  .capa-acoes{margin-top:10px}
+  .capa-acoes .btn{padding:11px 8px;font-size:13.5px}
+  .capa .busca-capa{margin-top:10px}
+  .capa .busca-capa .linha-f{gap:8px}
+  .credenciais{margin-top:10px;padding-top:10px}
+  .credenciais span{display:none}
+}
+
+@media (min-width:901px){
+  .capa{padding-top:clamp(12px,1.4vw,20px);padding-bottom:12px}
+  .capa-grade2 h1{font-size:clamp(28px,2.9vw,40px);max-width:none;margin:6px 0 8px}
+  .capa-grade2 .lead{font-size:14px;line-height:1.45}
+  .capa-acoes{margin-top:12px}
+  .capa-acoes .btn{padding:10px 18px;font-size:14.5px}
+  .capa .busca-capa{margin-top:12px}
+  .credenciais{margin-top:10px;padding-top:10px}
+  .credenciais span{display:none}
+  .credenciais b{font-size:15px}
+  .cp-g{padding:2px 0}
+  .cp-lista a{padding:4px 0}
+  .capa-painel{padding:14px 20px}
+}
+
+@media (min-width:901px){ .cp-sub{display:none} }
+@media (max-width:560px){ .capa-grade2 .lead{display:none} .capa-grade2 h1{font-size:clamp(24px,7.2vw,28px)} }
 </style>
 </head>
 <body>
@@ -560,7 +684,10 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <div class="veu" id="veu-menu" hidden></div>
 <header class="topo">
   <div class="faixa">
-    <a href="./" class="marca"><img src="assets/marca-horizontal-600.png" alt="PrimeCorp Imóveis" width="600" height="118"></a>
+    <a href="./" class="marca" aria-label="PrimeCorp Imóveis">
+      <img class="marca-sim" src="assets/marca-simbolo-128.png" alt="PrimeCorp" width="128" height="143">
+      <span class="marca-txt"><b>PRIMECORP</b><span>IMÓVEIS</span></span>
+    </a>
     <button class="hamburguer" id="abrir-menu" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu de navegação"><span></span></button>
     <nav class="menu" id="menu-principal" aria-label="Principal">
       <a href="#carteira">Imóveis</a>
@@ -578,50 +705,31 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <!-- ================= CAPA / ROTEADOR ================= -->
 <div class="capa" id="inicio">
   <div class="faixa">
-    <div class="capa-topo">
-      <div class="olho">Intermediação de compra e venda · Brasil</div>
-      <h1>Casas, terrenos, chácaras e galpões <em>à venda</em> em todo o Brasil.</h1>
-      <p class="lead">
-        Somos corretores e negociamos os dois lados: levamos o comprador ao ativo certo
-        e o proprietário ao comprador certo. Residencial, industrial, terrenos, rural e
-        comercial. <strong>Compra e venda</strong>, com intermediação dos dois lados. Não operamos locação.
-      </p>
+    <div class="capa-grade2">
+      <div class="capa-topo">
+        <div class="olho">Compra e venda · Estado de São Paulo</div>
+        <h1>Imóveis <em>à venda</em> em todas as cidades paulistas.</h1>
+        <p class="lead">
+          Casas, terrenos, chácaras e galpões. Negociamos os dois lados e só anunciamos
+          imóvel com autorização escrita do proprietário. <strong>Compra e venda</strong>, sem locação.
+        </p>
+        <div class="capa-acoes">
+          <a href="#carteira" class="btn">Buscar imóveis</a>
+          <a href="#vender" class="btn clara" onclick="abrirPorta('vender')">Quero vender meu imóvel</a>
+        </div>
+      </div>
+    <nav class="escolhas" aria-label="Escolha o tipo de imóvel">
+      <button type="button" class="escolha" data-grupo="Residencial"><b>Casas e apartamentos</b><span>Casas de bairro, condomínio, sobrados, apartamentos e coberturas</span></button>
+      <button type="button" class="escolha" data-grupo="Industrial e logístico"><b>Galpões e industrial</b><span>Logística, produção e depósitos</span></button>
+      <button type="button" class="escolha" data-grupo="Terrenos e glebas"><b>Terrenos e glebas</b><span>Lotes urbanos, áreas e glebas</span></button>
+      <button type="button" class="escolha" data-grupo="Rural"><b>Fazendas e chácaras</b><span>Sítios, chácaras, fazendas e haras</span></button>
+      <button type="button" class="escolha" data-grupo="Comercial"><b>Comercial</b><span>Salas, lojas, prédios e pontos</span></button>
+      <button type="button" class="escolha" id="atalho-codigo"><b>Tenho o código</b><span>Busque um imóvel pela referência</span></button>
+    </nav>
     </div>
 
-    <!-- A busca abre a home porque quem chega está procurando imóvel.
-         Ela empurra os valores para os filtros da carteira e rola até lá. -->
-    <form class="busca-capa" id="busca-capa" role="search" aria-label="Buscar imóveis na carteira">
-      <div class="bc-linha">
-        <div><label for="bc-tipo">O que você procura</label>
-          <select id="bc-tipo" class="ent"></select></div>
-        <div><label for="bc-cidade">Onde</label>
-          <div class="combo">
-            <input id="bc-cidade" class="ent" type="text" placeholder="Cidade · todo o Brasil" role="combobox"
-                   aria-expanded="false" aria-controls="bc-cidade-lista" aria-autocomplete="list"
-                   autocomplete="off" autocapitalize="words" spellcheck="false">
-            <ul id="bc-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
-          </div></div>
-        <div><label for="bc-area">Área a partir de</label>
-          <select id="bc-area" class="ent">
-            <option value="">Qualquer</option><option value="500">500 m²</option>
-            <option value="1000">1.000 m²</option><option value="3000">3.000 m²</option>
-            <option value="10000">10.000 m²</option><option value="20000">20.000 m²</option>
-          </select></div>
-        <button type="submit" class="btn bc-botao" id="bc-buscar">Ver imóveis</button>
-      </div>
-      <div class="atalhos">
-        <b>Atalhos</b>
-        <button type="button" class="atalho" data-grupo="Residencial">Casas e apartamentos</button>
-        <button type="button" class="atalho" data-grupo="Industrial e logístico">Galpões e industrial</button>
-        <button type="button" class="atalho" data-grupo="Terrenos e glebas">Terrenos e glebas</button>
-        <button type="button" class="atalho" data-grupo="Rural">Fazendas e chácaras</button>
-        <button type="button" class="atalho" data-grupo="Comercial">Comercial</button>
-        <button type="button" class="atalho" id="atalho-codigo">Buscar por código</button>
-      </div>
-    </form>
-
     <div class="credenciais">
-      <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
+      <div><b>Estado de São Paulo</b><span>todas as cidades paulistas, base em Campinas</span></div>
       <div><b>Autorização escrita</b><span>só entra imóvel com autorização do proprietário</span></div>
       <div><b>Compra e venda</b><span>intermediação dos dois lados; sem locação</span></div>
       <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
@@ -643,7 +751,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       <div class="linha-f">
         <div class="qb-tipo"><label for="fl-tipo-botao">Tipo de imóvel</label>
           <div class="drop" id="fl-tipo-caixa">
-            <button type="button" class="drop-botao" id="fl-tipo-botao" aria-expanded="false" aria-controls="fl-tipo-lista" aria-haspopup="true"><span id="fl-tipo-rotulo">Apartamento</span><i aria-hidden="true"></i></button>
+            <button type="button" class="drop-botao" id="fl-tipo-botao" aria-expanded="false" aria-controls="fl-tipo-lista" aria-haspopup="true"><span id="fl-tipo-rotulo">Todos os tipos</span><i aria-hidden="true"></i></button>
             <div class="drop-lista" id="fl-tipo-lista" hidden>
               <div id="fl-tipo-grupos"></div>
               <div class="drop-rodape"><button type="button" class="link-f" id="fl-tipo-todos">Limpar seleção</button><button type="button" class="btn sec mini" id="fl-tipo-fechar">Pronto</button></div>
@@ -759,10 +867,10 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
           <div><label for="c-tipo">Tipo de imóvel</label><select id="c-tipo" class="ent"></select></div>
           <div><label for="c-cidade">Cidade de interesse</label>
             <div class="combo">
-              <input id="c-cidade" class="ent" type="text" placeholder="Qualquer cidade do Brasil" role="combobox"
+              <input id="c-cidade" class="ent" type="text" placeholder="Qualquer cidade de SP" role="combobox"
                      aria-expanded="false" aria-controls="c-cidade-lista" aria-autocomplete="list"
                      autocomplete="off" autocapitalize="words" spellcheck="false">
-              <ul id="c-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+              <ul id="c-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do estado de São Paulo" hidden></ul>
             </div></div>
           <div><label for="c-area">Área a partir de (m²)</label><input id="c-area" class="ent" type="number" min="0" step="100" placeholder="ex.: 5000" inputmode="numeric"></div>
           <div><label for="c-orcamento">Orçamento até</label>
@@ -808,7 +916,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
               <input id="v-cidade" class="ent" type="text" placeholder="Cidade do imóvel" role="combobox"
                      aria-expanded="false" aria-controls="v-cidade-lista" aria-autocomplete="list"
                      autocomplete="off" autocapitalize="words" spellcheck="false">
-              <ul id="v-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+              <ul id="v-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do estado de São Paulo" hidden></ul>
             </div></div>
           <div><label for="v-area">Área total (m²)</label><input id="v-area" class="ent" type="number" min="0" step="10" placeholder="ex.: 18400" inputmode="numeric"></div>
           <div><label for="v-preco">Valor pretendido</label>
@@ -843,73 +951,75 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     <div class="cab">
       <div class="olho">O que negociamos</div>
       <h2>Ativos que exigem leitura técnica, não só anúncio</h2>
-      <p>Imóvel de ticket alto não vende por foto bonita. Vende quando o comprador entende a operação que cabe ali e o vendedor sabe onde está o preço.</p>
+      <p>Imóvel de ticket alto não vende por foto bonita. Vende quando o comprador entende a operação que cabe ali e o vendedor sabe onde está o preço. Atuamos na compra e venda de todos estes tipos, com intermediação dos dois lados.</p>
     </div>
     <div class="segmentos">
       <div class="seg">
         <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M3 44.5h42"/>
-          <path class="base" d="M6 44V16l9 6v-6l9 6v-6l9 6v-6l9 6v22"/>
-          <path class="marca" d="M11 44V32h11v12M26 44V32h11v12"/>
-          <path class="leve" d="M11 35.5h11M11 38.5h11M26 35.5h11M26 38.5h11"/>
+          <rect class="tile" x="0" y="0" width="48" height="48" rx="11"/>
+          <path class="leve" d="M30 40V17h7v23"/>
+          <path class="leve" d="M33 21h1M33 25h1M33 29h1M33 33h1"/>
+          <path class="marca" d="M10 24l9-8.5 9 8.5"/>
+          <path class="base" d="M13 24v16h12V24"/>
+          <path class="base" d="M19 40v-6h-3v6"/>
+          <rect class="base" x="14.5" y="28" width="3" height="3" rx=".5"/>
         </svg>
-        <h3>Industrial e logístico</h3>
-        <p>Galpões, centros de distribuição e áreas com vocação industrial.</p>
-        <ul><li>Pé-direito e docas</li><li>Energia e efluente</li><li>Acesso rodoviário</li></ul>
+        <h3>Residencial</h3>
+        <p>Casas de bairro, sobrados, casas em condomínio, apartamentos, coberturas, studios e kitnets, em compra e venda.</p>
+        <ul><li>Padrão e estado de conservação</li><li>Condomínio, taxas e regras</li><li>Matrícula e averbações</li></ul>
       </div>
       <div class="seg">
         <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="base" d="M8 10L38 6l5 26-38 5z"/>
-          <path class="leve" d="M13 23c6-4 12-4 18 0s8 1 9-1"/>
-          <path class="marca" d="M5 37l38-5"/>
-          <path class="leve" d="M5 43h38M5 41.5v3M43 41.5v3"/>
-          <circle class="cheio" cx="8" cy="10" r="1.9"/>
-          <circle class="cheio" cx="38" cy="6" r="1.9"/>
-          <circle class="cheio" cx="43" cy="32" r="1.9"/>
-          <circle class="cheio" cx="5" cy="37" r="1.9"/>
-        </svg>
-        <h3>Terrenos e glebas</h3>
-        <p>Lotes urbanos, glebas de expansão e áreas para incorporação.</p>
-        <ul><li>Zoneamento e uso</li><li>Frente e topografia</li><li>Viabilidade e REURB</li></ul>
-      </div>
-      <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle class="marca" cx="35" cy="13" r="4.5"/>
-          <path class="base" d="M2 35c6-9 13-10 19-5 6-5 13-4 17 0 3 3 6 2 8 1"/>
-          <path class="leve" d="M2 43c8-6 15-6 22-1s14 3 22-1"/>
-          <circle class="base" cx="11" cy="22" r="3.5"/>
-          <path class="base" d="M11 25.5V29"/>
-        </svg>
-        <h3>Rural</h3>
-        <p>Fazendas, sítios e chácaras com e sem exploração ativa.</p>
-        <ul><li>Georreferenciamento</li><li>CAR e recurso hídrico</li><li>Benfeitorias</li></ul>
-      </div>
-      <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M3 44.5h42"/>
-          <path class="base" d="M8 44V6h19v38"/>
-          <path class="base" d="M27 44V20h13v24"/>
-          <path class="leve" d="M12 11h4M19 11h3M12 17h4M19 17h3M12 23h4M19 23h3"/>
-          <path class="leve" d="M31 26h5M31 32h5M31 38h5"/>
-          <path class="marca" d="M10 33h15l-3-4h-9z"/>
-          <path class="base" d="M14 44v-7h7v7"/>
+          <rect class="tile" x="0" y="0" width="48" height="48" rx="11"/>
+          <path class="base" d="M11 40V11h18v29"/>
+          <path class="base" d="M29 40V22h8v18"/>
+          <path class="leve" d="M15 15h3M21 15h3M15 21h3M21 21h3"/>
+          <path class="marca" d="M10 32h16l-2.2-4.5H12.2z"/>
+          <path class="base" d="M16 40v-5h6v5"/>
         </svg>
         <h3>Comercial</h3>
-        <p>Prédios, lojas, salas e pontos consolidados.</p>
+        <p>Lojas, salas e lajes corporativas, prédios inteiros, hotéis e pontos consolidados.</p>
         <ul><li>Rentabilidade e cap rate</li><li>Ponto e fluxo</li><li>Padrão construtivo</li></ul>
       </div>
       <div class="seg">
         <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path class="leve" d="M3 44.5h42"/>
-          <path class="marca" d="M5 22.5L24 6l19 16.5"/>
-          <path class="base" d="M10 20v24h28V20"/>
-          <path class="base" d="M20 44V33h8v11"/>
-          <rect class="base" x="14" y="26" width="4.5" height="4.5" rx=".6"/>
-          <rect class="base" x="29.5" y="26" width="4.5" height="4.5" rx=".6"/>
+          <rect class="tile" x="0" y="0" width="48" height="48" rx="11"/>
+          <path class="base" d="M10 40V20l7-6v6l7-6v6l7-6v6l7-6v20"/>
+          <path class="marca" d="M15 40v-8h7v8M26 40v-8h7v8"/>
+          <path class="leve" d="M15 35h7M26 35h7"/>
         </svg>
-        <h3>Casas e alto padrão</h3>
-        <p>Casas, sobrados e casas em condomínio de alto padrão.</p>
-        <ul><li>Terreno e área útil</li><li>Padrão construtivo</li><li>Condomínio e segurança</li></ul>
+        <h3>Industrial e logístico</h3>
+        <p>Galpões, centros de distribuição, barracões e áreas industriais.</p>
+        <ul><li>Pé-direito e docas</li><li>Energia e efluente</li><li>Acesso rodoviário</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect class="tile" x="0" y="0" width="48" height="48" rx="11"/>
+          <path class="base" d="M12 15l24-3 2 19-26 3z"/>
+          <path class="marca" d="M10 34l28-3"/>
+          <path class="leve" d="M16 25c5-3 10-3 14 0s4 1 5 0"/>
+          <path class="leve" d="M10 42h28M10 40.5v3M38 40.5v3"/>
+          <circle class="cheio" cx="12" cy="15" r="1.9"/>
+          <circle class="cheio" cx="36" cy="12" r="1.9"/>
+          <circle class="cheio" cx="38" cy="31" r="1.9"/>
+          <circle class="cheio" cx="10" cy="34" r="1.9"/>
+        </svg>
+        <h3>Terrenos e glebas</h3>
+        <p>Lotes urbanos e de condomínio, terrenos comerciais, glebas de expansão e áreas para incorporação.</p>
+        <ul><li>Zoneamento e uso</li><li>Frente e topografia</li><li>Viabilidade e REURB</li></ul>
+      </div>
+      <div class="seg">
+        <svg class="seg-ico" viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect class="tile" x="0" y="0" width="48" height="48" rx="11"/>
+          <circle class="marca" cx="34" cy="16" r="3.5"/>
+          <path class="base" d="M8 38c5-9 12-11 18-6 5-4 11-3 14 2"/>
+          <path class="leve" d="M8 42h32"/>
+          <circle class="base" cx="14" cy="27" r="3"/>
+          <path class="base" d="M14 30v8"/>
+        </svg>
+        <h3>Rural</h3>
+        <p>Fazendas, sítios, chácaras e haras, com e sem exploração ativa.</p>
+        <ul><li>Georreferenciamento</li><li>CAR e recurso hídrico</li><li>Benfeitorias</li></ul>
       </div>
     </div>
   </div>
@@ -920,27 +1030,17 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   <div class="faixa alcance">
     <div>
       <div class="olho">Onde atuamos</div>
-      <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Base em Campinas,<br>negociação em todo o Brasil</h2>
+      <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Base em Campinas,<br>atuação em todo o estado de SP</h2>
       <p style="color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.65;max-width:62ch">
         A operação do dia a dia fica na região metropolitana de Campinas.
-        Para negócio em outro estado, atuamos na forma do art. 5º da Resolução COFECI nº 327/1992 —
-        com a habilitação da região em ordem antes de qualquer negócio.
+        Atendemos todas as cidades do estado de São Paulo, com visita e acompanhamento direto.
       </p>
       <ul class="lista">
         <li><span class="pt"></span><span><b>Núcleo operacional:</b> Campinas, Jundiaí, Sumaré, Indaiatuba, Hortolândia, Paulínia, Valinhos e Vinhedo.</span></li>
-        <li><span class="pt"></span><span><b>Interior e litoral de SP:</b> atendimento direto, com visita.</span></li>
-        <li><span class="pt"></span><span><b>Demais estados:</b> negociamos com corretor local credenciado, sempre com a habilitação da região em ordem.</span></li>
+        <li><span class="pt"></span><span><b>Demais cidades paulistas:</b> atendimento direto, com visita.</span></li>
       </ul>
     </div>
     <div>
-      <svg class="mapa-br" viewBox="28 18 500 716" role="img" aria-label="Mapa esquemático do Brasil com destaque para São Paulo">
-        <g class="ufs"></g>
-      </svg>
-      <div class="legenda">
-        <span><i style="background:#d5383a"></i>Base e operação direta</span>
-        <span><i style="background:#f0a9aa"></i>Negócios em andamento</span>
-        <span><i style="background:#dfe4e7"></i>Atendimento sob demanda</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1011,7 +1111,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       </div>
       <div class="banda-acoes">
         <a href="#vender" class="btn" onclick="abrirPorta('vender')">Cadastrar meu imóvel</a>
-        <a href="#carteira" class="btn clara">Ver a carteira</a>
+        <a href="#carteira" class="btn clara">Buscar imóveis</a>
       </div>
     </div>
   </div>
@@ -1033,7 +1133,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   <div class="faixa">
     <div>
       <div class="marca-pe"><img src="assets/marca-horizontal-negativa-600.png" alt="PrimeCorp Imóveis" width="600" height="118"></div>
-      <p style="margin:0;max-width:40ch;line-height:1.7">Intermediação de compra e venda de áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão.</p>
+      <p style="margin:0;max-width:40ch;line-height:1.7">Intermediação de compra e venda de imóveis residenciais, comerciais, industriais, terrenos e rurais no estado de São Paulo.</p>
     </div>
     <div><h4>Começar</h4><ul>
       <li><a href="#carteira">Ver os imóveis</a></li>
@@ -1054,14 +1154,8 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   </div>
   <div class="faixa">
     <div class="legal">
-      Para exercer seus direitos de titular de dados (acesso, correção ou exclusão), escreva para
-      <a href="mailto:contato@primecorpconsultoria.com.br" style="color:#aeb6bb;text-decoration:underline">contato@primecorpconsultoria.com.br</a>
-      — respondemos em até 15 dias, nos termos do art. 19 da Lei nº 13.709/2018 (LGPD).<br>
-      <b>PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA.</b> · CNPJ 55.745.297/0001-06<br>
-      Atuação fora da jurisdição do CRECI-SP observa o art. 5º da Resolução COFECI nº 327/1992.<br>
-      Todo imóvel divulgado possui autorização escrita do proprietário, nos termos do art. 5º do Decreto nº 81.871/1978.<br>
-      Parecer técnico de avaliação mercadológica (Resolução COFECI nº 1.066/2007) é serviço prestado mediante contratação. Este site não emite avaliação de valor.<br>
-      © 2026 PrimeCorp Imóveis · Campinas/SP
+      CNPJ 55.745.297/0001-06<br>
+      © 2026 PrimeCorp Imóveis · Estado de São Paulo
     </div>
   </div>
 </footer>
@@ -1106,7 +1200,6 @@ function opcoesAgrupadas(vazio){
       `<optgroup label="${nome}">` + ts.map(t => `<option value="${t.slug}">${t.nome}</option>`).join("") + `</optgroup>`).join("");
 }
 function montarTipos(){
-  el("bc-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
   el("c-tipo").innerHTML = opcoesAgrupadas("Qualquer tipo");
   el("v-tipo").innerHTML = opcoesAgrupadas("Selecione");
 }
@@ -1117,7 +1210,7 @@ function montarTipos(){
 function montarCombo(idCampo, aoEscolher){
   const campo = el(idCampo), lista = el(idCampo + "-lista");
   if (!campo || !lista) return;
-  const base = window.MUNICIPIOS_BR || [];
+  const base = (window.MUNICIPIOS_BR || []).filter(m => m[1] === "SP");
   let ativo = -1, visiveis = [];
 
   const fechar = () => { lista.hidden = true; lista.innerHTML = ""; campo.setAttribute("aria-expanded","false"); ativo = -1; visiveis = []; };
@@ -1227,7 +1320,7 @@ function fecharPortas(){
 
 /* Tipo de imóvel: dropdown com caixas de marcar, como no ZAP.
    Nada marcado = todos os tipos. Padrão: apartamento. */
-const TIPO_PADRAO = ["apartamento"];
+const TIPO_PADRAO = [];
 
 function tiposMarcados(){
   return [...d.querySelectorAll("#fl-tipo-grupos input[data-tipo]:checked")].map(x => x.dataset.tipo);
@@ -1441,10 +1534,10 @@ function atualizar(){
   el("fl-limpar").hidden = n === 0;
 
   const botao = el("fl-buscar");
-  botao.textContent = r.length === 0 ? "Nenhum imóvel encontrado"
+  botao.textContent = (n === 0 || r.length === 0) ? "Buscar"
                     : r.length === 1 ? "Ver 1 imóvel"
                     : `Ver ${r.length} imóveis`;
-  botao.disabled = r.length === 0;
+  botao.disabled = false;
   renderVitrine(r, f, n);
 }
 
@@ -1652,6 +1745,14 @@ function renderVitrine(lista, f, nAtivos){
   if (lista === undefined){ const x = achados(); lista = x.r; f = x.f; nAtivos = etiquetas(x.f); }
   const alvo = el("vitrine-lista");
 
+  /* Nada escolhido ainda: a carteira não aparece. Ela surge quando o
+     cliente escolhe o tipo (ou outro filtro) e clica em Buscar. */
+  if (!nAtivos){
+    alvo.innerHTML = `<div class="vazio"><h3>Escolha o que procura</h3>
+      <p>Marque o tipo de imóvel e clique em <b>Buscar</b>. A carteira aparece aqui, conforme a sua busca.</p></div>`;
+    return;
+  }
+
   if (lista.length){
     alvo.innerHTML = lista.map(im => cartao(im, IMOVEIS.indexOf(im))).join("");
     alvo.querySelectorAll(".imovel").forEach(c => {
@@ -1695,7 +1796,7 @@ function passarFiltrosParaBusca(){
   if (el("fl-area-min").value) el("c-area").value = el("fl-area-min").value;
 }
 
-/* "Limpar tudo" volta ao ponto de partida da barra: apartamento. */
+/* "Limpar tudo" volta ao ponto de partida: nada escolhido, carteira fechada. */
 function limparFiltros(){
   ["fl-cidade","fl-codigo","fl-preco-min","fl-preco-max","fl-area-min","fl-area-max","fx-quartos","fx-banheiros","fx-vagas"]
     .forEach(id => { el(id).value = ""; });
@@ -1792,7 +1893,9 @@ function montarMapa(){
 /* ---------- início ---------- */
 montarTipos();
 montarMapa();
-["bc-cidade","c-cidade","v-cidade"].forEach(id => montarCombo(id));
+["c-cidade","v-cidade"].forEach(id => montarCombo(id));
+
+
 montarCombo("fl-cidade", atualizar);
 montarTiposFiltro();
 montarRapidos();
@@ -1854,26 +1957,9 @@ function rolarAte(id){
 }
 el("fl-mais").addEventListener("click", () => abrirPainelFiltros(!el("fl-extras").classList.contains("aberto")));
 
-/* ---------- busca da capa ----------
-   Não é uma busca própria: ela empurra os valores para os filtros da
-   carteira e rola até lá. Uma lista só, um conjunto de filtros só. */
-function buscarDaCapa(e){
-  if (e) e.preventDefault();
-  const tipo = el("bc-tipo").value, cid = el("bc-cidade"), area = el("bc-area").value;
-  limparFiltros();
-  marcarTipos(tipo ? [tipo] : []);
-  if (cid.value.trim()){
-    el("fl-cidade").value = cid.value;
-    el("fl-cidade").dataset.slug = cid.dataset.slug || "";
-  }
-  if (area) el("fl-area-min").value = area;
-  montarExtras(); atualizar();
-  rolarAte("carteira");
-}
-el("busca-capa").addEventListener("submit", buscarDaCapa);
 
 /* Atalho por segmento: filtra pelo grupo inteiro, não por um tipo só. */
-d.querySelectorAll(".atalho[data-grupo]").forEach(b => {
+d.querySelectorAll(".escolha[data-grupo]").forEach(b => {
   b.addEventListener("click", () => {
     limparFiltros();
     marcarTipos(TIPOS.filter(t => t.grupo === b.dataset.grupo).map(t => t.slug));
@@ -1925,7 +2011,7 @@ lerHash();
 const ASSUNTOS = [
   ["ajudar",    "Olá! Vi o site da PrimeCorp e queria falar sobre comprar ou vender um imóvel."],
   ["carteira",  "Olá! Estou vendo a carteira de imóveis no site e queria mais informações."],
-  ["atuacao",   "Olá! Vi o site da PrimeCorp e queria falar sobre um imóvel fora da região de Campinas."],
+  ["atuacao",   "Olá! Vi o site da PrimeCorp e queria falar sobre um imóvel de outra cidade do estado de São Paulo."],
   ["como",      "Olá! Queria entender como funciona o trabalho de vocês para vender um imóvel."],
   ["segmentos", "Olá! Vi o site da PrimeCorp Imóveis e queria falar sobre compra e venda."]
 ];
