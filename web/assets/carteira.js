@@ -66,6 +66,36 @@ window.TIPOS = [
   {slug:"haras",              nome:"Haras",                     grupo:"Rural",                  campos:["agua","benfeitorias","construida"]}
 ];
 
+/* ---------- CÓDIGO DO IMÓVEL ----------
+   PREFIXO-CIDADE-NÚMERO, ex.: GA-JUN-002 (galpão em Jundiaí).
+   O prefixo vem do tipo, a sigla vem da cidade, o número é sequencial
+   e global, nunca reaproveitado.
+
+   Esta tabela é a mesma da planilha "Códigos dos imóveis PrimeCorp".
+   Mudou aqui, muda lá, e vice-versa. Os testes falham se não baterem. */
+window.CODIGO_TIPO = {
+  "apartamento":"AP", "studio":"ST", "kitnet":"KI", "casa":"CA", "casa-condominio":"CC",
+  "casa-vila":"CV", "cobertura":"CO", "flat":"FL", "loft":"LO", "sobrado":"SO",
+  "galpao":"GA", "centro-distribuicao":"CD", "barracao":"BA", "area-industrial":"AI",
+  "loja-ponto":"LJ", "sala-comercial":"SA", "casa-comercial":"CM", "hotel-pousada":"HO",
+  "andar-corporativo":"AL", "predio-comercial":"PC", "posto-combustivel":"PO", "garagem":"GR",
+  "terreno-urbano":"TU", "terreno-comercial":"TC", "area-comercial":"AC",
+  "fazenda":"FA", "sitio":"SI", "chacara":"CH", "gleba-rural":"GL", "haras":"HA"
+};
+
+window.CODIGO_CIDADE = {
+  "Campinas":"CAM", "Jundiaí":"JUN", "Sumaré":"SUM", "Hortolândia":"HOR",
+  "Indaiatuba":"IDT", "Paulínia":"PAU", "Valinhos":"VAL", "Vinhedo":"VIN"
+};
+
+/* Monta o código. Devolve null se o tipo ou a cidade não estiver na tabela:
+   código fora da regra não sai do cadastro. */
+window.gerarCodigo = function (tipo, cidade, numero) {
+  const p = CODIGO_TIPO[tipo], c = CODIGO_CIDADE[cidade];
+  if (!p || !c || !(numero > 0)) return null;
+  return `${p}-${c}-${String(numero).padStart(3, "0")}`;
+};
+
 /* ---------- 2. FILTROS DISPONÍVEIS ----------
    Campo numérico filtra por "a partir de". Campo de texto filtra
    por igualdade. Para acrescentar um filtro novo, declare-o aqui
@@ -148,7 +178,7 @@ window.IMOVEIS = [
 
   /* ---- DEMONSTRATIVO: substituir ---- */
   {
-    ref:"AI-CPQ-001",
+    ref:"AI-CAM-001",
     tipo:"area-industrial",
     titulo:"Área industrial com frente para via coletora",
     descricao:"Gleba plana em zona estritamente industrial, com frente de 120 m para via coletora e acesso direto à malha de escoamento do distrito. Energia em alta tensão disponível na testada. Topografia dispensa movimentação de terra relevante, o que encurta o cronograma de implantação de quem for construir.",
@@ -176,7 +206,7 @@ window.IMOVEIS = [
 
   /* ---- DEMONSTRATIVO: substituir ---- */
   {
-    ref:"TU-IND-003",
+    ref:"TU-IDT-003",
     tipo:"terreno-urbano",
     titulo:"Terreno urbano no centro expandido",
     descricao:"Lote de 3.400 m² com 48 m de frente em zona de uso misto, admitindo comércio, serviços e residencial multifamiliar. Infraestrutura urbana completa na testada. Pela metragem e pelo zoneamento, é um ativo de incorporação mais do que de uso final.",

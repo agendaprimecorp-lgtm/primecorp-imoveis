@@ -58,6 +58,20 @@ setTimeout(() => {
   ok("todo imóvel usa um slug de TIPOS", tiposOrfaos.length === 0, tiposOrfaos.join(","));
 
   console.log("\n=== 3. referências estáveis ===");
+  /* Código do imóvel: a regra da planilha, aplicada e checada. */
+  const { CODIGO_TIPO, CODIGO_CIDADE, gerarCodigo } = w; const prefixos = Object.values(CODIGO_TIPO);
+  ok("cada tipo tem prefixo", TIPOS.every(t => CODIGO_TIPO[t.slug]), TIPOS.filter(t => !CODIGO_TIPO[t.slug]).map(t => t.slug).join());
+  ok("prefixos são únicos", new Set(prefixos).size === prefixos.length);
+  ok("prefixo tem 2 letras", prefixos.every(p => /^[A-Z]{2}$/.test(p)));
+  ok("sigla de cidade tem 3 letras e é única", Object.values(CODIGO_CIDADE).every(c => /^[A-Z]{3}$/.test(c)) && new Set(Object.values(CODIGO_CIDADE)).size === Object.keys(CODIGO_CIDADE).length);
+  ok("gerarCodigo monta GA-JUN-002", gerarCodigo("galpao", "Jundiaí", 2) === "GA-JUN-002");
+  ok("gerarCodigo recusa tipo fora da tabela", gerarCodigo("inexistente", "Jundiaí", 2) === null);
+  ok("cada imóvel de demonstração segue a regra", IMOVEIS.every(im => {
+    const [p, c] = im.ref.split("-");
+    return CODIGO_TIPO[im.tipo] === p && CODIGO_CIDADE[im.cidade] === c;
+  }), IMOVEIS.map(im => im.ref).join());
+  ok("cartão mostra o código", [...d.querySelectorAll(".imovel .cod-imovel")].length === d.querySelectorAll(".imovel").length);
+
   const semRef = IMOVEIS.filter(im => !im.ref).map(im => im.titulo);
   ok("todo imóvel tem código próprio", semRef.length === 0, semRef.join(","));
   ok("códigos únicos", new Set(IMOVEIS.map(im => im.ref)).size === IMOVEIS.length);
@@ -324,13 +338,13 @@ setTimeout(() => {
   const fichaVeu = d.getElementById("ficha-veu");
   ok("clique abre a ficha", fichaVeu.classList.contains("aberta"));
   ok("ficha tem título", d.getElementById("ficha-titulo") !== null);
-  ok("ficha mostra a referência", /AI-CPQ-001/.test(d.getElementById("ficha").textContent));
+  ok("ficha mostra a referência", /AI-CAM-001/.test(d.getElementById("ficha").textContent));
   ok("ficha mostra a descrição", d.querySelector(".ficha p.desc") !== null);
   ok("ficha cita o CRECI do anúncio", /CRECISP 300760/.test(d.getElementById("ficha").textContent));
   ok("ficha cita o Decreto 81.871", /81\.871/.test(d.querySelector(".ficha-legal").textContent));
   ok("ficha expõe os atributos do tipo", /Zoneamento/.test(d.querySelector(".ficha-grade").textContent));
   ok("ficha calcula valor por m²", /Valor por m²/.test(d.querySelector(".ficha-grade").textContent));
-  ok("URL ganha endereço próprio", w.location.hash === "#imovel/AI-CPQ-001", w.location.hash);
+  ok("URL ganha endereço próprio", w.location.hash === "#imovel/AI-CAM-001", w.location.hash);
   ok("rolagem de fundo travada", d.body.style.overflow === "hidden");
 
   d.dispatchEvent(new w.KeyboardEvent("keydown", {key:"Escape", bubbles:true}));
