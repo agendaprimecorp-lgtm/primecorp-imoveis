@@ -23,7 +23,8 @@ let fonte = fs.readFileSync(path.join(DIR, "index.html"), "utf8");
 ["assets/municipios-br.js", "assets/contato.js", "assets/carteira.js"].forEach(rel => {
   const tag = `<script src="${rel}"></script>`;
   if (!fonte.includes(tag)) { console.log("  FALHA tag ausente: " + tag); falhas++; return; }
-  fonte = fonte.replace(tag, "<script>" + fs.readFileSync(path.join(DIR, rel), "utf8") + "</scr" + "ipt>");
+  const pre = rel === "assets/carteira.js" ? "window.CARTEIRA_DEMO = true;\n" : "";
+  fonte = fonte.replace(tag, "<script>" + pre + fs.readFileSync(path.join(DIR, rel), "utf8") + "</scr" + "ipt>");
 });
 
 const dom = new JSDOM(fonte, {
@@ -58,6 +59,20 @@ setTimeout(() => {
   ok("todo imóvel usa um slug de TIPOS", tiposOrfaos.length === 0, tiposOrfaos.join(","));
 
   console.log("\n=== 3. referências estáveis ===");
+  /* Código do imóvel: a regra da planilha, aplicada e checada. */
+  const { CODIGO_TIPO, CODIGO_CIDADE, gerarCodigo } = w; const prefixos = Object.values(CODIGO_TIPO);
+  ok("cada tipo tem prefixo", TIPOS.every(t => CODIGO_TIPO[t.slug]), TIPOS.filter(t => !CODIGO_TIPO[t.slug]).map(t => t.slug).join());
+  ok("prefixos são únicos", new Set(prefixos).size === prefixos.length);
+  ok("prefixo tem 2 letras", prefixos.every(p => /^[A-Z]{2}$/.test(p)));
+  ok("sigla de cidade tem 3 letras e é única", Object.values(CODIGO_CIDADE).every(c => /^[A-Z]{3}$/.test(c)) && new Set(Object.values(CODIGO_CIDADE)).size === Object.keys(CODIGO_CIDADE).length);
+  ok("gerarCodigo monta GA-JUN-002", gerarCodigo("galpao", "Jundiaí", 2) === "GA-JUN-002");
+  ok("gerarCodigo recusa tipo fora da tabela", gerarCodigo("inexistente", "Jundiaí", 2) === null);
+  ok("cada imóvel de demonstração segue a regra", IMOVEIS.every(im => {
+    const [p, c] = im.ref.split("-");
+    return CODIGO_TIPO[im.tipo] === p && CODIGO_CIDADE[im.cidade] === c;
+  }), IMOVEIS.map(im => im.ref).join());
+  ok("cartão mostra o código", [...d.querySelectorAll(".imovel .cod-imovel")].length === d.querySelectorAll(".imovel").length);
+
   const semRef = IMOVEIS.filter(im => !im.ref).map(im => im.titulo);
   ok("todo imóvel tem código próprio", semRef.length === 0, semRef.join(","));
   ok("códigos únicos", new Set(IMOVEIS.map(im => im.ref)).size === IMOVEIS.length);
@@ -65,7 +80,7 @@ setTimeout(() => {
   ok("todo imóvel tem descrição", semDesc === 0, semDesc);
 
   console.log("\n=== 4. seletores preenchidos ===");
-  ["bc-tipo","c-tipo","v-tipo"].forEach(id => {
+  ["c-tipo","v-tipo"].forEach(id => {
     const n = d.getElementById(id);
     ok(id + " tem optgroups", n && n.querySelectorAll("optgroup").length >= 4,
        n ? n.querySelectorAll("optgroup").length : "ausente");
@@ -73,7 +88,7 @@ setTimeout(() => {
   ok("dropdown de tipo lista os grupos",
      d.querySelectorAll("#fl-tipo-grupos .tg-nome").length === new Set(TIPOS.map(t=>t.grupo)).size,
      d.querySelectorAll("#fl-tipo-grupos .tg-nome").length);
-  ok("abre com apartamento marcado", JSON.stringify(w.tiposMarcados()) === '["apartamento"]', JSON.stringify(w.tiposMarcados()));
+  ok("abre sem tipo marcado", JSON.stringify(w.tiposMarcados()) === "[]", JSON.stringify(w.tiposMarcados()));
 
   console.log("\n=== 5. portas da capa ===");
   ok("pp-comprar começa fechado", d.getElementById("pp-comprar").hidden);
@@ -86,75 +101,49 @@ setTimeout(() => {
   d.querySelector("[data-fechar]").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
   ok("botão fechar fecha as duas", d.getElementById("pp-comprar").hidden && d.getElementById("pp-vender").hidden);
 
-  console.log("\n=== 6. combobox de cidade ===");
-  function digitar(id, texto) {
-    const c = d.getElementById(id);
-    c.value = texto;
-    c.dispatchEvent(new w.Event("input", {bubbles:true}));
-    return d.getElementById(id + "-lista");
-  }
-  let lista = digitar("bc-cidade", "campin");
-  const itens = [...lista.querySelectorAll("li[data-i]")].map(li => li.textContent.replace(/\s+/g," ").trim());
-  ok("'campin' sugere algo", itens.length > 0, itens.length);
-  ok("Campinas vem primeiro", /^Campinas/.test(itens[0] || ""), itens[0]);
-  ok("sugestão mostra a UF", /SP/.test(itens[0] || ""), itens[0]);
+  console.log("\n=== 6. capa limpa ===");
+  ok("busca simples removida da capa", d.getElementById("busca-capa") === null);
+  ok("carteira ao vivo removida", d.querySelector(".capa-painel") === null);
+  ok("sem o texto 'Ver a carteira'", !/Ver a carteira/.test(d.body.textContent));
+  ok("sem grade de caminhos na capa", d.querySelector(".escolhas") === null);
+  ok("sem faixa de credenciais na capa", d.querySelector(".credenciais") === null);
+  ok("título de dois lados, sem segmento único", /negocia os dois lados/.test(d.querySelector(".capa h1").textContent), d.querySelector(".capa h1").textContent);
+  ok("capa não cita a cidade no título", !/São Paulo/.test(d.querySelector(".capa h1").textContent));
+  ok("sem 'São Paulo' na chamada da capa", !/São Paulo/.test(d.querySelector(".capa").textContent));
+  const ctas = [...d.querySelectorAll('.capa-portas a')].map(a => a.textContent.trim());
+  ok("dois CTAs: Buscar imóveis e Quero vender", ctas.length === 2 && ctas[0] === "Buscar imóveis" && ctas[1] === "Quero vender meu imóvel", ctas.join(" | "));
+  ok("duas portas: comprador e vendedor", d.querySelectorAll(".capa-porta").length === 2);
+  ok("símbolo Propto como marca d'água", d.querySelector(".capa-simbolo img") !== null &&
+     /propto-simbolo\.svg/.test(d.querySelector(".capa-simbolo img").getAttribute("src")));
+  ok("símbolo fica fora da leitura", d.querySelector(".capa-simbolo").getAttribute("aria-hidden") === "true");
+  ok("carteira abre com título curto", d.querySelector("#carteira h2").textContent === "Imóveis à venda");
+  ok("carteira sem texto explicativo", d.querySelector("#carteira .cab p") === null);
+  ok("sem atalhos na carteira", d.querySelector("#carteira .atalhos") === null);
 
-  lista = digitar("bc-cidade", "sao paul");
-  const primeiros = [...lista.querySelectorAll("li[data-i]")].map(li => ({
-    nome: li.querySelector("span:first-child").textContent.trim(),
-    uf: li.querySelector(".uf").textContent.trim()
-  }));
-  ok("'sao paul' sem acento acha São Paulo",
-     primeiros.some(x => x.nome === "São Paulo" && x.uf === "SP"), JSON.stringify(primeiros[0]));
-  ok("capital antes de homônimo",
-     primeiros[0] && primeiros[0].nome === "São Paulo" && primeiros[0].uf === "SP", JSON.stringify(primeiros[0]));
+  ok("sem parágrafo de autorização na capa", d.querySelector(".capa .lead") === null);
+  ok("eyebrow diz só Compra e venda", d.querySelector(".capa .olho").textContent.trim() === "Compra e venda");
+  ok("'sem locação' fora da capa", !/sem locação/i.test(d.querySelector(".capa").textContent));
+  ok("link de WhatsApp na capa aponta para wa.me", /^https:\/\/wa\.me\//.test(d.getElementById("capa-zap").href), d.getElementById("capa-zap").href);
+  ok("destaques existem na home", d.getElementById("destaques-lista") !== null);
+  ok("destaques mostram até 3 imóveis", d.querySelectorAll("#destaques-lista article.imovel").length === Math.min(3, w.IMOVEIS.length),
+     d.querySelectorAll("#destaques-lista article.imovel").length);
+  ok("destaque abre a ficha", (() => { const c = d.querySelector("#destaques-lista article.imovel"); if (!c) return false; c.dispatchEvent(new w.MouseEvent("click", {bubbles:true})); return d.getElementById("ficha-veu").classList.contains("aberta") || d.getElementById("ficha-veu").hidden === false || d.getElementById("ficha") !== null; })());
+  d.dispatchEvent(new w.KeyboardEvent("keydown", {key:"Escape", bubbles:true}));
 
-  lista = digitar("bc-cidade", "agua boa");
-  const homonimos = [...lista.querySelectorAll("li[data-i]")];
-  ok("homônimo lista mais de uma UF", new Set(homonimos.map(li => li.querySelector(".uf").textContent)).size > 1,
-     homonimos.map(li => li.querySelector(".uf").textContent).join(","));
-
-  lista = digitar("bc-cidade", "zzzqqq");
-  ok("termo sem resultado avisa", lista.querySelector("li.vazio") !== null);
-
-  // escolha por clique registra slug
-  digitar("bc-cidade", "campinas");
-  const alvo = d.getElementById("bc-cidade-lista").querySelector("li[data-i]");
-  alvo.dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  const campoM = d.getElementById("bc-cidade");
-  ok("clique preenche Nome/UF", campoM.value === "Campinas/SP", campoM.value);
-  ok("clique registra slug", campoM.dataset.slug === "campinas-sp", campoM.dataset.slug);
-
-  console.log("\n=== 7. busca da capa ===");
-  ok("formulário de busca existe", d.getElementById("busca-capa") !== null);
-  ok("capa não tem mais consulta de faixa", d.getElementById("m-botao") === null);
-
-  const campoBc = d.getElementById("bc-cidade");
-  d.getElementById("bc-tipo").value = "galpao";
-  campoBc.value = "Jundiaí/SP"; campoBc.dataset.slug = "jundiai-sp"; campoBc.dataset.cidade = "Jundiaí";
-  d.getElementById("bc-area").value = "1000";
-  d.getElementById("busca-capa").dispatchEvent(new w.Event("submit", {bubbles:true, cancelable:true}));
-
-  ok("busca leva o tipo para o filtro", JSON.stringify(w.tiposMarcados()) === '["galpao"]',
-     JSON.stringify(w.tiposMarcados()));
-  ok("busca leva a cidade", d.getElementById("fl-cidade").value === "Jundiaí/SP",
-     d.getElementById("fl-cidade").value);
-  ok("busca leva a área mínima", d.getElementById("fl-area-min").value === "1000");
-  ok("busca encontra o galpão de Jundiaí",
-     d.getElementById("vitrine-lista").querySelectorAll("article.imovel").length === 1);
-
-  // atalho por segmento
-  d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  d.querySelector('.atalho[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  ok("atalho marca os tipos do segmento", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
-  ok("segmento sem imóvel mostra captação",
-     d.getElementById("vitrine-lista").querySelector("#vazio-cta") !== null);
+  console.log("\n=== 6b. segmentos com peso igual ===");
+  const cartoesSeg = [...d.querySelectorAll(".seg-card")];
+  ok("seis cartões de segmento", cartoesSeg.length === 6, cartoesSeg.length);
+  const segs = cartoesSeg.filter(c => c.dataset.grupo).map(c => c.dataset.grupo);
+  ok("seis cartões apontam para grupos reais", segs.length === 6 && segs.every(g => TIPOS.some(t => t.grupo === g)), segs.join(","));
+  ok("cartões com ícone", cartoesSeg.every(c => c.querySelector("svg") !== null));
+  d.querySelector('.seg-card[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
+  ok("clicar no cartão Rural não marca tipo nenhum (escolha é do cliente)", w.tiposMarcados().length === 0, w.tiposMarcados().join());
   d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
 
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
   const vitrine = d.getElementById("vitrine-lista");
   const conta = () => vitrine.querySelectorAll("article.imovel").length;
-  /* "Limpar" volta ao padrão (apartamento); os testes deste bloco querem a carteira inteira. */
+  /* "Limpar" volta ao ponto de partida: nada escolhido, carteira fechada. */
   const limpar = () => { d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true})); w.marcarTipos([]); w.montarExtras(); w.atualizar(); };
   function por(sets){
     Object.entries(sets).forEach(([id, v]) => {
@@ -170,19 +159,19 @@ setTimeout(() => {
   }
 
   limpar();
-  ok("vitrine abre com todos os imóveis", conta() === IMOVEIS.length, conta());
+  ok("sem escolha, a carteira não aparece", conta() === 0, conta());
 
   // --- contagem ANTES de aplicar: o detalhe que o ZAP acerta ---
   const botao = d.getElementById("fl-buscar");
-  ok("botão conta os imóveis", /Ver 3 imóveis/.test(botao.textContent), botao.textContent);
+  ok("botão começa como Buscar", botao.textContent === "Buscar", botao.textContent);
   por({"fl-tipo":"galpao"});
   ok("botão atualiza a contagem", /Ver 1 imóvel$/.test(botao.textContent), botao.textContent);
   ok("filtro por tipo devolve 1", conta() === 1);
   por({"fl-area-min":"99999"});
-  ok("botão avisa zero antes de clicar", /Nenhum imóvel/.test(botao.textContent), botao.textContent);
-  ok("botão desabilitado em zero", botao.disabled === true);
+  ok("zero resultados mostra Buscar", botao.textContent === "Buscar", botao.textContent);
+  ok("botão continua clicável em zero", botao.disabled === false);
   limpar();
-  ok("limpar reabilita o botão", botao.disabled === false && conta() === IMOVEIS.length);
+  ok("limpar reabilita o botão e fecha a carteira", botao.disabled === false && conta() === 0);
 
   // --- segmento filtra o seletor de tipo ---
   por({"fl-grupo":"Industrial e logístico"});
@@ -213,6 +202,7 @@ setTimeout(() => {
   // --- ordenação ---
   function precos(){ return [...vitrine.querySelectorAll(".preco")].map(e =>
     Number(e.textContent.replace(/\D/g,""))); }
+  por({"fl-grupo":"Industrial e logístico"});
   por({"fl-ordem":"preco-asc"});
   const asc = precos();
   ok("menor preço ordena crescente", asc.every((v,i) => i === 0 || asc[i-1] <= v), asc.join(","));
@@ -298,26 +288,25 @@ setTimeout(() => {
   console.log("\n=== 10. identidade, acessibilidade e conformidade ===");
   const html = fs.readFileSync(path.join(DIR, "index.html"), "utf8");
   ok("não sobrou referência a municipios-sp.js", !/municipios-sp\.js/.test(html));
-  ok("não sobrou 'Estado de São Paulo'", !/Estado de São Paulo/.test(html));
-  ok("marca horizontal no cabeçalho", /marca-horizontal-600\.png/.test(html));
+  ok("não sobrou 'todo o Brasil'", !/todo o Brasil/i.test(html));
+  ok("marca do cabeçalho com símbolo e tipografia", /marca-simbolo-128\.png/.test(html) && /class="marca-txt"/.test(html));
   ok("marca negativa no rodapé", /marca-horizontal-negativa-600\.png/.test(html));
   ok("vermelho da marca #d5383a", /#d5383a/.test(html) && !/#DB1D25|#db1d25/.test(html));
   ok("rodapé traz razão social e CNPJ", /PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA/.test(html) && /55\.745\.297\/0001-06/.test(html));
   ok("nomes e CRECI pessoais fora do site", !/Joselia|Rodrigo França|CRECISP 300760|CRECISP 297692/.test(html));
   ok("cita Decreto 81.871/1978", /81\.871/.test(html));
-  ok("cita Resolução 327/1992 para fora de SP", /327\/1992/.test(html));
+  ok("sem ressalva de jurisdição no rodapé (escopo é SP)", !/327\/1992/.test(html));
   ok("sem texto sobre processo de concessão no site", !/concess/i.test(html));
-  ok("avaliação declarada como serviço contratado", /mediante contratação/i.test(html));
+  ok("sem parecer de avaliação no rodapé", !/mediante contratação/i.test(html));
   ok("site não promete avaliação gratuita", !/avaliação gratuita/i.test(html));
   ok("nenhuma menção a locação como serviço", !/alug|loca(ç|c)ão de im/i.test(html.replace(/não operamos locação/g,"")));
 
-  const semAlt = [...d.querySelectorAll("img")].filter(i => !i.getAttribute("alt"));
+  const semAlt = [...d.querySelectorAll("img")].filter(i => i.getAttribute("alt") === null || (i.getAttribute("alt") === "" && i.getAttribute("aria-hidden") !== "true"));
   ok("toda imagem tem alt", semAlt.length === 0, semAlt.length);
   const semLabel = [...d.querySelectorAll("input:not([type=checkbox]), select, textarea")]
     .filter(c => c.id && !d.querySelector(`label[for="${c.id}"]`) && !c.getAttribute("aria-label"));
   ok("todo campo tem label", semLabel.length === 0, semLabel.map(c=>c.id).join(","));
-  ok("mapa do Brasil renderizou 27 UFs", d.querySelectorAll(".mapa-br .uf").length === 27,
-     d.querySelectorAll(".mapa-br .uf").length);
+  ok("mapa do Brasil removido (escopo SP)", d.querySelectorAll(".mapa-br").length === 0);
   ok("um único h1", d.querySelectorAll("h1").length === 1, d.querySelectorAll("h1").length);
   ok("link de pular para o conteúdo", d.querySelector(".pular") !== null);
 
@@ -339,6 +328,8 @@ setTimeout(() => {
   ok("Esc fecha o menu", btn.getAttribute("aria-expanded") === "false");
 
   console.log("\n=== 12. ficha do imóvel ===");
+  limpar();
+  por({"fl-grupo":"Industrial e logístico"});
   const cartoes = [...vitrine.querySelectorAll("article.imovel")];
   ok("cartão é acionável", cartoes[0].getAttribute("role") === "button" && cartoes[0].tabIndex === 0);
   ok("cartão carrega a referência", /^[A-Z]{2}-[A-Z]{3}-\d{3}$/.test(cartoes[0].dataset.ref), cartoes[0].dataset.ref);
@@ -348,13 +339,13 @@ setTimeout(() => {
   const fichaVeu = d.getElementById("ficha-veu");
   ok("clique abre a ficha", fichaVeu.classList.contains("aberta"));
   ok("ficha tem título", d.getElementById("ficha-titulo") !== null);
-  ok("ficha mostra a referência", /AI-CPQ-001/.test(d.getElementById("ficha").textContent));
+  ok("ficha mostra a referência", /AI-CAM-001/.test(d.getElementById("ficha").textContent));
   ok("ficha mostra a descrição", d.querySelector(".ficha p.desc") !== null);
   ok("ficha cita o CRECI do anúncio", /CRECISP 300760/.test(d.getElementById("ficha").textContent));
   ok("ficha cita o Decreto 81.871", /81\.871/.test(d.querySelector(".ficha-legal").textContent));
   ok("ficha expõe os atributos do tipo", /Zoneamento/.test(d.querySelector(".ficha-grade").textContent));
   ok("ficha calcula valor por m²", /Valor por m²/.test(d.querySelector(".ficha-grade").textContent));
-  ok("URL ganha endereço próprio", w.location.hash === "#imovel/AI-CPQ-001", w.location.hash);
+  ok("URL ganha endereço próprio", w.location.hash === "#imovel/AI-CAM-001", w.location.hash);
   ok("rolagem de fundo travada", d.body.style.overflow === "hidden");
 
   d.dispatchEvent(new w.KeyboardEvent("keydown", {key:"Escape", bubbles:true}));
@@ -433,9 +424,7 @@ setTimeout(() => {
 
   console.log("\n=== 15. LGPD e dados de contato ===");
   const htm = fs.readFileSync(path.join(DIR,"index.html"), "utf8");
-  ok("rodapé informa canal de direitos do titular", /direitos de titular/i.test(htm));
-  ok("cita a Lei 13.709 (LGPD)", /13\.709/.test(htm));
-  ok("cita prazo de resposta", /15 dias/.test(htm));
+  ok("rodapé sem bloco LGPD (pedido do titular)", !/direitos de titular|13\.709|15 dias/i.test(htm));
   ok("telefone no schema.org", /\+55-19-99919-4447/.test(htm));
   ok("sem telefone antigo remanescente", !/99805-1985|98110-5192/.test(htm));
 

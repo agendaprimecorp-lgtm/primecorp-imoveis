@@ -33,7 +33,7 @@ window.PROPTO = Object.assign({
   /* URL do endpoint público do Propto. Vazio = usa só a lista local.
      Quando o endpoint estiver no ar:
      ENDPOINT: "https://propto.com.br/api/publicos?org=primecorp" */
-  ENDPOINT: "",
+  ENDPOINT: "https://propto.com.br/vitrine/imoveis",
 
   /* Segundos antes de desistir da busca. Acima disso o visitante
      está esperando uma tela em branco, e a lista local é melhor
@@ -69,7 +69,8 @@ window.PROPTO = Object.assign({
     operacao:  "não é venda",
     publicado: "não está publicado",
     creci:     "sem CRECI do corretor responsável",
-    essencial: "faltam dados essenciais (tipo, cidade ou preço)"
+    essencial: "faltam dados essenciais (tipo, cidade ou preço)",
+    tipo:      "tipo não reconhecido pela vitrine"
   };
 
   function recusar(o) {
@@ -80,8 +81,8 @@ window.PROPTO = Object.assign({
     if (!op.includes("venda")) return MOTIVOS.operacao;
 
     /* 2. Só anúncio publicado de verdade. "Em captação" é trabalho
-          em andamento: ainda não há autorização assinada, e o art. 5º
-          do Decreto 81.871/1978 não admite anunciar sem ela. */
+          em andamento e não vai ao ar. A autorização do proprietário
+          é tratada internamente, nos procedimentos da PrimeCorp. */
     const st = semAcento(o.status || "");
     if (st && !["publicado", "publicada", "ativo", "ativa"].includes(st)) return MOTIVOS.publicado;
 
@@ -93,6 +94,10 @@ window.PROPTO = Object.assign({
     /* 4. O mínimo para o anúncio dizer alguma coisa. Ficha vazia no
           ar é pior que vitrine vazia. */
     if (!o.tipo || !o.cidade || !(o.preco > 0)) return MOTIVOS.essencial;
+
+    /* 5. Tipo que a vitrine não conhece não vira "área comercial" por
+          descuido: fica de fora e aparece no log, para ser ajustado. */
+    if (!tipoDe(o)) return MOTIVOS.tipo;
 
     return null;
   }
@@ -117,8 +122,9 @@ window.PROPTO = Object.assign({
     "terreno": "terreno-urbano",
     "lote em condominio": "terreno-urbano", "lote em condomínio": "terreno-urbano",
     "area / terreno": "terreno-urbano", "área / terreno": "terreno-urbano",
-    "fazenda": "fazenda", "sitio": "chacara-sitio", "sítio": "chacara-sitio",
-    "chacara": "chacara-sitio", "chácara": "chacara-sitio",
+    "fazenda": "fazenda", "sitio": "sitio", "sítio": "sitio",
+    "chacara": "chacara", "chácara": "chacara",
+    "gleba": "gleba-rural", "gleba / área rural": "gleba-rural", "gleba / area rural": "gleba-rural",
     "haras": "fazenda",
     "predio comercial": "predio-comercial", "prédio comercial": "predio-comercial",
     "sala comercial": "sala-comercial",
@@ -133,7 +139,7 @@ window.PROPTO = Object.assign({
   const ARTE = {
     "area-industrial": "industrial", "galpao": "galpao", "centro-distribuicao": "galpao",
     "terreno-urbano": "terreno", "area-comercial": "terreno",
-    "gleba-rural": "rural", "fazenda": "rural", "chacara-sitio": "rural",
+    "gleba-rural": "rural", "fazenda": "rural", "chacara": "rural", "sitio": "rural",
     "predio-comercial": "predio", "sala-comercial": "predio", "loja-ponto": "predio",
     "hotel-pousada": "predio", "posto-combustivel": "terreno",
     "casa": "residencial", "casa-condominio": "residencial",
@@ -146,9 +152,14 @@ window.PROPTO = Object.assign({
     return Number.isFinite(n) && n > 0 ? n : undefined;
   };
 
+  /* Aceita o slug do próprio carteira.js ("casa-condominio") ou o nome
+     em português ("casa em condomínio"). Sem correspondência, devolve
+     null — nunca um tipo chutado. */
   function tipoDe(o) {
     const bruto = semAcento(o.tipo || "");
-    return TIPOS[bruto] || TIPOS[o.tipo] || "area-comercial";
+    const slug = (window.TIPOS || []).find(t => t.slug === bruto || t.slug === o.tipo);
+    if (slug) return slug.slug;
+    return TIPOS[bruto] || TIPOS[o.tipo] || null;
   }
 
   /* As três linhas da fichinha do cartão. Mostramos o que o imóvel

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65.50 58.25"
+     role="img" aria-label="Propto">
+  <title>Propto</title>
+  <g transform="translate(0.75 -1.25)">
+  <path d="M9 31.5 32 11l23 20.5" fill="none" stroke="#E8443F" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="18.5" y="40" width="6.5" height="13" rx="3.25" fill="#E8443F"/>
+  <rect x="28.75" y="33.5" width="6.5" height="19.5" rx="3.25" fill="#E8443F"/>
+  <rect x="39" y="37" width="6.5" height="16" rx="3.25" fill="#E8443F"/>
+  </g>
+</svg>
