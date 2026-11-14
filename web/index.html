@@ -190,7 +190,12 @@ section.papel{background:var(--papel)}
 .segmentos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--linha)}
 .seg{padding:26px 24px 26px 0;border-right:1px solid var(--linha)}
 .seg:last-child{border-right:0;padding-right:0}
-.seg-ico{width:34px;height:34px;margin-bottom:14px}
+.seg-ico{width:42px;height:42px;margin-bottom:15px;display:block}
+.seg-ico .base{stroke:var(--tinta2);stroke-width:1.5}
+.seg-ico .marca{stroke:var(--vermelho);stroke-width:2}
+.seg-ico .cheio{fill:var(--vermelho);stroke:none}
+.seg-ico .leve{stroke:var(--linha);stroke-width:1.2}
+.seg:hover .seg-ico .base{stroke:var(--tinta)}
 .seg h3{font-size:17px;margin-bottom:9px}
 .seg p{font-size:14.5px;color:var(--tinta2);margin:0 0 12px;line-height:1.6}
 .seg ul{list-style:none;padding:0;margin:0;display:grid;gap:5px}
@@ -788,25 +793,53 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     </div>
     <div class="segmentos">
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 27h26M5 27V14l7-4v17M14 27V8l12-5v24"/><path d="M18 12h4M18 17h4M18 22h4M8 18h2"/></svg>
+        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M2 34h36"/>
+          <path class="base" d="M5 34V18h30v16"/>
+          <path class="marca" d="M5 18v-5l7.5 5v-5l7.5 5v-5l7.5 5v-5l7.5 5"/>
+          <path class="base" d="M9 34v-7h5v7M19 34v-7h5v7M29 34v-7h4v7"/>
+          <circle class="cheio" cx="11.5" cy="30.5" r="1"/>
+          <circle class="cheio" cx="21.5" cy="30.5" r="1"/>
+        </svg>
         <h3>Industrial e logístico</h3>
         <p>Galpões, centros de distribuição e áreas com vocação industrial.</p>
         <ul><li>Pé-direito e docas</li><li>Energia e efluente</li><li>Acesso rodoviário</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 26h26M6 26V9l10-5 10 5v17"/><path d="M13 26v-7h6v7"/><circle cx="16" cy="12" r="1.6"/></svg>
+        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="base" d="M4 26L12 6l24 3.5-5 19.5z"/>
+          <path class="leve" d="M12 6L9 26M21 7.3L17 27.3"/>
+          <circle class="cheio" cx="4" cy="26" r="2.2"/>
+          <circle class="cheio" cx="12" cy="6" r="2.2"/>
+          <circle class="cheio" cx="36" cy="9.5" r="2.2"/>
+          <circle class="cheio" cx="31" cy="29" r="2.2"/>
+          <path class="marca" d="M4 34h27"/>
+          <path class="base" d="M4 31.5v5M31 31.5v5"/>
+        </svg>
         <h3>Terrenos e glebas</h3>
         <p>Lotes urbanos, glebas de expansão e áreas para incorporação.</p>
         <ul><li>Zoneamento e uso</li><li>Frente e topografia</li><li>Viabilidade e REURB</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 24c4-6 8-6 12 0s8 6 14 0"/><path d="M3 29h26M9 17V7M9 7l8 3-8 3"/></svg>
+        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M2 21c5-7 10-7 15 0 5-6 10-6 21 1"/>
+          <path class="base" d="M4 33V21M15 33V19M26 33V20M37 33V22"/>
+          <path class="base" d="M3 24.5c11-1.5 23-1.5 35 .5M3 29c11-1.5 23-1.5 35 .5"/>
+          <path class="marca" d="M2 36.5c5-2.5 10 2.5 15 0s10-2.5 15 0 4.5 1 6 0"/>
+        </svg>
         <h3>Rural</h3>
         <p>Fazendas, sítios e chácaras com e sem exploração ativa.</p>
         <ul><li>Georreferenciamento</li><li>CAR e recurso hídrico</li><li>Benfeitorias</li></ul>
       </div>
       <div class="seg">
-        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" stroke="#d5383a" stroke-width="1.7" aria-hidden="true"><path d="M3 28h26M7 28V6h12v22M19 14h7v14"/><path d="M11 11h4M11 16h4M11 21h4M22 19h2M22 24h2"/></svg>
+        <svg class="seg-ico" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="leve" d="M2 34h36"/>
+          <path class="base" d="M7 34V5h15v29M22 34V15h11v19"/>
+          <path class="leve" d="M11 10h3.5M17.5 10h1.5M11 15h3.5M17.5 15h1.5M11 20h3.5M17.5 20h1.5M26 20h4M26 25h4"/>
+          <path class="marca" d="M6.5 26h16l-2.5-4h-11z"/>
+          <path class="base" d="M12 34v-6h5v6"/>
+          <circle class="cheio" cx="16" cy="31" r="0.9"/>
+        </svg>
         <h3>Comercial e alto padrão</h3>
         <p>Prédios, lojas, pontos consolidados e residencial de alto padrão.</p>
         <ul><li>Rentabilidade e cap rate</li><li>Ponto e fluxo</li><li>Padrão construtivo</li></ul>
