@@ -80,8 +80,8 @@ window.PROPTO = Object.assign({
     if (!op.includes("venda")) return MOTIVOS.operacao;
 
     /* 2. Só anúncio publicado de verdade. "Em captação" é trabalho
-          em andamento: ainda não há autorização assinada, e o art. 5º
-          do Decreto 81.871/1978 não admite anunciar sem ela. */
+          em andamento e não vai ao ar. A autorização do proprietário
+          é tratada internamente, nos procedimentos da PrimeCorp. */
     const st = semAcento(o.status || "");
     if (st && !["publicado", "publicada", "ativo", "ativa"].includes(st)) return MOTIVOS.publicado;
 
