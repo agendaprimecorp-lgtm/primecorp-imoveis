@@ -115,8 +115,24 @@ h1,h2,h3,h4{font-family:var(--f-disp);font-weight:700;letter-spacing:-.025em;lin
 .capa h1 em{font-style:normal;color:#ff6b6d}
 .capa .lead{font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;color:#aeb6bb;max-width:52ch;margin:0}
 
-/* portas */
-.portas{display:grid;gap:14px}
+/* ---------- busca da capa ----------
+   É a primeira coisa da home porque quem chega está procurando imóvel,
+   não formulário. Padrão do segmento: ADI Galpões, Brasil Galpões e MD
+   Imóveis abrem todas assim. */
+.busca-capa{background:var(--branco);border-radius:var(--r);padding:clamp(18px,2vw,24px);
+  box-shadow:0 22px 56px rgba(0,0,0,.3);margin-top:clamp(24px,3vw,34px)}
+.bc-linha{display:grid;grid-template-columns:1.05fr 1.35fr .85fr auto;gap:12px;align-items:end}
+.bc-linha label{color:var(--tinta3)}
+.busca-capa .ent{background:var(--claro)}
+.bc-botao{height:43px;padding-inline:26px;white-space:nowrap}
+.atalhos{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:15px;padding-top:14px;border-top:1px solid var(--linha2)}
+.atalhos b{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--tinta3);margin-right:3px}
+.atalho{background:var(--claro);border:1px solid var(--linha);border-radius:999px;padding:7px 14px;
+  font-size:13.5px;font-weight:500;color:var(--tinta2);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.atalho:hover{border-color:var(--vermelho);color:var(--vermelho);background:var(--branco)}
+
+/* portas — agora em seção larga, não na coluna estreita da capa */
+.portas{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .porta{position:relative;text-align:left;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:clamp(20px,2vw,26px);cursor:pointer;color:#fff;transition:background .18s,border-color .18s,transform .18s;display:flex;flex-direction:column;gap:9px}
 .porta:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);transform:translateY(-2px)}
 .porta[aria-selected="true"]{background:var(--branco);border-color:var(--branco);color:var(--tinta)}
@@ -124,7 +140,7 @@ h1,h2,h3,h4{font-family:var(--f-disp);font-weight:700;letter-spacing:-.025em;lin
 .porta[aria-selected="true"] .p-num{color:var(--vermelho)}
 .p-num{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--areia)}
 .porta h2{font-family:var(--f-disp);font-size:clamp(20px,1.9vw,25px);letter-spacing:-.025em}
-.p-sub{font-size:14px;line-height:1.5;color:#aeb6bb;margin:0}
+.p-sub{font-size:14.5px;line-height:1.55;color:#aeb6bb;margin:0;max-width:46ch}
 .p-seta{margin-top:3px;font-family:var(--f-mono);font-size:12.5px;font-weight:600;color:var(--vermelho);display:flex;align-items:center;gap:7px}
 .porta[aria-selected="false"] .p-seta{color:#ff6b6d}
 
@@ -200,13 +216,49 @@ section.papel{background:var(--papel)}
 
 /* ---------- filtros e vitrine ---------- */
 .barra-filtros{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r);padding:16px;box-shadow:var(--sombra);margin-bottom:20px}
-.linha-f{display:grid;grid-template-columns:1.3fr 1.3fr 1fr 1fr auto;gap:11px;align-items:end}
-.extras{display:none;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-top:14px;padding-top:16px;border-top:1px solid var(--linha2)}
+.linha-f{display:grid;grid-template-columns:1fr 1.1fr 1.2fr 1fr auto;gap:11px;align-items:end}
+.extras{display:none;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:14px;padding-top:16px;border-top:1px solid var(--linha2)}
 .extras.aberto{display:grid}
-.rodape-f{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--linha2)}
-.conta{font-family:var(--f-mono);font-size:12.5px;color:var(--tinta3)}
-.conta b{color:var(--tinta);font-weight:600}
+.ex-grupo.larga{grid-column:1/-1}
+.ex-rot{display:block;font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta3);margin-bottom:7px}
+.par{display:flex;align-items:center;gap:8px}
+.par .ent{min-width:0}
+.ate{font-size:13px;color:var(--tinta3);flex-shrink:0}
+.atribs{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px}
+.atribs p{grid-column:1/-1;margin:0;font-size:13.5px;color:var(--tinta3);line-height:1.5}
+
+.rodape-f{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--linha2)}
+.acoes-f{display:flex;align-items:center;gap:16px;margin-left:auto}
 .link-f{background:none;border:0;padding:0;font-size:13.5px;font-weight:500;color:var(--vermelho);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+#fl-buscar{padding:11px 22px}
+#fl-buscar[disabled]{opacity:.45;cursor:not-allowed}
+
+/* Etiqueta de filtro ativo: sem isso a pessoa vê a lista encolher e não
+   sabe o que a está limitando. */
+.etiquetas{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.etiqueta{display:inline-flex;align-items:center;gap:7px;background:var(--claro);border:1px solid var(--linha);
+  border-radius:999px;padding:5px 7px 5px 13px;font-size:13px;color:var(--tinta2)}
+.etiqueta button{border:0;background:var(--linha);color:var(--tinta2);width:19px;height:19px;border-radius:50%;
+  cursor:pointer;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0}
+.etiqueta button:hover{background:var(--vermelho);color:#fff}
+.sem-filtro{font-family:var(--f-mono);font-size:12.5px;color:var(--tinta3)}
+
+/* ---------- trilha de etapas ---------- */
+.trilha{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:8px}
+.trilha::before{content:"";position:absolute;top:21px;left:12%;right:12%;height:2px;
+  background:linear-gradient(90deg,var(--vermelho),var(--areia));opacity:.3}
+.passo{position:relative;padding:0 18px 0 0}
+.passo:last-child{padding-right:0}
+.p-marca{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;background:var(--branco);
+  border:2px solid var(--linha);display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:14.5px;font-weight:600;color:var(--tinta3);margin-bottom:17px;transition:all .2s}
+.passo.forte .p-marca{background:var(--vermelho);border-color:var(--vermelho);color:#fff;
+  box-shadow:0 0 0 5px rgba(213,56,58,.12)}
+.passo h3{font-size:17.5px;margin-bottom:8px}
+.passo p{font-size:14.5px;color:var(--tinta2);margin:0;line-height:1.6;max-width:34ch}
+.passo .selo{display:inline-block;margin-top:10px;font-family:var(--f-mono);font-size:10px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--vermelho);background:#fdeced;
+  border-radius:999px;padding:4px 10px}
 
 .vitrine{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
 .imovel{border:1px solid var(--linha);border-radius:var(--r);overflow:hidden;background:var(--branco);display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s,transform .15s}
@@ -329,8 +381,12 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 
 /* ---- até 1080px: tablet e notebook estreito ---- */
 @media(max-width:1080px){
-  .capa-grade{grid-template-columns:1fr;gap:clamp(26px,4vw,36px)}
   .capa h1{max-width:19ch}
+  .bc-linha{grid-template-columns:1fr 1fr;gap:11px}
+  .bc-linha>:last-child{grid-column:1/-1}
+  .trilha{grid-template-columns:1fr 1fr;gap:30px 24px}
+  .trilha::before{display:none}
+  .passo{padding-right:0}
   .capa .lead{max-width:62ch}
   .portas{grid-template-columns:1fr 1fr}
   .alcance,.faixa-wrap{grid-template-columns:1fr}
@@ -359,6 +415,32 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 /* ---- até 680px: celular ---- */
 @media(max-width:680px){
   .portas{grid-template-columns:1fr;gap:11px}
+  /* Tipo e área lado a lado, cidade inteira: ganha ~70px e mantém o
+     botão de busca acima da dobra num aparelho de 360px. */
+  .bc-linha{grid-template-columns:1fr 1fr;gap:10px}
+  .bc-linha>:nth-child(1){order:1}
+  .bc-linha>:nth-child(3){order:2}
+  .bc-linha>:nth-child(2){order:3;grid-column:1/-1}
+  .bc-linha>:last-child{order:4;grid-column:1/-1}
+  .capa .lead{font-size:15px;line-height:1.5}
+  .busca-capa{padding:15px}
+  .atalhos{margin-top:13px;padding-top:12px}
+  .atalho{font-size:13px;padding:7px 12px}
+  .rodape-f{flex-direction:column;align-items:stretch}
+  .acoes-f{margin-left:0;justify-content:space-between}
+  #fl-buscar{flex:1}
+  .par{flex-wrap:nowrap}
+
+  /* Trilha vertical: os marcadores alinhados à esquerda, ligados pela
+     linha, é o que mantém a leitura de sequência no celular. */
+  .trilha{grid-template-columns:1fr;gap:0}
+  .trilha::before{display:block;top:22px;bottom:22px;left:21px;right:auto;width:2px;height:auto;
+    background:linear-gradient(180deg,var(--vermelho),var(--areia))}
+  .passo{display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding-bottom:26px}
+  .passo:last-child{padding-bottom:0}
+  .p-marca{margin-bottom:0;grid-row:1/3}
+  .passo h3{align-self:center;margin-top:9px}
+  .passo p,.passo .selo{grid-column:2}
   .segmentos,.etapas,.blocos,.linha-f,.credenciais{grid-template-columns:1fr}
   .seg,.etapa,.bloco{padding-right:0!important;border-right:0!important;border-bottom:1px solid var(--linha)}
   .seg:last-child,.etapa:last-child,.bloco:last-child{border-bottom:0}
@@ -403,13 +485,13 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     <a href="./" class="marca"><img src="assets/marca-horizontal-600.png" alt="PrimeCorp Imóveis" width="600" height="118"></a>
     <button class="hamburguer" id="abrir-menu" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu de navegação"><span></span></button>
     <nav class="menu" id="menu-principal" aria-label="Principal">
-      <a href="#comprar">Quero comprar</a>
-      <a href="#vender">Quero vender</a>
-      <a href="#carteira">Carteira</a>
+      <a href="#carteira">Imóveis</a>
+      <a href="#comprar">Encomendar busca</a>
+      <a href="#vender">Cadastrar imóvel</a>
       <a href="#atuacao">Onde atuamos</a>
-      <a href="#faixa">Consulta de faixa</a>
+      <a href="#ajudar">Como ajudamos</a>
     </nav>
-    <a href="#vender" class="btn"><span>Avaliar<span class="longo"> meu imóvel</span></span></a>
+    <a href="#vender" class="btn"><span>Cadastrar<span class="longo"> imóvel</span></span></a>
   </div>
 </header>
 
@@ -418,42 +500,164 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <!-- ================= CAPA / ROTEADOR ================= -->
 <div class="capa" id="inicio">
   <div class="faixa">
-    <div class="capa-grade">
-      <div class="capa-topo">
-        <div class="olho">Intermediação de compra e venda · Brasil</div>
-        <h1>Imóvel certo, <em>preço certo,</em> negócio fechado.</h1>
-        <p class="lead">
-          Somos corretores e trabalhamos os dois lados da mesa: encontramos o ativo
-          para quem compra e definimos o preço real para quem vende. Áreas industriais,
-          galpões, terrenos, fazendas e alto padrão — em todo o Brasil.
-        </p>
+    <div class="capa-topo">
+      <div class="olho">Intermediação de compra e venda · Brasil</div>
+      <h1>Galpões, áreas e terrenos <em>à venda</em> em todo o Brasil.</h1>
+      <p class="lead">
+        Somos corretores e negociamos os dois lados: levamos o comprador ao ativo certo
+        e o proprietário ao comprador certo. Industrial, logístico, comercial, rural e
+        alto padrão. <strong>Somente venda.</strong>
+      </p>
+    </div>
+
+    <!-- A busca abre a home porque quem chega está procurando imóvel.
+         Ela empurra os valores para os filtros da carteira e rola até lá. -->
+    <form class="busca-capa" id="busca-capa" role="search" aria-label="Buscar imóveis na carteira">
+      <div class="bc-linha">
+        <div><label for="bc-tipo">O que você procura</label>
+          <select id="bc-tipo" class="ent"></select></div>
+        <div><label for="bc-cidade">Onde</label>
+          <div class="combo">
+            <input id="bc-cidade" class="ent" type="text" placeholder="Cidade · todo o Brasil" role="combobox"
+                   aria-expanded="false" aria-controls="bc-cidade-lista" aria-autocomplete="list"
+                   autocomplete="off" autocapitalize="words" spellcheck="false">
+            <ul id="bc-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
+          </div></div>
+        <div><label for="bc-area">Área a partir de</label>
+          <select id="bc-area" class="ent">
+            <option value="">Qualquer</option><option value="500">500 m²</option>
+            <option value="1000">1.000 m²</option><option value="3000">3.000 m²</option>
+            <option value="10000">10.000 m²</option><option value="20000">20.000 m²</option>
+          </select></div>
+        <button type="submit" class="btn bc-botao" id="bc-buscar">Ver imóveis</button>
+      </div>
+      <div class="atalhos">
+        <b>Atalhos</b>
+        <button type="button" class="atalho" data-grupo="Industrial e logístico">Galpões e industrial</button>
+        <button type="button" class="atalho" data-grupo="Terrenos e glebas">Terrenos e áreas</button>
+        <button type="button" class="atalho" data-grupo="Rural">Fazendas e rural</button>
+        <button type="button" class="atalho" data-grupo="Comercial">Comercial</button>
+        <button type="button" class="atalho" data-grupo="Residencial alto padrão">Alto padrão</button>
+        <button type="button" class="atalho" id="atalho-codigo">Buscar por código</button>
+      </div>
+    </form>
+
+    <div class="credenciais">
+      <div><b>CRECISP 300760</b><span>Joselia Junqueira Viana · responsável técnica</span></div>
+      <div><b>CRECISP 297692</b><span>Rodrigo França Viana · corretor</span></div>
+      <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
+      <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CARTEIRA ================= -->
+<section class="claro" id="carteira">
+  <div class="faixa">
+    <div class="cab">
+      <div class="olho">Carteira</div>
+      <h2>Imóveis com autorização vigente</h2>
+      <p>Só entra aqui o que tem autorização escrita do proprietário. O que não está na lista, buscamos sob demanda.</p>
+    </div>
+
+    <div class="barra-filtros">
+      <!-- Barra rápida: o que se usa todo dia. -->
+      <div class="linha-f">
+        <div><label for="fl-grupo">Segmento</label><select id="fl-grupo" class="ent"></select></div>
+        <div><label for="fl-tipo">Tipo</label><select id="fl-tipo" class="ent"></select></div>
+        <div><label for="fl-cidade">Cidade</label>
+          <div class="combo">
+            <input id="fl-cidade" class="ent" type="text" placeholder="Todas" role="combobox"
+                   aria-expanded="false" aria-controls="fl-cidade-lista" aria-autocomplete="list"
+                   autocomplete="off" autocapitalize="words" spellcheck="false">
+            <ul id="fl-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios" hidden></ul>
+          </div></div>
+        <div><label for="fl-ordem">Ordenar por</label>
+          <select id="fl-ordem" class="ent">
+            <option value="recente">Mais recentes</option>
+            <option value="preco-asc">Menor preço</option>
+            <option value="preco-desc">Maior preço</option>
+            <option value="area-desc">Maior área</option>
+            <option value="m2-asc">Menor R$/m²</option>
+          </select></div>
+        <button type="button" class="btn sec" id="fl-mais" aria-expanded="false" aria-controls="fl-extras">Filtros</button>
       </div>
 
-      <div class="portas" id="portas" role="tablist" aria-label="O que você quer fazer">
-        <span id="comprar" class="ancora" aria-hidden="true"></span>
-        <span id="vender" class="ancora" aria-hidden="true"></span>
-        <button class="porta" id="porta-comprar" role="tab" aria-selected="false" aria-controls="pp-comprar">
-          <span class="p-num">01 · Comprador ou investidor</span>
-          <h2>Quero comprar</h2>
-          <p class="p-sub">Diga o que procura. Buscamos no mercado aberto, em carteiras de parceiros e em proprietários que ainda não anunciaram.</p>
-          <span class="p-seta">Abrir mandato de busca →</span>
-        </button>
-
-        <button class="porta" id="porta-vender" role="tab" aria-selected="false" aria-controls="pp-vender">
-          <span class="p-num">02 · Proprietário</span>
-          <h2>Quero vender</h2>
-          <p class="p-sub">Avaliação técnica antes do anúncio. Preço errado é o que faz um imóvel encalhar meses e vender abaixo do que valia.</p>
-          <span class="p-seta">Pedir avaliação →</span>
-        </button>
+      <!-- Painel completo: faixas, características da tipologia e código. -->
+      <div class="extras" id="fl-extras">
+        <div class="ex-grupo">
+          <span class="ex-rot">Preço</span>
+          <div class="par">
+            <input id="fl-preco-min" class="ent" type="number" min="0" step="50000" placeholder="Mínimo" inputmode="numeric" aria-label="Preço mínimo">
+            <span class="ate">até</span>
+            <input id="fl-preco-max" class="ent" type="number" min="0" step="50000" placeholder="Máximo" inputmode="numeric" aria-label="Preço máximo">
+          </div>
+        </div>
+        <div class="ex-grupo">
+          <span class="ex-rot">Área do terreno (m²)</span>
+          <div class="par">
+            <input id="fl-area-min" class="ent" type="number" min="0" step="100" placeholder="Mínima" inputmode="numeric" aria-label="Área mínima">
+            <span class="ate">até</span>
+            <input id="fl-area-max" class="ent" type="number" min="0" step="100" placeholder="Máxima" inputmode="numeric" aria-label="Área máxima">
+          </div>
+        </div>
+        <div class="ex-grupo">
+          <span class="ex-rot">Código do imóvel</span>
+          <input id="fl-codigo" class="ent" type="text" placeholder="ex.: GA-JUN-002" autocapitalize="characters" spellcheck="false" aria-label="Código do imóvel">
+        </div>
+        <div class="ex-grupo larga">
+          <span class="ex-rot">Características</span>
+          <div class="atribs" id="fl-atribs-campos"></div>
+        </div>
       </div>
+
+      <div class="rodape-f">
+        <div class="etiquetas" id="fl-etiquetas"></div>
+        <div class="acoes-f">
+          <button type="button" class="link-f" id="fl-limpar" hidden>Limpar tudo</button>
+          <button type="button" class="btn" id="fl-buscar">Ver 0 imóveis</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vitrine" id="vitrine-lista"></div>
+  </div>
+</section>
+
+<!-- ================= COMO PODEMOS AJUDAR ================= -->
+<section id="ajudar">
+  <div class="faixa">
+    <div class="cab">
+      <div class="olho">Como podemos ajudar</div>
+      <h2>Não achou na carteira? É assim que a maior parte dos negócios começa</h2>
+      <p>Boa parte do que negociamos nunca chega a ser anunciado: vem de proprietário direto
+         e de carteira de parceiros. Diga de que lado você está.</p>
+    </div>
+
+    <div class="portas" id="portas" role="tablist" aria-label="O que você quer fazer">
+      <span id="comprar" class="ancora" aria-hidden="true"></span>
+      <span id="vender" class="ancora" aria-hidden="true"></span>
+      <button class="porta" id="porta-comprar" role="tab" aria-selected="false" aria-controls="pp-comprar">
+        <span class="p-num">01 · Comprador ou investidor</span>
+        <h2>Encomende sua busca</h2>
+        <p class="p-sub">Diga o que procura e vamos atrás — no mercado aberto, em carteiras de parceiros e em proprietários que ainda não anunciaram.</p>
+        <span class="p-seta">Abrir encomenda →</span>
+      </button>
+
+      <button class="porta" id="porta-vender" role="tab" aria-selected="false" aria-controls="pp-vender">
+        <span class="p-num">02 · Proprietário</span>
+        <h2>Cadastre seu imóvel</h2>
+        <p class="p-sub">Coloque seu imóvel na nossa vitrine e na nossa rede de compradores. Sem custo para o proprietário: a comissão só existe se o negócio fechar.</p>
+        <span class="p-seta">Cadastrar imóvel →</span>
+      </button>
     </div>
 
     <!-- painel: comprar -->
     <div class="painel-porta" id="pp-comprar" role="tabpanel" aria-labelledby="porta-comprar" hidden>
       <div class="pp-cab">
         <div>
-          <h3>Mandato de busca</h3>
-          <p>Não listamos o que não temos. Recebemos seu perfil de busca e vamos atrás —
+          <h3>Encomenda de busca</h3>
+          <p>Não listamos o que não temos. Recebemos o que você procura e vamos atrás —
              inclusive de proprietário que ainda não colocou o imóvel no mercado.</p>
         </div>
         <button class="btn sec mini" data-fechar>Fechar</button>
@@ -485,21 +689,22 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
             <span>Autorizo o contato da PrimeCorp sobre esta busca. Posso pedir a exclusão dos meus dados a qualquer momento.</span></label>
         </div>
         <div class="acoes-pp">
-          <button class="btn" id="c-enviar">Enviar meu perfil de busca</button>
+          <button class="btn" id="c-enviar">Enviar minha encomenda</button>
           <p class="dica">Retorno em até um dia útil. Sem custo para o comprador.</p>
         </div>
         <p class="erro" id="c-erro"></p>
       </div>
-      <div class="recibo" id="c-recibo"><b>Mandato recebido.</b>Vamos ao mercado com o seu perfil e retornamos com o que encontrarmos.</div>
+      <div class="recibo" id="c-recibo"><b>Encomenda recebida.</b>Vamos ao mercado com o seu perfil e retornamos com o que encontrarmos.</div>
     </div>
 
     <!-- painel: vender -->
     <div class="painel-porta" id="pp-vender" role="tabpanel" aria-labelledby="porta-vender" hidden>
       <div class="pp-cab">
         <div>
-          <h3>Avaliação do seu imóvel</h3>
-          <p>Visita, levantamento e pesquisa de mercado. O parecer sai por escrito, com a metodologia,
-             nos termos da Resolução COFECI nº 1.066/2007. Sem custo na etapa inicial.</p>
+          <h3>Cadastrar imóvel para venda</h3>
+          <p>Recebemos os dados, visitamos o imóvel e, acertadas as condições, assinamos a
+             autorização de venda. A partir daí ele entra na vitrine e na nossa rede de
+             compradores. Sem custo para o proprietário.</p>
         </div>
         <button class="btn sec mini" data-fechar>Fechar</button>
       </div>
@@ -515,6 +720,8 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
               <ul id="v-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
             </div></div>
           <div><label for="v-area">Área total (m²)</label><input id="v-area" class="ent" type="number" min="0" step="10" placeholder="ex.: 18400" inputmode="numeric"></div>
+          <div><label for="v-preco">Valor pretendido</label>
+            <input id="v-preco" class="ent" type="text" placeholder="ex.: R$ 4.500.000 ou a combinar"></div>
           <div><label for="v-prazo">Prazo para vender</label>
             <select id="v-prazo" class="ent">
               <option value="">Sem pressa</option><option>Até 3 meses</option>
@@ -523,27 +730,21 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
           <div><label for="v-nome">Seu nome</label><input id="v-nome" class="ent" autocomplete="name"></div>
           <div><label for="v-tel">WhatsApp</label><input id="v-tel" class="ent" type="tel" autocomplete="tel" placeholder="(19) 90000-0000"></div>
           <div class="larga"><label for="v-msg">Sobre o imóvel</label>
-            <textarea id="v-msg" class="ent" placeholder="Benfeitorias, matrícula, se já esteve anunciado antes e por quanto."></textarea></div>
+            <textarea id="v-msg" class="ent" placeholder="Metragem construída, benfeitorias, situação da matrícula, se já esteve anunciado antes e por quanto."></textarea></div>
           <label class="consent larga" for="v-ok"><input type="checkbox" id="v-ok">
-            <span>Autorizo o contato da PrimeCorp sobre esta avaliação. Posso pedir a exclusão dos meus dados a qualquer momento.</span></label>
+            <span>Autorizo o contato da PrimeCorp sobre este imóvel. Posso pedir a exclusão dos meus dados a qualquer momento.</span></label>
         </div>
         <div class="acoes-pp">
-          <button class="btn" id="v-enviar">Pedir avaliação</button>
-          <p class="dica">Já tem ideia do valor? <a href="#faixa" style="color:var(--vermelho)">Consulte a faixa estimada</a> antes.</p>
+          <button class="btn" id="v-enviar">Cadastrar meu imóvel</button>
+          <p class="dica">Retorno em até um dia útil. Cadastrar não gera compromisso nem custo.</p>
         </div>
         <p class="erro" id="v-erro"></p>
       </div>
-      <div class="recibo" id="v-recibo"><b>Pedido recebido.</b>Entramos em contato para agendar a visita e o levantamento.</div>
+      <div class="recibo" id="v-recibo"><b>Cadastro recebido.</b>Entramos em contato para conhecer o imóvel e conversar sobre a venda.</div>
     </div>
 
-    <div class="credenciais">
-      <div><b>CRECISP 300760</b><span>Joselia Junqueira Viana · responsável técnica</span></div>
-      <div><b>CRECISP 297692</b><span>Rodrigo França Viana · corretor</span></div>
-      <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
-      <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
-    </div>
   </div>
-</div>
+</section>
 
 <!-- ================= O QUE NEGOCIAMOS ================= -->
 <section id="segmentos">
@@ -617,99 +818,31 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   <div class="faixa">
     <div class="cab">
       <div class="olho">Como trabalhamos</div>
-      <h2>O parecer vem antes do anúncio</h2>
-      <p>A ordem importa. Definir preço por comparação com o vizinho é o que faz um imóvel ficar meses parado e depois vender abaixo do que valia.</p>
+      <h2>Da conversa à escritura, em quatro etapas</h2>
+      <p>Imóvel industrial e de ticket alto não vende por anúncio em portal: vende por quem conhece o comprador. O caminho é curto e cada etapa tem um entregável.</p>
     </div>
-    <div class="etapas">
-      <div class="etapa"><div class="n">ETAPA 01</div><h3>Visita e levantamento</h3>
-        <p>Metragem, acessos, benfeitorias e situação registral. Conferimos a área da matrícula contra a área informada.</p></div>
-      <div class="etapa"><div class="n">ETAPA 02</div><h3>Pesquisa de mercado</h3>
-        <p>Elementos do mesmo tipo e município, com metragem comparável, observados nos últimos 18 meses.</p></div>
-      <div class="etapa"><div class="n">ETAPA 03</div><h3>Parecer técnico</h3>
-        <p>Valor de mercado com faixa de negociação e a metodologia por escrito, nos termos da Resolução COFECI 1.066/2007.</p></div>
-      <div class="etapa"><div class="n">ETAPA 04</div><h3>Autorização e divulgação</h3>
-        <p>Com o preço definido, formalizamos a autorização escrita e o imóvel vai ao mercado.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CARTEIRA ================= -->
-<section class="claro" id="carteira">
-  <div class="faixa">
-    <div class="cab">
-      <div class="olho">Carteira</div>
-      <h2>Imóveis com autorização vigente</h2>
-      <p>Só entra aqui o que tem autorização escrita do proprietário. O que não está na lista, buscamos sob demanda.</p>
-    </div>
-
-    <div class="barra-filtros">
-      <div class="linha-f">
-        <div><label for="fl-tipo">Tipo</label><select id="fl-tipo" class="ent"></select></div>
-        <div><label for="fl-cidade">Cidade</label>
-          <div class="combo">
-            <input id="fl-cidade" class="ent" type="text" placeholder="Todas" role="combobox"
-                   aria-expanded="false" aria-controls="fl-cidade-lista" aria-autocomplete="list"
-                   autocomplete="off" autocapitalize="words" spellcheck="false">
-            <ul id="fl-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios" hidden></ul>
-          </div></div>
-        <div><label for="fl-preco-max">Preço até</label>
-          <select id="fl-preco-max" class="ent">
-            <option value="">Sem limite</option><option value="1000000">R$ 1 mi</option>
-            <option value="3000000">R$ 3 mi</option><option value="5000000">R$ 5 mi</option>
-            <option value="10000000">R$ 10 mi</option><option value="20000000">R$ 20 mi</option>
-          </select></div>
-        <div><label for="fl-area-min">Área mínima</label>
-          <select id="fl-area-min" class="ent">
-            <option value="">Qualquer</option><option value="500">500 m²</option>
-            <option value="1000">1.000 m²</option><option value="3000">3.000 m²</option>
-            <option value="10000">10.000 m²</option><option value="20000">20.000 m²</option>
-          </select></div>
-        <button class="btn sec" id="fl-mais" aria-expanded="false" aria-controls="fl-extras">Mais filtros</button>
+    <div class="trilha">
+      <div class="passo">
+        <div class="p-marca">01</div>
+        <h3>Conversa e visita</h3>
+        <p>Entendemos o imóvel e o que o proprietário espera. Conferimos metragem, acessos, benfeitorias e a situação da matrícula.</p>
       </div>
-      <div class="extras" id="fl-extras"></div>
-      <div class="rodape-f">
-        <span class="conta" id="fl-conta">—</span>
-        <button class="link-f" id="fl-limpar" hidden>Limpar filtros</button>
+      <div class="passo forte">
+        <div class="p-marca">02</div>
+        <h3>Autorização de venda</h3>
+        <p>Acertado o valor de oferta e as condições, assinamos a autorização escrita. É o que a lei exige para anunciar.</p>
+        <span class="selo">Sem custo · comissão só na venda</span>
       </div>
-    </div>
-
-    <div class="vitrine" id="vitrine-lista"></div>
-  </div>
-</section>
-
-<!-- ================= CONSULTA DE FAIXA (secundária) ================= -->
-<section id="faixa">
-  <div class="faixa faixa-wrap">
-    <div>
-      <div class="olho">Ferramenta · proprietário</div>
-      <h2 style="font-size:clamp(26px,3.2vw,38px);margin:12px 0 14px">Uma ideia do valor, antes da conversa</h2>
-      <p style="color:var(--tinta2);margin:0;font-size:16.5px;line-height:1.65;max-width:62ch">
-        Estimativa preliminar por tipologia, cidade e metragem. Serve para calibrar expectativa —
-        não substitui o parecer técnico, que é feito com visita e pesquisa dedicada.
-      </p>
-      <ul class="lista">
-        <li><span class="pt"></span><span>Onde ainda não temos base comparável publicada, o resultado diz isso em vez de inventar um número.</span></li>
-        <li><span class="pt"></span><span>O parecer técnico costuma estreitar bastante a faixa.</span></li>
-      </ul>
-    </div>
-
-    <div class="consultor">
-      <h3>Consulta rápida de faixa</h3>
-      <p>Preencha os três campos. Leva dez segundos.</p>
-      <div class="campos">
-        <div class="larga"><label for="m-tipo">Tipo de imóvel</label><select id="m-tipo" class="ent"></select></div>
-        <div class="larga"><label for="m-cidade">Cidade</label>
-          <div class="combo">
-            <input id="m-cidade" class="ent" type="text" placeholder="Digite a cidade" role="combobox"
-                   aria-expanded="false" aria-controls="m-cidade-lista" aria-autocomplete="list"
-                   autocomplete="off" autocapitalize="words" spellcheck="false">
-            <ul id="m-cidade-lista" class="combo-lista" role="listbox" aria-label="Municípios do Brasil" hidden></ul>
-          </div></div>
-        <div class="larga"><label for="m-area">Área em m²</label>
-          <input id="m-area" class="ent" type="number" min="20" step="10" placeholder="ex.: 18400" inputmode="numeric"></div>
+      <div class="passo">
+        <div class="p-marca">03</div>
+        <h3>Vitrine e rede</h3>
+        <p>O imóvel entra no site com ficha própria e vai à nossa rede de compradores, investidores e corretores parceiros.</p>
       </div>
-      <button class="btn" id="m-botao">Ver faixa estimada</button>
-      <div class="saida" id="m-saida" hidden></div>
+      <div class="passo">
+        <div class="p-marca">04</div>
+        <h3>Negociação e fechamento</h3>
+        <p>Conduzimos visitas, proposta e contraproposta, e acompanhamos a documentação até a escritura.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -741,12 +874,12 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     <div class="banda">
       <div>
         <div class="olho" style="color:#d9c892">Proprietário</div>
-        <h2>Seu imóvel está há meses no mercado?</h2>
-        <p>Na maioria das vezes o problema não é o imóvel — é o preço de oferta. O parecer técnico mostra onde ele está em relação à sua micro-região.</p>
+        <h2>Seu imóvel está anunciado há meses e não vende?</h2>
+        <p>Imóvel industrial e de ticket alto não vende por anúncio em portal: vende por quem conhece o comprador. Cadastre conosco e entre numa carteira trabalhada por corretor.</p>
       </div>
       <div class="banda-acoes">
-        <a href="#vender" class="btn" onclick="abrirPorta('vender')">Pedir avaliação gratuita</a>
-        <a href="#faixa" class="btn clara">Consultar faixa estimada</a>
+        <a href="#vender" class="btn" onclick="abrirPorta('vender')">Cadastrar meu imóvel</a>
+        <a href="#carteira" class="btn clara">Ver a carteira</a>
       </div>
     </div>
   </div>
@@ -771,10 +904,10 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       <p style="margin:0;max-width:40ch;line-height:1.7">Intermediação de compra e venda de áreas industriais, galpões, terrenos, fazendas e imóveis de alto padrão.</p>
     </div>
     <div><h4>Começar</h4><ul>
-      <li><a href="#comprar" onclick="abrirPorta('comprar')">Quero comprar</a></li>
-      <li><a href="#vender" onclick="abrirPorta('vender')">Quero vender</a></li>
-      <li><a href="#faixa">Consulta de faixa</a></li>
-      <li><a href="#carteira">Ver a carteira</a></li></ul></div>
+      <li><a href="#carteira">Ver os imóveis</a></li>
+      <li><a href="#comprar" onclick="abrirPorta('comprar')">Encomendar uma busca</a></li>
+      <li><a href="#vender" onclick="abrirPorta('vender')">Cadastrar meu imóvel</a></li>
+      <li><a href="#atuacao">Onde atuamos</a></li></ul></div>
     <div><h4>Atuação</h4><ul>
       <li><a href="#segmentos">Industrial e logístico</a></li>
       <li><a href="#segmentos">Terrenos e glebas</a></li>
@@ -796,7 +929,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       Inscrição da pessoa jurídica no CRECI-SP em processo de concessão. Enquanto isso, a intermediação é exercida pelos corretores pessoa física acima identificados.<br>
       Atuação fora da jurisdição do CRECI-SP observa o art. 5º da Resolução COFECI nº 327/1992.<br>
       Todo imóvel divulgado possui autorização escrita do proprietário, nos termos do art. 5º do Decreto nº 81.871/1978.<br>
-      A consulta de faixa desta página é estimativa preliminar e não constitui parecer técnico de avaliação mercadológica.<br>
+      Parecer técnico de avaliação mercadológica (Resolução COFECI nº 1.066/2007) é serviço prestado mediante contratação. Este site não emite avaliação de valor.<br>
       © 2026 PrimeCorp Imóveis · Campinas/SP
     </div>
   </div>
@@ -805,7 +938,6 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <script src="assets/municipios-br.js"></script>
 <script src="assets/contato.js"></script>
 <script src="assets/carteira.js"></script>
-<script src="assets/calibracao.js"></script>
 <script>
 "use strict";
 
@@ -841,7 +973,7 @@ function opcoesAgrupadas(vazio){
       `<optgroup label="${nome}">` + ts.map(t => `<option value="${t.slug}">${t.nome}</option>`).join("") + `</optgroup>`).join("");
 }
 function montarTipos(){
-  el("m-tipo").innerHTML = opcoesAgrupadas(null);
+  el("bc-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
   el("c-tipo").innerHTML = opcoesAgrupadas("Qualquer tipo");
   el("v-tipo").innerHTML = opcoesAgrupadas("Selecione");
   el("fl-tipo").innerHTML = opcoesAgrupadas("Todos os tipos");
@@ -956,42 +1088,91 @@ function fecharPortas(){
   });
 }
 
-/* ---------- filtros adaptativos ---------- */
+/* ---------- filtros ----------
+   Mecânica do ZAP (barra rápida + painel + contagem antecipada),
+   taxonomia nossa: as características mudam conforme a tipologia, para
+   não oferecer filtro de piscina numa carteira de galpões. */
+
+function montarGrupos(){
+  const grupos = [...new Set(TIPOS.map(t => t.grupo))];
+  el("fl-grupo").innerHTML = '<option value="">Todos</option>' +
+    grupos.map(g => `<option value="${g}">${g}</option>`).join("");
+}
+
+/* O seletor de tipo mostra só os tipos do segmento escolhido. */
+function montarTiposDoGrupo(){
+  const g = el("fl-grupo").value;
+  const lista = g ? TIPOS.filter(t => t.grupo === g) : TIPOS;
+  const atual = el("fl-tipo").value;
+  el("fl-tipo").innerHTML = g
+    ? '<option value="">Todos os tipos</option>' + lista.map(t => `<option value="${t.slug}">${t.nome}</option>`).join("")
+    : opcoesAgrupadas("Todos os tipos");
+  if (lista.some(t => t.slug === atual)) el("fl-tipo").value = atual;
+}
+
+/* Características do painel: união dos campos das tipologias em jogo. */
 function montarExtras(){
   const t = tipoPor(el("fl-tipo").value);
-  const caixa = el("fl-extras");
-  const campos = t ? t.campos : [];
+  const g = el("fl-grupo").value;
+  /* Sem segmento nem tipo, a união daria as 11 características de uma
+     vez — ruído, não ajuda. Nesse caso orientamos em vez de listar. */
+  const campos = t ? t.campos
+    : g ? [...new Set(TIPOS.filter(x => x.grupo === g).flatMap(x => x.campos))]
+    : [];
+  const caixa = el("fl-atribs-campos");
+  if (!caixa) return;
+
   if (!campos.length){
-    caixa.innerHTML = `<p class="nota" style="grid-column:1/-1;margin:0">Escolha um tipo para ver os filtros específicos dele — um galpão filtra por pé-direito e docas, uma gleba por recurso hídrico.</p>`;
+    caixa.innerHTML = `<p>Escolha um segmento ou tipo para ver as características específicas — galpão filtra por pé-direito e docas, gleba por recurso hídrico.</p>`;
     return;
   }
+
+  const antes = {};
+  caixa.querySelectorAll("select").forEach(x => { if (x.value) antes[x.dataset.campo] = x.value; });
+
   caixa.innerHTML = campos.map(c => {
-    const d = CAMPOS[c];
-    return `<div><label for="fx-${c}">${d.rotulo}</label>
+    const def = CAMPOS[c];
+    if (!def) return "";
+    return `<div><label for="fx-${c}">${def.rotulo}</label>
       <select id="fx-${c}" class="ent" data-campo="${c}">
-        ${d.opcoes.map(([v,n]) => `<option value="${v}">${n}</option>`).join("")}
+        ${def.opcoes.map(([v,n]) => `<option value="${v}">${n}</option>`).join("")}
       </select></div>`;
   }).join("");
-  caixa.querySelectorAll("select").forEach(s => s.addEventListener("change", renderVitrine));
+
+  caixa.querySelectorAll("select").forEach(x => {
+    if (antes[x.dataset.campo]) x.value = antes[x.dataset.campo];
+    x.addEventListener("change", atualizar);
+  });
 }
 
 function lerFiltros(){
   const f = {
-    tipo: el("fl-tipo").value,
-    cidade: semAcento(el("fl-cidade").value.split("/")[0]),
+    grupo:    el("fl-grupo").value,
+    tipo:     el("fl-tipo").value,
+    cidade:   semAcento(el("fl-cidade").value.split("/")[0]),
+    codigo:   el("fl-codigo").value.trim().toUpperCase(),
+    precoMin: Number(el("fl-preco-min").value) || 0,
     precoMax: Number(el("fl-preco-max").value) || Infinity,
-    areaMin: Number(el("fl-area-min").value) || 0,
-    extras: {}
+    areaMin:  Number(el("fl-area-min").value) || 0,
+    areaMax:  Number(el("fl-area-max").value) || Infinity,
+    ordem:    el("fl-ordem").value,
+    extras:   {}
   };
-  el("fl-extras").querySelectorAll("select").forEach(s => { if (s.value) f.extras[s.dataset.campo] = s.value; });
+  el("fl-atribs-campos").querySelectorAll("select").forEach(x => {
+    if (x.value) f.extras[x.dataset.campo] = x.value;
+  });
   return f;
 }
 
-function passa(im, f){
+function passa(im, f, i){
+  if (f.codigo && !refDe(im, i).includes(f.codigo)) return false;
+  const t = tipoPor(im.tipo);
+  if (f.grupo && (!t || t.grupo !== f.grupo)) return false;
   if (f.tipo && im.tipo !== f.tipo) return false;
   if (f.cidade && !semAcento(im.cidade).includes(f.cidade)) return false;
-  if (im.preco > f.precoMax) return false;
-  if ((im.area || 0) < f.areaMin) return false;
+  if (im.preco < f.precoMin || im.preco > f.precoMax) return false;
+  const a = im.area || 0;
+  if (a < f.areaMin || a > f.areaMax) return false;
   for (const [campo, valor] of Object.entries(f.extras)){
     const v = im[campo];
     if (v === undefined || v === null) return false;
@@ -999,6 +1180,83 @@ function passa(im, f){
     else if (String(v) !== String(valor)) return false;
   }
   return true;
+}
+
+const ORDENAR = {
+  "preco-asc":  (a,b) => a.preco - b.preco,
+  "preco-desc": (a,b) => b.preco - a.preco,
+  "area-desc":  (a,b) => (b.area||0) - (a.area||0),
+  "m2-asc":     (a,b) => (a.preco/(a.area||1)) - (b.preco/(b.area||1)),
+  "recente":    () => 0
+};
+
+function achados(){
+  const f = lerFiltros();
+  const r = IMOVEIS.filter((im, i) => passa(im, f, i));
+  return { f, r: r.slice().sort(ORDENAR[f.ordem] || ORDENAR.recente) };
+}
+
+/* ---------- etiquetas de filtro ativo ---------- */
+const LIMPAR = {
+  grupo:    () => { el("fl-grupo").value = ""; montarTiposDoGrupo(); montarExtras(); },
+  tipo:     () => { el("fl-tipo").value = ""; montarExtras(); },
+  cidade:   () => { el("fl-cidade").value = ""; el("fl-cidade").dataset.slug = ""; },
+  codigo:   () => { el("fl-codigo").value = ""; },
+  precoMin: () => { el("fl-preco-min").value = ""; },
+  precoMax: () => { el("fl-preco-max").value = ""; },
+  areaMin:  () => { el("fl-area-min").value = ""; },
+  areaMax:  () => { el("fl-area-max").value = ""; }
+};
+
+function etiquetas(f){
+  const lista = [];
+  const add = (chave, texto) => lista.push({chave, texto});
+  if (f.grupo) add("grupo", f.grupo);
+  if (f.tipo){ const t = tipoPor(f.tipo); add("tipo", t ? t.nome : f.tipo); }
+  if (el("fl-cidade").value.trim()) add("cidade", el("fl-cidade").value.trim());
+  if (f.codigo) add("codigo", "Cód. " + f.codigo);
+  if (f.precoMin) add("precoMin", "a partir de " + reais(f.precoMin));
+  if (f.precoMax !== Infinity) add("precoMax", "até " + reais(f.precoMax));
+  if (f.areaMin) add("areaMin", "a partir de " + f.areaMin.toLocaleString("pt-BR") + " m²");
+  if (f.areaMax !== Infinity) add("areaMax", "até " + f.areaMax.toLocaleString("pt-BR") + " m²");
+  Object.entries(f.extras).forEach(([c, v]) => {
+    const def = CAMPOS[c];
+    if (!def) return;
+    const op = def.opcoes.find(o => String(o[0]) === String(v));
+    add("fx:" + c, def.rotulo.replace(/ mín\.$/, "") + ": " + (op ? op[1] : v));
+  });
+
+  const caixa = el("fl-etiquetas");
+  if (!lista.length){
+    caixa.innerHTML = `<span class="sem-filtro">nenhum filtro aplicado</span>`;
+    return 0;
+  }
+  caixa.innerHTML = lista.map(x =>
+    `<span class="etiqueta">${x.texto}<button type="button" data-chave="${x.chave}" aria-label="Remover filtro ${x.texto}">×</button></span>`).join("");
+  caixa.querySelectorAll("button[data-chave]").forEach(b => {
+    b.addEventListener("click", () => {
+      const k = b.dataset.chave;
+      if (k.startsWith("fx:")){ const sel = el("fx-" + k.slice(3)); if (sel) sel.value = ""; }
+      else if (LIMPAR[k]) LIMPAR[k]();
+      atualizar();
+    });
+  });
+  return lista.length;
+}
+
+/* Contagem ANTES de aplicar — o melhor detalhe do ZAP: a pessoa vê o
+   zero sem precisar clicar e descobrir que a lista sumiu. */
+function atualizar(){
+  const { f, r } = achados();
+  const n = etiquetas(f);
+  el("fl-limpar").hidden = n === 0;
+
+  const botao = el("fl-buscar");
+  botao.textContent = r.length === 0 ? "Nenhum imóvel encontrado"
+                    : r.length === 1 ? "Ver 1 imóvel"
+                    : `Ver ${r.length} imóveis`;
+  botao.disabled = r.length === 0;
+  renderVitrine(r, f, n);
 }
 
 /* Referência estável do imóvel: é o que vai na URL e no pedido de
@@ -1108,21 +1366,12 @@ function lerHash(){
   else if (el("ficha-veu").classList.contains("aberta")) fecharFicha();
 }
 
-function renderVitrine(){
-  const f = lerFiltros();
-  const achados = IMOVEIS.filter(im => passa(im, f));
+function renderVitrine(lista, f, nAtivos){
+  if (lista === undefined){ const x = achados(); lista = x.r; f = x.f; nAtivos = etiquetas(x.f); }
   const alvo = el("vitrine-lista");
-  const ativos = (f.tipo?1:0) + (f.cidade?1:0) + (f.precoMax!==Infinity?1:0) + (f.areaMin?1:0) + Object.keys(f.extras).length;
 
-  el("fl-limpar").hidden = ativos === 0;
-  el("fl-conta").innerHTML = IMOVEIS.length === 0
-    ? `carteira em formação`
-    : achados.length
-      ? `<b>${achados.length}</b> ${achados.length === 1 ? "imóvel" : "imóveis"} com autorização vigente${ativos ? " · filtros aplicados" : ""}`
-      : `<b>0</b> imóveis com os filtros aplicados`;
-
-  if (achados.length){
-    alvo.innerHTML = achados.map(im => cartao(im, IMOVEIS.indexOf(im))).join("");
+  if (lista.length){
+    alvo.innerHTML = lista.map(im => cartao(im, IMOVEIS.indexOf(im))).join("");
     alvo.querySelectorAll(".imovel").forEach(c => {
       c.addEventListener("click", () => abrirFicha(c.dataset.ref));
       c.addEventListener("keydown", e => {
@@ -1132,16 +1381,20 @@ function renderVitrine(){
     return;
   }
 
-  /* Vitrine vazia vira captação. O site antigo mostrava "nenhum
-     resultado" e perdia o lead ali. */
+  /* Vitrine vazia vira captação. Sem isso o site mostra "nenhum
+     resultado" e perde o lead exatamente onde ele estava mais quente. */
+  const semCarteira = IMOVEIS.length === 0;
   alvo.innerHTML = `<div class="vazio">
-      <h3>${IMOVEIS.length === 0 ? "Carteira em formação" : "Nada na carteira com esses filtros"}</h3>
+      <h3>${semCarteira ? "Carteira em formação" : "Nada na carteira com esses filtros"}</h3>
       <p>Boa parte do que negociamos nunca chega a ser anunciado — vem de proprietário direto
          e de carteira de parceiros. Diga o que procura e vamos atrás.</p>
-      <a href="#comprar" class="btn" id="vazio-cta">Abrir mandato de busca</a>
+      <a href="#comprar" class="btn" id="vazio-cta">Encomendar minha busca</a>
+      ${nAtivos ? '<button type="button" class="link-f" id="vazio-limpar" style="display:block;margin:14px auto 0">Limpar os filtros</button>' : ""}
     </div>`;
   const cta = el("vazio-cta");
   if (cta) cta.addEventListener("click", () => { passarFiltrosParaBusca(); abrirPorta("comprar"); });
+  const lim = el("vazio-limpar");
+  if (lim) lim.addEventListener("click", limparFiltros);
 }
 
 function passarFiltrosParaBusca(){
@@ -1152,69 +1405,20 @@ function passarFiltrosParaBusca(){
 }
 
 function limparFiltros(){
-  el("fl-tipo").value = ""; el("fl-cidade").value = ""; el("fl-cidade").dataset.slug = "";
-  el("fl-preco-max").value = ""; el("fl-area-min").value = "";
-  montarExtras(); renderVitrine();
+  ["fl-grupo","fl-tipo","fl-cidade","fl-codigo","fl-preco-min","fl-preco-max","fl-area-min","fl-area-max"]
+    .forEach(id => { el(id).value = ""; });
+  el("fl-cidade").dataset.slug = "";
+  el("fl-ordem").value = "recente";
+  /* As características são remontadas preservando o que estava escolhido;
+     num "limpar tudo" isso deixaria filtro invisível ativo. */
+  el("fl-atribs-campos").querySelectorAll("select").forEach(x => { x.value = ""; });
+  montarTiposDoGrupo(); montarExtras(); atualizar();
 }
 
-/* ---------- consulta de faixa ----------
-   Só mostra número onde há calibração própria. Cidade sem base
-   convida ao parecer — não inventa valor de mercado. */
-function convite(texto){
-  return `<div class="convite">
-    <b>Ainda não publicamos faixa para este caso</b>
-    <p>${texto}</p>
-    <a href="#vender" class="btn" id="conv-cta">Pedir avaliação técnica</a>
-  </div>`;
-}
-
-function ligarConvite(){
-  const b = el("conv-cta");
-  if (b) b.addEventListener("click", () => {
-    const c = el("m-cidade");
-    if (c.value){ el("v-cidade").value = c.value; el("v-cidade").dataset.slug = c.dataset.slug || ""; }
-    if (el("m-tipo").value) el("v-tipo").value = el("m-tipo").value;
-    if (el("m-area").value) el("v-area").value = el("m-area").value;
-    abrirPorta("vender");
-  });
-}
-
-function estimar(){
-  const C = window.CALIBRACAO || {};
-  const tipo = el("m-tipo").value, campo = el("m-cidade"), area = Number(el("m-area").value);
-  const saida = el("m-saida");
-  saida.hidden = false;
-
-  const nome = campo.dataset.cidade || campo.value.split("/")[0].trim();
-  const slug = campo.dataset.slug;
-
-  if (!nome) { saida.innerHTML = convite("Informe a cidade para consultarmos a base da região."); return ligarConvite(); }
-  if (!slug) { saida.innerHTML = convite(`Escolha <strong>${nome}</strong> na lista de sugestões para identificarmos o município e a UF.`); return ligarConvite(); }
-  if (!area || area < 20) { saida.innerHTML = convite("Informe a metragem aproximada, a partir de 20 m²."); return ligarConvite(); }
-
-  const par = ((C.MERCADO || {})[slug] || {})[tipo];
-  const t = tipoPor(tipo);
-  if (!par){
-    saida.innerHTML = convite(`Ainda não temos base comparável calibrada para <strong>${nome}</strong> na tipologia <strong>${(t?t.nome:tipo).toLowerCase()}</strong>. Fazemos a pesquisa dedicada e emitimos o parecer técnico — sem custo na etapa inicial.`);
-    return ligarConvite();
-  }
-
-  const [valorRef, areaRef] = par;
-  const e = (C.ELASTICIDADE || {})[tipo] ?? -0.15;
-  const amp = C.AMPLITUDE_PADRAO ?? 0.14;
-  const unit = valorRef * Math.pow(area / areaRef, e);
-  const total = unit * area;
-
-  saida.innerHTML = `
-    <div class="tres">
-      <div><span>Mínimo</span><b>${reais(total*(1-amp))}</b></div>
-      <div class="meio"><span>Referência</span><b>${reais(total)}</b></div>
-      <div><span>Máximo</span><b>${reais(total*(1+amp))}</b></div>
-    </div>
-    <p class="nota">Cerca de <code>${reais(unit)}/m²</code> em ${nome} para esta metragem.
-    Faixa preliminar, sem visita nem pesquisa dedicada — o parecer técnico costuma estreitá-la bastante.
-    <a href="#vender" id="conv-cta" style="color:var(--vermelho)">Peça o seu</a>.</p>`;
-  ligarConvite();
+function abrirPainelFiltros(abrir){
+  el("fl-extras").classList.toggle("aberto", abrir);
+  el("fl-mais").setAttribute("aria-expanded", String(abrir));
+  el("fl-mais").textContent = abrir ? "Menos filtros" : "Filtros";
 }
 
 /* ---------- formulários ---------- */
@@ -1253,7 +1457,7 @@ function linkZap(texto){
 }
 
 const ROTULO_LEAD = {name:"Nome", phone:"WhatsApp", tipo:"Tipo", location:"Cidade",
-  area:"Área (m²)", orcamento:"Orçamento", prazo:"Prazo", message:"Observações"};
+  area:"Área (m²)", preco:"Valor pretendido", orcamento:"Orçamento", prazo:"Prazo", message:"Observações"};
 
 function textoDoLead(dados){
   const linhas = ["*" + dados.purpose + "* — site PrimeCorp Imóveis", ""];
@@ -1295,40 +1499,87 @@ function montarMapa(){
 /* ---------- início ---------- */
 montarTipos();
 montarMapa();
-["m-cidade","c-cidade","v-cidade"].forEach(id => montarCombo(id));
-montarCombo("fl-cidade", renderVitrine);
+["bc-cidade","c-cidade","v-cidade"].forEach(id => montarCombo(id));
+montarCombo("fl-cidade", atualizar);
+montarGrupos();
+montarTiposDoGrupo();
 montarExtras();
-renderVitrine();
+atualizar();
 
 el("porta-comprar").addEventListener("click", () => abrirPorta("comprar"));
 el("porta-vender").addEventListener("click", () => abrirPorta("vender"));
 document.querySelectorAll("[data-fechar]").forEach(b => b.addEventListener("click", fecharPortas));
 
-el("m-botao").addEventListener("click", estimar);
-["m-area","m-cidade"].forEach(id => el(id).addEventListener("keydown", e => { if (e.key === "Enter") estimar(); }));
-
 el("c-enviar").addEventListener("click", () => validarEnviar("c", () => ({
-  purpose:"Comprar um imóvel", name:el("c-nome").value.trim(), phone:el("c-tel").value.trim(),
+  purpose:"Encomenda de busca", name:el("c-nome").value.trim(), phone:el("c-tel").value.trim(),
   tipo:el("c-tipo").value||null, location:el("c-cidade").value.trim()||null,
   area:el("c-area").value||null, orcamento:el("c-orcamento").value||null,
   message:el("c-msg").value.trim()||null, source:"site/mandato-busca"
 })));
 
 el("v-enviar").addEventListener("click", () => validarEnviar("v", () => ({
-  purpose:"Avaliar meu imóvel", name:el("v-nome").value.trim(), phone:el("v-tel").value.trim(),
+  purpose:"Cadastrar imóvel para venda", name:el("v-nome").value.trim(), phone:el("v-tel").value.trim(),
   tipo:el("v-tipo").value||null, location:el("v-cidade").value.trim()||null,
-  area:el("v-area").value||null, prazo:el("v-prazo").value||null,
-  message:el("v-msg").value.trim()||null, source:"site/avaliacao"
+  area:el("v-area").value||null, preco:el("v-preco").value.trim()||null, prazo:el("v-prazo").value||null,
+  message:el("v-msg").value.trim()||null, source:"site/cadastro-imovel"
 })));
 
 el("fl-limpar").addEventListener("click", limparFiltros);
-el("fl-tipo").addEventListener("change", () => { montarExtras(); renderVitrine(); });
-["fl-preco-max","fl-area-min"].forEach(id => el(id).addEventListener("change", renderVitrine));
-el("fl-cidade").addEventListener("input", renderVitrine);
-el("fl-mais").addEventListener("click", () => {
-  const aberto = el("fl-extras").classList.toggle("aberto");
-  el("fl-mais").setAttribute("aria-expanded", String(aberto));
-  el("fl-mais").textContent = aberto ? "Menos filtros" : "Mais filtros";
+el("fl-grupo").addEventListener("change", () => { montarTiposDoGrupo(); montarExtras(); atualizar(); });
+el("fl-tipo").addEventListener("change", () => { montarExtras(); atualizar(); });
+el("fl-ordem").addEventListener("change", atualizar);
+/* Os numéricos escutam input e change: só em change a contagem do botão
+   esperaria a pessoa sair do campo, e a promessa é ver o número enquanto
+   digita. */
+["fl-preco-min","fl-preco-max","fl-area-min","fl-area-max","fl-codigo","fl-cidade"]
+  .forEach(id => { el(id).addEventListener("input", atualizar); el(id).addEventListener("change", atualizar); });
+el("fl-buscar").addEventListener("click", () => rolarAte("vitrine-lista"));
+
+/* Protegido: uma exceção aqui mata o resto do handler. Foi assim que a
+   navegação por teclado do combo quebrou uma vez. */
+function rolarAte(id){
+  const alvo = el(id);
+  if (!alvo || typeof alvo.scrollIntoView !== "function") return;
+  try { alvo.scrollIntoView({behavior:"smooth", block:"start"}); } catch(_){}
+}
+el("fl-mais").addEventListener("click", () => abrirPainelFiltros(!el("fl-extras").classList.contains("aberto")));
+
+/* ---------- busca da capa ----------
+   Não é uma busca própria: ela empurra os valores para os filtros da
+   carteira e rola até lá. Uma lista só, um conjunto de filtros só. */
+function buscarDaCapa(e){
+  if (e) e.preventDefault();
+  const tipo = el("bc-tipo").value, cid = el("bc-cidade"), area = el("bc-area").value;
+  limparFiltros();
+  if (tipo){
+    const t = tipoPor(tipo);
+    if (t){ el("fl-grupo").value = t.grupo; montarTiposDoGrupo(); }
+    el("fl-tipo").value = tipo;
+  }
+  if (cid.value.trim()){
+    el("fl-cidade").value = cid.value;
+    el("fl-cidade").dataset.slug = cid.dataset.slug || "";
+  }
+  if (area) el("fl-area-min").value = area;
+  montarExtras(); atualizar();
+  rolarAte("carteira");
+}
+el("busca-capa").addEventListener("submit", buscarDaCapa);
+
+/* Atalho por segmento: filtra pelo grupo inteiro, não por um tipo só. */
+d.querySelectorAll(".atalho[data-grupo]").forEach(b => {
+  b.addEventListener("click", () => {
+    limparFiltros();
+    el("fl-grupo").value = b.dataset.grupo;
+    montarTiposDoGrupo(); montarExtras(); atualizar();
+    rolarAte("carteira");
+  });
+});
+
+el("atalho-codigo").addEventListener("click", () => {
+  rolarAte("carteira");
+  abrirPainelFiltros(true);
+  setTimeout(() => { const c = el("fl-codigo"); if (c) c.focus(); }, 480);
 });
 
 /* âncoras do menu abrem a porta correspondente */
@@ -1366,10 +1617,10 @@ lerHash();
    O botão pergunta sobre o que a pessoa está olhando. Um "olá"
    genérico obriga o corretor a descobrir o assunto do zero. */
 const ASSUNTOS = [
-  ["faixa",     "Olá! Usei a consulta de faixa no site e queria entender melhor o valor do meu imóvel."],
+  ["ajudar",    "Olá! Vi o site da PrimeCorp e queria falar sobre comprar ou vender um imóvel."],
   ["carteira",  "Olá! Estou vendo a carteira de imóveis no site e queria mais informações."],
   ["atuacao",   "Olá! Vi o site da PrimeCorp e queria falar sobre um imóvel fora da região de Campinas."],
-  ["como",      "Olá! Queria entender como funciona a avaliação antes do anúncio."],
+  ["como",      "Olá! Queria entender como funciona o trabalho de vocês para vender um imóvel."],
   ["segmentos", "Olá! Vi o site da PrimeCorp Imóveis e queria falar sobre compra e venda."]
 ];
 const btnZap = el("zap");

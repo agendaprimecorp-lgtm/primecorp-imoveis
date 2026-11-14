@@ -14,7 +14,7 @@ Nenhum deles é o `index.html`. Você não precisa abrir o HTML.
 |---|---|
 | `assets/contato.js` | Telefone, WhatsApp, e-mails, horário e para onde vai o lead |
 | `assets/carteira.js` | Os imóveis publicados e as tipologias disponíveis |
-| `assets/calibracao.js` | Base de preço por m² da consulta de faixa |
+| `assets/carteira.js` | Também define as tipologias e os filtros disponíveis |
 
 ---
 
@@ -81,25 +81,19 @@ link que você manda no WhatsApp — abre direto na ficha.
 
 ---
 
-## 4. Calibrar a consulta de faixa
+## 4. O site não avalia imóvel — e isso é de propósito
 
-`assets/calibracao.js` está **vazio de propósito**. Enquanto estiver
-assim, a consulta devolve um convite para o parecer técnico em vez de
-um número. Isso é intencional: publicar R$/m² inventado sob o CRECI de
-vocês é exposição.
+Não existe calculadora de preço no site. Avaliar imóvel de quem ainda
+não é cliente é trabalho sem contrato e expõe a inscrição dos sócios:
+um número publicado sob o CRECI vira referência que o proprietário leva
+para a mesa, inclusive contra vocês.
 
-Para ligar um município, use valores apurados de verdade:
+O caminho é o da etapa 02 da seção "Como trabalhamos": conversa, visita,
+e o valor de oferta acertado junto com a autorização de venda assinada.
 
-```js
-window.CALIBRACAO.MERCADO = {
-  "campinas-sp": { "galpao": [1850, 5000] }   // [R$/m² de referência, área de referência]
-};
-```
-
-O slug sai de `assets/municipios-br.js` e sempre carrega a UF, porque
-232 nomes de cidade se repetem entre estados.
-
----
+Parecer técnico de avaliação mercadológica (Resolução COFECI nº
+1.066/2007) continua sendo serviço que vocês prestam — mediante
+contratação, fora do site. O rodapé já diz isso.
 
 ## 5. O que ainda falta (em ordem)
 
@@ -119,7 +113,8 @@ O slug sai de `assets/municipios-br.js` e sempre carrega a UF, porque
 - Declaração de autorização escrita do proprietário (art. 5º do mesmo decreto)
 - Abrangência nacional redigida na forma do art. 5º da Resolução COFECI 327/1992
 - Consentimento explícito nos dois formulários, com canal e prazo de exclusão (LGPD)
-- Ressalva de que a consulta de faixa não é parecer técnico (Resolução COFECI 1.066/2007)
+- Parecer de avaliação declarado como serviço contratado, não como
+  função do site (Resolução COFECI 1.066/2007)
 - Nenhuma menção a locação como serviço
 
 **Pendência societária:** o CRECI-J está em concessão. Até sair, os
