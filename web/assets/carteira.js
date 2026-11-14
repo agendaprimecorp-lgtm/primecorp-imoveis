@@ -174,7 +174,7 @@ window.CAMPOS_NUMERICOS = ["construida","pedireito","docas","piso","quartos","su
            responsável por este imóvel.
    `dados` são as três linhas da fichinha do cartão, na ordem.
    ============================================================ */
-window.IMOVEIS = [
+const DEMONSTRATIVOS = [
 
   /* ---- DEMONSTRATIVO: substituir ---- */
   {
@@ -219,3 +219,8 @@ window.IMOVEIS = [
   }
 
 ];
+
+/* Produção não mostra demonstrativos. Sem Propto e sem cache, a vitrine
+   fica vazia e cai no convite à captação, nunca em imóvel fictício.
+   Os testes ligam os demonstrativos com window.CARTEIRA_DEMO = true. */
+window.IMOVEIS = window.CARTEIRA_DEMO === true ? DEMONSTRATIVOS : [];

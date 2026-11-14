@@ -23,7 +23,8 @@ let fonte = fs.readFileSync(path.join(DIR, "index.html"), "utf8");
 ["assets/municipios-br.js", "assets/contato.js", "assets/carteira.js"].forEach(rel => {
   const tag = `<script src="${rel}"></script>`;
   if (!fonte.includes(tag)) { console.log("  FALHA tag ausente: " + tag); falhas++; return; }
-  fonte = fonte.replace(tag, "<script>" + fs.readFileSync(path.join(DIR, rel), "utf8") + "</scr" + "ipt>");
+  const pre = rel === "assets/carteira.js" ? "window.CARTEIRA_DEMO = true;\n" : "";
+  fonte = fonte.replace(tag, "<script>" + pre + fs.readFileSync(path.join(DIR, rel), "utf8") + "</scr" + "ipt>");
 });
 
 const dom = new JSDOM(fonte, {

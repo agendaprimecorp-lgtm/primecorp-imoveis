@@ -250,7 +250,7 @@ const site = http.createServer((req, res) => {
              cartoes: document.querySelectorAll('#vitrine-lista article.imovel').length };
   });
   ok('endpoint ligado ao Propto', r8.endpoint === 'https://propto.com.br/vitrine/imoveis');
-  ok('site funciona igual sem integração', r8.cartoes === 3, r8.cartoes);
+  ok('sem integração, vitrine vazia (nenhum demonstrativo em produção)', r8.cartoes === 0, r8.cartoes);
 
   console.log('\n=== 9. fotos reais do Propto ===');
   const r9 = await page.evaluate(() => {
