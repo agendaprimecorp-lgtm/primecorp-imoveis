@@ -85,7 +85,7 @@ window.CODIGO_TIPO = {
 
 window.CODIGO_CIDADE = {
   "Campinas":"CAM", "Jundiaí":"JUN", "Sumaré":"SUM", "Hortolândia":"HOR",
-  "Indaiatuba":"IDT", "Paulínia":"PAU", "Valinhos":"VAL", "Vinhedo":"VIN"
+  "Indaiatuba":"IDT", "Paulínia":"PAU", "Valinhos":"VAL", "Vinhedo":"VIN", "Cotia":"COT"
 };
 
 /* Monta o código. Devolve null se o tipo ou a cidade não estiver na tabela:
