@@ -92,15 +92,28 @@ setTimeout(() => {
   ok("sem o texto 'Ver a carteira'", !/Ver a carteira/.test(d.body.textContent));
   ok("sem grade de caminhos na capa", d.querySelector(".escolhas") === null);
   ok("sem faixa de credenciais na capa", d.querySelector(".credenciais") === null);
-  ok("título forte da capa", /Seu próximo galpão, terreno ou fazenda/.test(d.querySelector(".capa h1").textContent));
-  const ctas = [...d.querySelectorAll('.capa-acoes a')].map(a => a.textContent.trim());
+  ok("título de dois lados, sem segmento único", /negocia os dois lados/.test(d.querySelector(".capa h1").textContent), d.querySelector(".capa h1").textContent);
+  ok("capa não cita a cidade no título", !/São Paulo/.test(d.querySelector(".capa h1").textContent));
+  ok("sem 'São Paulo' na chamada da capa", !/São Paulo/.test(d.querySelector(".capa").textContent));
+  const ctas = [...d.querySelectorAll('.capa-portas a')].map(a => a.textContent.trim());
   ok("dois CTAs: Buscar imóveis e Quero vender", ctas.length === 2 && ctas[0] === "Buscar imóveis" && ctas[1] === "Quero vender meu imóvel", ctas.join(" | "));
+  ok("duas portas: comprador e vendedor", d.querySelectorAll(".capa-porta").length === 2);
   ok("símbolo Propto como marca d'água", d.querySelector(".capa-simbolo img") !== null &&
      /propto-simbolo\.svg/.test(d.querySelector(".capa-simbolo img").getAttribute("src")));
   ok("símbolo fica fora da leitura", d.querySelector(".capa-simbolo").getAttribute("aria-hidden") === "true");
   ok("carteira abre com título curto", d.querySelector("#carteira h2").textContent === "Imóveis à venda");
   ok("carteira sem texto explicativo", d.querySelector("#carteira .cab p") === null);
   ok("sem atalhos na carteira", d.querySelector("#carteira .atalhos") === null);
+
+  console.log("\n=== 6b. segmentos com peso igual ===");
+  const cartoesSeg = [...d.querySelectorAll(".seg-card")];
+  ok("seis cartões de segmento", cartoesSeg.length === 6, cartoesSeg.length);
+  const segs = cartoesSeg.filter(c => c.dataset.grupo).map(c => c.dataset.grupo);
+  ok("seis cartões apontam para grupos reais", segs.length === 6 && segs.every(g => TIPOS.some(t => t.grupo === g)), segs.join(","));
+  ok("cartões com ícone", cartoesSeg.every(c => c.querySelector("svg") !== null));
+  d.querySelector('.seg-card[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
+  ok("clicar no cartão Rural marca o grupo rural", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
+  d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
 
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
   const vitrine = d.getElementById("vitrine-lista");
