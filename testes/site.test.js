@@ -86,23 +86,21 @@ setTimeout(() => {
   d.querySelector("[data-fechar]").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
   ok("botão fechar fecha as duas", d.getElementById("pp-comprar").hidden && d.getElementById("pp-vender").hidden);
 
-  console.log("\n=== 6. capa enxuta ===");
+  console.log("\n=== 6. capa limpa ===");
   ok("busca simples removida da capa", d.getElementById("busca-capa") === null);
   ok("carteira ao vivo removida", d.querySelector(".capa-painel") === null);
   ok("sem o texto 'Ver a carteira'", !/Ver a carteira/.test(d.body.textContent));
-  const ctas = [...d.querySelectorAll('a[href="#carteira"]')].map(a => a.textContent.trim());
-  ok("há ao menos dois CTAs 'Buscar imóveis'", ctas.filter(t => t === "Buscar imóveis").length >= 2, ctas.join(" | "));
-  ok("'Quero vender meu imóvel' continua na capa", /Quero vender meu imóvel/.test(d.body.textContent));
-
-  console.log("\n=== 7. segmentos da home ===");
-  ok("home tem 6 caminhos (5 segmentos + código)", d.querySelectorAll("nav.escolhas .escolha").length === 6,
-     d.querySelectorAll("nav.escolhas .escolha").length);
-  ok("atalho 'Tenho o código' existe", d.getElementById("atalho-codigo") !== null);
-  d.querySelector('.escolha[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  ok("segmento marca os tipos do segmento", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
-  ok("segmento sem imóvel mostra captação",
-     d.getElementById("vitrine-lista").querySelector("#vazio-cta") !== null);
-  d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
+  ok("sem grade de caminhos na capa", d.querySelector(".escolhas") === null);
+  ok("sem faixa de credenciais na capa", d.querySelector(".credenciais") === null);
+  ok("título forte da capa", /Seu próximo galpão, terreno ou fazenda/.test(d.querySelector(".capa h1").textContent));
+  const ctas = [...d.querySelectorAll('.capa-acoes a')].map(a => a.textContent.trim());
+  ok("dois CTAs: Buscar imóveis e Quero vender", ctas.length === 2 && ctas[0] === "Buscar imóveis" && ctas[1] === "Quero vender meu imóvel", ctas.join(" | "));
+  ok("símbolo Propto como marca d'água", d.querySelector(".capa-simbolo img") !== null &&
+     /propto-simbolo\.svg/.test(d.querySelector(".capa-simbolo img").getAttribute("src")));
+  ok("símbolo fica fora da leitura", d.querySelector(".capa-simbolo").getAttribute("aria-hidden") === "true");
+  ok("carteira abre com título curto", d.querySelector("#carteira h2").textContent === "Imóveis à venda");
+  ok("carteira sem texto explicativo", d.querySelector("#carteira .cab p") === null);
+  ok("sem atalhos na carteira", d.querySelector("#carteira .atalhos") === null);
 
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
   const vitrine = d.getElementById("vitrine-lista");
@@ -265,7 +263,7 @@ setTimeout(() => {
   ok("site não promete avaliação gratuita", !/avaliação gratuita/i.test(html));
   ok("nenhuma menção a locação como serviço", !/alug|loca(ç|c)ão de im/i.test(html.replace(/não operamos locação/g,"")));
 
-  const semAlt = [...d.querySelectorAll("img")].filter(i => !i.getAttribute("alt"));
+  const semAlt = [...d.querySelectorAll("img")].filter(i => i.getAttribute("alt") === null || (i.getAttribute("alt") === "" && i.getAttribute("aria-hidden") !== "true"));
   ok("toda imagem tem alt", semAlt.length === 0, semAlt.length);
   const semLabel = [...d.querySelectorAll("input:not([type=checkbox]), select, textarea")]
     .filter(c => c.id && !d.querySelector(`label[for="${c.id}"]`) && !c.getAttribute("aria-label"));
