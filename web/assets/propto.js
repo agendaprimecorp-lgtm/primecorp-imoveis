@@ -206,9 +206,21 @@ window.PROPTO = Object.assign({
     if (o.zoneamento) imovel.zoneamento = semAcento(o.zoneamento).includes("indust") ? "industrial"
                                         : semAcento(o.zoneamento).includes("comerc") ? "comercial" : "misto";
     if (o.energia_kva) imovel.energia = num(o.energia_kva) >= 300 ? "alta" : "media";
-    if (o.agua) imovel.agua = "sim";
-    if (o.benfeitorias) imovel.benfeitorias = "sim";
-    if (o.elevador) imovel.elevador = "sim";
+
+    /* Os campos de sim/não — piscina, churrasqueira, elevador, água,
+       AVCB — vêm do próprio carteira.js, não de uma lista escrita aqui.
+       Assim, acrescentar uma característica lá passa a funcionar na
+       integração sem ninguém lembrar de mexer neste arquivo. */
+    const CAMPOS = window.CAMPOS || {};
+    for (const [campo, def] of Object.entries(CAMPOS)) {
+      /* Dois formatos contam como sim/não: caixa de marcar (tipo "sim")
+         e seletor cuja única opção é "sim" — é o caso de recurso hídrico
+         e benfeitorias, que ficam entre os principais da tipologia rural. */
+      const booleano = def.tipo === "sim" ||
+        (def.opcoes && def.opcoes.filter(o => o[0]).every(o => o[0] === "sim"));
+      if (!booleano) continue;
+      if (o[campo] === true || semAcento(o[campo]) === "sim") imovel[campo] = "sim";
+    }
 
     imovel.dados = fichinha(
       {...o, area_terreno: num(o.area_terreno), area_construida: num(o.area_construida),

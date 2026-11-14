@@ -26,23 +26,45 @@
    Ao criar uma tipologia nova, acrescente também a elasticidade
    dela em assets/calibracao.js. */
 window.TIPOS = [
-  {slug:"area-industrial",    nome:"Área industrial",           grupo:"Industrial e logístico",  campos:["zoneamento","energia"]},
-  {slug:"galpao",             nome:"Galpão / barracão",         grupo:"Industrial e logístico",  campos:["construida","pedireito","docas"]},
-  {slug:"centro-distribuicao",nome:"Centro de distribuição",    grupo:"Industrial e logístico",  campos:["construida","pedireito","docas"]},
-  {slug:"terreno-urbano",     nome:"Terreno urbano",            grupo:"Terrenos e glebas",       campos:["zoneamento","frente"]},
-  {slug:"area-comercial",     nome:"Área comercial",            grupo:"Terrenos e glebas",       campos:["zoneamento","frente"]},
-  {slug:"gleba-rural",        nome:"Gleba / área rural",        grupo:"Rural",                   campos:["agua","benfeitorias"]},
-  {slug:"fazenda",            nome:"Fazenda",                   grupo:"Rural",                   campos:["agua","benfeitorias"]},
-  {slug:"chacara-sitio",      nome:"Chácara / sítio",           grupo:"Rural",                   campos:["agua","benfeitorias"]},
-  {slug:"predio-comercial",   nome:"Prédio comercial",          grupo:"Comercial",               campos:["construida","vagas","elevador"]},
-  {slug:"sala-comercial",     nome:"Sala / conjunto comercial", grupo:"Comercial",               campos:["construida","vagas"]},
-  {slug:"loja-ponto",         nome:"Loja / ponto comercial",    grupo:"Comercial",               campos:["construida","frente"]},
-  {slug:"hotel-pousada",      nome:"Hotel / pousada",           grupo:"Comercial",               campos:["construida","quartos"]},
-  {slug:"posto-combustivel",  nome:"Posto de combustível",      grupo:"Comercial",               campos:["frente"]},
-  {slug:"casa",               nome:"Casa",                      grupo:"Residencial alto padrão", campos:["construida","quartos","vagas"]},
-  {slug:"casa-condominio",    nome:"Casa em condomínio",        grupo:"Residencial alto padrão", campos:["construida","quartos","vagas"]},
-  {slug:"apartamento",        nome:"Apartamento",               grupo:"Residencial alto padrão", campos:["construida","quartos","vagas"]},
-  {slug:"cobertura",          nome:"Cobertura",                 grupo:"Residencial alto padrão", campos:["construida","quartos","vagas"]}
+  /* ---------- Residencial ---------- */
+  {slug:"apartamento",        nome:"Apartamento",               grupo:"Residencial",            campos:["construida","quartos","suites","banheiros","vagas"]},
+  {slug:"cobertura",          nome:"Cobertura",                 grupo:"Residencial",            campos:["construida","quartos","suites","banheiros","vagas"]},
+  {slug:"studio-kitnet",      nome:"Studio / kitnet",           grupo:"Residencial",            campos:["construida","banheiros","vagas"]},
+  {slug:"flat",               nome:"Flat",                      grupo:"Residencial",            campos:["construida","quartos","banheiros","vagas"]},
+  {slug:"loft",               nome:"Loft",                      grupo:"Residencial",            campos:["construida","quartos","banheiros","vagas"]},
+  {slug:"casa",               nome:"Casa",                      grupo:"Residencial",            campos:["construida","quartos","suites","banheiros","vagas"]},
+  {slug:"casa-condominio",    nome:"Casa em condomínio",        grupo:"Residencial",            campos:["construida","quartos","suites","banheiros","vagas"]},
+  {slug:"casa-vila",          nome:"Casa de vila",              grupo:"Residencial",            campos:["construida","quartos","banheiros","vagas"]},
+  {slug:"sobrado",            nome:"Sobrado",                   grupo:"Residencial",            campos:["construida","quartos","suites","banheiros","vagas"]},
+
+  /* ---------- Industrial e logístico ---------- */
+  {slug:"galpao",             nome:"Galpão / depósito / armazém",grupo:"Industrial e logístico",campos:["construida","pedireito","docas","energia","piso"]},
+  {slug:"centro-distribuicao",nome:"Centro de distribuição",    grupo:"Industrial e logístico", campos:["construida","pedireito","docas","energia"]},
+  {slug:"barracao",           nome:"Barracão",                  grupo:"Industrial e logístico", campos:["construida","pedireito","energia"]},
+  {slug:"area-industrial",    nome:"Área industrial",           grupo:"Industrial e logístico", campos:["zoneamento","energia","frente"]},
+
+  /* ---------- Comercial ---------- */
+  {slug:"sala-comercial",     nome:"Conjunto / sala comercial", grupo:"Comercial",              campos:["construida","vagas","banheiros","elevador"]},
+  {slug:"andar-corporativo",  nome:"Andar / laje corporativa",  grupo:"Comercial",              campos:["construida","vagas","elevador"]},
+  {slug:"loja-ponto",         nome:"Loja / salão / ponto",      grupo:"Comercial",              campos:["construida","frente","banheiros"]},
+  {slug:"casa-comercial",     nome:"Casa comercial",            grupo:"Comercial",              campos:["construida","vagas","banheiros"]},
+  {slug:"predio-comercial",   nome:"Prédio inteiro",            grupo:"Comercial",              campos:["construida","vagas","elevador"]},
+  {slug:"hotel-pousada",      nome:"Hotel / motel / pousada",   grupo:"Comercial",              campos:["construida","quartos","vagas"]},
+  {slug:"posto-combustivel",  nome:"Posto de combustível",      grupo:"Comercial",              campos:["frente","construida"]},
+  {slug:"garagem",            nome:"Garagem / vaga",            grupo:"Comercial",              campos:["construida"]},
+
+  /* ---------- Terrenos e glebas ---------- */
+  {slug:"terreno-urbano",     nome:"Terreno / lote urbano",     grupo:"Terrenos e glebas",      campos:["zoneamento","frente"]},
+  {slug:"terreno-condominio", nome:"Lote em condomínio",        grupo:"Terrenos e glebas",      campos:["frente","portaria24h"]},
+  {slug:"terreno-comercial",  nome:"Terreno / lote comercial",  grupo:"Terrenos e glebas",      campos:["zoneamento","frente"]},
+  {slug:"area-comercial",     nome:"Área comercial",            grupo:"Terrenos e glebas",      campos:["zoneamento","frente"]},
+
+  /* ---------- Rural ---------- */
+  {slug:"fazenda",            nome:"Fazenda",                   grupo:"Rural",                  campos:["agua","benfeitorias","construida"]},
+  {slug:"sitio",              nome:"Sítio",                     grupo:"Rural",                  campos:["agua","benfeitorias","construida"]},
+  {slug:"chacara",            nome:"Chácara",                   grupo:"Rural",                  campos:["agua","benfeitorias","construida","quartos"]},
+  {slug:"gleba-rural",        nome:"Gleba / área rural",        grupo:"Rural",                  campos:["agua","benfeitorias"]},
+  {slug:"haras",              nome:"Haras",                     grupo:"Rural",                  campos:["agua","benfeitorias","construida"]}
 ];
 
 /* ---------- 2. FILTROS DISPONÍVEIS ----------
@@ -50,21 +72,59 @@ window.TIPOS = [
    por igualdade. Para acrescentar um filtro novo, declare-o aqui
    e cite o nome dele em `campos` das tipologias que o usam. */
 window.CAMPOS = {
-  construida:  {rotulo:"Área construída mín.", opcoes:[["","Qualquer"],["500","500 m²"],["1000","1.000 m²"],["3000","3.000 m²"],["6000","6.000 m²"]]},
-  pedireito:   {rotulo:"Pé-direito mín.",      opcoes:[["","Qualquer"],["8","8 m"],["10","10 m"],["12","12 m"]]},
-  docas:       {rotulo:"Docas",                opcoes:[["","Qualquer"],["1","Com docas"],["6","6 ou mais"],["12","12 ou mais"]]},
-  zoneamento:  {rotulo:"Zoneamento",           opcoes:[["","Qualquer"],["industrial","Industrial"],["comercial","Comercial"],["misto","Misto"]]},
-  energia:     {rotulo:"Energia",              opcoes:[["","Qualquer"],["media","Média tensão"],["alta","Alta tensão"]]},
-  frente:      {rotulo:"Frente mín.",          opcoes:[["","Qualquer"],["20","20 m"],["40","40 m"],["80","80 m"]]},
-  agua:        {rotulo:"Recurso hídrico",      opcoes:[["","Qualquer"],["sim","Com água"]]},
-  benfeitorias:{rotulo:"Benfeitorias",         opcoes:[["","Qualquer"],["sim","Com benfeitorias"]]},
-  quartos:     {rotulo:"Quartos",              opcoes:[["","Qualquer"],["2","2+"],["3","3+"],["4","4+"]]},
-  vagas:       {rotulo:"Vagas",                opcoes:[["","Qualquer"],["2","2+"],["4","4+"],["10","10+"]]},
-  elevador:    {rotulo:"Elevador",             opcoes:[["","Qualquer"],["sim","Com elevador"]]}
+  /* --- principais: medida e contagem --- */
+  construida:  {grupo:"principal", rotulo:"Área construída mín.", opcoes:[["","Qualquer"],["50","50 m²"],["100","100 m²"],["200","200 m²"],["500","500 m²"],["1000","1.000 m²"],["3000","3.000 m²"],["6000","6.000 m²"]]},
+  quartos:     {grupo:"principal", rotulo:"Quartos",          opcoes:[["","Qualquer"],["1","1+"],["2","2+"],["3","3+"],["4","4+"]]},
+  suites:      {grupo:"principal", rotulo:"Suítes",           opcoes:[["","Qualquer"],["1","1+"],["2","2+"],["3","3+"],["4","4+"]]},
+  banheiros:   {grupo:"principal", rotulo:"Banheiros",        opcoes:[["","Qualquer"],["1","1+"],["2","2+"],["3","3+"],["4","4+"]]},
+  vagas:       {grupo:"principal", rotulo:"Vagas",            opcoes:[["","Qualquer"],["1","1+"],["2","2+"],["4","4+"],["10","10+"]]},
+
+  /* --- industriais: o que decide se a operação cabe --- */
+  pedireito:   {grupo:"principal", rotulo:"Pé-direito mín.",  opcoes:[["","Qualquer"],["6","6 m"],["8","8 m"],["10","10 m"],["12","12 m"]]},
+  docas:       {grupo:"principal", rotulo:"Docas",            opcoes:[["","Qualquer"],["1","Com docas"],["6","6 ou mais"],["12","12 ou mais"]]},
+  piso:        {grupo:"principal", rotulo:"Piso mín.",        opcoes:[["","Qualquer"],["3","3 t/m²"],["5","5 t/m²"],["8","8 t/m²"]]},
+  energia:     {grupo:"principal", rotulo:"Energia",          opcoes:[["","Qualquer"],["media","Média tensão"],["alta","Alta tensão"]]},
+  zoneamento:  {grupo:"principal", rotulo:"Zoneamento",       opcoes:[["","Qualquer"],["industrial","Industrial"],["comercial","Comercial"],["misto","Misto"],["residencial","Residencial"]]},
+  frente:      {grupo:"principal", rotulo:"Frente mín.",      opcoes:[["","Qualquer"],["10","10 m"],["20","20 m"],["40","40 m"],["80","80 m"]]},
+  agua:        {grupo:"principal", rotulo:"Recurso hídrico",  opcoes:[["","Qualquer"],["sim","Com água"]]},
+  benfeitorias:{grupo:"principal", rotulo:"Benfeitorias",     opcoes:[["","Qualquer"],["sim","Com benfeitorias"]]},
+
+  /* --- comodidades, lazer e condomínio ---
+     Entram como caixas de marcar: a pessoa quer somar o que precisa,
+     não escolher um valor. Só aparecem na tipologia que os admite. */
+  mobiliado:   {grupo:"comodidades", rotulo:"Mobiliado",        tipo:"sim"},
+  varanda:     {grupo:"comodidades", rotulo:"Varanda",          tipo:"sim"},
+  arcondicionado:{grupo:"comodidades", rotulo:"Ar-condicionado",tipo:"sim"},
+  armarios:    {grupo:"comodidades", rotulo:"Armários",         tipo:"sim"},
+  aceitapet:   {grupo:"comodidades", rotulo:"Aceita animais",   tipo:"sim"},
+
+  piscina:     {grupo:"lazer", rotulo:"Piscina",                tipo:"sim"},
+  churrasqueira:{grupo:"lazer", rotulo:"Churrasqueira",         tipo:"sim"},
+  academia:    {grupo:"lazer", rotulo:"Academia",               tipo:"sim"},
+  salaofestas: {grupo:"lazer", rotulo:"Salão de festas",        tipo:"sim"},
+  playground:  {grupo:"lazer", rotulo:"Playground",             tipo:"sim"},
+
+  elevador:    {grupo:"condominio", rotulo:"Elevador",          tipo:"sim"},
+  portaria24h: {grupo:"condominio", rotulo:"Portaria 24h",      tipo:"sim"},
+  seguranca:   {grupo:"condominio", rotulo:"Segurança",         tipo:"sim"},
+  avcb:        {grupo:"condominio", rotulo:"AVCB",              tipo:"sim"}
+};
+
+/* As tipologias que admitem comodidades, lazer e condomínio. Fora
+   daqui esses filtros não aparecem — churrasqueira em galpão foi o
+   defeito que zerava a vitrine. */
+window.GRUPOS_EXTRAS = {
+  comodidades: ["apartamento","cobertura","studio-kitnet","flat","loft","casa","casa-condominio",
+                "casa-vila","sobrado","chacara","casa-comercial","sala-comercial"],
+  lazer:       ["apartamento","cobertura","flat","casa","casa-condominio","casa-vila","sobrado",
+                "chacara","sitio","fazenda","terreno-condominio","hotel-pousada"],
+  condominio:  ["apartamento","cobertura","studio-kitnet","flat","loft","casa-condominio",
+                "sala-comercial","andar-corporativo","predio-comercial","terreno-condominio","galpao",
+                "centro-distribuicao"]
 };
 
 /* Quais campos são "a partir de" em vez de igualdade exata. */
-window.CAMPOS_NUMERICOS = ["construida","pedireito","docas","quartos","vagas","frente"];
+window.CAMPOS_NUMERICOS = ["construida","pedireito","docas","piso","quartos","suites","banheiros","vagas","frente"];
 
 /* ---------- 3. A CARTEIRA ----------
    Campos obrigatórios: tipo, titulo, cidade, uf, onde, preco, area,

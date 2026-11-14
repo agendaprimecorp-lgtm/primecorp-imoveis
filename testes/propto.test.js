@@ -34,6 +34,14 @@ const OFERTAS = [
     preco:15200000, area_terreno:24000, frente:150, zoneamento:'Industrial',
     creci:'CRECISP 300760', corretor:'Joselia Junqueira Viana' },
 
+  { ref:'PC-0028', status:'publicado', operacao:'venda', tipo:'Apartamento', cidade:'Campinas', uf:'SP',
+    titulo:'Apartamento alto padrão no Cambuí', preco:2400000,
+    area_construida:180, quartos:3, suites:1, banheiros:3, vagas:2,
+    piscina:true, churrasqueira:true, elevador:true, portaria24h:true, varanda:true,
+    creci:'CRECISP 300760',
+    fotos:['https://propto.com.br/api/foto?k=a.jpg','https://propto.com.br/api/foto?k=b.jpg',
+           'https://propto.com.br/api/foto?k=c.jpg'] },
+
   { ref:'PC-0023', status:'publicado', operacao:'venda', tipo:'Fazenda', cidade:'Lajeado', uf:'RS',
     titulo:'Fazenda com recurso hídrico', preco:9800000, area_terreno:1210000,
     agua:true, benfeitorias:true, creci:'CRECISP 297692' },
@@ -51,7 +59,20 @@ const OFERTAS = [
 
 let modo = 'ok';   // ok | fora | lixo
 
+/* PNG 1x1 real: sem isso o navegador falha ao carregar, o onerror
+   dispara e a galeria vira ilustração — que é o comportamento certo,
+   mas impede testar o caminho feliz. */
+const PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+  'base64');
+
 const propto = http.createServer((req, res) => {
+  if (req.url.startsWith('/api/foto')) {
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(PNG);
+    return;
+  }
   if (modo === 'fora') { res.destroy(); return; }
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -70,7 +91,12 @@ const site = http.createServer((req, res) => {
 (async () => {
   await new Promise(r => propto.listen(0, r));
   await new Promise(r => site.listen(0, r));
-  const urlPropto = `http://127.0.0.1:${propto.address().port}/api/publicos`;
+  const base = `http://127.0.0.1:${propto.address().port}`;
+  const urlPropto = `${base}/api/publicos`;
+  /* reescreve as fotos para o servidor falso, agora que a porta existe */
+  for (const o of OFERTAS) {
+    if (o.fotos) o.fotos = o.fotos.map((_, i) => `${base}/api/foto?k=${o.ref}-${i}.jpg`);
+  }
   const urlSite   = `http://127.0.0.1:${site.address().port}/index.html`;
 
   const b = await chromium.launch();
@@ -93,9 +119,9 @@ const site = http.createServer((req, res) => {
     botao: document.getElementById('fl-buscar').textContent.trim()
   }));
   ok('carteira veio do Propto', r1.origem === 'propto', r1.origem);
-  ok('entraram os 3 publicáveis', r1.total === 3, r1.refs.join(','));
-  ok('a vitrine renderizou os 3', r1.cartoes === 3, r1.cartoes);
-  ok('o contador acompanha', /Ver 3 im/.test(r1.botao), r1.botao);
+  ok('entraram os 4 publicáveis', r1.total === 4, r1.refs.join(','));
+  ok('a vitrine renderizou os 4', r1.cartoes === 4, r1.cartoes);
+  ok('o contador acompanha', /Ver 4 im/.test(r1.botao), r1.botao);
   ok('os demonstrativos saíram', !r1.refs.some(x => /AI-CPQ|GA-JUN|TU-IND/.test(x)), r1.refs.join(','));
 
   console.log('\n=== 2. as travas ===');
@@ -207,6 +233,108 @@ const site = http.createServer((req, res) => {
   }));
   ok('endpoint nasce vazio', r8.endpoint === '');
   ok('site funciona igual sem integração', r8.cartoes === 3, r8.cartoes);
+
+  console.log('\n=== 9. fotos reais do Propto ===');
+  const r9 = await page.evaluate(() => {
+    document.getElementById('fl-limpar').click();
+    const cartoes = [...document.querySelectorAll('#vitrine-lista article.imovel')];
+    const comFoto = cartoes.find(c => c.querySelector('.im-contagem'));
+    const semFoto = cartoes.find(c => c.querySelector('.im-capa svg'));
+    return {
+      temImg: !!comFoto,
+      src: comFoto ? comFoto.querySelector('img').getAttribute('src') : null,
+      lazy: comFoto ? comFoto.querySelector('img').getAttribute('loading') : null,
+      alt: comFoto ? comFoto.querySelector('img').getAttribute('alt') : null,
+      contagem: comFoto ? (comFoto.querySelector('.im-contagem') || {}).textContent : null,
+      temIlustracao: !!semFoto
+    };
+  });
+  ok('cartão com foto usa <img>', r9.temImg);
+  ok('a foto vem do Propto', /api\/foto/.test(r9.src || ''), r9.src);
+  ok('carrega sob demanda', r9.lazy === 'lazy');
+  ok('a foto tem texto alternativo', (r9.alt || '').length > 5, r9.alt);
+  ok('mostra quantas fotos há', /3/.test(r9.contagem || ''), r9.contagem);
+  ok('imóvel sem foto mantém a ilustração', r9.temIlustracao);
+
+  console.log('\n=== 10. galeria da ficha ===');
+  const r10 = await page.evaluate(async () => {
+    const alvo = [...document.querySelectorAll('#vitrine-lista article.imovel')]
+      .find(c => c.querySelector('.im-contagem'));   // o que tem mais de uma foto
+    alvo.click();
+    await new Promise(r => setTimeout(r, 300));
+    const foto = document.getElementById('gal-foto');
+    const inicial = foto.getAttribute('src');
+    document.getElementById('gal-prox').click();
+    await new Promise(r => setTimeout(r, 80));
+    const depois = foto.getAttribute('src');
+    const pos = document.getElementById('gal-pos').textContent;
+    document.querySelector('[data-gal="2"]').click();
+    await new Promise(r => setTimeout(r, 80));
+    return { inicial, depois, pos, posFinal: document.getElementById('gal-pos').textContent,
+             tiras: document.querySelectorAll('[data-gal]').length,
+             marcada: document.querySelector('[data-gal="2"]').getAttribute('aria-current') };
+  });
+  ok('galeria abriu com a primeira foto', /-0\.jpg/.test(decodeURIComponent(r10.inicial)), r10.inicial);
+  ok('a seta avança', r10.inicial !== r10.depois);
+  ok('o contador acompanha', r10.pos === '2 / 3', r10.pos);
+  ok('há uma miniatura por foto', r10.tiras === 3, r10.tiras);
+  ok('clicar na miniatura troca a foto', r10.posFinal === '3 / 3', r10.posFinal);
+  ok('a miniatura ativa fica marcada', r10.marcada === 'true');
+  await page.keyboard.press('Escape');
+
+  console.log('\n=== 11. filtros residenciais só no residencial ===');
+  const r11 = await page.evaluate(() => {
+    const ev = (id, v) => { const n = document.getElementById(id); n.value = v;
+      n.dispatchEvent(new Event('change', { bubbles: true })); };
+    document.getElementById('fl-limpar').click();
+
+    ev('fl-tipo', 'apartamento');
+    const apto = [...document.querySelectorAll('#fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
+    const blocosApto = [...document.querySelectorAll('#fl-atribs-campos .ex-sub')].map(x => x.textContent);
+
+    document.getElementById('fl-limpar').click();
+    ev('fl-tipo', 'galpao');
+    const galpao = [...document.querySelectorAll('#fl-atribs-campos [data-campo]')].map(x => x.dataset.campo);
+    const blocosGalpao = [...document.querySelectorAll('#fl-atribs-campos .ex-sub')].map(x => x.textContent);
+    document.getElementById('fl-limpar').click();
+    return { apto, blocosApto, galpao, blocosGalpao };
+  });
+  ok('apartamento tem quartos e suítes',
+     r11.apto.includes('quartos') && r11.apto.includes('suites'), r11.apto.join(','));
+  ok('apartamento tem lazer', r11.blocosApto.some(b => /Lazer/.test(b)), r11.blocosApto.join(' · '));
+  ok('apartamento NÃO tem docas', !r11.apto.includes('docas'));
+  ok('galpão tem pé-direito, docas e piso',
+     ['pedireito','docas','piso'].every(c => r11.galpao.includes(c)), r11.galpao.join(','));
+  ok('galpão NÃO tem quartos nem piscina',
+     !r11.galpao.includes('quartos') && !r11.galpao.includes('piscina'), r11.galpao.join(','));
+  ok('galpão NÃO oferece bloco de lazer',
+     !r11.blocosGalpao.some(b => /Lazer/.test(b)), r11.blocosGalpao.join(' · '));
+
+  console.log('\n=== 12. caixas de marcar filtram ===');
+  const r12 = await page.evaluate(() => {
+    const ev = (id, v) => { const n = document.getElementById(id); n.value = v;
+      n.dispatchEvent(new Event('change', { bubbles: true })); };
+    document.getElementById('fl-limpar').click();
+    ev('fl-tipo', 'apartamento');
+    const antes = document.querySelectorAll('#vitrine-lista article.imovel').length;
+    const cx = document.getElementById('fx-piscina');
+    cx.checked = true; cx.dispatchEvent(new Event('change', { bubbles: true }));
+    const comPiscina = document.querySelectorAll('#vitrine-lista article.imovel').length;
+    const etq = [...document.querySelectorAll('#fl-etiquetas .etiqueta')].map(e => e.textContent.trim());
+    const academia = document.getElementById('fx-academia');
+    academia.checked = true; academia.dispatchEvent(new Event('change', { bubbles: true }));
+    const comAcademia = document.querySelectorAll('#vitrine-lista article.imovel').length;
+    document.getElementById('fl-limpar').click();
+    const depoisLimpar = document.getElementById('fx-piscina');
+    return { antes, comPiscina, comAcademia, etq,
+             limpou: !depoisLimpar || depoisLimpar.checked === false };
+  });
+  ok('apartamento aparece', r12.antes === 1, r12.antes);
+  ok('piscina mantém o que tem piscina', r12.comPiscina === 1, r12.comPiscina);
+  ok('etiqueta não diz "Piscina: Sim"',
+     r12.etq.some(e => /^Piscina×?$/.test(e.replace(/\s/g, ''))), r12.etq.join(' | '));
+  ok('academia ausente exclui o imóvel', r12.comAcademia === 0, r12.comAcademia);
+  ok('limpar desmarca as caixas', r12.limpou);
 
   await b.close(); propto.close(); site.close();
   console.log(`\n${passes} passaram, ${falhas} falharam\n`);

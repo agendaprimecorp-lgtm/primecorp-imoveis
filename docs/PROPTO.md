@@ -133,10 +133,15 @@ Todo o resto é opcional — o site mostra o que vier e omite o que faltar.
 
 ### Tipologias
 
-O adaptador traduz as 23 tipologias do Propto para os slugs da vitrine.
-Galpão, galpão em condomínio e barracão caem em `galpao`; sítio e
-chácara em `chacara-sitio`; haras em `fazenda`. O que não for
-reconhecido vira `area-comercial` e continua aparecendo — nunca some.
+A vitrine cobre **30 tipologias em 5 grupos** — residencial, industrial
+e logístico, comercial, terrenos e glebas, rural. O adaptador traduz as
+do Propto para esses slugs. O que não for reconhecido vira
+`area-comercial` e **continua aparecendo** — nunca some da vitrine por
+falta de tradução.
+
+Os filtros seguem a tipologia: apartamento oferece quartos, suítes e
+lazer; galpão oferece pé-direito, docas, energia e piso. Churrasqueira
+não aparece em galpão, docas não aparecem em apartamento.
 
 ### Conversões automáticas
 
@@ -146,7 +151,22 @@ reconhecido vira `area-comercial` e continua aparecendo — nunca some.
 | `zoneamento` com "indust" | filtro `industrial` |
 | `area_terreno`, `pedireito`, `docas`, `frente` | filtros numéricos da vitrine |
 | `preco` ÷ área | "valor por m²" na fichinha |
+| `piscina`, `elevador`, `avcb`… (true) | caixas de marcar do painel |
+| `fotos[]` | foto do cartão e galeria da ficha |
 | `regiao` | aparece junto da cidade, sem endereço |
+
+Os campos de sim/não são lidos de `assets/carteira.js`, não de uma
+lista escrita no adaptador: acrescentar uma característica lá já passa
+a funcionar na integração.
+
+### Fotos
+
+Vêm em `fotos[]` como URLs completas. A primeira vira a capa do cartão,
+com o número de fotos no canto; a ficha abre galeria com setas,
+miniaturas e navegação por teclado.
+
+Foto que não carrega vira a ilustração da tipologia — se o Propto cair,
+a ficha não vira um retângulo cinza. Miniatura quebrada some da tira.
 
 ---
 
