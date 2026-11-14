@@ -2035,12 +2035,11 @@ function rolarAte(id){
 el("fl-mais").addEventListener("click", () => abrirPainelFiltros(!el("fl-extras").classList.contains("aberto")));
 
 
-/* Cartões de segmento: filtram pelo grupo inteiro e levam à carteira. */
+/* Cartões de segmento só levam à carteira. A escolha dos tipos é do cliente:
+   nada vem marcado, para ele montar a busca do jeito que precisa. */
 d.querySelectorAll(".seg-card[data-grupo]").forEach(b => {
   b.addEventListener("click", () => {
     limparFiltros();
-    marcarTipos(TIPOS.filter(t => t.grupo === b.dataset.grupo).map(t => t.slug));
-    montarExtras(); atualizar();
     rolarAte("carteira");
   });
 });

@@ -122,7 +122,7 @@ setTimeout(() => {
   ok("seis cartões apontam para grupos reais", segs.length === 6 && segs.every(g => TIPOS.some(t => t.grupo === g)), segs.join(","));
   ok("cartões com ícone", cartoesSeg.every(c => c.querySelector("svg") !== null));
   d.querySelector('.seg-card[data-grupo="Rural"]').dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
-  ok("clicar no cartão Rural marca o grupo rural", w.tiposMarcados().length === TIPOS.filter(t => t.grupo === "Rural").length, w.tiposMarcados().join());
+  ok("clicar no cartão Rural não marca tipo nenhum (escolha é do cliente)", w.tiposMarcados().length === 0, w.tiposMarcados().join());
   d.getElementById("fl-limpar").dispatchEvent(new w.MouseEvent("click", {bubbles:true}));
 
   console.log("\n=== 8. vitrine e filtros padrão ZAP ===");
