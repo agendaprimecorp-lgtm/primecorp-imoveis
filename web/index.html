@@ -938,6 +938,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <script src="assets/municipios-br.js"></script>
 <script src="assets/contato.js"></script>
 <script src="assets/carteira.js"></script>
+<script src="assets/propto.js"></script>
 <script>
 "use strict";
 
@@ -1505,6 +1506,19 @@ montarGrupos();
 montarTiposDoGrupo();
 montarExtras();
 atualizar();
+
+/* ---------- Propto ----------
+   A vitrine nasce com a lista local e se redesenha quando o Propto
+   responde. A página não fica em branco esperando a rede, e quem
+   chega vê imóvel mesmo com a integração fora do ar. */
+if (w.PROPTO && typeof w.PROPTO.carregar === "function"){
+  w.PROPTO.carregar().then(r => {
+    if (r.fonte === "local") return;        // já é o que está na tela
+    IMOVEIS.length = 0;
+    IMOVEIS.push(...w.IMOVEIS);
+    limparFiltros();
+  }).catch(() => { /* a integração nunca derruba o site */ });
+}
 
 el("porta-comprar").addEventListener("click", () => abrirPorta("comprar"));
 el("porta-vender").addEventListener("click", () => abrirPorta("vender"));
