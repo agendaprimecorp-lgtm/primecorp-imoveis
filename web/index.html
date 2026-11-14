@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PrimeCorp Imóveis — Intermediação de compra e venda em todo o Brasil</title>
-<meta name="description" content="Compra e venda de casas, terrenos, chácaras, sítios, fazendas, galpões e imóveis comerciais em todo o Brasil. Somente venda, com autorização escrita do proprietário.">
+<meta name="description" content="Compra e venda de casas, terrenos, chácaras, sítios, fazendas, galpões e imóveis comerciais em todo o Brasil. Intermediação de compra e de venda, sem locação. Autorização escrita do proprietário em todo anúncio.">
 <meta name="theme-color" content="#14171a">
 <link rel="canonical" href="https://www.primecorpimoveis.com.br/">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
@@ -511,7 +511,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   .capa .lead{font-size:15px}
 }
 /* ---- refino 3: barra no padrão ZAP, dropdown de tipo, cinco segmentos ---- */
-@media (min-width:1081px){.linha-f{grid-template-columns:minmax(150px,.9fr) minmax(210px,1.3fr) repeat(3,minmax(118px,.8fr)) auto}}
+@media (min-width:1081px){.linha-f{grid-template-columns:minmax(240px,1.6fr) repeat(3,minmax(118px,.8fr)) auto}}
 /* abaixo de 1080: tipo ocupa a linha; contadores e finalidade dividem o resto */
 @media (max-width:1080px){.linha-f{grid-template-columns:1fr 1fr}.qb-tipo{grid-column:1/-1}.linha-f>#fl-mais{grid-column:1/-1}}
 .fin{display:flex;height:44px;border:1px solid var(--linha);border-radius:9px;background:var(--claro);overflow:hidden}
@@ -584,7 +584,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
       <p class="lead">
         Somos corretores e negociamos os dois lados: levamos o comprador ao ativo certo
         e o proprietário ao comprador certo. Residencial, industrial, terrenos, rural e
-        comercial. <strong>Somente venda.</strong>
+        comercial. <strong>Compra e venda</strong>, com intermediação dos dois lados. Não operamos locação.
       </p>
     </div>
 
@@ -623,7 +623,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     <div class="credenciais">
       <div><b>Todo o Brasil</b><span>negociação nacional, base em Campinas/SP</span></div>
       <div><b>Autorização escrita</b><span>só entra imóvel com autorização do proprietário</span></div>
-      <div><b>Somente venda</b><span>compra e venda; não operamos locação</span></div>
+      <div><b>Compra e venda</b><span>intermediação dos dois lados; sem locação</span></div>
       <div><b>(19) 99919-4447</b><span>WhatsApp e telefone · seg a sex, 9h às 18h</span></div>
     </div>
   </div>
@@ -641,8 +641,6 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
     <div class="barra-filtros">
       <!-- Barra rápida, como no ZAP: finalidade, tipo de imóvel e os contadores. -->
       <div class="linha-f">
-        <div class="qb-fin"><label>Finalidade</label>
-          <div class="fin" role="group" aria-label="Finalidade"><span class="fin-on" aria-current="true">Comprar</span></div></div>
         <div class="qb-tipo"><label for="fl-tipo-botao">Tipo de imóvel</label>
           <div class="drop" id="fl-tipo-caixa">
             <button type="button" class="drop-botao" id="fl-tipo-botao" aria-expanded="false" aria-controls="fl-tipo-lista" aria-haspopup="true"><span id="fl-tipo-rotulo">Apartamento</span><i aria-hidden="true"></i></button>
