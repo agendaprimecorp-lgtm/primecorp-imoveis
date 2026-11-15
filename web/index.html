@@ -257,7 +257,7 @@ section.papel{background:var(--papel)}
 
 /* ---------- trilha de etapas ---------- */
 .trilha{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:8px}
-.trilha::before{content:"";position:absolute;top:21px;left:12%;right:12%;height:2px;
+.trilha::before{content:"";position:absolute;top:21px;left:22px;right:calc(25% - 22px);height:2px;
   background:linear-gradient(90deg,var(--vermelho),var(--areia));opacity:.3}
 .passo{position:relative;padding:0 18px 0 0}
 .passo:last-child{padding-right:0}
@@ -643,19 +643,11 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 @media (max-width:900px){.capa-grade2{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.cp-pulso{animation:none}}
 
-/* ---- refino 6: marca do cabeçalho em tipografia (mesmas cores da paleta) ---- */
-.topo .marca{gap:11px}
-.topo .marca .marca-sim{height:44px;width:auto;display:block}
-.marca-txt{display:flex;flex-direction:column;justify-content:center;line-height:1}
-.marca-txt b{font-family:var(--f-disp);font-weight:800;font-size:25px;letter-spacing:.005em;color:var(--grafite);line-height:1}
-.marca-txt > span{display:flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--f-corpo);font-weight:700;font-size:13px;letter-spacing:.34em;color:var(--vermelho);line-height:1}
-.marca-txt > span::after{content:"";flex:1;min-width:34px;height:2px;background:var(--vermelho);opacity:.9}
+/* marca do cabeçalho: mesma logomarca do rodapé (versão para fundo claro) */
+.topo .marca .marca-h{height:44px;width:auto;display:block}
 @media (max-width:560px){
-  .marca-txt b{font-size:19px}
-  .marca-txt > span{font-size:11px;letter-spacing:.26em;margin-top:5px;gap:7px}
-  .marca-txt > span::after{min-width:18px}
-  .topo .marca .marca-sim{height:36px}
-  .topo .marca{gap:8px}
+  .topo .marca .marca-h{height:36px}
+}
 }
 
 .capa-acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
@@ -734,8 +726,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 <header class="topo">
   <div class="faixa">
     <a href="./" class="marca" aria-label="PrimeCorp Imóveis">
-      <img class="marca-sim" src="assets/marca-simbolo-128.png" alt="PrimeCorp" width="128" height="143">
-      <span class="marca-txt"><b>PRIMECORP</b><span>IMÓVEIS</span></span>
+      <img class="marca-h" src="assets/marca-horizontal-600.png" alt="PrimeCorp Imóveis" width="600" height="118">
     </a>
     <button class="hamburguer" id="abrir-menu" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu de navegação"><span></span></button>
     <nav class="menu" id="menu-principal" aria-label="Principal">

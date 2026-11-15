@@ -289,7 +289,7 @@ setTimeout(() => {
   const html = fs.readFileSync(path.join(DIR, "index.html"), "utf8");
   ok("não sobrou referência a municipios-sp.js", !/municipios-sp\.js/.test(html));
   ok("não sobrou 'todo o Brasil'", !/todo o Brasil/i.test(html));
-  ok("marca do cabeçalho com símbolo e tipografia", /marca-simbolo-128\.png/.test(html) && /class="marca-txt"/.test(html));
+  ok("marca do cabeçalho igual à do rodapé (versão para fundo claro)", /marca-horizontal-600\.png/.test(html) && /class="marca-h"/.test(html));
   ok("marca negativa no rodapé", /marca-horizontal-negativa-600\.png/.test(html));
   ok("vermelho da marca #d5383a", /#d5383a/.test(html) && !/#DB1D25|#db1d25/.test(html));
   ok("rodapé traz razão social e CNPJ", /PRIMECORP BROKERS CONSULTORIA E INTERMEDIAÇÃO DE NEGÓCIOS LTDA/.test(html) && /55\.745\.297\/0001-06/.test(html));
